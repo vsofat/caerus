@@ -44,3 +44,7 @@ body {
      margin: 0;
      font-style: italic;
 }
+
+.text-center .button:active {
+     outline: 1px
+}
