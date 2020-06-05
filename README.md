@@ -3,10 +3,10 @@
 ## Roster
 
 - **Vishwaa Sofat**: Project Manager and Success.
-- **Ahmed Sultan**: UI/UX, Bootstrap, routing, form submission, productivity
+- **Kazi Jamal**: Opportunity bulletin, scholarship finder
 - **Eric Lau**: OAuth, accounts, reminders/notifications
-- **Kazi Jamal**: Opportunity bulletin, resume/application review
-- **Raymond Lee**: Scholarship finder, student collaboration
+- **Raymond Lee**: Opportunity bulletin, scholarship finder
+- **Ahmed Sultan**: UI/UX, routing, form submission, productivity
 
 ## Description
 
