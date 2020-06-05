@@ -1,5 +1,5 @@
 precedented -- Vishwaa Sofat, Kazi Jamal, Eric Lau, Raymond Lee, Ahmed Sultan
-0;95;0cSoftDev1 pd9
+SoftDev1 pd9
 P05 —- Fin
 2020-06-11
 
@@ -22,7 +22,7 @@ Added css/, img/, js/ dirs under static/ dir
 Added base template 'template.html' under templates/ dir
 Edited devlog.txt
 
-jamalK -- 2020-06-03 23:18
+kaziJ -- 2020-06-03 23:18
 Added team flag
 
 ahmedS -- 2020-06-04 19:10
@@ -32,4 +32,6 @@ Added beginning of front-end (still experimenting quite a bit)
 Edited __init__.py to include some basic routing
 Uploaded waaaaaavy team flag v2 (flag.jpg)
 Renamed team flag v1 (flag_alt.jpg) for jokes, memes, giggles, gaffes, etc.
-Edited devlog.txt
+
+kaziJ -- 2020-06-04 21:53
+Upload design doc v0
