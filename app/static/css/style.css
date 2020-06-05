@@ -1,3 +1,5 @@
+/* regular/template CSS */
+
 body {
      padding: 5%;
 }
@@ -17,4 +19,28 @@ body {
 .bar {
      font-size: 16px;
      font-style: normal;
+}
+
+/* landing page CSS */
+
+.landing-body {
+     background-image: linear-gradient(135deg, rgba(49,163,220,1) 0%, rgba(238,137,184,1) 100%);
+     color: white;
+     height: 100%;
+     margin: 0;
+     background-repeat: no-repeat;
+     background-attachment: fixed;
+}
+
+.landing-title {
+     font-size: 18vw;
+     font-weight: bold;
+     margin: 0;
+     line-height: 110%;
+}
+
+.landing-subtitle {
+     font-size: 24px;
+     margin: 0;
+     font-style: italic;
 }
