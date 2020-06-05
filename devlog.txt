@@ -30,8 +30,8 @@ Added beginning of front-end (still experimenting quite a bit)
      Edited style.css
      Added index.html under templates/ dir
 Edited __init__.py to include some basic routing
-Uploaded waaaaaavy team flag v2 (flag.jpg)
-Renamed team flag v1 (flag_alt.jpg) for jokes, memes, giggles, gaffes, etc.
+Uploaded waaaaaavy team flag v1 (flag.jpg)
+Renamed team flag v0 (flag_alt.jpg) for jokes, memes, giggles, gaffes, etc.
 
 kaziJ -- 2020-06-04 21:53
 Upload design doc v0
