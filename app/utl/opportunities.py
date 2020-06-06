@@ -16,8 +16,10 @@ def getAllOpportunities():
 
 
 def getOpportunity(opportunityID):
-    opportunity = Opportunity.query.filter_by(opportunityID=opportunityID).first()
-    grades = OpportunityGrade.query.filter_by(opportunityID=opportunityID).all()
+    opportunity = Opportunity.query.filter_by(
+        opportunityID=opportunityID).first()
+    grades = OpportunityGrade.query.filter_by(
+        opportunityID=opportunityID).all()
     links = OpportunityLink.query.filter_by(opportunityID=opportunityID).all()
     opportunity.grades = [grade.grade for grade in grades]
     opportunity.links = [link.link for link in links]
