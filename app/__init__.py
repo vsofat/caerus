@@ -46,7 +46,7 @@ def auth():
 def oauthcallback():
     org = request.args.get("hd")
     if not org == "stuy.edu":
-        flash("Please use your stuy.edu email", 'warning')
+        flash("Please use your stuy.edu email", 'error')
         return redirect(url_for("root"))
 
     state = session['state']
