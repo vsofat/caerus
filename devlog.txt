@@ -49,3 +49,8 @@ Created landing.html
           Added styling for landing.html
           Reorganized stylesheet
 Edited devlog.txt
+
+ahmedS -- 2020-06-06 12:32
+Edited __init__.py to include all planned GET routes, with placeholders
+     Changed "/homepage" to "/opportunities", redirecting to index.html (temporarily)
+Edited devlog.txt
