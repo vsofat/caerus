@@ -44,15 +44,19 @@ def auth():
 
 @app.route("/redirect")
 def oauthcallback():
+    org = request.args.get("hd")
+    if not org == "stuy.edu":
+        flash("Please use your stuy.edu email", 'warning')
+        return redirect(url_for("root"))
+
     state = session['state']
-    print("STATE", state)
 
     flow = google_auth_oauthlib.flow.Flow.from_client_secrets_file(
         CLIENT_SECRETS_FILE, scopes=SCOPES, state=state)
     flow.redirect_uri = url_for('oauthcallback', _external=True)
 
-    # Use the authorization server's response to fetch the OAuth 2.0 tokens.
     authorization_response = request.url
+    # Use the authorization server's response to fetch the OAuth 2.0 tokens.
     flow.fetch_token(authorization_response=authorization_response)
 
     # Store credentials in the session.
