@@ -12,7 +12,9 @@ DIR += '/'
 
 flow = google_auth_oauthlib.flow.Flow.from_client_secrets_file(
     'oauth-client.json',
-    ['https://www.googleapis.com/auth/drive.metadata.readonly'])
+    ['https://www.googleapis.com/auth/userinfo.email',
+     'https://www.googleapis.com/auth/userinfo.profile',
+     'openid'])
 
 
 flow.redirect_uri = 'http://127.0.0.1:5000/redirect'
@@ -23,6 +25,7 @@ authorization_url, state = flow.authorization_url(
     access_type='offline',
     # Enable incremental authorization. Recommended as a best practice.
     include_granted_scopes='true')
+
 
 @app.route('/')
 def root():

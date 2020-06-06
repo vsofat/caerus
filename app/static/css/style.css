@@ -46,5 +46,19 @@ body {
 }
 
 .text-center .button:active {
-     outline: 1px
+     outline: 1px;
+}
+
+a {
+     text-decoration: none;
+     color: black;
+}
+
+a:hover {
+     color: black;
+     text-decoration: none;
+}
+
+a:active {
+     color: black;
 }
