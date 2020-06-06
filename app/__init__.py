@@ -61,7 +61,6 @@ def oauthcallback():
     flow.redirect_uri = url_for('oauthcallback', _external=True)
 
     authorization_response = request.url
-    print(request.url)
     # Use the authorization server's response to fetch the OAuth 2.0 tokens.
     flow.fetch_token(authorization_response=authorization_response)
 
@@ -82,10 +81,13 @@ def oauthcallback():
     )
 
     info = build('oauth2', 'v2', credentials=credentials)
-    # print(credentials.token)
-    # print(credentials.id_token)
     info = info.userinfo().get().execute()
+    id = info['id']
+    email = info['email']
+    name = info['name']
+    picture = info['picture']
     print(info)
+    print(id, email, name, picture)
 
     return redirect(url_for('opportunities'))
 

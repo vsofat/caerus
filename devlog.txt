@@ -66,5 +66,16 @@ Created individual.html, in /templates dir
      Added render_template under "/opportunity" route in __init__.py, to redirect to indiviudal.html
 Edited devlog.txt
 
+ahmedS -- 2020-06-06 15:47
+Fixed gradient colors in style.css to standardize everything a little bit
+Edited devlog.txt (take that Kazi >:))
+
+ahmedS -- 2020-06-06 16:24
+Added fontawesome webkit to template.html
+Cleaned up Google log-in button (maybe temporary) on landing.html
+Made edits in style.css, landing.html to responsively vertically-align (WIP)
+     Lost my temper doing this one
+Edited devlog.txt
+
 ericL -- 2020-06-06 17:47
 Retrieve google user data
