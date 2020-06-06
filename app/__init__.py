@@ -15,8 +15,8 @@ def opportunities():
 
 # INDIVIDUAL OPPORTUNITY
 @app.route("/opportunities/<opportunityID>")
-def opportunity():
-    return 'placeholder'
+def opportunity(opportunityID):
+    return render_template("individual.html")
 
 # SCHOLARSHIP FINDER
 @app.route("/scholarships")

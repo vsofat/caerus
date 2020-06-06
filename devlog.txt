@@ -54,3 +54,8 @@ ahmedS -- 2020-06-06 12:32
 Edited __init__.py to include all planned GET routes, with placeholders
      Changed "/homepage" to "/opportunities", redirecting to index.html (temporarily)
 Edited devlog.txt
+
+ahmedS -- 2020-06-06 13:24 
+Created individual.html, in /templates dir 
+     Added render_template under "/opportunity" route in __init__.py, to redirect to indiviudal.html
+Edited devlog.txt
