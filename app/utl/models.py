@@ -19,11 +19,13 @@ class Opportunity(db.Model):
 
 
 class OpportunityGrade(db.Model):
+    opportunityGradeID = db.Column(db.Integer, primary_key=True)
     opportunityID = db.Column(db.Integer, nullable=False)
     grade = db.Column(db.Integer, nullable=False)
 
 
 class OpportunityLink(db.Model):
+    opportunityLinkID = db.Column(db.Integer, primary_key=True)
     opportunityID = db.Column(db.Integer, nullable=False)
     link = db.Column(db.String, nullable=False)
 
@@ -39,18 +41,21 @@ class Scholarship(db.Model):
 
 
 class ScholarshipLink(db.Model):
+    scholarshipLinkID = db.Column(db.Integer, primary_key=True)
     scholarshipID = db.Column(db.Integer, nullable=False)
     link = db.Column(db.String, nullable=False)
 
 
 # Saved
 class SavedOpportunity(db.Model):
+    savedOpportunityID = db.Column(db.Integer, primary_key=True)
     userID = db.Column(db.Integer, nullable=False)
     opportunityID = db.Column(db.Integer, nullable=False)
     reminderDate = db.Column(db.DateTime)
 
 
 class SavedScholarship(db.Model):
+    savedScholarshipID = db.Column(db.Integer, primary_key=True)
     userID = db.Column(db.Integer, nullable=False)
     scholarshipID = db.Column(db.Integer, nullable=False)
     reminderDate = db.Column(db.DateTime)
