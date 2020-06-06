@@ -17,8 +17,7 @@ class Opportunity(db.Model):
     endDate = db.Column(db.DateTime)
     deadline = db.Column(db.DateTime)
     cost = db.Column(db.Float, nullable=False)
-    datePosted = db.Column(db.DateTime, nullable=False,
-                           default=datetime.utcnow)
+    datePosted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
 
 class OpportunityGrade(db.Model):
@@ -40,8 +39,8 @@ class Scholarship(db.Model):
     description = db.Column(db.String, nullable=False)
     deadline = db.Column(db.DateTime, nullable=False)
     eligibility = db.Column(db.String, nullable=False)
-    datePosted = db.Column(db.DateTime, nullable=False,
-                           default=datetime.utcnow)
+    datePosted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    datePosted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
 
 class ScholarshipLink(db.Model):
@@ -71,11 +70,10 @@ class Resource(db.Model):
     title = db.Column(db.String, nullable=False)
     description = db.Column(db.Text, nullable=False)
     link = db.Column(db.String, nullable=False)
-    datePosted = db.Column(db.DateTime, nullable=False,
-                           default=datetime.utcnow)
+    datePosted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    datePosted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
 
-# Preferences
 class FieldPreference(db.Model):
     fieldPreferenceID = db.Column(db.Integer, primary_key=True)
     userID = db.Column(db.Integer, nullable=False)
