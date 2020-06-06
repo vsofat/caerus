@@ -65,3 +65,7 @@ ahmedS -- 2020-06-06 13:24
 Created individual.html, in /templates dir
      Added render_template under "/opportunity" route in __init__.py, to redirect to indiviudal.html
 Edited devlog.txt
+
+ahmedS -- 2020-06-06 15:47
+Fixed gradient colors in style.css to standardize everything a little bit
+Edited devlog.txt (take that Kazi >:))
