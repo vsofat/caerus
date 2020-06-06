@@ -67,6 +67,7 @@ class Resource(db.Model):
     title = db.Column(db.String, nullable=False)
     description = db.Column(db.Text, nullable=False)
     link = db.Column(db.String, nullable=False)
+    datePosted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
 
 # Preferences
