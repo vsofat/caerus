@@ -76,3 +76,7 @@ Cleaned up Google log-in button (maybe temporary) on landing.html
 Made edits in style.css, landing.html to responsively vertically-align (WIP)
      Lost my temper doing this one
 Edited devlog.txt
+
+ahmedS -- 2020-06-06 19:01
+Worked (and almost completed) individual opportunity/scholarship template
+Edited devlog.txt
