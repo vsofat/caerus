@@ -79,3 +79,6 @@ Edited devlog.txt
 
 ericL -- 2020-06-06 17:47
 Retrieve google user data
+
+ericL -- 2020-06-06 18:59
+Add logout route

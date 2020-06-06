@@ -1,5 +1,6 @@
 from flask import Flask, request, redirect, session, render_template, url_for, flash
 import os
+import requests
 import google.oauth2.credentials
 import google_auth_oauthlib.flow
 from googleapiclient.discovery import build
@@ -40,7 +41,6 @@ def auth():
         include_granted_scopes='true')
 
     session['state'] = state
-    print("STATE", state)
     return redirect(authorization_url)
 
 
@@ -90,6 +90,30 @@ def oauthcallback():
     print(id, email, name, picture)
 
     return redirect(url_for('opportunities'))
+
+
+@app.route("/logout")
+def logout():
+    if 'credentials' not in session:
+        return redirect(url_for('root'))
+    cred = session['credentials']
+
+    credentials = google.oauth2.credentials.Credentials(
+        cred['token'],
+        cred['refresh_token'],
+        cred['token_uri'],
+        cred['client_id'],
+        cred['client_secret'],
+        cred['scopes']
+    )
+
+    revoke = requests.post('https://oauth2.googleapis.com/revoke',
+                           params={'token': credentials.token},
+                           headers={'content-type': 'application/x-www-form-urlencoded'})
+
+    del session['credentials']
+
+    return redirect(url_for('root'))
 
 
 def credentials_to_dict(credentials):
