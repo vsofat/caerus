@@ -1,11 +1,11 @@
 from flask import Flask, request, redirect, session, render_template, url_for, flash
 import os
+import json
 import requests
 import google.oauth2.credentials
 import google_auth_oauthlib.flow
 from googleapiclient.discovery import build
 
-import os
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
 app = Flask(__name__)
@@ -46,15 +46,15 @@ def auth():
 
 @app.route("/redirect")
 def oauthcallback():
-    org = request.args.get("hd")
-    if not org == "stuy.edu":
-        flash("Please use your stuy.edu email", 'error')
-        return redirect(url_for("root"))
+    users = open(DIR + "static/data/users.json")
+    users = json.load(users)
 
-    if 'state' in session:
-        state = session['state']
-    else:
-        state = None
+    teachers = users['teacher']
+    admin = users['admin']
+
+    org = request.args.get("hd")
+
+    state = session['state'] if 'state' in session else None
 
     flow = google_auth_oauthlib.flow.Flow.from_client_secrets_file(
         CLIENT_SECRETS_FILE, scopes=SCOPES, state=state)
@@ -82,12 +82,24 @@ def oauthcallback():
 
     info = build('oauth2', 'v2', credentials=credentials)
     info = info.userinfo().get().execute()
-    id = info['id']
+
+    userid = info['id']
     email = info['email']
     name = info['name']
     picture = info['picture']
+
+    if email in admin:
+        usertype = 'admin'
+    elif email in teachers:
+        usertype = 'teacher'
+    elif org == "stuy.edu":
+        usertype = 'student'
+    else:
+        flash("Please use an appropriate email", 'error')
+        return redirect(url_for("root"))
+
     print(info)
-    print(id, email, name, picture)
+    print(userid, email, name, picture, usertype)
 
     return redirect(url_for('opportunities'))
 

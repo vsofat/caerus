@@ -4,13 +4,19 @@ import json
 
 DIR = os.path.dirname(__file__) + "/../static/data/"
 
-users = dict()
+users = {
+    'teacher': list(),
+    'admin': list(),
+    'student': list()
+}
 
-def addUser(file, type):
+
+def addUser(file, utype):
     with open(DIR + file, newline='') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
-            users[row['email']] = type
+            users[utype].append(row['email'])
+
 
 addUser('teachers.csv', 'teacher')
 addUser('students.csv', 'student')
