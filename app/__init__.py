@@ -18,6 +18,7 @@ SCOPES = ['https://www.googleapis.com/auth/userinfo.email',
           'openid']
 
 
+# LANDING PAGE
 @app.route("/")
 def root():
     return render_template("landing.html")
@@ -65,7 +66,7 @@ def oauthcallback():
     credentials = flow.credentials
     session['credentials'] = credentials_to_dict(credentials)
 
-    return redirect(url_for('homepage'))
+    return redirect(url_for('opportunities'))
 
 
 def credentials_to_dict(credentials):
@@ -77,9 +78,39 @@ def credentials_to_dict(credentials):
             'scopes': credentials.scopes}
 
 
-@app.route("/homepage")
-def homepage():
+@app.route("/opportunities")
+def opportunities():
     return render_template("index.html")
+
+
+@app.route("/opportunities/<opportunityID>")
+def opportunity(opportunityID):
+    return render_template("individual.html")
+
+
+@app.route("/scholarships")
+def scholarships():
+    return 'placeholder'
+
+
+@app.route("/scholarships/<scholarshipID>")
+def scholarship():
+    return 'placeholder'
+
+
+@app.route("/favorites")
+def favorites():
+    return 'placeholder'
+
+
+@app.route("/resources")
+def resources():
+    return 'placeholder'
+
+
+@app.route("/preferences")
+def preferences():
+    return 'placeholder'
 
 
 if __name__ == "__main__":
