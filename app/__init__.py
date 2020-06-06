@@ -2,6 +2,7 @@ from flask import Flask, request, redirect, session, render_template, url_for, f
 import os
 import google.oauth2.credentials
 import google_auth_oauthlib.flow
+from googleapiclient.discovery import build
 
 import os
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
@@ -50,13 +51,17 @@ def oauthcallback():
         flash("Please use your stuy.edu email", 'error')
         return redirect(url_for("root"))
 
-    state = session['state']
+    if 'state' in session:
+        state = session['state']
+    else:
+        state = None
 
     flow = google_auth_oauthlib.flow.Flow.from_client_secrets_file(
         CLIENT_SECRETS_FILE, scopes=SCOPES, state=state)
     flow.redirect_uri = url_for('oauthcallback', _external=True)
 
     authorization_response = request.url
+    print(request.url)
     # Use the authorization server's response to fetch the OAuth 2.0 tokens.
     flow.fetch_token(authorization_response=authorization_response)
 
@@ -65,6 +70,22 @@ def oauthcallback():
     #              credentials in a persistent database instead.
     credentials = flow.credentials
     session['credentials'] = credentials_to_dict(credentials)
+    cred = session['credentials']
+
+    credentials = google.oauth2.credentials.Credentials(
+        cred['token'],
+        cred['refresh_token'],
+        cred['token_uri'],
+        cred['client_id'],
+        cred['client_secret'],
+        cred['scopes']
+    )
+
+    info = build('oauth2', 'v2', credentials=credentials)
+    # print(credentials.token)
+    # print(credentials.id_token)
+    info = info.userinfo().get().execute()
+    print(info)
 
     return redirect(url_for('opportunities'))
 
