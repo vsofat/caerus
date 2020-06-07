@@ -2,6 +2,10 @@
 
 {% block title %}caerus{% endblock %}
 
+{% block scripts %}
+     <script src="./static/js/opportunities.js"></script>
+{% endblock %}
+
 {% block heading %}
      <div class="row w-100">
           <div class="col-9">
@@ -81,13 +85,12 @@
       <label for="type10"> MEDICAL & LIFE SCIENCES</label><br>
 
     </div>
-    <div class="col-sm">
-    <form class="vizSelection" method="">
-         <select class="vizForm2" id="vizSelector2" type="text" name="vizDropdown2" placeholder="Select One">
 
-         </select> <span>&emsp;</span>
-         <!-- <input type="button" class="btn btn-warning" value="" onclick="render()"> -->
-    </form>
+    <div class="col-sm">
+      <div class="slidecontainer">
+        <p><b> PRICE <span id="demo"></span></b></p>
+        <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+      </div>
 
   </div>
 </div>
