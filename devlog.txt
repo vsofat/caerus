@@ -154,3 +154,6 @@ Initialize database
 ahmedS -- 2020-06-06 23:59
 Fixed flasher in landing.html
 Edited devlog.txt
+
+ericL -- 2020-06-07 01:29
+Move credentials from session to db

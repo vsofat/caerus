@@ -4,8 +4,6 @@ from datetime import datetime
 db = SQLAlchemy()
 
 # Users
-
-
 class User(db.Model):
     userID = db.Column(db.String, primary_key=True)
     email = db.Column(db.String, nullable=False)

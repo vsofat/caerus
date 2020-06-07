@@ -8,7 +8,7 @@ import functools
 import google.oauth2.credentials
 import google_auth_oauthlib.flow
 from googleapiclient.discovery import build
-from utl import models
+from utl import models, users
 
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
@@ -25,11 +25,17 @@ SCOPES = ['https://www.googleapis.com/auth/userinfo.email',
           'https://www.googleapis.com/auth/userinfo.profile',
           'openid']
 
+f = open(CLIENT_SECRETS_FILE)
+f = json.load(f)['web']
+TOKEN_URI = f['token_uri']
+CLIENT_ID = f['client_id']
+CLIENT_SECRET = f['client_secret']
+
 
 def protected(f):
     @functools.wraps(f)
     def wrapper(*args, **kwargs):
-        if 'credentials' in session:
+        if 'userid' in session:
             return f(*args, **kwargs)
         else:
             flash("You are not logged in", 'error')
@@ -39,10 +45,19 @@ def protected(f):
 
 @app.route("/")
 def root():
-    if 'credentials' in session:
-        credentials = dict_to_credentials(session['credentials'])
-        session['credentials'] = credentials_to_dict(credentials)
-        print('here')
+    if 'userid' in session:
+        userid = session['userid']
+        access, refresh = users.getTokens(userid)
+        credentials = dict_to_credentials({
+            'token': access,
+            'refresh_token': refresh,
+            'token_uri': TOKEN_URI,
+            'client_id': CLIENT_ID,
+            'client_secret': CLIENT_SECRET,
+            'scopes': SCOPES
+        })
+        users.updateTokens(userid, credentials.token,
+                           credentials.refresh_token)
         return redirect(url_for('opportunities'))
     else:
         return render_template("landing.html")
@@ -68,11 +83,11 @@ def auth():
 
 @app.route("/redirect")
 def oauthcallback():
-    users = open(DIR + "static/data/users.json")
-    users = json.load(users)
+    userfile = open(DIR + "static/data/users.json")
+    userDict = json.load(userfile)
 
-    teachers = users['teacher']
-    admin = users['admin']
+    teachers = userDict['teacher']
+    admin = userDict['admin']
 
     org = request.args.get("hd")
 
@@ -83,24 +98,15 @@ def oauthcallback():
     flow.redirect_uri = url_for('oauthcallback', _external=True)
 
     authorization_response = request.url
-    # Use the authorization server's response to fetch the OAuth 2.0 tokens.
     flow.fetch_token(authorization_response=authorization_response)
 
-    # Store credentials in the session.
-    # ACTION ITEM: In a production app, you likely want to save these
-    #              credentials in a persistent database instead.
     credentials = flow.credentials
-    session['credentials'] = credentials_to_dict(credentials)
-
-    credentials = dict_to_credentials(session['credentials'])
 
     info = build('oauth2', 'v2', credentials=credentials)
     info = info.userinfo().get().execute()
 
-    userid = info['id']
     email = info['email']
-    name = info['name']
-    picture = info['picture']
+    userid = info['id']
 
     if email in admin:
         usertype = 'admin'
@@ -109,28 +115,47 @@ def oauthcallback():
     elif org == "stuy.edu":
         usertype = 'student'
     else:
-        del session['credentials']
         flash("Please use an appropriate email", 'error')
         return redirect(url_for("root"))
 
-    # print(info)
-    # print(userid, email, name, picture, usertype)
+    if users.userExists(userid):
+        users.updateTokens(
+            userid,
+            credentials.token,
+            credentials.refresh_token
+        )
+    else:
+        users.createUser(
+            userid,
+            email,
+            info['name'],
+            info['picture'],
+            usertype,
+            credentials.token,
+            credentials.refresh_token
+        )
+
+    session['userid'] = userid
 
     return redirect(url_for('opportunities'))
 
 
 @app.route("/logout")
 def logout():
-    if 'credentials' not in session:
+    if 'userid' not in session:
         return redirect(url_for('root'))
 
-    credentials = dict_to_credentials(session['credentials'])
+    userid = session['userid']
+
+    access, refresh = users.getTokens(userid)
 
     revoke = requests.post('https://oauth2.googleapis.com/revoke',
-                           params={'token': credentials.token},
+                           params={'token': access},
                            headers={'content-type': 'application/x-www-form-urlencoded'})
 
-    del session['credentials']
+    users.nullifyTokens(userid)
+
+    del session['userid']
 
     return redirect(url_for('root'))
 

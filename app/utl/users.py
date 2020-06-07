@@ -15,6 +15,10 @@ def createUser(userID, email, name, imglink, userType, accessToken, refreshToken
     db.session.commit()
 
 
+def userExists(userID):
+    return db.session.query(User.query.filter(User.userID == userID).exists()).scalar()
+
+
 def nullifyTokens(userID):
     user = User.query.filter_by(userID=userID).first()
     user.accessToken = None
@@ -25,3 +29,10 @@ def nullifyTokens(userID):
 def getTokens(userID):
     user = User.query.filter_by(userID=userID).first()
     return user.accessToken, user.accessToken
+
+
+def updateTokens(userID, access, refresh):
+    user = User.query.filter_by(userID=userID).first()
+    user.accessToken = access
+    user.refreshToken = refresh
+    db.session.commit()
