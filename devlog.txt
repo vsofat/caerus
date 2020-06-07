@@ -150,3 +150,7 @@ Add user functions
 
 kaziJ -- 2020-06-06 23:58
 Initialize database
+
+ahmedS -- 2020-06-06 23:59
+Fixed flasher in landing.html
+Edited devlog.txt
