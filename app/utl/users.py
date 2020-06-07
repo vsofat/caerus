@@ -19,7 +19,7 @@ def nullifyTokens(userID):
     user = User.query.filter_by(userID=userID).first()
     user.accessToken = None
     user.refreshToken = None
-    db.session.commit() =
+    db.session.commit()
 
 
 def getTokens(userID):
