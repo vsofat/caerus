@@ -118,6 +118,9 @@ Add user parser from csv to json
 ericL -- 2020-06-06 19:48
 Discriminate users by type
 
+vishwaaS -- 2020-06-06 20:32
+Made changes to the designDoc
+
 ericL -- 2020-06-06 20:32
 Redirect if credentials are present
 
@@ -144,6 +147,9 @@ Add workflow and decryption script
 
 kaziJ -- 2020-06-06 22:26
 Add scholarship and opportunity links in functions
+
+vishwaaS -- 2020-06-06 22:32
+Set up Github secret for decryption script
 
 kaziJ -- 2020-06-06 23:47
 Add user functions
@@ -180,3 +186,9 @@ Fix creation functions
 
 ericL -- 2020-06-07 03:26
 Manually add opportunity
+
+vishwaaS -- 2020-06-07 05:57
+Renamed index.html to opportunities.html
+Updated CSS for opportunities.html
+Added JS script for opportunities.html
+Added a collapsable with a form for filtering and search on opportunities.html
