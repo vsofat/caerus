@@ -1,4 +1,5 @@
 from flask import Flask, request, redirect, session, render_template, url_for, flash
+from flask_sqlalchemy import SQLAlchemy
 import os
 import json
 import requests
@@ -6,9 +7,11 @@ import functools
 import google.oauth2.credentials
 import google_auth_oauthlib.flow
 from googleapiclient.discovery import build
+from utl import models
 
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
+db = models.db
 app = Flask(__name__)
 app.secret_key = os.urandom(32)
 
@@ -193,5 +196,9 @@ def preferences():
 
 
 if __name__ == "__main__":
+    if not os.path.exists(CLIENT_SECRETS_FILE):
+        print('Missing Google OAuth 2.0 Client ID file.')
+        print('Read README.md for instructions')
+        exit()
     app.debug = True
     app.run()
