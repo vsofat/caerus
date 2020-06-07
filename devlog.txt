@@ -91,3 +91,6 @@ Discriminate users by type
 
 ericL -- 2020-06-06 20:32
 Redirect if credentials are present
+
+ericL -- 2020-06-06 20:42
+Protect user routes

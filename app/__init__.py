@@ -2,6 +2,7 @@ from flask import Flask, request, redirect, session, render_template, url_for, f
 import os
 import json
 import requests
+import functools
 import google.oauth2.credentials
 import google_auth_oauthlib.flow
 from googleapiclient.discovery import build
@@ -20,12 +21,23 @@ SCOPES = ['https://www.googleapis.com/auth/userinfo.email',
           'openid']
 
 
-# LANDING PAGE
+def protected(f):
+    @functools.wraps(f)
+    def wrapper(*args, **kwargs):
+        if 'credentials' in session:
+            return f(*args, **kwargs)
+        else:
+            flash("You are not logged in", 'error')
+            return redirect(url_for('root'))
+    return wrapper
+
+
 @app.route("/")
 def root():
     if 'credentials' in session:
         credentials = dict_to_credentials(session['credentials'])
         session['credentials'] = credentials_to_dict(credentials)
+        print('here')
         return redirect(url_for('opportunities'))
     else:
         return render_template("landing.html")
@@ -92,6 +104,7 @@ def oauthcallback():
     elif org == "stuy.edu":
         usertype = 'student'
     else:
+        del session['credentials']
         flash("Please use an appropriate email", 'error')
         return redirect(url_for("root"))
 
@@ -125,6 +138,7 @@ def credentials_to_dict(credentials):
             'client_secret': credentials.client_secret,
             'scopes': credentials.scopes}
 
+
 def dict_to_credentials(dict):
     return google.oauth2.credentials.Credentials(
         dict['token'],
@@ -135,37 +149,45 @@ def dict_to_credentials(dict):
         dict['scopes']
     )
 
+
 @app.route("/opportunities")
+@protected
 def opportunities():
     return render_template("index.html")
 
 
 @app.route("/opportunities/<opportunityID>")
+@protected
 def opportunity(opportunityID):
     return render_template("individual.html")
 
 
 @app.route("/scholarships")
+@protected
 def scholarships():
     return 'placeholder'
 
 
 @app.route("/scholarships/<scholarshipID>")
+@protected
 def scholarship():
     return 'placeholder'
 
 
 @app.route("/favorites")
+@protected
 def favorites():
     return 'placeholder'
 
 
 @app.route("/resources")
+@protected
 def resources():
     return 'placeholder'
 
 
 @app.route("/preferences")
+@protected
 def preferences():
     return 'placeholder'
 
