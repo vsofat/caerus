@@ -28,7 +28,7 @@
           <script src="https://kit.fontawesome.com/0cf2afd459.js" crossorigin="anonymous"></script>
      </head>
 
-     <body class="landing-body h-100 d-flex">
+     <body class="landing-body vh-100 d-flex">
           <div class="justify-content-center align-self-center mx-auto">
                {% with messages = get_flashed_messages(with_categories=true) %}
                {% if messages %}
@@ -47,7 +47,6 @@
                {% endfor %}
                {% endif %}
                {% endwith %}
-               <br> <br>
                <div class="text-center">
                     <span class="landing-title">Caerus</span> <br>
                     <span class="landing-subtitle">All your opportunities, in one place.</span> <br> <br>
