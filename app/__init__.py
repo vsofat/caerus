@@ -196,13 +196,6 @@ def opportunityRoute(opportunityID):
 @app.route("/scholarships")
 @protected
 def scholarshipsRoute():
-    scholarships.createScholarship({
-        'title': 'Architecture Scholarship',
-        'description': 'NYC students who plan to attend a five-year architecture program are eligible for the Walter Hunt scholarship, which offers up to $10,000 a year for two years:',
-        'deadline': datetime.datetime(2020, 6, 15),
-        'eligibility': 'Current New York City public high school seniors who have been accepted to a five-year Bachelor of Architecture program at a NAAB-accredited school of architecture in the U.S.',
-        'links': ['https://www.centerforarchitecture.org/scholarships-grants/walter-a-hunt-jr-scholarship/', 'https://w7jln1jmtz92r8zso3ijqxl1-wpengine.netdna-ssl.com/wp-content/uploads/2018/11/Walter-Hunt-Application-Requirements-Page_2019-v2.pdf']
-    })
     return render_template("scholarships.html")
 
 
