@@ -164,4 +164,3 @@ Updated templates/ dir
 Edited style.css with navbar changes/updates
 Edited __init__.py routing, to reflect the addition of new templates in templates/ dir
 Edited devlog.txt
-
