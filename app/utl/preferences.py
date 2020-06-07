@@ -17,18 +17,22 @@ GRADE_PREFERENCE = "GRADE_PREFERENCE"
 
 
 # Cost Preference
+
+# Create
 def createCostPreference(userID, cost):
     costPreference = CostPreference(userID=userID, cost=cost)
     db.session.add(costPreference)
     db.session.commit()
 
 
-def updateCostPreference(userID, cost):
+# Update
+def updateCostPreference(userID, cost):  # TODO: Is this the best way to update a row?
     costPreference = CostPreference.query.filter_by(userID=userID).first()
     costPreference.cost = cost
     db.session.commit()
 
 
+# Get All
 def getAllCostPreferences(userID):
     costPreferences = CostPreference.query.filter_by(userID=userID).all()
     costPreferencesArr = []
@@ -39,18 +43,15 @@ def getAllCostPreferences(userID):
 
 
 # Field Preference
+
+# Create
 def createFieldPreference(userID, field):
     fieldPreference = FieldPreference(userID=userID, field=field)
     db.session.add(fieldPreference)
     db.session.commit()
 
 
-def updateFieldPreference(userID, field):
-    fieldPreference = FieldPreference.query.filter_by(userID=userID).first()
-    fieldPreference.field = field
-    db.session.commit()
-
-
+# Get All
 def getAllFieldPreferences(userID):
     fieldPreferences = FieldPreference.query.filter_by(userID=userID).all()
     fieldPreferencesArr = []
@@ -61,18 +62,15 @@ def getAllFieldPreferences(userID):
 
 
 # Gender Preference
+
+# Create
 def createGenderPreference(userID, gender):
     genderPreference = GenderPreference(userID=userID, gender=gender)
     db.session.add(genderPreference)
     db.session.commit()
 
 
-def updateGenderPreference(userID, gender):
-    genderPreference = GenderPreference.query.filter_by(userID=userID).first()
-    genderPreference.gender = gender
-    db.session.commit()
-
-
+# Get All
 def getAllGenderPreferences(userID):
     genderPreferences = GenderPreference.query.filter_by(userID=userID).all()
     genderPreferencesArr = []
@@ -86,18 +84,15 @@ def getAllGenderPreferences(userID):
 
 
 # Grade Preference
+
+# Create
 def createGradePreference(userID, grade):
     gradePreference = GradePreference(userID=userID, grade=grade)
     db.session.add(gradePreference)
     db.session.commit()
 
 
-def updateGradePreference(userID, grade):
-    gradePreference = GradePreference.query.filter_by(userID=userID).first()
-    gradePreference.grade = grade
-    db.session.commit()
-
-
+# Get All
 def getAllGradePreferences(userID):
     GradePreferences = FieldPreference.query.filter_by(userID=userID).all()
     GradePreferencesArr = []
@@ -157,6 +152,12 @@ def createAllPreferences(body):
 
 
 def getAllPreferences(userID):
+    """
+    Output
+    -----
+    An array of preference dictionaries, each with its own type and value.
+    See the createAllPreferences function for an example.
+    """
     costPreferences = deepcopy(getAllCostPreferences(userID))
     fieldPreferences = deepcopy(getAllFieldPreferences(userID))
     genderPreferences = deepcopy(getAllGenderPreferences(userID))
