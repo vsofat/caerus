@@ -83,6 +83,10 @@ Retrieve google user data
 ericL -- 2020-06-06 18:59
 Add logout route
 
+ahmedS -- 2020-06-06 19:01
+Worked (and almost completed) individual opportunity/scholarship template
+Edited devlog.txt
+
 ericL -- 2020-06-06 19:28
 Add user parser from csv to json
 

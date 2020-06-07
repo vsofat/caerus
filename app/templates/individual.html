@@ -4,4 +4,40 @@
 
 {% block heading %} 
      <h1 class="title">TITLE GOES HERE</h1>
+
+     <!-- tags -->
+     <div class="tag-block">
+          <!-- field, gender, cost, etc. -->
+          <a class="btn btn-primary btn-sm" href="/opportunities">&nbsp; #freshman &nbsp;</a> &nbsp;
+          <a class="btn btn-primary btn-sm" href="/opportunities">&nbsp; #sophomore &nbsp;</a> &nbsp;
+          <a class="btn btn-primary btn-sm" href="/opportunities">&nbsp; #junior &nbsp;</a> &nbsp;
+          <a class="btn btn-primary btn-sm" href="/opportunities">&nbsp; #senior &nbsp;</a> &nbsp;
+          <a class="btn btn-primary btn-sm" href="/opportunities">&nbsp; #STEM &nbsp;</a> &nbsp;
+          <a class="btn btn-primary btn-sm" href="/opportunities">&nbsp; #free &nbsp;</a> &nbsp;
+          <a class="btn btn-primary btn-sm" href="/opportunities">&nbsp; #female-only &nbsp;</a> &nbsp;
+     </div>
+
+     <br>
+
+     <!-- description & info -->
+     <h3 class="subtitle">startdate - enddate</h3>
+     <h3 class="subtitle"><b>DEADLINE</b></h3> <br>
+
+     <p>description lorem ipsum description lorem ipsum description lorem ipsum description lorem ipsum description lorem ipsum description lorem ipsum</p>
+
 {% endblock %}
+
+<!--
+     opportunityID: Integer primary_key
+title: String
+description : Text
+field: String
+gender: String or NULL 
+location: String or NULL
+startDate: DateTime or NULL
+endDate: DateTime or NULL
+deadline: DateTime or NULL
+cost: Float
+datePosted: DateTime
+
+-->
