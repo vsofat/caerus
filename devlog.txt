@@ -65,3 +65,27 @@ ahmedS -- 2020-06-06 13:24
 Created individual.html, in /templates dir
      Added render_template under "/opportunity" route in __init__.py, to redirect to indiviudal.html
 Edited devlog.txt
+
+kaziJ -- 2020-06-06 15:39
+Setup db models
+
+kaziJ -- 2020-06-06 15:55
+Finish half of models.py
+
+kaziJ -- 2020-06-06 16:24
+Start working on database functions
+
+kaziJ -- 2020-06-06 16:49
+Start working on opportunities functions
+
+kaziJ -- 2020-06-06 17:56
+Add resources and saved functions
+
+kaziJ -- 2020-06-06 18:29
+Update scholarships and opportunities
+
+kaziJ -- 2020-06-06 21:39
+Create User model
+
+kaziJ -- 2020-06-06 22:26
+Add scholarship and opportunity links in functions
