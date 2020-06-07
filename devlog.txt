@@ -83,3 +83,6 @@ Edited devlog.txt
 
 ericL -- 2020-06-06 20:56
 Add instructions to README.md
+
+ericL -- 2020-06-06 21:38
+Add check for oauth-client file

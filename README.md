@@ -12,6 +12,10 @@
 
 Caerus is a website based off of Mr. Blumm's weekly Opportunity Bulletin, where students at Stuyvesant can search through a database of opportunities, internships and scholarships curated by Mr. Blumm and Stuyvesant faculty.
 
+## APIs Used
+
+- Google OAuth2 API: Retrieves basic information from a user's Google account. We use it for authentication and to get the email, name, and picture from a user's account.
+
 ## Instructions
 
 ### Assuming python3 and pip are already installed
@@ -72,7 +76,7 @@ pip install -r requirements.txt
 - Add <http://127.0.0.1:5000/redirect> as an Authorized redirect URI.
 - Create the project and click **OK**.
 - Click the download button on the right-hand side of the OAuth 2.0 Client ID.
-- Rename the file to oauth-client.json and place it in the root of this repository.
+- Rename the file to `oauth-client.json` and place it in the root of this repository.
 
 The file should look like this:
 
