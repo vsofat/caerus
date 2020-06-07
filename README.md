@@ -11,3 +11,92 @@
 ## Description
 
 Caerus is a website based off of Mr. Blumm's weekly Opportunity Bulletin, where students at Stuyvesant can search through a database of opportunities, internships and scholarships curated by Mr. Blumm and Stuyvesant faculty.
+
+## Instructions
+
+### Assuming python3 and pip are already installed
+
+### Virtual Environment
+
+- To prevent conflicts with globally installed packages, it is recommended to run everything below in a virtual environment.
+
+Set up a virtual environment by running the following in your terminal:
+
+```shell
+python -m venv hero
+# replace hero with anything you want
+# If the above does not work, run with python3 (this may be the case if a version of python2 is also installed)
+```
+
+To enter your virtual environment, run the following:
+
+```shell
+. hero/bin/activate
+```
+
+To exit your virtual environment, run the following:
+
+```shell
+deactivate
+```
+
+### Cloning
+
+Run the following commands in your terminal
+
+```shell
+git clone https://github.com/vsofat/caerus.git
+
+cd caerus
+```
+
+### Dependencies
+
+Run the following line in your virtual environment
+
+```shell
+pip install -r requirements.txt
+```
+
+### Launch Codes
+
+#### Google OAuth 2.0 Client
+
+- Head over to the [Google API Console](https://console.developers.google.com/projectselector2) and create a new project.
+- Click on the OAuth consent screen tab and select the External option.
+- Name the application and click save.
+- Click on the Credentials tab and click **CREATE CREDENTIALS**.
+- Select the OAuth client ID option.
+- Choose web application as the Application type.
+- Add <http://127.0.0.1:5000> as an Authorized JavaScript origin.
+- Add <http://127.0.0.1:5000/redirect> as an Authorized redirect URI.
+- Create the project and click **OK**.
+- Click the download button on the right-hand side of the OAuth 2.0 Client ID.
+- Rename the file to oauth-client.json and place it in the root of this repository.
+
+The file should look like this:
+
+```json
+{
+    "web": {
+        "client_id": "",
+        "project_id": "",
+        "auth_uri": "",
+        "token_uri": "",
+        "auth_provider_x509_cert_url": "",
+        "client_secret": "",
+        "redirect_uris": [],
+        "javascript_origins": []
+    }
+}
+```
+
+### Running
+
+Run the following line in your virtual environment
+
+```shell
+python3 app/__init__.py
+```
+
+Open a browser and head to <http://127.0.0.1:5000/>
