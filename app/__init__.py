@@ -184,7 +184,7 @@ def logout():
 @app.route("/opportunities")
 @protected
 def opportunitiesRoute():
-    return render_template("opportunities.html")
+    return render_template("opportunities.html", user=users.getUserInfo(session['userid']))
 
 
 @app.route("/opportunities/<opportunityID>")
