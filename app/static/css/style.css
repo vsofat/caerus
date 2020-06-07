@@ -1,0 +1,64 @@
+/* regular/template CSS */
+
+body {
+     padding: 5%;
+}
+
+.title {
+     font-size: 72px;
+     font-weight: bold;
+     margin: 0;
+}
+
+.subtitle {
+     font-size: 24px;
+     margin: 0;
+     font-style: italic;
+}
+
+.bar {
+     font-size: 16px;
+     font-style: normal;
+}
+
+/* landing page CSS */
+
+.landing-body {
+     background: rgb(0,123,255);
+     background-image: linear-gradient(135deg, rgba(0,123,255,1) 0%, rgba(255,143,240,1) 75%);
+     color: white;
+     height: 100%;
+     background-repeat: no-repeat;
+     background-attachment: fixed;
+}
+
+.landing-title {
+     font-size: 18vw;
+     font-weight: bold;
+     margin: 0;
+     line-height: 110%;
+}
+
+.landing-subtitle {
+     font-size: 24px;
+     margin: 0;
+     font-style: italic;
+}
+
+.text-center .button:active {
+     outline: 1px;
+}
+
+a {
+     text-decoration: none;
+     color: black;
+}
+
+a:hover {
+     color: black;
+     text-decoration: none;
+}
+
+a:active {
+     color: black;
+}

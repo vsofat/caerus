@@ -1,0 +1,24 @@
+on:
+  push
+
+name: Test App
+
+jobs:
+  test:
+    name: run test.py
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Decrypt oauth-client.json
+      run: ./.github/scripts/decrypt.sh
+      env:
+        PASSPHRASE: ${{ secrets.PASSPHRASE }}
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+    - name: Execute test.py
+      run: python app/test.py
