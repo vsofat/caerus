@@ -3,6 +3,16 @@ from datetime import datetime
 
 db = SQLAlchemy()
 
+# Users
+class User(db.Model):
+    userID = db.Column(db.String, primary_key=True)
+    email = db.Column(db.String, nullable=False)
+    name = db.Column(db.String, nullable=False)
+    imglink = db.Column(db.String, nullable=False)
+    userType = db.Column(db.String, nullable=False)
+    accessToken = db.Column(db.String)
+    refreshToken = db.Column(db.String)
+
 # Opportunities
 class Opportunity(db.Model):
     opportunityID = db.Column(db.Integer, primary_key=True)
@@ -67,14 +77,8 @@ class Resource(db.Model):
     title = db.Column(db.String, nullable=False)
     description = db.Column(db.Text, nullable=False)
     link = db.Column(db.String, nullable=False)
-    datePosted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-
-
-# Preferences
-class CostPreference(db.Model):
-    costPreferenceID = db.Column(db.Integer, primary_key=True)
-    userID = db.Column(db.Integer, nullable=False)
-    cost = db.Column(db.Float, nullable=False)
+    datePosted = db.Column(db.DateTime, nullable=False,
+                           default=datetime.utcnow)
 
 
 class FieldPreference(db.Model):
@@ -83,13 +87,19 @@ class FieldPreference(db.Model):
     field = db.Column(db.String, nullable=False)
 
 
+class GradePreference(db.Model):
+    gradePreferenceID = db.Column(db.Integer, primary_key=True)
+    userID = db.Column(db.Integer, nullable=False)
+    grade = db.Column(db.Integer, nullable=False)
+
+
 class GenderPreference(db.Model):
     genderPreferenceID = db.Column(db.Integer, primary_key=True)
     userID = db.Column(db.Integer, nullable=False)
     gender = db.Column(db.String, nullable=False)
 
 
-class GradePreference(db.Model):
-    gradePreferenceID = db.Column(db.Integer, primary_key=True)
+class CostPreference(db.Model):
+    costPreferenceID = db.Column(db.Integer, primary_key=True)
     userID = db.Column(db.Integer, nullable=False)
-    grade = db.Column(db.Integer, nullable=False)
+    cost = db.Column(db.Float, nullable=False)
