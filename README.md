@@ -66,17 +66,17 @@ pip install -r requirements.txt
 
 #### Google OAuth 2.0 Client
 
-- Head over to the [Google API Console](https://console.developers.google.com/projectselector2) and create a new project.
-- Click on the OAuth consent screen tab and select the External option.
-- Name the application and click save.
-- Click on the Credentials tab and click **CREATE CREDENTIALS**.
-- Select the OAuth client ID option.
-- Choose web application as the Application type.
-- Add <http://127.0.0.1:5000> as an Authorized JavaScript origin.
-- Add <http://127.0.0.1:5000/redirect> as an Authorized redirect URI.
-- Create the project and click **OK**.
-- Click the download button on the right-hand side of the OAuth 2.0 Client ID.
-- Rename the file to `oauth-client.json` and place it in the root of this repository.
+1. Head over to the [Google API Console](https://console.developers.google.com/projectselector2) and create a new project.
+2. Click on the OAuth consent screen tab and select the External option.
+3. Name the application and click save.
+4. Click on the Credentials tab and click **CREATE CREDENTIALS**.
+5. Select the OAuth client ID option.
+6. Choose web application as the Application type.
+7. Add <http://127.0.0.1:5000> as an Authorized JavaScript origin.
+8. Add <http://127.0.0.1:5000/redirect> as an Authorized redirect URI.
+9. Create the project and click **OK**.
+10. Click the download button on the right-hand side of the OAuth 2.0 Client ID.
+11. Rename the file to `oauth-client.json` and place it in the root of this repository.
 
 The file should look like this:
 

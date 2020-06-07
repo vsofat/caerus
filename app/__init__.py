@@ -1,11 +1,17 @@
 from flask import Flask, request, redirect, session, render_template, url_for, flash
+from flask_sqlalchemy import SQLAlchemy
 import os
+import json
+import requests
+import functools
 import google.oauth2.credentials
 import google_auth_oauthlib.flow
+from googleapiclient.discovery import build
+from utl import models
 
-import os
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
+db = models.db
 app = Flask(__name__)
 app.secret_key = os.urandom(32)
 
@@ -18,10 +24,26 @@ SCOPES = ['https://www.googleapis.com/auth/userinfo.email',
           'openid']
 
 
-# LANDING PAGE
+def protected(f):
+    @functools.wraps(f)
+    def wrapper(*args, **kwargs):
+        if 'credentials' in session:
+            return f(*args, **kwargs)
+        else:
+            flash("You are not logged in", 'error')
+            return redirect(url_for('root'))
+    return wrapper
+
+
 @app.route("/")
 def root():
-    return render_template("landing.html")
+    if 'credentials' in session:
+        credentials = dict_to_credentials(session['credentials'])
+        session['credentials'] = credentials_to_dict(credentials)
+        print('here')
+        return redirect(url_for('opportunities'))
+    else:
+        return render_template("landing.html")
 
 
 @app.route("/auth")
@@ -39,18 +61,20 @@ def auth():
         include_granted_scopes='true')
 
     session['state'] = state
-    print("STATE", state)
     return redirect(authorization_url)
 
 
 @app.route("/redirect")
 def oauthcallback():
-    org = request.args.get("hd")
-    if not org == "stuy.edu":
-        flash("Please use your stuy.edu email", 'error')
-        return redirect(url_for("root"))
+    users = open(DIR + "static/data/users.json")
+    users = json.load(users)
 
-    state = session['state']
+    teachers = users['teacher']
+    admin = users['admin']
+
+    org = request.args.get("hd")
+
+    state = session['state'] if 'state' in session else None
 
     flow = google_auth_oauthlib.flow.Flow.from_client_secrets_file(
         CLIENT_SECRETS_FILE, scopes=SCOPES, state=state)
@@ -66,7 +90,47 @@ def oauthcallback():
     credentials = flow.credentials
     session['credentials'] = credentials_to_dict(credentials)
 
+    credentials = dict_to_credentials(session['credentials'])
+
+    info = build('oauth2', 'v2', credentials=credentials)
+    info = info.userinfo().get().execute()
+
+    userid = info['id']
+    email = info['email']
+    name = info['name']
+    picture = info['picture']
+
+    if email in admin:
+        usertype = 'admin'
+    elif email in teachers:
+        usertype = 'teacher'
+    elif org == "stuy.edu":
+        usertype = 'student'
+    else:
+        del session['credentials']
+        flash("Please use an appropriate email", 'error')
+        return redirect(url_for("root"))
+
+    # print(info)
+    # print(userid, email, name, picture, usertype)
+
     return redirect(url_for('opportunities'))
+
+
+@app.route("/logout")
+def logout():
+    if 'credentials' not in session:
+        return redirect(url_for('root'))
+
+    credentials = dict_to_credentials(session['credentials'])
+
+    revoke = requests.post('https://oauth2.googleapis.com/revoke',
+                           params={'token': credentials.token},
+                           headers={'content-type': 'application/x-www-form-urlencoded'})
+
+    del session['credentials']
+
+    return redirect(url_for('root'))
 
 
 def credentials_to_dict(credentials):
@@ -78,37 +142,55 @@ def credentials_to_dict(credentials):
             'scopes': credentials.scopes}
 
 
+def dict_to_credentials(dict):
+    return google.oauth2.credentials.Credentials(
+        dict['token'],
+        dict['refresh_token'],
+        dict['token_uri'],
+        dict['client_id'],
+        dict['client_secret'],
+        dict['scopes']
+    )
+
+
 @app.route("/opportunities")
+@protected
 def opportunities():
     return render_template("index.html")
 
 
 @app.route("/opportunities/<opportunityID>")
+@protected
 def opportunity(opportunityID):
     return render_template("individual.html")
 
 
 @app.route("/scholarships")
+@protected
 def scholarships():
     return 'placeholder'
 
 
 @app.route("/scholarships/<scholarshipID>")
+@protected
 def scholarship():
     return 'placeholder'
 
 
 @app.route("/favorites")
+@protected
 def favorites():
     return 'placeholder'
 
 
 @app.route("/resources")
+@protected
 def resources():
     return 'placeholder'
 
 
 @app.route("/preferences")
+@protected
 def preferences():
     return 'placeholder'
 
