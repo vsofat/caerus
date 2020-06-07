@@ -1,3 +1,4 @@
+
 precedented -- Vishwaa Sofat, Kazi Jamal, Eric Lau, Raymond Lee, Ahmed Sultan
 SoftDev1 pd9
 P05 —- Fin
@@ -72,6 +73,9 @@ Setup db models
 kaziJ -- 2020-06-06 15:55
 Finish half of models.py
 
+rayL -- 2020-06-06 15:55
+Create resources and preferences db models
+
 kaziJ -- 2020-06-06 16:24
 Start working on database functions
 
@@ -81,8 +85,17 @@ Start working on opportunities functions
 kaziJ -- 2020-06-06 17:56
 Add resources and saved functions
 
+rayL -- 2020-06-06 17:57
+Create utility functions for scholarships
+
 kaziJ -- 2020-06-06 18:29
 Update scholarships and opportunities
+
+rayL -- 2020-06-06 21:26
+Create utility functions for preferences
+
+rayL -- 2020-06-06 21:26
+Delete update fxns and make functionality comments
 
 kaziJ -- 2020-06-06 21:39
 Create User model
