@@ -15,9 +15,8 @@ class User(db.Model):
     accessToken = db.Column(db.String)
     refreshToken = db.Column(db.String)
 
+
 # Opportunities
-
-
 class Opportunity(db.Model):
     opportunityID = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String, nullable=False)
