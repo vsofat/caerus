@@ -10,16 +10,16 @@
           </div>
           <div class="col-3 mt-auto" style="padding-right: 0;">
                <span class="float-right" style="padding: 0; margin: 0;">
-                    <b>{{ user.name }}</b> &emsp; 
+                    <b>{{ user.name }}</b> &emsp;
                     <img style="border-radius: 50%; height: 10vh; width: auto;" src="{{ user.imglink }}">
                </span>
           </div>
      </div>
-     
-      
+
+
 
      <hr>
- 
+
      <span class="bar">
           <a class="bar-here" href="/opportunities">Opportunities</a> &emsp;
           <a href="/scholarships">Scholarships</a> &emsp;
@@ -27,5 +27,69 @@
           <a href="/favorites">Favorites</a> &emsp;
           <a href="/preferences">Preferences</a> &emsp;
      </span>
+
+<br>
+<br>
+
+<span class="bar">
+  <div class="row">
+    <div class="col-sm">
+      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        Filter
+      </button>
+    </div>
+    <div class="col-sm">
+      <form class="form-inline">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</span>
+
+<br>
+
+<div class="collapse" id="collapseExample">
+  <div class="card card-body">
+    <div class="row">
+      <div class="col-sm">
+    <form action="" method="post">
+      <b> TYPE </b> <br>
+      <input type="checkbox" name="ACADEMIC" value="ACADEMIC">
+      <label for="type1"> ACADEMIC PROGRAMS </label><br>
+      <input type="checkbox" name="BUSINESS" value="BUSINESS">
+      <label for="type2"> BUSINESS & JOBS </label><br>
+      <input type="checkbox" name="COMMUNITY" value="COMMUNITY">
+      <label for="type3"> COMMUNITY SERVICE </label><br>
+      <input type="checkbox" name="GOVT" value="GOVT">
+      <label for="type4"> LEADERSHIP, GOVT, LAW, & ADVOCACY </label><br>
+      <input type="checkbox" name="MUSEUMS" value="MUSEUMS">
+      <label for="type5"> MUSEUMS & ART </label><br>
+      <input type="checkbox" name="NATURE" value="NATURE">
+      <label for="type6"> PARKS, ZOOS, & NATURE </label><br>
+      <input type="checkbox" name="ENGINEERING" value="ENGINEERING">
+      <label for="type8"> ENGINEERING, MATH, & CS </label><br>
+      <input type="checkbox" name="MEDICAL" value="MEDICAL">
+      <label for="type9"> MEDICAL & LIFE SCIENCES</label><br>
+      <input type="checkbox" name="ARTS" value="ARTS">
+      <label for="type10"> LITERATURE</label><br>
+      <input type="checkbox" name="THEATRE" value="THEATRE">
+      <label for="type10"> PERFORMING ARTS</label><br>
+      <input type="checkbox" name="VISUAL" value="VISUAL">
+      <label for="type10"> VISUAL ARTS</label><br>
+      <input type="checkbox" name="MEDICAL" value="MEDICAL">
+      <label for="type10"> MEDICAL & LIFE SCIENCES</label><br>
+
+    </div>
+    <div class="col-sm">
+    <form class="vizSelection" method="">
+         <select class="vizForm2" id="vizSelector2" type="text" name="vizDropdown2" placeholder="Select One">
+
+         </select> <span>&emsp;</span>
+         <!-- <input type="button" class="btn btn-warning" value="" onclick="render()"> -->
+    </form>
+
+  </div>
+</div>
 
 {% endblock %}
