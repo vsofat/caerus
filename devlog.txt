@@ -141,3 +141,6 @@ Create User model
 
 kaziJ -- 2020-06-06 22:26
 Add scholarship and opportunity links in functions
+
+kaziJ -- 2020-06-06 23:47
+Add user functions
