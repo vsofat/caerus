@@ -36,3 +36,7 @@ def updateTokens(userID, access, refresh):
     user.accessToken = access
     user.refreshToken = refresh
     db.session.commit()
+
+def getUserInfo(userID):
+    user = User.query.filter_by(userID=userID).first()
+    return user;

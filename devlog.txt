@@ -168,3 +168,10 @@ Edited devlog.txt
 ericL -- 2020-06-07 01:29
 Move credentials from session to db
 
+ahmedS -- 2020-06-07 02:27
+Added getUserInfo function in users.py in utl/ dir
+Edited /opportunities route in __init__.py to pass getUsersInfo function through
+Edited opportunities.html to take name and image of user and display them on page above navbar
+Edited style.css to support these changes
+Edited devlog.txt
+

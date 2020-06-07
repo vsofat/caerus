@@ -183,7 +183,7 @@ def dict_to_credentials(dict):
 @app.route("/opportunities")
 @protected
 def opportunities():
-    return render_template("opportunities.html")
+    return render_template("opportunities.html", user=users.getUserInfo(session['userid']))
 
 
 @app.route("/opportunities/<opportunityID>")
