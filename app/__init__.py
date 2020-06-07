@@ -32,7 +32,7 @@ def protected(f):
         if 'credentials' in session:
             return f(*args, **kwargs)
         else:
-            flash("You are not logged in", 'error')
+            flash("You are not logged in!", 'error')
             return redirect(url_for('root'))
     return wrapper
 
@@ -110,7 +110,7 @@ def oauthcallback():
         usertype = 'student'
     else:
         del session['credentials']
-        flash("Please use an appropriate email", 'error')
+        flash("Please use an appropriate email.", 'error')
         return redirect(url_for("root"))
 
     # print(info)
@@ -170,25 +170,24 @@ def opportunity(opportunityID):
 @app.route("/scholarships")
 @protected
 def scholarships():
-    return 'placeholder'
+    return render_template("scholarships.html")
 
 
 @app.route("/scholarships/<scholarshipID>")
 @protected
 def scholarship():
-    return 'placeholder'
-
-
-@app.route("/favorites")
-@protected
-def favorites():
-    return 'placeholder'
+    return render_template("individual.html")
 
 
 @app.route("/resources")
 @protected
 def resources():
-    return 'placeholder'
+    return render_template("resources.html")
+
+@app.route("/favorites")
+@protected
+def favorites():
+    return render_template("favorites.html")
 
 
 @app.route("/preferences")
@@ -200,7 +199,7 @@ def preferences():
 if __name__ == "__main__":
     if not os.path.exists(CLIENT_SECRETS_FILE):
         print('Missing Google OAuth 2.0 Client ID file.')
-        print('Read README.md for instructions')
+        print('Read README.md for instructions.')
         exit()
     db.init_app(app)
     with app.app_context():

@@ -21,6 +21,28 @@ body {
      font-style: normal;
 }
 
+.bar a {
+     transition: 250ms;
+}
+
+.bar a:hover {
+     color: #ff8ff0;
+     text-decoration: none;
+     transition: 250ms;
+}
+
+.bar-here {
+     background-color: #ff8ff0;
+     border-radius: 5px;
+     padding: 0.25em 0.5em;
+     color: white;
+}
+
+.bar-here:hover {
+     background-color: #007bff;
+     color: white !important;
+}
+
 /* landing page CSS */
 
 .landing-body {
