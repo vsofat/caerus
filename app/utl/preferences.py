@@ -1,12 +1,6 @@
 from copy import deepcopy
 
-from .models import (
-    db,
-    CostPreference,
-    FieldPreference,
-    GenderPreference,
-    GradePreference,
-)
+from .models import db, CostPreference, FieldPreference, GenderPreference, GradePreference
 
 
 # Preference Types
@@ -33,15 +27,14 @@ def updateCostPreference(userID, cost):
     db.session.commit()
 
 
-# Get All
-def getAllCostPreferences(userID):
-    costPreferences = CostPreference.query.filter_by(userID=userID).all()
-    costPreferencesArr = []
-    for costPreference in costPreferences:
-        costPreferenceDict = {"type": COST_PREFERENCE,
-                              "value": costPreference.cost}
-        costPreferencesArr.append(costPreferenceDict)
-    return costPreferencesArr
+# Get
+def getCostPreferences(userID):
+    costPreferences = CostPreference.query.filter_by(userID=userID).first()
+    costPreference = [{
+        "type": COST_PREFERENCE,
+        "value": costPreferences.cost
+    }]
+    return costPreference
 
 
 # Field Preference
@@ -58,8 +51,10 @@ def getAllFieldPreferences(userID):
     fieldPreferences = FieldPreference.query.filter_by(userID=userID).all()
     fieldPreferencesArr = []
     for fieldPreference in fieldPreferences:
-        fieldPreferenceDict = {"type": FIELD_PREFERENCE,
-                               "value": fieldPreference.field}
+        fieldPreferenceDict = {
+            "type": FIELD_PREFERENCE,
+            "value": fieldPreference.field
+        }
         fieldPreferencesArr.append(fieldPreferenceDict)
     return fieldPreferencesArr
 
@@ -100,8 +95,10 @@ def getAllGradePreferences(userID):
     GradePreferences = FieldPreference.query.filter_by(userID=userID).all()
     GradePreferencesArr = []
     for gradePreference in GradePreferences:
-        gradePreferenceDict = {"type": GRADE_PREFERENCE,
-                               "value": gradePreference.grade}
+        gradePreferenceDict = {
+            "type": GRADE_PREFERENCE,
+            "value": gradePreference.grade
+        }
         GradePreferencesArr.append(gradePreferenceDict)
     return GradePreferencesArr
 
@@ -162,7 +159,7 @@ def getAllPreferences(userID):
     An array of preference dictionaries, each with its own type and value.
     See the createAllPreferences function for an example.
     """
-    costPreferences = deepcopy(getAllCostPreferences(userID))
+    costPreferences = deepcopy(getCostPreferences(userID))
     fieldPreferences = deepcopy(getAllFieldPreferences(userID))
     genderPreferences = deepcopy(getAllGenderPreferences(userID))
     gradePreferences = deepcopy(getAllGradePreferences(userID))
