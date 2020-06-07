@@ -117,5 +117,9 @@ def preferences():
 
 
 if __name__ == "__main__":
+    if not os.path.exists(CLIENT_SECRETS_FILE):
+        print('Missing Google OAuth 2.0 Client ID file.')
+        print('Read README.md for instructions')
+        exit()
     app.debug = True
     app.run()
