@@ -175,3 +175,8 @@ Edited opportunities.html to take name and image of user and display them on pag
 Edited style.css to support these changes
 Edited devlog.txt
 
+ericL -- 2020-06-07 02:30
+Fix creation functions
+
+ericL -- 2020-06-07 03:26
+Manually add opportunity

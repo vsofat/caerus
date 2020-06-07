@@ -8,7 +8,8 @@ import functools
 import google.oauth2.credentials
 import google_auth_oauthlib.flow
 from googleapiclient.discovery import build
-from utl import models, users
+from utl import models, opportunities, preferences, resources, saved, scholarships, users
+import datetime
 
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
@@ -43,6 +44,26 @@ def protected(f):
     return wrapper
 
 
+def credentials_to_dict(credentials):
+    return {'token': credentials.token,
+            'refresh_token': credentials.refresh_token,
+            'token_uri': credentials.token_uri,
+            'client_id': credentials.client_id,
+            'client_secret': credentials.client_secret,
+            'scopes': credentials.scopes}
+
+
+def dict_to_credentials(dict):
+    return google.oauth2.credentials.Credentials(
+        dict['token'],
+        dict['refresh_token'],
+        dict['token_uri'],
+        dict['client_id'],
+        dict['client_secret'],
+        dict['scopes']
+    )
+
+
 @app.route("/")
 def root():
     if 'userid' in session:
@@ -58,7 +79,7 @@ def root():
         })
         users.updateTokens(userid, credentials.token,
                            credentials.refresh_token)
-        return redirect(url_for('opportunities'))
+        return redirect(url_for('opportunitiesRoute'))
     else:
         return render_template("landing.html")
 
@@ -137,7 +158,7 @@ def oauthcallback():
 
     session['userid'] = userid
 
-    return redirect(url_for('opportunities'))
+    return redirect(url_for('opportunitiesRoute'))
 
 
 @app.route("/logout")
@@ -160,64 +181,45 @@ def logout():
     return redirect(url_for('root'))
 
 
-def credentials_to_dict(credentials):
-    return {'token': credentials.token,
-            'refresh_token': credentials.refresh_token,
-            'token_uri': credentials.token_uri,
-            'client_id': credentials.client_id,
-            'client_secret': credentials.client_secret,
-            'scopes': credentials.scopes}
-
-
-def dict_to_credentials(dict):
-    return google.oauth2.credentials.Credentials(
-        dict['token'],
-        dict['refresh_token'],
-        dict['token_uri'],
-        dict['client_id'],
-        dict['client_secret'],
-        dict['scopes']
-    )
-
-
 @app.route("/opportunities")
 @protected
-def opportunities():
+def opportunitiesRoute():
     return render_template("opportunities.html", user=users.getUserInfo(session['userid']))
 
 
 @app.route("/opportunities/<opportunityID>")
 @protected
-def opportunity(opportunityID):
+def opportunityRoute(opportunityID):
     return render_template("individual.html")
 
 
 @app.route("/scholarships")
 @protected
-def scholarships():
+def scholarshipsRoute():
     return render_template("scholarships.html")
 
 
 @app.route("/scholarships/<scholarshipID>")
 @protected
-def scholarship():
+def scholarshipRoute():
     return render_template("individual.html")
 
 
 @app.route("/resources")
 @protected
-def resources():
+def resourcesRoute():
     return render_template("resources.html")
+
 
 @app.route("/favorites")
 @protected
-def favorites():
+def favoritesRoute():
     return render_template("favorites.html")
 
 
 @app.route("/preferences")
 @protected
-def preferences():
+def preferencesRoute():
     return 'placeholder'
 
 
