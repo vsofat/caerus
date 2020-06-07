@@ -155,5 +155,16 @@ ahmedS -- 2020-06-06 23:59
 Fixed flasher in landing.html
 Edited devlog.txt
 
+ahmedS -- 2020-06-07 01:07
+Updated templates/ dir
+     Updated navbar on opportunities.html to add visual interest/make it easier to understand where one is in the website
+     Created scholarships.html, reflecting changes in opportunities.html
+     Created resources.html, reflecting changes in opportunities.html
+     Created favorites.html, reflecting changes in opportunities.html
+Edited style.css with navbar changes/updates
+Edited __init__.py routing, to reflect the addition of new templates in templates/ dir
+Edited devlog.txt
+
 ericL -- 2020-06-07 01:29
 Move credentials from session to db
+
