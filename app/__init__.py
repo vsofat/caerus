@@ -23,7 +23,12 @@ SCOPES = ['https://www.googleapis.com/auth/userinfo.email',
 # LANDING PAGE
 @app.route("/")
 def root():
-    return render_template("landing.html")
+    if 'credentials' in session:
+        credentials = dict_to_credentials(session['credentials'])
+        session['credentials'] = credentials_to_dict(credentials)
+        return redirect(url_for('opportunities'))
+    else:
+        return render_template("landing.html")
 
 
 @app.route("/auth")
@@ -69,16 +74,8 @@ def oauthcallback():
     #              credentials in a persistent database instead.
     credentials = flow.credentials
     session['credentials'] = credentials_to_dict(credentials)
-    cred = session['credentials']
 
-    credentials = google.oauth2.credentials.Credentials(
-        cred['token'],
-        cred['refresh_token'],
-        cred['token_uri'],
-        cred['client_id'],
-        cred['client_secret'],
-        cred['scopes']
-    )
+    credentials = dict_to_credentials(session['credentials'])
 
     info = build('oauth2', 'v2', credentials=credentials)
     info = info.userinfo().get().execute()
@@ -98,8 +95,8 @@ def oauthcallback():
         flash("Please use an appropriate email", 'error')
         return redirect(url_for("root"))
 
-    print(info)
-    print(userid, email, name, picture, usertype)
+    # print(info)
+    # print(userid, email, name, picture, usertype)
 
     return redirect(url_for('opportunities'))
 
@@ -108,16 +105,8 @@ def oauthcallback():
 def logout():
     if 'credentials' not in session:
         return redirect(url_for('root'))
-    cred = session['credentials']
 
-    credentials = google.oauth2.credentials.Credentials(
-        cred['token'],
-        cred['refresh_token'],
-        cred['token_uri'],
-        cred['client_id'],
-        cred['client_secret'],
-        cred['scopes']
-    )
+    credentials = dict_to_credentials(session['credentials'])
 
     revoke = requests.post('https://oauth2.googleapis.com/revoke',
                            params={'token': credentials.token},
@@ -136,6 +125,15 @@ def credentials_to_dict(credentials):
             'client_secret': credentials.client_secret,
             'scopes': credentials.scopes}
 
+def dict_to_credentials(dict):
+    return google.oauth2.credentials.Credentials(
+        dict['token'],
+        dict['refresh_token'],
+        dict['token_uri'],
+        dict['client_id'],
+        dict['client_secret'],
+        dict['scopes']
+    )
 
 @app.route("/opportunities")
 def opportunities():

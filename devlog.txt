@@ -88,3 +88,6 @@ Add user parser from csv to json
 
 ericL -- 2020-06-06 19:48
 Discriminate users by type
+
+ericL -- 2020-06-06 20:32
+Redirect if credentials are present
