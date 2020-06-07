@@ -23,14 +23,14 @@ def getScholarship(scholarshipID):
 
 def createScholarship(body):
     scholarship = Scholarship(
-        title=body.title,
-        description=body.description,
-        deadline=body.deadline,
-        eligibility=body.eligibility,
+        title=body['title'],
+        description=body['description'],
+        deadline=body['deadline'],
+        eligibility=body['eligibility'],
     )
     db.session.add(scholarship)
     db.session.commit()
-    for link in body.links:
+    for link in body['links']:
         newLink = ScholarshipLink(scholarshipID=scholarship.scholarshipID, link=link)
         db.session.add(newLink)
     db.session.commit()

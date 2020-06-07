@@ -28,22 +28,22 @@ def getOpportunity(opportunityID):
 
 def createOpportunity(body):
     opportunity = Opportunity(
-        title=body.title,
-        description=body.description,
-        field=body.field,
-        gender=body.gender,
-        location=body.location,
-        startDate=body.startDate,
-        endDate=body.endDate,
-        deadline=body.deadline,
-        cost=body.cost,
+        title=body['title'],
+        description=body['description'],
+        field=body['field'],
+        gender=body['gender'],
+        location=body['location'],
+        startDate=body['startDate'],
+        endDate=body['endDate'],
+        deadline=body['deadline'],
+        cost=body['cost'],
     )
     db.session.add(opportunity)
     db.session.commit()
     for grade in body.grades:
         newGrade = OpportunityGrade(opportunityID=opportunity.opportunityID, grade=grade)
         db.session.add(newGrade)
-    for link in body.links:
+    for link in body['links']:
         newLink = OpportunityLink(opportunityID=opportunity.opportunityID, link=link)
         db.session.add(newLink)
     db.session.commit()

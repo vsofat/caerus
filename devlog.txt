@@ -168,3 +168,6 @@ Edited devlog.txt
 ericL -- 2020-06-07 01:29
 Move credentials from session to db
 
+ericL -- 2020-06-07 02:30
+Fix creation functions
+
