@@ -1,5 +1,6 @@
 from flask import Flask, request, redirect, session, render_template, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
+from config import Config
 import os
 import json
 import requests
@@ -13,6 +14,7 @@ os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
 db = models.db
 app = Flask(__name__)
+app.config.from_object(Config)
 app.secret_key = os.urandom(32)
 
 DIR = os.path.dirname(__file__) or '.'
@@ -200,5 +202,8 @@ if __name__ == "__main__":
         print('Missing Google OAuth 2.0 Client ID file.')
         print('Read README.md for instructions')
         exit()
+    db.init_app(app)
+    with app.app_context():
+        db.create_all()
     app.debug = True
     app.run()
