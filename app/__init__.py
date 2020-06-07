@@ -1,11 +1,14 @@
 from flask import Flask, request, redirect, session, render_template, url_for, flash
+from flask_sqlalchemy import SQLAlchemy
 import os
 import google.oauth2.credentials
 import google_auth_oauthlib.flow
 
-import os
+from utl import models
+
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
+db = models.db
 app = Flask(__name__)
 app.secret_key = os.urandom(32)
 
