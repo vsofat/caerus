@@ -1,3 +1,4 @@
+
 precedented -- Vishwaa Sofat, Kazi Jamal, Eric Lau, Raymond Lee, Ahmed Sultan
 SoftDev1 pd9
 P05 —- Fin
@@ -66,9 +67,18 @@ Created individual.html, in /templates dir
      Added render_template under "/opportunity" route in __init__.py, to redirect to indiviudal.html
 Edited devlog.txt
 
+kaziJ -- 2020-06-06 15:39
+Setup db models
+
 ahmedS -- 2020-06-06 15:47
 Fixed gradient colors in style.css to standardize everything a little bit
 Edited devlog.txt (take that Kazi >:))
+
+kaziJ -- 2020-06-06 15:55
+Finish half of models.py
+
+rayL -- 2020-06-06 15:55
+Create resources and preferences db models
 
 ahmedS -- 2020-06-06 16:24
 Added fontawesome webkit to template.html
@@ -77,12 +87,70 @@ Made edits in style.css, landing.html to responsively vertically-align (WIP)
      Lost my temper doing this one
 Edited devlog.txt
 
+kaziJ -- 2020-06-06 16:24
+Start working on database functions
+
+kaziJ -- 2020-06-06 16:49
+Start working on opportunities functions
+
+ericL -- 2020-06-06 17:47
+Retrieve google user data
+
+kaziJ -- 2020-06-06 17:56
+Add resources and saved functions
+
+rayL -- 2020-06-06 17:57
+Create utility functions for scholarships
+
+kaziJ -- 2020-06-06 18:29
+Update scholarships and opportunities
+
+ericL -- 2020-06-06 18:59
+Add logout route
+
 ahmedS -- 2020-06-06 19:01
 Worked (and almost completed) individual opportunity/scholarship template
 Edited devlog.txt
 
+ericL -- 2020-06-06 19:28
+Add user parser from csv to json
+
+ericL -- 2020-06-06 19:48
+Discriminate users by type
+
+ericL -- 2020-06-06 20:32
+Redirect if credentials are present
+
+ericL -- 2020-06-06 20:42
+Protect user routes
+
 ericL -- 2020-06-06 20:56
 Add instructions to README.md
 
+rayL -- 2020-06-06 21:26
+Create utility functions for preferences
+
+rayL -- 2020-06-06 21:26
+Delete update fxns and make functionality comments
+
 ericL -- 2020-06-06 21:38
 Add check for oauth-client file
+
+kaziJ -- 2020-06-06 21:39
+Create User model
+
+ericL -- 2020-06-06 22:11
+Add workflow and decryption script
+
+kaziJ -- 2020-06-06 22:26
+Add scholarship and opportunity links in functions
+
+kaziJ -- 2020-06-06 23:47
+Add user functions
+
+kaziJ -- 2020-06-06 23:58
+Initialize database
+
+ahmedS -- 2020-06-06 23:59
+Fixed flasher in landing.html
+Edited devlog.txt
