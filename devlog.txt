@@ -139,6 +139,9 @@ Add check for oauth-client file
 kaziJ -- 2020-06-06 21:39
 Create User model
 
+ericL -- 2020-06-06 22:11
+Add workflow and decryption script
+
 kaziJ -- 2020-06-06 22:26
 Add scholarship and opportunity links in functions
 
