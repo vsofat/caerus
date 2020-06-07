@@ -26,7 +26,8 @@ def createCostPreference(userID, cost):
 
 
 # Update
-def updateCostPreference(userID, cost):  # TODO: Is this the best way to update a row?
+# TODO: Is this the best way to update a row?
+def updateCostPreference(userID, cost):
     costPreference = CostPreference.query.filter_by(userID=userID).first()
     costPreference.cost = cost
     db.session.commit()
@@ -37,7 +38,8 @@ def getAllCostPreferences(userID):
     costPreferences = CostPreference.query.filter_by(userID=userID).all()
     costPreferencesArr = []
     for costPreference in costPreferences:
-        costPreferenceDict = {"type": COST_PREFERENCE, "value": costPreference.cost}
+        costPreferenceDict = {"type": COST_PREFERENCE,
+                              "value": costPreference.cost}
         costPreferencesArr.append(costPreferenceDict)
     return costPreferencesArr
 
@@ -56,7 +58,8 @@ def getAllFieldPreferences(userID):
     fieldPreferences = FieldPreference.query.filter_by(userID=userID).all()
     fieldPreferencesArr = []
     for fieldPreference in fieldPreferences:
-        fieldPreferenceDict = {"type": FIELD_PREFERENCE, "value": fieldPreference.field}
+        fieldPreferenceDict = {"type": FIELD_PREFERENCE,
+                               "value": fieldPreference.field}
         fieldPreferencesArr.append(fieldPreferenceDict)
     return fieldPreferencesArr
 
@@ -97,7 +100,8 @@ def getAllGradePreferences(userID):
     GradePreferences = FieldPreference.query.filter_by(userID=userID).all()
     GradePreferencesArr = []
     for gradePreference in GradePreferences:
-        gradePreferenceDict = {"type": GRADE_PREFERENCE, "value": gradePreference.grade}
+        gradePreferenceDict = {"type": GRADE_PREFERENCE,
+                               "value": gradePreference.grade}
         GradePreferencesArr.append(gradePreferenceDict)
     return GradePreferencesArr
 
