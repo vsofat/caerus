@@ -40,8 +40,10 @@ def createOpportunity(body):
     )
     db.session.add(opportunity)
     db.session.commit()
-    opportunityID = opportunity.opportunityID
     for grade in body.grades:
-        new_grade = OpportunityGrade(opportunityID=opportunityID, grade=grade)
-        db.session.add(new_grade)
+        newGrade = OpportunityGrade(opportunityID=opportunity.opportunityID, grade=grade)
+        db.session.add(newGrade)
+    for link in body.links:
+        newLink = OpportunityLink(opportunityID=opportunity.opportunityID, link=link)
+        db.session.add(newLink)
     db.session.commit()
