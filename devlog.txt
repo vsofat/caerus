@@ -177,3 +177,6 @@ Edited devlog.txt
 
 ericL -- 2020-06-07 02:30
 Fix creation functions
+
+ericL -- 2020-06-07 03:26
+Manually add opportunity
