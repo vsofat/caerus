@@ -192,3 +192,6 @@ Renamed index.html to opportunities.html
 Updated CSS for opportunities.html
 Added JS script for opportunities.html
 Added a collapsable with a form for filtering and search on opportunities.html
+
+kaziJ -- 2020-06-08 13:10
+Add amount field to scholarship model and creation
