@@ -198,5 +198,9 @@ Create get all user preferences with email fxn
 Create get all users info fxn
 
 vishwaaS -- 2020-06-08 11:45
-Made changes to existing front end for filtering on opportunities.html 
+Made changes to existing front end for filtering on opportunities.html
 Added a form for sort selection
+
+vishwaaS -- 2020-06-08 14:50
+Added value and id tags for the sort dropdown on opportunities.html
+Added search form and sort dropdown on scholarships.html
