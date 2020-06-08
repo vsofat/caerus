@@ -192,3 +192,7 @@ Renamed index.html to opportunities.html
 Updated CSS for opportunities.html
 Added JS script for opportunities.html
 Added a collapsable with a form for filtering and search on opportunities.html
+
+rayL -- 2020-06-07 20:12
+Create get all user preferences with email fxn
+Create get all users info fxn
