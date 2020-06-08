@@ -196,3 +196,7 @@ Added a collapsable with a form for filtering and search on opportunities.html
 rayL -- 2020-06-07 20:12
 Create get all user preferences with email fxn
 Create get all users info fxn
+
+vishwaaS -- 2020-06-08 11:45
+Made changes to existing front end for filtering on opportunities.html 
+Added a form for sort selection
