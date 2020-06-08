@@ -196,7 +196,7 @@ def opportunityRoute(opportunityID):
 @app.route("/scholarships")
 @protected
 def scholarshipsRoute():
-    return render_template("scholarships.html")
+    return render_template("scholarships.html", user=users.getUserInfo(session['userid']))
 
 
 @app.route("/scholarships/<scholarshipID>")
