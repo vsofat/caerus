@@ -208,7 +208,7 @@ def scholarshipRoute():
 @app.route("/resources")
 @protected
 def resourcesRoute():
-    return render_template("resources.html")
+    return render_template("resources.html", user=users.getUserInfo(session['userid']))
 
 
 @app.route("/favorites")
