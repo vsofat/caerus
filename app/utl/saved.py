@@ -39,6 +39,18 @@ def saveScholarship(userID, scholarshipID):
     db.session.commit()
 
 
+def unsaveOpportunity(userID, opportunityID):
+    SavedOpportunity.query.filter_by(
+        userID=userID, opportunityID=opportunityID).delete()
+    db.session.commit()
+
+
+def unsaveScholarship(userID, scholarshipID):
+    SavedScholarship.query.filter_by(
+        userID=userId, scholarshipID=scholarshipID).delete()
+    db.session.commit()
+
+
 def addOpportunityReminder(userID, opportunityID, reminderDate):
     opportunity = SavedOpportunity.query.filter_by(
         userID=userID, opportunityID=opportunityID).first()
@@ -51,3 +63,17 @@ def addScholarshipReminder(userID, scholarshipID, reminderDate):
         userID=userID, scholarshipID=scholarshipID).first()
     scholarship.reminderDate = reminderDate
     db.session.commit()
+
+def removeOpportunityReminder(userID, opportunityID):
+    opportunity = SavedOpportunity.query.filter_by(
+        userID=userID, opportunityID=opportunityID).first()
+    opportunity.reminderDate = None
+    db.session.commit()
+
+
+def removeScholarshipReminder(userID, scholarshipID):
+    scholarship = SavedScholarship.query.filter_by(
+        userID=userID, scholarshipID=scholarshipID).first()
+    scholarship.reminderDate = None
+    db.session.commit()
+

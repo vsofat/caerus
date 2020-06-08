@@ -198,3 +198,6 @@ Add amount field to scholarship model and creation
 
 kaziJ -- 2020-06-08 13:18
 Create save and add reminder functions
+
+kaziJ -- 2020-06-08 13:23
+Create unsave and remove reminder functions
