@@ -11,6 +11,7 @@ def getSavedOpportunities(userID):
         opportunities.append(getOpportunity(savedOpportunity.opportunityID))
     return opportunities
 
+
 def getSavedScholarships(userID):
     savedScholarships = SavedScholarship.query.filter_by(
         userID=userID).all()
@@ -18,3 +19,35 @@ def getSavedScholarships(userID):
     for savedScholarship in savedScholarships:
         scholarships.append(getScholarship(savedScholarship.scholarshipID))
     return scholarships
+
+
+def saveOpportunity(userID, opportunityID):
+    opportunity = SavedOpportunity(
+        userID=userID,
+        opportunityID=opportunityID
+    )
+    db.session.add(opportunity)
+    db.session.commit()
+
+
+def saveScholarship(userID, scholarshipID):
+    scholarship = SavedScholarship(
+        userID=userID,
+        scholarshipID=scholarshipID
+    )
+    db.session.add(scholarship)
+    db.session.commit()
+
+
+def addOpportunityReminder(userID, opportunityID, reminderDate):
+    opportunity = SavedOpportunity.query.filter_by(
+        userID=userID, opportunityID=opportunityID).first()
+    opportunity.reminderDate = reminderDate
+    db.session.commit()
+
+
+def addScholarshipReminder(userID, scholarshipID, reminderDate):
+    scholarship = SavedScholarship.query.filter_by(
+        userID=userID, scholarshipID=scholarshipID).first()
+    scholarship.reminderDate = reminderDate
+    db.session.commit()

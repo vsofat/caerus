@@ -195,3 +195,6 @@ Added a collapsable with a form for filtering and search on opportunities.html
 
 kaziJ -- 2020-06-08 13:10
 Add amount field to scholarship model and creation
+
+kaziJ -- 2020-06-08 13:18
+Create save and add reminder functions
