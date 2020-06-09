@@ -4,7 +4,7 @@
      ('/resources', 'resources', 'Resources'),
      ('/favorites', 'favorites', 'Favorites'),
      ('/preferences', 'preferences', 'Preferences'),
- ] -%}
+ ] %}
 
 {% set active_page = active_page|default('opportunities') -%}
 
@@ -53,14 +53,14 @@
           {% endif %}
           {% endwith %}
           <div class="row w-100">
-               <div class="col-9">
+               <div class="col-8">
                     <span class="title">Caerus</span>
                     <br> <span class="subtitle">All your opportunities, in one place.</span>
                </div>
-               <div class="col-3 mt-auto" style="padding-right: 0;">
+               <div class="col-4 mt-auto" style="padding-right: 0;">
                     <span class="float-right" style="padding: 0; margin: 0;">
                          <b>{{ user.name }}</b> &emsp;
-                         <img style="border-radius: 50%; height: 10vh; width: auto;" src="{{ user.imglink }}">
+                         <img style="border-radius: 50%; height: 5vw; width: auto;" src="{{ user.imglink }}">
                     </span>
                </div>
           </div>
@@ -70,6 +70,7 @@
                {% for href, id, caption in navigation_bar %}
                <a {% if id == active_page %} class="bar-here" {% endif %} href="{{ href|e }}">{{ caption|e }}</a> &emsp;
                {% endfor %}
+               <a style="float: right" href="/logout">Log out</a></span>
           </span>
           <br>
           <br>
