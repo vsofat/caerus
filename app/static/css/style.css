@@ -1,7 +1,14 @@
 /* regular/template CSS */
 
+* {
+     margin: 0;
+     padding: 0;
+}
+
 body {
      padding: 5%;
+     max-width: 1440px;
+     margin: auto;
 }
 
 .title {

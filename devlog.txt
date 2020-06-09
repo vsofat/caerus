@@ -196,3 +196,51 @@ Added a collapsable with a form for filtering and search on opportunities.html
 rayL -- 2020-06-07 20:12
 Create get all user preferences with email fxn
 Create get all users info fxn
+
+vishwaaS -- 2020-06-08 11:45
+Made changes to existing front end for filtering on opportunities.html
+Added a form for sort selection
+
+vishwaaS -- 2020-06-08 13:00
+Added profile info, search form and sort dropdown on resources.html
+
+kaziJ -- 2020-06-08 13:10
+Add amount field to scholarship model and creation
+
+kaziJ -- 2020-06-08 13:18
+Create save and add reminder functions
+
+kaziJ -- 2020-06-08 13:23
+Create unsave and remove reminder functions
+
+kaziJ -- 2020-06-08 14:10
+Create search opportunities, scholarships, and resources functions
+
+kaziJ -- 2020-06-08 14:25
+Create sort opportunities, scholarships, and resources functions
+
+vishwaaS -- 2020-06-08 14:50
+Added value and id tags for the sort dropdown on opportunities.html
+Added profile info, search form and sort dropdown on scholarships.html
+
+ericL -- 2020-06-08 18:16
+Add Google OAuth2 API 411 sheet link to README
+
+ericL -- 2020-06-08 20:05
+Add Jinja templating
+
+ericL -- 2020-06-08 20:55
+Fix database retrieval functions
+
+ahmedS -- 2020-06-08 21:56
+Made few changes to website display, profile picture display on style.css and template.html
+Edited devlog.txt
+
+ahmedS -- 2020-06-08 22:24 
+Added logout button, tested successfully
+Edited devlog.txt
+
+ahmedS -- 2020-06-09 00:20
+Worked on individual opportunity templating in individual.html
+Added testing route in __init__.py
+Edited devlog.txt

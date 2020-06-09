@@ -1,19 +1,30 @@
 {% extends "template.html" %}
 
-{% block title %}caerus{% endblock %}
+{% set active_page = active_page|default('resources') -%}
+
+{% block title %}Resources{% endblock %}
 
 {% block heading %}
-<h1 class="title">Caerus</h1>
-<h1 class="subtitle">All your opportunities, in one place.</h1>
-
-<hr>
+{{super()}}
 
 <span class="bar">
-     <a href="/opportunities">Opportunities</a> &emsp;
-     <a href="/scholarships">Scholarships</a> &emsp;
-     <a class="bar-here" href="/resources">Resources</a> &emsp;
-     <a href="/favorites">Favorites</a> &emsp;
-     <a href="/preferences">Preferences</a> &emsp;
+  <div class="row">
+    <div class="col-sm">
+      <div class="form-group">
+        <select class="form-control" method="post" id="sort">
+          <option type="hidden"> Select a Sort </option>
+          <option value="dateposted-asc" id="dateposted-asc"> Date Created (↑)</option>
+          <option value="dateposted-desc" id="dateposted-desc">Date Created (↓)</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-sm">
+      <form class="form-inline ">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
 </span>
-
+<br>
 {% endblock %}

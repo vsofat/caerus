@@ -184,19 +184,26 @@ def logout():
 @app.route("/opportunities")
 @protected
 def opportunitiesRoute():
-    return render_template("opportunities.html", user=users.getUserInfo(session['userid']))
+    return render_template("opportunities.html",
+        user=users.getUserInfo(session['userid']),
+        opportunityList = opportunities.getAllOpportunities()
+        )
 
 
 @app.route("/opportunities/<opportunityID>")
 @protected
 def opportunityRoute(opportunityID):
-    return render_template("individual.html")
+    return render_template("individual.html", opp=opportunities.getOpportunity(opportunityID)
+    )
 
 
 @app.route("/scholarships")
 @protected
 def scholarshipsRoute():
-    return render_template("scholarships.html")
+    return render_template("scholarships.html",
+        user=users.getUserInfo(session['userid']),
+        scholars=scholarships.getAllScholarships()
+        )
 
 
 @app.route("/scholarships/<scholarshipID>")
@@ -208,19 +215,48 @@ def scholarshipRoute():
 @app.route("/resources")
 @protected
 def resourcesRoute():
-    return render_template("resources.html")
+    return render_template("resources.html",
+        user=users.getUserInfo(session['userid']),
+        res=resources.getAllResources())
+
+@app.route("/resources/create")
+@protected
+def resourceRoute():
+    return render_template("createResources.html",
+        user=users.getUserInfo(session['userid']),
+        res=resources.getAllResources())
 
 
 @app.route("/favorites")
 @protected
 def favoritesRoute():
-    return render_template("favorites.html")
+    return render_template("favorites.html",
+        user=users.getUserInfo(session['userid']))
 
 
 @app.route("/preferences")
 @protected
 def preferencesRoute():
-    return 'placeholder'
+    return render_template("preferences.html",
+        user=users.getUserInfo(session['userid']))
+
+@app.route('/dumb')
+def dumb():
+    newOpp = {
+        'title': 'yo momma',
+        'description': 'at my house last nite!!! #yolo',
+        'field': 'STEM',
+        'gender': None,
+        'location': '106 W 117th Street, New York, NY, 10026',
+        'startDate': datetime.datetime.today(),
+        'endDate': None,
+        'deadline': None,
+        'cost': 0,
+        'grades': [9,10,11,12],
+        'links': ['hello'],
+    }
+    opportunities.createOpportunity(newOpp)
+    return 'submitted'
 
 
 if __name__ == "__main__":

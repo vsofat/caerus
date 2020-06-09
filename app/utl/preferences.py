@@ -1,6 +1,13 @@
 from copy import deepcopy
 
-from .models import db, CostPreference, FieldPreference, GenderPreference, GradePreference
+from .models import (
+    db,
+    CostPreference,
+    FieldPreference,
+    GenderPreference,
+    GradePreference,
+)
+from .users import getAllUsersInfo
 
 
 # Preference Types
@@ -30,10 +37,7 @@ def updateCostPreference(userID, cost):
 # Get
 def getCostPreferences(userID):
     costPreferences = CostPreference.query.filter_by(userID=userID).first()
-    costPreference = [{
-        "type": COST_PREFERENCE,
-        "value": costPreferences.cost
-    }]
+    costPreference = [{"type": COST_PREFERENCE, "value": costPreferences.cost}]
     return costPreference
 
 
@@ -51,10 +55,7 @@ def getAllFieldPreferences(userID):
     fieldPreferences = FieldPreference.query.filter_by(userID=userID).all()
     fieldPreferencesArr = []
     for fieldPreference in fieldPreferences:
-        fieldPreferenceDict = {
-            "type": FIELD_PREFERENCE,
-            "value": fieldPreference.field
-        }
+        fieldPreferenceDict = {"type": FIELD_PREFERENCE, "value": fieldPreference.field}
         fieldPreferencesArr.append(fieldPreferenceDict)
     return fieldPreferencesArr
 
@@ -95,10 +96,7 @@ def getAllGradePreferences(userID):
     GradePreferences = FieldPreference.query.filter_by(userID=userID).all()
     GradePreferencesArr = []
     for gradePreference in GradePreferences:
-        gradePreferenceDict = {
-            "type": GRADE_PREFERENCE,
-            "value": gradePreference.grade
-        }
+        gradePreferenceDict = {"type": GRADE_PREFERENCE, "value": gradePreference.grade}
         GradePreferencesArr.append(gradePreferenceDict)
     return GradePreferencesArr
 
@@ -168,3 +166,11 @@ def getAllPreferences(userID):
         costPreferences + fieldPreferences + genderPreferences + gradePreferences
     )
     return allPreferences
+
+
+def getAllPreferencesForAllUsers():
+    users = getAllUsersInfo()
+    emailsToPreferencesDict = {}
+    for user in users:
+        emailsToPreferencesDict[user.email] = getAllPreferences(user.userID)
+    return emailsToPreferencesDict
