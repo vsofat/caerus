@@ -1,0 +1,47 @@
+{% extends "template.html" %}
+
+{% set active_page = active_page|default('resources') -%}
+
+{% block title %}Resources{% endblock %}
+
+{% block heading %}
+{{super()}}
+
+<span class="bar">
+  <div class="row">
+    <div class="col-sm">
+      <div class="form-group">
+        <select class="form-control" method="post" id="sort">
+          <option type="hidden"> Select a Sort </option>
+          <option value="dateposted-asc" id="dateposted-asc"> Date Created (↑)</option>
+          <option value="dateposted-desc" id="dateposted-desc">Date Created (↓)</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-sm">
+      <form class="form-inline ">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</span>
+<br>
+
+<form>
+  <div class="form-group" type="post">
+    <label for="exampleFormControlInput1" name="Title" >Title</label>
+    <input type="text" class="form-control" type="required" id="Title" name="Title" placeholder="Resource Title">
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlInput2" name="Link">Link</label>
+    <input type="text" class="form-control" type="required" id="Link" name="Link" placeholder="Provide a link for resource.">
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1" name="Description">Description</label>
+    <textarea class="form-control" id="Description" type="required" rows="3" id="Link" name="Description" placeholder="Please use this space to provide an explanation for the resource you are uploading."></textarea>
+  </div>
+  <input type="submit" value="Post Resource">
+</form>
+
+{% endblock %}
