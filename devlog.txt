@@ -244,3 +244,6 @@ ahmedS -- 2020-06-09 00:20
 Worked on individual opportunity templating in individual.html
 Added testing route in __init__.py
 Edited devlog.txt
+
+rayL -- 2020-06-09 02:35
+Create filtering functions for opportunities
