@@ -269,3 +269,6 @@ Add nav bar to creation forms
 
 ericL -- 2020-06-09 19:47
 Style opportunity creation form
+
+ericL -- 2020-06-09 19:56
+Create scholarship creation form
