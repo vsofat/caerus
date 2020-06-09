@@ -240,3 +240,6 @@ Add dynamic opportunity creation form
 
 ericL -- 2020-06-09 01:37
 Prevent clearing on dynamic form
+
+ericL -- 2020-06-09 02:32
+Complete opportunity creation form submission

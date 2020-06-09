@@ -7,6 +7,8 @@
 {% block heading %}
 {% endblock %}
 
+{% block title %}Create Opportunity{% endblock %}
+
 {% block body %}
 <a tabindex="-1" href="../">GO BACK</a>
 <br>
@@ -21,33 +23,28 @@
     </div>
     <div class="form-group">
         <label for="field"><b>Field</b></label>
-        <select class="form-control" id="field">
-            <option>ACADEMIC PROGRAMS</option>
-            <option>BUSINESS & JOBS</option>
-            <option>COMMUNITY SERVICE</option>
-            <option>GOVT & LAW</option>
-            <option>LEADERSHIP & ADVOCACY</option>
-            <option>MUSEUMS & ART</option>
-            <option>PARKS, ZOOS, & NATURE</option>
-            <option>ENGINEERING, MATH, & CS</option>
-            <option>MEDICAL & LIFE SCIENCES</option>
-            <option>LITERATURE</option>
-            <option>PERFORMING ARTS</option>
-            <option>VISUAL ARTS</option>
+        <select class="form-control" name="field" id="field">
+            <option value="ACADEMIC PROGRAMS">ACADEMIC PROGRAMS</option>
+            <option value="BUSINESS & JOBS">BUSINESS & JOBS</option>
+            <option value="COMMUNITY SERVICE">COMMUNITY SERVICE</option>
+            <option value="GOVT & LAW">GOVT & LAW</option>
+            <option value="LEADERSHIP & ADVOCACY">LEADERSHIP & ADVOCACY</option>
+            <option value="MUSEUMS & ART">MUSEUMS & ART</option>
+            <option value="PARKS, ZOOS, & NATURE">PARKS, ZOOS, & NATURE</option>
+            <option value="ENGINEERING, MATH, & CS">ENGINEERING, MATH, & CS</option>
+            <option value="MEDICAL & LIFE SCIENCES">MEDICAL & LIFE SCIENCES</option>
+            <option value="LITERATURE">LITERATURE</option>
+            <option value="PERFORMING ARTS">PERFORMING ARTS</option>
+            <option value="VISUAL ARTS">VISUAL ARTS</option>
         </select>
     </div>
-    <b>Gender</b>
-    <div class="custom-control custom-radio">
-        <input type="radio" class="custom-control-input" value="female" name="gender">
-        <label class="custom-control-label" for="female">Female only</label>
-    </div>
-    <div class="custom-control custom-radio">
-        <input type="radio" class="custom-control-input" value="male" name="gender">
-        <label class="custom-control-label" for="male">Male only</label>
-    </div>
-    <div class="custom-control custom-radio">
-        <input type="radio" class="custom-control-input" value="both" name="gender">
-        <label class="custom-control-label" for="both">Both</label>
+    <div class="form-group">
+        <label for="field"><b>Gender</b></label>
+        <select class="form-control" name="gender" id="gender">
+            <option value="both">Both</option>
+            <option value="female">Female only</option>
+            <option value="male">Male only</option>
+        </select>
     </div>
     <b>Start Date</b><br>
     <input type="date" name="start"><br>
@@ -61,14 +58,18 @@
         <input name="cost" type="number" class="form-control" id="cost" placeholder="Enter cost" required>
     </div>
     <div class="form-group">
+        <label for="location"><b>Location</b></label>
+        <input name="location" type="text" class="form-control" id="location" placeholder="Location">
+    </div>
+    <div class="form-group">
         <label for="grades"><b>Grades</b></label>
         <input name="grades" type="text" class="form-control" id="grades"
             placeholder="Enter grades separated by commas">
     </div>
     <b>Links</b><br>
-    <div id="links-container">
+    <div id="links-container" class="form-group">
         <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Link" id="link0">
+            <input type="text" class="form-control" placeholder="Link" id="link0" name="link0">
         </div>
     </div>
     <button type="button" class="btn btn-primary" id="add-link">Add Link</button><br>

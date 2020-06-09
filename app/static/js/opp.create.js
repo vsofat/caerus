@@ -10,6 +10,7 @@ document.getElementById('add-link').onclick = function add() {
     input.type = 'text';
     input.classList.add('form-control');
     input.id = `link${count}`;
+    input.name = `link${count}`;
     input.placeholder = "Link";
 
     el.appendChild(input);

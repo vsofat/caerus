@@ -208,18 +208,47 @@ def opportunityRoute(opportunityID):
     return render_template("individual.html")
 
 
+def strtodate(string):
+    if len(string) > 0:
+        return datetime.datetime.strptime(string, '%Y-%m-%d')
+    else:
+        return None
+
+
 @app.route("/opportunities/create", methods=['GET', 'POST'])
 @protected
 @staffonly
 def createOpportunityRoute():
     if (request.method == 'GET'):
         return render_template('createopportunity.html',
-            user=users.getUserInfo(session['userid'])
-        )
+                               user=users.getUserInfo(session['userid'])
+                               )
     elif (request.method == 'POST'):
-        print(request.form)
+        links = list()
+        grades = list()
+        f = request.form
+        for key in f.keys():
+            if 'link' in key:
+                links.append(request.form[key])
+            if 'grades' == key:
+                grades = request.form[key].split(',')
+        location = request.form['location']
+        location = location if len(location) > 0 else None
+        opportunities.createOpportunity({
+            'title': request.form['title'],
+            'description': request.form['description'],
+            'field': request.form['field'],
+            'gender': request.form['gender'],
+            'location': location,
+            'startDate': strtodate(request.form['start']),
+            'endDate': strtodate(request.form['end']),
+            'deadline': strtodate(request.form['deadline']),
+            'cost': request.form['cost'],
+            'grades': grades,
+            'links': links
+        })
         return render_template('createopportunity.html',
-            user=users.getUserInfo(session['userid']))
+                               user=users.getUserInfo(session['userid']))
 
 
 @app.route("/scholarships")
