@@ -210,3 +210,6 @@ Added profile info, search form and sort dropdown on resources.html
 
 ericL -- 2020-06-08 18:16
 Add Google OAuth2 API 411 sheet link to README
+
+ericL -- 2020-06-08 20:05
+Add Jinja templating

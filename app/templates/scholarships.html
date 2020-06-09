@@ -1,33 +1,11 @@
 {% extends "template.html" %}
 
-{% block title %}caerus{% endblock %}
+{% set active_page = active_page|default('scholarships') -%}
+
+{% block title %}Scholarships{% endblock %}
 
 {% block heading %}
-     <div class="row w-100">
-          <div class="col-9">
-               <span class="title">Caerus</span>
-               <br> <span class="subtitle">All your opportunities, in one place.</span>
-          </div>
-          <div class="col-3 mt-auto" style="padding-right: 0;">
-               <span class="float-right" style="padding: 0; margin: 0;">
-                    <b>{{ user.name }}</b> &emsp;
-                    <img style="border-radius: 50%; height: 10vh; width: auto;" src="{{ user.imglink }}">
-               </span>
-          </div>
-     </div>
-
-     <hr>
-
-     <span class="bar">
-          <a href="/opportunities">Opportunities</a> &emsp;
-          <a class="bar-here" href="/scholarships">Scholarships</a> &emsp;
-          <a href="/resources">Resources</a> &emsp;
-          <a href="/favorites">Favorites</a> &emsp;
-          <a href="/preferences">Preferences</a> &emsp;
-     </span>
-
-<br>
-<br>
+{{super()}}
 
 <span class="bar">
   <div class="row">
@@ -35,20 +13,20 @@
       <div class="form-group">
         <select class="form-control" method="post" id="sort">
           <option type="hidden"> Select a Sort </option>
-          <option value="dateposted-asc" id="dateposted-asc" > Date Created (↑)</option>
-          <option value="dateposted-desc" id="dateposted-desc" >Date Created (↓)</option>
-          <option value="deadline-asc" id="deadline-asc" > Deadline (↑)</option>
-          <option value="deadline-desc" id="deadline-desc" > Deadline (↓)</option>
-          <option value="award-asc" id="award-asc" > Scholarship Amount (↑)</option>
-          <option value="award-desc" id="award-desc" > Scholarship Amount (↓)</option>
+          <option value="dateposted-asc" id="dateposted-asc"> Date Created (↑)</option>
+          <option value="dateposted-desc" id="dateposted-desc">Date Created (↓)</option>
+          <option value="deadline-asc" id="deadline-asc"> Deadline (↑)</option>
+          <option value="deadline-desc" id="deadline-desc"> Deadline (↓)</option>
+          <option value="award-asc" id="award-asc"> Scholarship Amount (↑)</option>
+          <option value="award-desc" id="award-desc"> Scholarship Amount (↓)</option>
         </select>
       </div>
 
     </div>
     <div class="col-sm">
       <form class="form-inline ">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
       </form>
     </div>
   </div>

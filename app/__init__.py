@@ -214,13 +214,13 @@ def resourcesRoute():
 @app.route("/favorites")
 @protected
 def favoritesRoute():
-    return render_template("favorites.html")
+    return render_template("favorites.html", user=users.getUserInfo(session['userid']))
 
 
 @app.route("/preferences")
 @protected
 def preferencesRoute():
-    return 'placeholder'
+    return render_template("preferences.html", user=users.getUserInfo(session['userid']))
 
 
 if __name__ == "__main__":

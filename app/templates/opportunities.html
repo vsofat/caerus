@@ -1,44 +1,17 @@
 {% extends "template.html" %}
 
-{% block title %}caerus{% endblock %}
+{% set active_page = active_page|default('opportunities') -%}
 
-{% block scripts %}
-     <script src="./static/js/opportunities.js"></script>
-{% endblock %}
+{% block title %}Opportunities{% endblock %}
 
 {% block heading %}
-     <div class="row w-100">
-          <div class="col-9">
-               <span class="title">Caerus</span>
-               <br> <span class="subtitle">All your opportunities, in one place.</span>
-          </div>
-          <div class="col-3 mt-auto" style="padding-right: 0;">
-               <span class="float-right" style="padding: 0; margin: 0;">
-                    <b>{{ user.name }}</b> &emsp;
-                    <img style="border-radius: 50%; height: 10vh; width: auto;" src="{{ user.imglink }}">
-               </span>
-          </div>
-     </div>
-
-
-
-     <hr>
-
-     <span class="bar">
-          <a class="bar-here" href="/opportunities">Opportunities</a> &emsp;
-          <a href="/scholarships">Scholarships</a> &emsp;
-          <a href="/resources">Resources</a> &emsp;
-          <a href="/favorites">Favorites</a> &emsp;
-          <a href="/preferences">Preferences</a> &emsp;
-     </span>
-
-<br>
-<br>
+{{super()}}
 
 <span class="bar">
   <div class="row">
     <div class="col-sm">
-      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
+        aria-expanded="false" aria-controls="collapseExample">
         Filter
       </button>
     </div>
@@ -46,107 +19,103 @@
       <div class="form-group">
         <select class="form-control" method="post" id="sort">
           <option type="hidden"> Select a Sort </option>
-          <option value="dateposted-asc" id="dateposted-asc" > Date Created (↑)</option>
-          <option value="dateposted-desc" id="dateposted-desc" >Date Created (↓)</option>
-          <option value="deadline-asc" id="deadline-asc" > Deadline (↑)</option>
-          <option value="deadline-desc" id="deadline-desc" > Deadline (↓)</option>
-          <option value="cost-asc" id="cost-asc" > Price (↑)</option>
-          <option value="cost-desc" id="cost-desc" > Price (↓)</option>
+          <option value="dateposted-asc" id="dateposted-asc"> Date Created (↑)</option>
+          <option value="dateposted-desc" id="dateposted-desc">Date Created (↓)</option>
+          <option value="deadline-asc" id="deadline-asc"> Deadline (↑)</option>
+          <option value="deadline-desc" id="deadline-desc"> Deadline (↓)</option>
+          <option value="cost-asc" id="cost-asc"> Price (↑)</option>
+          <option value="cost-desc" id="cost-desc"> Price (↓)</option>
         </select>
       </div>
-
     </div>
     <div class="col-sm">
       <form class="form-inline">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
       </form>
     </div>
   </div>
 </span>
-
 <br>
-
 <div class="collapse" id="collapseExample">
   <div class="card card-body">
     <form action="" method="post">
-    <div class="row">
-      <div class="col-sm">
-      <b> FIELD </b> <br>
-      <input type="checkbox" name="ACADEMIC" value="ACADEMIC">
-      <label for="field1"> ACADEMIC PROGRAMS </label><br>
-      <input type="checkbox" name="BUSINESS" value="BUSINESS">
-      <label for="field2"> BUSINESS & JOBS </label><br>
-      <input type="checkbox" name="COMMUNITY" value="COMMUNITY">
-      <label for="field3"> COMMUNITY SERVICE </label><br>
-      <input type="checkbox" name="GOVT" value="GOVT">
-      <label for="field4"> GOVT & LAW </label><br>
-      <input type="checkbox" name="LEADERSHIP" value="LEADERSHIP">
-      <label for="field5"> LEADERSHIP & ADVOCACY </label><br>
-      <input type="checkbox" name="MUSEUMS" value="MUSEUMS">
-      <label for="field6"> MUSEUMS & ART </label><br>
-      <input type="checkbox" name="NATURE" value="NATURE">
-      <label for="field7"> PARKS, ZOOS, & NATURE </label><br>
-      <input type="checkbox" name="ENGINEERING" value="ENGINEERING">
-      <label for="field8"> ENGINEERING, MATH, & CS </label><br>
-      <input type="checkbox" name="MEDICAL" value="MEDICAL">
-      <label for="field9"> MEDICAL & LIFE SCIENCES</label><br>
-      <input type="checkbox" name="ARTS" value="ARTS">
-      <label for="field10"> LITERATURE</label><br>
-      <input type="checkbox" name="THEATRE" value="THEATRE">
-      <label for="field11"> PERFORMING ARTS</label><br>
-      <input type="checkbox" name="VISUAL" value="VISUAL">
-      <label for="field12"> VISUAL ARTS</label><br>
-      <input type="checkbox" name="MEDICAL" value="MEDICAL">
-      <label for="field13"> MEDICAL & LIFE SCIENCES</label><br>
+      <div class="row">
+        <div class="col-sm">
+          <b> FIELD </b> <br>
+          <input type="checkbox" name="ACADEMIC" value="ACADEMIC">
+          <label for="field1"> ACADEMIC PROGRAMS </label><br>
+          <input type="checkbox" name="BUSINESS" value="BUSINESS">
+          <label for="field2"> BUSINESS & JOBS </label><br>
+          <input type="checkbox" name="COMMUNITY" value="COMMUNITY">
+          <label for="field3"> COMMUNITY SERVICE </label><br>
+          <input type="checkbox" name="GOVT" value="GOVT">
+          <label for="field4"> GOVT & LAW </label><br>
+          <input type="checkbox" name="LEADERSHIP" value="LEADERSHIP">
+          <label for="field5"> LEADERSHIP & ADVOCACY </label><br>
+          <input type="checkbox" name="MUSEUMS" value="MUSEUMS">
+          <label for="field6"> MUSEUMS & ART </label><br>
+          <input type="checkbox" name="NATURE" value="NATURE">
+          <label for="field7"> PARKS, ZOOS, & NATURE </label><br>
+          <input type="checkbox" name="ENGINEERING" value="ENGINEERING">
+          <label for="field8"> ENGINEERING, MATH, & CS </label><br>
+          <input type="checkbox" name="MEDICAL" value="MEDICAL">
+          <label for="field9"> MEDICAL & LIFE SCIENCES</label><br>
+          <input type="checkbox" name="ARTS" value="ARTS">
+          <label for="field10"> LITERATURE</label><br>
+          <input type="checkbox" name="THEATRE" value="THEATRE">
+          <label for="field11"> PERFORMING ARTS</label><br>
+          <input type="checkbox" name="VISUAL" value="VISUAL">
+          <label for="field12"> VISUAL ARTS</label><br>
+          <input type="checkbox" name="MEDICAL" value="MEDICAL">
+          <label for="field13"> MEDICAL & LIFE SCIENCES</label><br>
+        </div>
 
-    </div>
+        <div class="col-sm">
 
-    <div class="col-sm">
+          <label for="minPrice"><b> MINIMUM PRICE </b> </label> <br>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text" id="btnGroupAddon">$</div>
+            </div>
+            <input type="text" class="form-control" id="minPrice" aria-describedby="" placeholder="Enter price">
+          </div>
 
-      <label for="minPrice"><b> MINIMUM PRICE </b> </label> <br>
-      <div class="input-group">
-      <div class="input-group-prepend">
-      <div class="input-group-text" id="btnGroupAddon">$</div>
-      </div>
-      <input type="text" class="form-control" id="minPrice" aria-describedby="" placeholder="Enter price">
-      </div>
+          <br>
 
-      <br>
+          <label for="maxPrice"><b> MAXIMUM PRICE </b> </label> <br>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text" id="btnGroupAddon">$</div>
+            </div>
+            <input type="text" class="form-control" id="maxPrice" aria-describedby="" placeholder="Enter price">
+          </div>
 
-      <label for="maxPrice"><b> MAXIMUM PRICE </b> </label> <br>
-      <div class="input-group">
-      <div class="input-group-prepend">
-      <div class="input-group-text" id="btnGroupAddon">$</div>
-      </div>
-      <input type="text" class="form-control" id="maxPrice" aria-describedby="" placeholder="Enter price">
-      </div>
+          <br>
 
-      <br>
+          <b> GRADE </b> <br>
+          <input type="checkbox" name="FROSH" value="FROSH">
+          <label for="grade1"> FRESHMAN </label><br>
+          <input type="checkbox" name="SOPH" value="SOPH">
+          <label for="grade2"> SOPHOMORE </label><br>
+          <input type="checkbox" name="JUNIOR" value="JUNIOR">
+          <label for="grade3"> JUNIOR </label><br>
+          <input type="checkbox" name="SENIOR" value="SENIOR">
+          <label for="grade4"> SENIOR </label><br>
 
-      <b> GRADE </b> <br>
-      <input type="checkbox" name="FROSH" value="FROSH">
-      <label for="grade1"> FRESHMAN </label><br>
-      <input type="checkbox" name="SOPH" value="SOPH">
-      <label for="grade2"> SOPHOMORE </label><br>
-      <input type="checkbox" name="JUNIOR" value="JUNIOR">
-      <label for="grade3"> JUNIOR </label><br>
-      <input type="checkbox" name="SENIOR" value="SENIOR">
-      <label for="grade4"> SENIOR </label><br>
+          <br>
 
-      <br>
+          <b> GENDER </b> <br>
+          <input type="checkbox" name="CO-ED" value="CO-ED">
+          <label for="grade1"> CO-ED </label><br>
+          <input type="checkbox" name="FEMALE" value="FEMALE">
+          <label for="grade2"> FEMALE </label><br>
 
-      <b> GENDER </b> <br>
-      <input type="checkbox" name="CO-ED" value="CO-ED">
-      <label for="grade1"> CO-ED </label><br>
-      <input type="checkbox" name="FEMALE" value="FEMALE">
-      <label for="grade2"> FEMALE </label><br>
-
-      <br>
-      <div class="text-right">
-      <input type="submit" value="Show Results">
-      </div>
-      </form>
+          <br>
+          <div class="text-right">
+            <input type="submit" value="Show Results">
+          </div>
+    </form>
   </div>
 
 </div>
