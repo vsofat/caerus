@@ -1,0 +1,77 @@
+{% extends "template.html" %}
+
+{% block scripts %}
+<script defer src="{{ url_for('static', filename='js/opp.create.js') }}"></script>
+{% endblock %}
+
+{% block heading %}
+{% endblock %}
+
+{% block body %}
+<form action="/opportunities/create" method="POST">
+    <div class="form-group">
+        <label for="title"><b>Title</b></label>
+        <input name="title" type="text" class="form-control" id="title" placeholder="Enter title" required>
+    </div>
+    <div class="form-group">
+        <label for="description"><b>Description</b></label>
+        <textarea name="description" class="form-control" id="description" rows="3"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="field"><b>Field</b></label>
+        <select class="form-control" id="field">
+            <option>ACADEMIC PROGRAMS</option>
+            <option>BUSINESS & JOBS</option>
+            <option>COMMUNITY SERVICE</option>
+            <option>GOVT & LAW</option>
+            <option>LEADERSHIP & ADVOCACY</option>
+            <option>MUSEUMS & ART</option>
+            <option>PARKS, ZOOS, & NATURE</option>
+            <option>ENGINEERING, MATH, & CS</option>
+            <option>MEDICAL & LIFE SCIENCES</option>
+            <option>LITERATURE</option>
+            <option>PERFORMING ARTS</option>
+            <option>VISUAL ARTS</option>
+        </select>
+    </div>
+    <b>Gender</b>
+    <div class="custom-control custom-radio">
+        <input type="radio" class="custom-control-input" value="female" name="gender">
+        <label class="custom-control-label" for="female">Female only</label>
+    </div>
+    <div class="custom-control custom-radio">
+        <input type="radio" class="custom-control-input" value="male" name="gender">
+        <label class="custom-control-label" for="male">Male only</label>
+    </div>
+    <div class="custom-control custom-radio">
+        <input type="radio" class="custom-control-input" value="both" name="gender">
+        <label class="custom-control-label" for="both">Both</label>
+    </div>
+    <b>Start Date</b><br>
+    <input type="date" name="start"><br>
+    <b>End Date</b><br>
+    <input type="date" name="end"><br>
+    <b>Application Deadline</b><br>
+    <input type="date" name="deadline"><br>
+    <br>
+    <div class="form-group">
+        <label for="cost"><b>Cost</b></label>
+        <input name="cost" type="number" class="form-control" id="cost" placeholder="Enter cost" required>
+    </div>
+    <div class="form-group">
+        <label for="grades"><b>Grades</b></label>
+        <input name="grades" type="text" class="form-control" id="grades"
+            placeholder="Enter grades separated by commas">
+    </div>
+    <b>Links</b><br>
+    <div id="links-container">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Link" id="link0">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" id="add-link-0">Add Link</button>
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}

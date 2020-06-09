@@ -213,9 +213,12 @@ def opportunityRoute(opportunityID):
 @staffonly
 def createOpportunityRoute():
     if (request.method == 'GET'):
-        return render_template('createopportunity.html')
+        return render_template('createopportunity.html',
+            user=users.getUserInfo(session['userid'])
+        )
     elif (request.method == 'POST'):
-        return render_template('createopportunity.html')
+        return render_template('createopportunity.html',
+            user=users.getUserInfo(session['userid']))
 
 
 @app.route("/scholarships")
