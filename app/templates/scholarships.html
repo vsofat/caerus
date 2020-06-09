@@ -35,3 +35,9 @@
 <br>
 
 {% endblock %}
+
+{% block body %}
+{% for scholarship in scholars %}
+{{scholarship.title}}
+{% endfor %}
+{% endblock %}

@@ -2,7 +2,7 @@ from .models import db, Resource
 
 
 def getAllResources():
-    resources = Resource.query.all().order_by(Resource.datePosted.desc())
+    resources = Resource.query.order_by(Resource.datePosted.desc()).all()
     return resources
 
 

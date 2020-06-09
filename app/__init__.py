@@ -184,7 +184,10 @@ def logout():
 @app.route("/opportunities")
 @protected
 def opportunitiesRoute():
-    return render_template("opportunities.html", user=users.getUserInfo(session['userid']))
+    return render_template("opportunities.html",
+        user=users.getUserInfo(session['userid']),
+        opportunityList = opportunities.getAllOpportunities()
+        )
 
 
 @app.route("/opportunities/<opportunityID>")
@@ -196,7 +199,10 @@ def opportunityRoute(opportunityID):
 @app.route("/scholarships")
 @protected
 def scholarshipsRoute():
-    return render_template("scholarships.html", user=users.getUserInfo(session['userid']))
+    return render_template("scholarships.html",
+        user=users.getUserInfo(session['userid']),
+        scholars=scholarships.getAllScholarships()
+        )
 
 
 @app.route("/scholarships/<scholarshipID>")
@@ -208,19 +214,23 @@ def scholarshipRoute():
 @app.route("/resources")
 @protected
 def resourcesRoute():
-    return render_template("resources.html", user=users.getUserInfo(session['userid']))
+    return render_template("resources.html",
+        user=users.getUserInfo(session['userid']),
+        res=resources.getAllResources())
 
 
 @app.route("/favorites")
 @protected
 def favoritesRoute():
-    return render_template("favorites.html", user=users.getUserInfo(session['userid']))
+    return render_template("favorites.html",
+        user=users.getUserInfo(session['userid']))
 
 
 @app.route("/preferences")
 @protected
 def preferencesRoute():
-    return render_template("preferences.html", user=users.getUserInfo(session['userid']))
+    return render_template("preferences.html",
+        user=users.getUserInfo(session['userid']))
 
 
 if __name__ == "__main__":

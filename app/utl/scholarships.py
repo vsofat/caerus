@@ -2,7 +2,7 @@ from .models import db, Scholarship, ScholarshipLink
 
 
 def getAllScholarships():
-    scholarships = Scholarship.query.all().order_by(Scholarship.datePosted.desc())
+    scholarships = Scholarship.query.order_by(Scholarship.datePosted.desc()).all()
     for scholarship in scholarships:
         links = ScholarshipLink.query.filter_by(
             scholarshipID=scholarship.scholarshipID

@@ -2,7 +2,7 @@ from .models import db, Opportunity, OpportunityGrade, OpportunityLink
 
 
 def getAllOpportunities():
-    opportunities = Opportunity.query.all().order_by(Opportunity.datePosted.desc())
+    opportunities = Opportunity.query.order_by(Opportunity.datePosted.desc()).all()
     for opportunity in opportunities:
         grades = OpportunityGrade.query.filter_by(
             opportunityID=opportunity.opportunityID

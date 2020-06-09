@@ -39,4 +39,4 @@ def updateTokens(userID, access, refresh):
 
 def getUserInfo(userID):
     user = User.query.filter_by(userID=userID).first()
-    return user;
+    return user

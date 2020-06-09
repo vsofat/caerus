@@ -213,3 +213,6 @@ Add Google OAuth2 API 411 sheet link to README
 
 ericL -- 2020-06-08 20:05
 Add Jinja templating
+
+ericL -- 2020-06-08 20:55
+Fix database retrieval functions
