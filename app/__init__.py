@@ -206,7 +206,7 @@ def opportunitiesRoute():
 @protected
 def opportunityRoute(opportunityID):
     return render_template("individual.html", opp=opportunities.getOpportunity(opportunityID)
-    )
+                           )
 
 
 def strtodate(string):
@@ -221,9 +221,7 @@ def strtodate(string):
 @staffonly
 def createOpportunityRoute():
     if (request.method == 'GET'):
-        return render_template('createopportunity.html',
-                               user=users.getUserInfo(session['userid'])
-                               )
+        return render_template('createopportunity.html')
     elif (request.method == 'POST'):
         links = list()
         grades = list()
@@ -248,8 +246,8 @@ def createOpportunityRoute():
             'grades': grades,
             'links': links
         })
-        return render_template('createopportunity.html',
-                               user=users.getUserInfo(session['userid']))
+        flash("Successfully created an opportunity", 'success')
+        return render_template('createopportunity.html')
 
 
 @app.route("/scholarships")
@@ -267,6 +265,40 @@ def scholarshipRoute():
     return render_template("individual.html")
 
 
+@app.route("/scholarships/create", methods=['GET', 'POST'])
+@protected
+@staffonly
+def createScholarshipRoute():
+    if (request.method == 'GET'):
+        return render_template('createscholarship.html')
+    elif (request.method == 'POST'):
+        # links = list()
+        # grades = list()
+        # f = request.form
+        # for key in f.keys():
+        #     if 'link' in key:
+        #         links.append(request.form[key])
+        #     if 'grades' == key:
+        #         grades = request.form[key].split(',')
+        # location = request.form['location']
+        # location = location if len(location) > 0 else None
+        # opportunities.createOpportunity({
+        #     'title': request.form['title'],
+        #     'description': request.form['description'],
+        #     'field': request.form['field'],
+        #     'gender': request.form['gender'],
+        #     'location': location,
+        #     'startDate': strtodate(request.form['start']),
+        #     'endDate': strtodate(request.form['end']),
+        #     'deadline': strtodate(request.form['deadline']),
+        #     'cost': request.form['cost'],
+        #     'grades': grades,
+        #     'links': links
+        # })
+        flash("Successfully created a scholarship", 'success')
+        return render_template('createscholarship.html')
+
+
 @app.route("/resources")
 @protected
 def resourcesRoute():
@@ -274,12 +306,13 @@ def resourcesRoute():
                            user=users.getUserInfo(session['userid']),
                            res=resources.getAllResources())
 
+
 @app.route("/resources/create")
 @protected
 def resourceRoute():
     return render_template("createResources.html",
-        user=users.getUserInfo(session['userid']),
-        res=resources.getAllResources())
+                           user=users.getUserInfo(session['userid']),
+                           res=resources.getAllResources())
 
 
 @app.route("/favorites")
@@ -295,6 +328,7 @@ def preferencesRoute():
     return render_template("preferences.html",
                            user=users.getUserInfo(session['userid']))
 
+
 @app.route('/dumb')
 def dumb():
     newOpp = {
@@ -307,7 +341,7 @@ def dumb():
         'endDate': None,
         'deadline': None,
         'cost': 0,
-        'grades': [9,10,11,12],
+        'grades': [9, 10, 11, 12],
         'links': ['hello'],
     }
     opportunities.createOpportunity(newOpp)

@@ -259,3 +259,7 @@ Complete opportunity creation form submission
 
 rayL -- 2020-06-09 02:35
 Create filtering functions for opportunities
+
+ericL -- 2020-06-09 18:58
+Add flash messages to creation forms
+Add scholarship creation route
