@@ -231,3 +231,7 @@ Add Jinja templating
 
 ericL -- 2020-06-08 20:55
 Fix database retrieval functions
+
+ahmedS -- 2020-06-08 21:56
+Made few changes to website display, profile picture display on style.css and template.html
+Edited devlog.txt
