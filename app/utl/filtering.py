@@ -1,10 +1,11 @@
 from .models import db, Opportunity
 
 
-def filterOpportunities(selectedFilters):
+def filterOpportunities(query, selectedFilters):
     """
     Parameters
     ----------
+    query: 
     filters: a dictionary of filter type to filter values, where the filter types are: field, maximum price, grade, and gender
     ex: {field: ["ACADEMIC PROGRAMS", "ENGINEERING, MATH, & CS", "MEDICAL & LIFE SCIENCES"], maximumPrice: 500, grade: [
     "JUNIOR", "SENIOR"], gender: ["CO-ED", "FEMALE"]}
@@ -38,6 +39,6 @@ def filterOpportunities(selectedFilters):
         filters.append(getattr(Opportunity, gender) == selectedGenderFilter)
 
     # Finally, apply the filters array onto the given list of opportunities
-    filteredOpportunities = Opportunity.query.filter(*filters)
+    filteredOpportunities = query.filter(*filters)
 
     return filteredOpportunities
