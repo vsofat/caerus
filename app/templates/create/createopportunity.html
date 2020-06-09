@@ -4,39 +4,21 @@
 <script defer src="{{ url_for('static', filename='js/create.js') }}"></script>
 {% endblock %}
 
-{% block heading %}
-{% with messages = get_flashed_messages(with_categories=true) %}
-{% if messages %}
-{% for category, message in messages %}
-{% if category == "error" %}
-<div class="alert alert-danger text-align-center alert-dismissible fade show" role="alert">
-{% endif %}
-    {% if category == "success" %}
-    <div class="alert alert-success text-align-center alert-dismissible fade show" role="alert">
-    {% endif %}
-    {{message}}
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close" tabindex="-2">
-            <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-{% endfor %}
-{% endif %}
-{% endwith %}
-{% endblock %}
-
 {% block title %}Create Opportunity{% endblock %}
 
 {% block body %}
-<a tabindex="-1" href="/opportunities">GO BACK</a>
-<br>
 <form action="/opportunities/create" method="POST">
-    <div class="form-group">
-        <label for="title"><b>Title</b></label>
-        <input name="title" type="text" class="form-control" id="title" placeholder="Enter title" required>
+    <div class="form-group row">
+        <label for="title" class="col-sm-2 col-form-label font-weight-bold">Title</label>
+        <div class="col-sm-10">
+            <input name="title" type="text" class="form-control" id="title" placeholder="Enter title" required>
+        </div>
     </div>
-    <div class="form-group">
-        <label for="description"><b>Description</b></label>
-        <textarea name="description" class="form-control" id="description" rows="3"></textarea>
+    <div class="form-group row">
+        <label for="description" class="col-sm-2 col-form-label font-weight-bold">Description</label>
+        <div class="col-sm-10">
+            <textarea name="description" class="form-control" id="description" rows="3"></textarea>
+        </div>
     </div>
     <div class="form-group">
         <label for="field"><b>Field</b></label>

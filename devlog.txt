@@ -263,3 +263,6 @@ Create filtering functions for opportunities
 ericL -- 2020-06-09 18:58
 Add flash messages to creation forms
 Add scholarship creation route
+
+ericL -- 2020-06-09 19:24
+Add nav bar to creation forms

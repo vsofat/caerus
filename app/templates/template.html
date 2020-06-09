@@ -20,10 +20,11 @@
           </title>
 
           <!-- BOOTSTRAP & CSS -->
-          <link rel="stylesheet" href="/static/css/style.css">
           <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
                integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                crossorigin="anonymous">
+
+          <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
           <!-- SCRIPTS -->
           {% block scripts %}
@@ -68,9 +69,21 @@
 
           <span class="bar">
                {% for href, id, caption in navigation_bar %}
-               <a {% if id == active_page %} class="bar-here" {% endif %} href="{{ href|e }}">{{ caption|e }}</a> &emsp;
+               <a
+                    {% if id == active_page %} class="bar-here" {% endif %}
+                    href="{{ href|e }}"
+                    {% if "create" in request.url %}
+                    tabindex="-1"
+                    {% endif %}
+                    >{{ caption|e }}</a> &emsp;
                {% endfor %}
-               <a style="float: right" href="/logout">Log out</a></span>
+               <a
+                    style="float: right"
+                    href="/logout"
+                    {% if "create" in request.url %}
+                    tabindex="-1"
+                    {% endif %}
+                    >Log out</a></span>
           </span>
           <br>
           <br>
