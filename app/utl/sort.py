@@ -4,17 +4,17 @@ from .models import db, Opportunity, OpportunityGrade, OpportunityLink, Scholars
 def searchOpportunities(sort):
     opportunities = []
     if sort == 'dateposted-asc':
-        opportunities = Opportunity.query.all().order_by(Opportunity.datePosted.asc())
+        opportunities = Opportunity.query.order_by(Opportunity.datePosted.asc()).all()
     elif sort == 'dateposted-desc':
-        opportunities = Opportunity.query.all().order_by(Opportunity.datePosted.desc())
+        opportunities = Opportunity.query.order_by(Opportunity.datePosted.desc()).all()
     elif sort == 'deadline-asc':
-        opportunities = Opportunity.query.all().order_by(Opportunity.deadline.asc())
+        opportunities = Opportunity.query.order_by(Opportunity.deadline.asc()).all()
     elif sort == 'deadline-desc':
-        opportunities = Opportunity.query.all().order_by(Opportunity.deadline.desc())
+        opportunities = Opportunity.query.order_by(Opportunity.deadline.desc()).all()
     elif sort == 'cost-asc':
-        opportunities = Opportunity.query.all().order_by(Opportunity.cost.asc())
+        opportunities = Opportunity.query.order_by(Opportunity.cost.asc()).all()
     elif sort == 'cost-desc':
-        opportunities = Opportunity.query.all().order_by(Opportunity.cost.desc())
+        opportunities = Opportunity.query.order_by(Opportunity.cost.desc()).all()
     for opportunity in opportunities:
         grades = OpportunityGrade.query.filter_by(
             opportunityID=opportunity.opportunityID
@@ -30,17 +30,17 @@ def searchOpportunities(sort):
 def searchScholarships(sort):
     scholarships = []
     if sort == 'dateposted-asc':
-        scholarships = Scholarship.query.all().order_by(Scholarship.datePosted.asc())
+        scholarships = Scholarship.query.order_by(Scholarship.datePosted.asc()).all()
     elif sort == 'dateposted-desc':
-        scholarships = Scholarship.query.all().order_by(Scholarship.datePosted.desc())
+        scholarships = Scholarship.query.order_by(Scholarship.datePosted.desc()).all()
     elif sort == 'deadline-asc':
-        scholarships = Scholarship.query.all().order_by(Scholarship.deadline.asc())
+        scholarships = Scholarship.query.order_by(Scholarship.deadline.asc()).all()
     elif sort == 'deadline-desc':
-        scholarships = Scholarship.query.all().order_by(Scholarship.deadline.desc())
+        scholarships = Scholarship.query.order_by(Scholarship.deadline.desc()).all()
     elif sort == 'amount-asc':
-        scholarships = Scholarship.query.all().order_by(Scholarship.amount.asc())
+        scholarships = Scholarship.query.order_by(Scholarship.amount.asc()).all()
     elif sort == 'amount-desc':
-        scholarships = Scholarship.query.all().order_by(Scholarship.amount.desc())
+        scholarships = Scholarship.query.order_by(Scholarship.amount.desc()).all()
     for scholarship in scholarships:
         links = ScholarshipLink.query.filter_by(
             scholarshipID=scholarship.scholarshipID
@@ -52,7 +52,7 @@ def searchScholarships(sort):
 def searchResources(sort):
     resources = []
     if sort == 'dateposted-asc':
-        resources = Resource.query.all().order_by(Resource.datePosted.asc())
+        resources = Resource.query.order_by(Resource.datePosted.asc()).all()
     elif sort == 'dateposted-desc':
-        resources = Resource.query.all().order_by(Resource.datePosted.desc())
+        resources = Resource.query.order_by(Resource.datePosted.desc()).all()
     return sort, resources
