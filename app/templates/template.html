@@ -53,6 +53,7 @@
                {% for href, id, caption in navigation_bar %}
                <a {% if id == active_page %} class="bar-here" {% endif %} href="{{ href|e }}">{{ caption|e }}</a> &emsp;
                {% endfor %}
+               <a style="float: right" href="/logout">Log out</a></span>
           </span>
           <br>
           <br>
