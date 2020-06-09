@@ -193,7 +193,8 @@ def opportunitiesRoute():
 @app.route("/opportunities/<opportunityID>")
 @protected
 def opportunityRoute(opportunityID):
-    return render_template("individual.html")
+    return render_template("individual.html", opp=opportunities.getOpportunity(opportunityID)
+    )
 
 
 @app.route("/scholarships")
@@ -238,6 +239,24 @@ def favoritesRoute():
 def preferencesRoute():
     return render_template("preferences.html",
         user=users.getUserInfo(session['userid']))
+
+@app.route('/dumb')
+def dumb():
+    newOpp = {
+        'title': 'yo momma',
+        'description': 'at my house last nite!!! #yolo',
+        'field': 'STEM',
+        'gender': None,
+        'location': '106 W 117th Street, New York, NY, 10026',
+        'startDate': datetime.datetime.today(),
+        'endDate': None,
+        'deadline': None,
+        'cost': 0,
+        'grades': [9,10,11,12],
+        'links': ['hello'],
+    }
+    opportunities.createOpportunity(newOpp)
+    return 'submitted'
 
 
 if __name__ == "__main__":

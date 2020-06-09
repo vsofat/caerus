@@ -239,3 +239,8 @@ Edited devlog.txt
 ahmedS -- 2020-06-08 22:24 
 Added logout button, tested successfully
 Edited devlog.txt
+
+ahmedS -- 2020-06-09 00:20
+Worked on individual opportunity templating in individual.html
+Added testing route in __init__.py
+Edited devlog.txt
