@@ -217,6 +217,7 @@ def createOpportunityRoute():
             user=users.getUserInfo(session['userid'])
         )
     elif (request.method == 'POST'):
+        print(request.form)
         return render_template('createopportunity.html',
             user=users.getUserInfo(session['userid']))
 

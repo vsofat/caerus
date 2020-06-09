@@ -237,3 +237,6 @@ Add staff only wrapper
 
 ericL -- 2020-06-09 00:25
 Add dynamic opportunity creation form
+
+ericL -- 2020-06-09 01:37
+Prevent clearing on dynamic form

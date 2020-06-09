@@ -8,6 +8,8 @@
 {% endblock %}
 
 {% block body %}
+<a tabindex="-1" href="../">GO BACK</a>
+<br>
 <form action="/opportunities/create" method="POST">
     <div class="form-group">
         <label for="title"><b>Title</b></label>
@@ -67,11 +69,9 @@
     <div id="links-container">
         <div class="input-group mb-3">
             <input type="text" class="form-control" placeholder="Link" id="link0">
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" id="add-link-0">Add Link</button>
-            </div>
         </div>
     </div>
+    <button type="button" class="btn btn-primary" id="add-link">Add Link</button><br>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 {% endblock %}
