@@ -201,12 +201,27 @@ vishwaaS -- 2020-06-08 11:45
 Made changes to existing front end for filtering on opportunities.html
 Added a form for sort selection
 
+vishwaaS -- 2020-06-08 13:00
+Added profile info, search form and sort dropdown on resources.html
+
+kaziJ -- 2020-06-08 13:10
+Add amount field to scholarship model and creation
+
+kaziJ -- 2020-06-08 13:18
+Create save and add reminder functions
+
+kaziJ -- 2020-06-08 13:23
+Create unsave and remove reminder functions
+
+kaziJ -- 2020-06-08 14:10
+Create search opportunities, scholarships, and resources functions
+
+kaziJ -- 2020-06-08 14:25
+Create sort opportunities, scholarships, and resources functions
+
 vishwaaS -- 2020-06-08 14:50
 Added value and id tags for the sort dropdown on opportunities.html
 Added profile info, search form and sort dropdown on scholarships.html
-
-vishwaaS -- 2020-06-08 13:00
-Added profile info, search form and sort dropdown on resources.html
 
 ericL -- 2020-06-08 18:16
 Add Google OAuth2 API 411 sheet link to README

@@ -9,7 +9,7 @@ def createUser(userID, email, name, imglink, userType, accessToken, refreshToken
         imglink=imglink,
         userType=userType,
         accessToken=accessToken,
-        refreshToken=refreshToken
+        refreshToken=refreshToken,
     )
     db.session.add(user)
     db.session.commit()
@@ -37,6 +37,16 @@ def updateTokens(userID, access, refresh):
     user.refreshToken = refresh
     db.session.commit()
 
+
 def getUserInfo(userID):
     user = User.query.filter_by(userID=userID).first()
     return user
+
+
+def getAllUsersInfo():
+    # {0: User, 1: User, 2: User, ...}
+    userIDs = User.query.with_entities(User.userID).all()
+    userIDToUserInfoDict = {}
+    for userID in userIDs:
+        userIDToUserInfoDict[userID] = getUserInfo(userID)
+    return userIDToUserInfoDict
