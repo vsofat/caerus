@@ -218,6 +218,13 @@ def resourcesRoute():
         user=users.getUserInfo(session['userid']),
         res=resources.getAllResources())
 
+@app.route("/resources/create")
+@protected
+def resourceRoute():
+    return render_template("createResources.html",
+        user=users.getUserInfo(session['userid']),
+        res=resources.getAllResources())
+
 
 @app.route("/favorites")
 @protected
