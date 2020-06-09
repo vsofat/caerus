@@ -1,7 +1,7 @@
 from .models import db, Opportunity
 
 
-def filterOpportunities(query, selectedFilters):
+def filterOpportunities(selectedFilters):
     """
     Parameters
     ----------
@@ -15,13 +15,13 @@ def filterOpportunities(query, selectedFilters):
     filters = []
 
     # Pull out relevant fields in the selectedFilters dictionary for later use
-    selectedFieldFilters = selectedFilters.field
-    selectedMaximumPriceFilter = selectedFilters.maximumPrice
-    selectedGradeFilters = selectedFilters.grade
-    selectedGenderFilters = selectedFilters.gender
+    selectedFieldFilters = selectedFilters['field']
+    selectedMaximumPriceFilter = selectedFilters['maximumPrice']
+    selectedGradeFilters = selectedFilters['grade']
+    selectedGenderFilters = selectedFilters['gender']
 
     # For now, apply filters on a list of opportunities from the entire Opportunities db table
-    opportunities = Opportunity.query.all()
+    opportunities = Opportunity.query
 
     # Dynamically append field filters to the filters array
     for selectedFieldFilter in selectedFieldFilters:
@@ -39,6 +39,24 @@ def filterOpportunities(query, selectedFilters):
         filters.append(getattr(Opportunity, gender) == selectedGenderFilter)
 
     # Finally, apply the filters array onto the given list of opportunities
-    filteredOpportunities = query.filter(*filters)
+    filteredOpportunities = opportunities.filter(*filters).all()
 
     return filteredOpportunities
+
+sort():
+    model.query.sort_by().all()
+sortsearch():
+    model.query.filter(model.title.like(search)).sort_by().all()
+filtersort():
+
+filtersortsearch():
+
+if filters.len == 0:
+    if search == '':
+        sort()
+    sortsearch()
+if search == '':
+    filtersort()
+filtersortsearch()
+
+search -> filter -> sort
