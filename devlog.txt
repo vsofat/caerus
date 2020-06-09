@@ -232,6 +232,10 @@ Add Jinja templating
 ericL -- 2020-06-08 20:55
 Fix database retrieval functions
 
+vishwaaS -- 2020-06-08 21:55
+Set up route for resource creation: resources/create
+Set up form on resources/create for creating route as admin
+
 ahmedS -- 2020-06-08 21:56
 Made few changes to website display, profile picture display on style.css and template.html
 Edited devlog.txt
