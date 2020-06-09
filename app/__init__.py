@@ -44,6 +44,18 @@ def protected(f):
     return wrapper
 
 
+def staffonly(f):
+    @functools.wraps(f)
+    def wrapper(*args, **kwargs):
+        u = users.getUserInfo(session['userid'])
+        if u.userType == 'admin' or u.userType == 'teacher':
+            return f(*args, **kwargs)
+        else:
+            flash("You are not authorized!", 'error')
+            return redirect(url_for('root'))
+    return wrapper
+
+
 def credentials_to_dict(credentials):
     return {'token': credentials.token,
             'refresh_token': credentials.refresh_token,
@@ -185,9 +197,9 @@ def logout():
 @protected
 def opportunitiesRoute():
     return render_template("opportunities.html",
-        user=users.getUserInfo(session['userid']),
-        opportunityList = opportunities.getAllOpportunities()
-        )
+                           user=users.getUserInfo(session['userid']),
+                           opportunityList=opportunities.getAllOpportunities()
+                           )
 
 
 @app.route("/opportunities/<opportunityID>")
@@ -196,13 +208,23 @@ def opportunityRoute(opportunityID):
     return render_template("individual.html")
 
 
+@app.route("/opportunities/create", methods=['GET', 'POST'])
+@protected
+@staffonly
+def createOpportunityRoute():
+    if (request.method == 'GET'):
+        return render_template('createopportunity.html')
+    elif (request.method == 'POST'):
+        return render_template('createopportunity.html')
+
+
 @app.route("/scholarships")
 @protected
 def scholarshipsRoute():
     return render_template("scholarships.html",
-        user=users.getUserInfo(session['userid']),
-        scholars=scholarships.getAllScholarships()
-        )
+                           user=users.getUserInfo(session['userid']),
+                           scholars=scholarships.getAllScholarships()
+                           )
 
 
 @app.route("/scholarships/<scholarshipID>")
@@ -215,22 +237,22 @@ def scholarshipRoute():
 @protected
 def resourcesRoute():
     return render_template("resources.html",
-        user=users.getUserInfo(session['userid']),
-        res=resources.getAllResources())
+                           user=users.getUserInfo(session['userid']),
+                           res=resources.getAllResources())
 
 
 @app.route("/favorites")
 @protected
 def favoritesRoute():
     return render_template("favorites.html",
-        user=users.getUserInfo(session['userid']))
+                           user=users.getUserInfo(session['userid']))
 
 
 @app.route("/preferences")
 @protected
 def preferencesRoute():
     return render_template("preferences.html",
-        user=users.getUserInfo(session['userid']))
+                           user=users.getUserInfo(session['userid']))
 
 
 if __name__ == "__main__":
