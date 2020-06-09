@@ -11,7 +11,7 @@ document.getElementById('add-link').onclick = function add() {
     input.classList.add('form-control');
     input.id = `link${count}`;
     input.name = `link${count}`;
-    input.placeholder = "Link";
+    input.placeholder = "Add Link";
 
     el.appendChild(input);
 

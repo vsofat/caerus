@@ -266,3 +266,6 @@ Add scholarship creation route
 
 ericL -- 2020-06-09 19:24
 Add nav bar to creation forms
+
+ericL -- 2020-06-09 19:47
+Style opportunity creation form
