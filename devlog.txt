@@ -285,3 +285,12 @@ Conform resource creation routing to others
 
 ericL -- 2020-06-09 20:13
 Fix autopep styling issue
+
+ahmedS -- 2020-06-09 20:30
+Changed frontend layout for opportunities.html to have a side bar instead of buttons in a span on autopep
+
+vishwaaS -- 2020-06-09 20:30
+Worked with Ahmed remotely to change frontend layout for opportunities.html to have a side bar instead of buttons in a span on autopep
+
+vishwaaS -- 2020-06-10--12:30
+Added a scrollable thingy with overflow for a div within the sidebar to show user all of filtering options
