@@ -275,29 +275,19 @@ def createScholarshipRoute():
         return render_template('create/scholarship.html',
                                user=users.getUserInfo(session['userid']))
     elif (request.method == 'POST'):
-        # links = list()
-        # grades = list()
-        # f = request.form
-        # for key in f.keys():
-        #     if 'link' in key:
-        #         links.append(request.form[key])
-        #     if 'grades' == key:
-        #         grades = request.form[key].split(',')
-        # location = request.form['location']
-        # location = location if len(location) > 0 else None
-        # opportunities.createOpportunity({
-        #     'title': request.form['title'],
-        #     'description': request.form['description'],
-        #     'field': request.form['field'],
-        #     'gender': request.form['gender'],
-        #     'location': location,
-        #     'startDate': strtodate(request.form['start']),
-        #     'endDate': strtodate(request.form['end']),
-        #     'deadline': strtodate(request.form['deadline']),
-        #     'cost': request.form['cost'],
-        #     'grades': grades,
-        #     'links': links
-        # })
+        links = list()
+        f = request.form
+        for key in f.keys():
+            if 'link' in key:
+                links.append(request.form[key])
+        scholarships.createScholarship({
+            'title': request.form['title'],
+            'description': request.form['description'],
+            'amount': request.form['amount'],
+            'deadline': strtodate(request.form['deadline']),
+            'eligibility': request.form['eligibility'],
+            'links': links
+        })
         if len(request.form['title']) > 0:
             flash("Successfully created a scholarship", 'success')
         return render_template('create/scholarship.html',
