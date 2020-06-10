@@ -14,7 +14,7 @@ Caerus is a website based off of Mr. Blumm's weekly Opportunity Bulletin, where 
 
 ## APIs Used
 
-- Google OAuth2 API: Retrieves basic information from a user's Google account. We use it for authentication and to get the email, name, and picture from a user's account.
+- [Google OAuth2 API](https://docs.google.com/document/u/3/d/1ByvzxoEhH1UuHJR2RW2w5-unr6sOeJBm9Hh-YFq3RSw): Retrieves basic information from a user's Google account. We use it for authentication and to get the email, name, and picture from a user's account.
 
 ## Instructions
 

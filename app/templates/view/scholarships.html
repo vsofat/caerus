@@ -1,0 +1,43 @@
+{% extends "template.html" %}
+
+{% set active_page = active_page|default('scholarships') -%}
+
+{% block title %}Scholarships{% endblock %}
+
+{% block heading %}
+{{super()}}
+
+<span class="bar">
+  <div class="row">
+    <div class="col-sm">
+      <div class="form-group">
+        <select class="form-control" method="post" id="sort">
+          <option type="hidden"> Select a Sort </option>
+          <option value="dateposted-asc" id="dateposted-asc"> Date Created (↑)</option>
+          <option value="dateposted-desc" id="dateposted-desc">Date Created (↓)</option>
+          <option value="deadline-asc" id="deadline-asc"> Deadline (↑)</option>
+          <option value="deadline-desc" id="deadline-desc"> Deadline (↓)</option>
+          <option value="award-asc" id="award-asc"> Scholarship Amount (↑)</option>
+          <option value="award-desc" id="award-desc"> Scholarship Amount (↓)</option>
+        </select>
+      </div>
+
+    </div>
+    <div class="col-sm">
+      <form class="form-inline ">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</span>
+
+<br>
+
+{% endblock %}
+
+{% block body %}
+{% for scholarship in scholars %}
+{{scholarship.title}}
+{% endfor %}
+{% endblock %}

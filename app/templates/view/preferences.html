@@ -1,0 +1,10 @@
+{% extends "template.html" %}
+
+{% set active_page = active_page|default('preferences') -%}
+
+{% block title %}Preferences{% endblock %}
+
+{% block heading %}
+{{super()}}
+
+{% endblock %}

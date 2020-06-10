@@ -6,7 +6,7 @@
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-          <title>welcome</title>
+          <title>Caerus</title>
 
           <!-- BOOTSTRAP & CSS -->
           <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -24,30 +24,29 @@
           <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
                integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
                crossorigin="anonymous" defer></script>
-          
+
           <script src="https://kit.fontawesome.com/0cf2afd459.js" crossorigin="anonymous"></script>
      </head>
 
-     <body class="landing-body h-100 d-flex">
-          {% with messages = get_flashed_messages(with_categories=true) %}
-          {% if messages %}
-          {% for category, message in messages %}
-          {% if category == "error" %}
-          <div class="alert alert-danger text-align-center alert-dismissible fade show" role="alert">
-          {% endif %}
-          {% if category == "success" %}
-          <div class="alert alert-success text-align-center alert-dismissible fade show" role="alert">
-          {% endif %}
-          {{message}}
-               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-               </button>
-          </div>
-          {% endfor %}
-          {% endif %}
-          {% endwith %}
+     <body class="landing-body vh-100 d-flex">
           <div class="justify-content-center align-self-center mx-auto">
-               <br> <br>
+               {% with messages = get_flashed_messages(with_categories=true) %}
+               {% if messages %}
+               {% for category, message in messages %}
+               {% if category == "error" %}
+               <div class="alert alert-danger text-align-center alert-dismissible fade show" role="alert">
+               {% endif %}
+                    {% if category == "success" %}
+                    <div class="alert alert-success text-align-center alert-dismissible fade show" role="alert">
+                    {% endif %}
+                         {{message}}
+                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                         </button>
+                    </div>
+               {% endfor %}
+               {% endif %}
+               {% endwith %}
                <div class="text-center">
                     <span class="landing-title">Caerus</span> <br>
                     <span class="landing-subtitle">All your opportunities, in one place.</span> <br> <br>

@@ -1,30 +1,96 @@
+{% set navigation_bar = [
+     ('/opportunities', 'opportunities', 'Opportunities'),
+     ('/scholarships', 'scholarships', 'Scholarships'),
+     ('/resources', 'resources', 'Resources'),
+     ('/favorites', 'favorites', 'Favorites'),
+     ('/preferences', 'preferences', 'Preferences'),
+ ] %}
+
+{% set active_page = active_page|default('opportunities') -%}
+
 <!DOCTYPE html>
 <html lang="en">
+
      <head>
           <!-- META -->
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <title>
-               {% block title %}
-               {% endblock %}
+               Caerus -- {% block title %}{% endblock %}
           </title>
 
           <!-- BOOTSTRAP & CSS -->
-          <link rel="stylesheet" href="/static/css/style.css">
           <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+               crossorigin="anonymous">
+
+          <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
           <!-- SCRIPTS -->
           {% block scripts %}
           {% endblock %}
           <script src="https://kit.fontawesome.com/0cf2afd459.js" crossorigin="anonymous"></script>
+          <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+          <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
      </head>
 
      <body>
           {% block heading %}
+          {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+          {% for category, message in messages %}
+          {% if category == "error" %}
+          <div class="alert alert-danger text-align-center alert-dismissible fade show" role="alert">
+          {% endif %}
+               {% if category == "success" %}
+               <div class="alert alert-success text-align-center alert-dismissible fade show" role="alert">
+               {% endif %}
+                    {{message}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                         <span aria-hidden="true">&times;</span>
+                    </button>
+               </div>
+          {% endfor %}
+          {% endif %}
+          {% endwith %}
+          <div class="row w-100">
+               <div class="col-8">
+                    <span class="title">Caerus</span>
+                    <br> <span class="subtitle">All your opportunities, in one place.</span>
+               </div>
+               <div class="col-4 mt-auto" style="padding-right: 0;">
+                    <span class="float-right" style="padding: 0; margin: 0;">
+                         <b>{{ user.name }}</b> &emsp;
+                         <img style="border-radius: 50%; height: 5vw; width: auto;" src="{{ user.imglink }}">
+                    </span>
+               </div>
+          </div>
+          <hr>
+
+          <span class="bar">
+               {% for href, id, caption in navigation_bar %}
+               <a
+                    {% if id == active_page %} class="bar-here" {% endif %}
+                    href="{{ href|e }}"
+                    {% if "create" in request.url %}
+                    tabindex="-1"
+                    {% endif %}
+                    >{{ caption|e }}</a> &emsp;
+               {% endfor %}
+               <a
+                    style="float: right"
+                    href="/logout"
+                    {% if "create" in request.url %}
+                    tabindex="-1"
+                    {% endif %}
+                    >Log out</a></span>
+          </span>
+          <br>
+          <br>
           {% endblock %}
-          
+
           {% block body %}
           {% endblock %}
      </body>
+
 </html>

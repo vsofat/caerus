@@ -1,0 +1,49 @@
+{% extends "template.html" %}
+
+{% block scripts %}
+<script defer src="{{ url_for('static', filename='js/create.js') }}"></script>
+{% endblock %}
+
+{% set active_page = active_page|default('scholarships') -%}
+
+{% block title %}Create Scholarship{% endblock %}
+
+{% block body %}
+<form action="/opportunities/create" method="POST">
+    <div class="form-group row">
+        <label for="title" class="col-sm-2 col-form-label font-weight-bold">Title</label>
+        <div class="col-sm-10">
+            <input name="title" type="text" class="form-control" id="title" placeholder="Enter title" required>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="description" class="col-sm-2 col-form-label font-weight-bold">Description</label>
+        <div class="col-sm-10">
+            <textarea name="description" class="form-control" id="description" rows="3"></textarea>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="deadline" class="col-sm-2 col-form-label font-weight-bold">Application Deadline</label>
+        <div class="col-sm-10">
+            <input type="date" name="deadline">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="eligibility" class="col-sm-2 col-form-label font-weight-bold">Eligibility</label>
+        <div class="col-sm-10">
+            <input name="eligibility" type="text" class="form-control" id="eligibility"
+                placeholder="Who is eligible for this scholarship?">
+        </div>
+    </div>
+    <div class="mb-2 font-weight-bold">
+        Link(s)
+    </div>
+    <div id="links-container" class="form-group">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Add link" id="link0" name="link0">
+        </div>
+    </div>
+    <button type="button" class="btn btn-primary" id="add-link">Add Another Link</button>
+    <button type="submit" class="btn btn-success">Submit</button>
+</form>
+{% endblock %}

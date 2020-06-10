@@ -1,0 +1,10 @@
+{% extends "template.html" %}
+
+{% set active_page = active_page|default('favorites') -%}
+
+{% block title %}Favorites{% endblock %}
+
+{% block heading %}
+{{super()}}
+
+{% endblock %}

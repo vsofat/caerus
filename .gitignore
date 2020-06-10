@@ -133,3 +133,4 @@ ehthumbs.db
 # Project Files
 !__init__.py
 oauth-client.json
+site.db

@@ -1,11 +1,10 @@
-from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+
+from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
 # Users
-
-
 class User(db.Model):
     userID = db.Column(db.String, primary_key=True)
     email = db.Column(db.String, nullable=False)
@@ -49,6 +48,7 @@ class Scholarship(db.Model):
     scholarshipID = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String, nullable=False)
     description = db.Column(db.String, nullable=False)
+    amount = db.Column(db.Float, nullable=False)
     deadline = db.Column(db.DateTime, nullable=False)
     eligibility = db.Column(db.String, nullable=False)
     datePosted = db.Column(db.DateTime, nullable=False,

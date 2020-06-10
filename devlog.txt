@@ -118,6 +118,9 @@ Add user parser from csv to json
 ericL -- 2020-06-06 19:48
 Discriminate users by type
 
+vishwaaS -- 2020-06-06 20:32
+Made changes to the designDoc
+
 ericL -- 2020-06-06 20:32
 Redirect if credentials are present
 
@@ -144,3 +147,141 @@ Add workflow and decryption script
 
 kaziJ -- 2020-06-06 22:26
 Add scholarship and opportunity links in functions
+
+vishwaaS -- 2020-06-06 22:32
+Set up Github secret for decryption script
+
+kaziJ -- 2020-06-06 23:47
+Add user functions
+
+kaziJ -- 2020-06-06 23:58
+Initialize database
+
+ahmedS -- 2020-06-06 23:59
+Fixed flasher in landing.html
+Edited devlog.txt
+
+ahmedS -- 2020-06-07 01:07
+Updated templates/ dir
+     Updated navbar on opportunities.html to add visual interest/make it easier to understand where one is in the website
+     Created scholarships.html, reflecting changes in opportunities.html
+     Created resources.html, reflecting changes in opportunities.html
+     Created favorites.html, reflecting changes in opportunities.html
+Edited style.css with navbar changes/updates
+Edited __init__.py routing, to reflect the addition of new templates in templates/ dir
+Edited devlog.txt
+
+ericL -- 2020-06-07 01:29
+Move credentials from session to db
+
+ahmedS -- 2020-06-07 02:27
+Added getUserInfo function in users.py in utl/ dir
+Edited /opportunities route in __init__.py to pass getUsersInfo function through
+Edited opportunities.html to take name and image of user and display them on page above navbar
+Edited style.css to support these changes
+Edited devlog.txt
+
+ericL -- 2020-06-07 02:30
+Fix creation functions
+
+ericL -- 2020-06-07 03:26
+Manually add opportunity
+
+vishwaaS -- 2020-06-07 05:57
+Renamed index.html to opportunities.html
+Updated CSS for opportunities.html
+Added JS script for opportunities.html
+Added a collapsable with a form for filtering and search on opportunities.html
+
+rayL -- 2020-06-07 20:12
+Create get all user preferences with email fxn
+Create get all users info fxn
+
+vishwaaS -- 2020-06-08 11:45
+Made changes to existing front end for filtering on opportunities.html
+Added a form for sort selection
+
+vishwaaS -- 2020-06-08 13:00
+Added profile info, search form and sort dropdown on resources.html
+
+kaziJ -- 2020-06-08 13:10
+Add amount field to scholarship model and creation
+
+kaziJ -- 2020-06-08 13:18
+Create save and add reminder functions
+
+kaziJ -- 2020-06-08 13:23
+Create unsave and remove reminder functions
+
+kaziJ -- 2020-06-08 14:10
+Create search opportunities, scholarships, and resources functions
+
+kaziJ -- 2020-06-08 14:25
+Create sort opportunities, scholarships, and resources functions
+
+vishwaaS -- 2020-06-08 14:50
+Added value and id tags for the sort dropdown on opportunities.html
+Added profile info, search form and sort dropdown on scholarships.html
+
+ericL -- 2020-06-08 18:16
+Add Google OAuth2 API 411 sheet link to README
+
+ericL -- 2020-06-08 20:05
+Add Jinja templating
+
+ericL -- 2020-06-08 20:55
+Fix database retrieval functions
+
+vishwaaS -- 2020-06-08 21:55
+Set up route for resource creation: resources/create
+Set up form on resources/create for creating route as admin
+
+ahmedS -- 2020-06-08 21:56
+Made few changes to website display, profile picture display on style.css and template.html
+Edited devlog.txt
+
+ahmedS -- 2020-06-08 22:24
+Added logout button, tested successfully
+Edited devlog.txt
+
+ericL -- 2020-06-08 22:52
+Add staff only wrapper
+
+kaziJ -- 2020-06-09 00:02
+Create delete opportunities, scholarships, and resources functions
+
+ahmedS -- 2020-06-09 00:20
+Worked on individual opportunity templating in individual.html
+Added testing route in __init__.py
+Edited devlog.txt
+
+ericL -- 2020-06-09 00:25
+Add dynamic opportunity creation form
+
+ericL -- 2020-06-09 01:37
+Prevent clearing on dynamic form
+
+ericL -- 2020-06-09 02:32
+Complete opportunity creation form submission
+
+rayL -- 2020-06-09 02:35
+Create filtering functions for opportunities
+
+ericL -- 2020-06-09 18:58
+Add flash messages to creation forms
+Add scholarship creation route
+
+ericL -- 2020-06-09 19:24
+Add nav bar to creation forms
+
+ericL -- 2020-06-09 19:47
+Style opportunity creation form
+
+ericL -- 2020-06-09 19:56
+Create scholarship creation form
+
+ericL -- 2020-06-09 20:01
+Conform resource creation routing to others
+
+ericL -- 2020-06-09 20:13
+Fix autopep styling issue

@@ -1,0 +1,30 @@
+{% extends "template.html" %}
+
+{% set active_page = active_page|default('resources') -%}
+
+{% block title %}Resources{% endblock %}
+
+{% block heading %}
+{{super()}}
+
+<span class="bar">
+  <div class="row">
+    <div class="col-sm">
+      <div class="form-group">
+        <select class="form-control" method="post" id="sort">
+          <option type="hidden"> Select a Sort </option>
+          <option value="dateposted-asc" id="dateposted-asc"> Date Created (↑)</option>
+          <option value="dateposted-desc" id="dateposted-desc">Date Created (↓)</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-sm">
+      <form class="form-inline ">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</span>
+<br>
+{% endblock %}
