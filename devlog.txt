@@ -285,3 +285,6 @@ Conform resource creation routing to others
 
 ericL -- 2020-06-09 20:13
 Fix autopep styling issue
+
+ericL -- 2020-06-09 20:36
+Conform resource creation form with other forms

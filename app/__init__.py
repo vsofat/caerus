@@ -58,6 +58,10 @@ def staffonly(f):
     return wrapper
 
 
+def strtodate(string):
+    return datetime.datetime.strptime(string, '%Y-%m-%d') if len(string) > 0 else None
+
+
 def credentials_to_dict(credentials):
     return {'token': credentials.token,
             'refresh_token': credentials.refresh_token,
@@ -207,15 +211,9 @@ def opportunitiesRoute():
 @app.route("/opportunities/<opportunityID>")
 @protected
 def opportunityRoute(opportunityID):
-    return render_template("view/individual.html", opp=opportunities.getOpportunity(opportunityID)
+    return render_template("view/individual.html",
+                           opp=opportunities.getOpportunity(opportunityID)
                            )
-
-
-def strtodate(string):
-    if len(string) > 0:
-        return datetime.datetime.strptime(string, '%Y-%m-%d')
-    else:
-        return None
 
 
 @app.route("/opportunities/create", methods=['GET', 'POST'])
@@ -314,12 +312,17 @@ def resourcesRoute():
                            res=resources.getAllResources())
 
 
-@app.route("/resources/create")
+@app.route("/resources/create", methods=['GET', 'POST'])
 @protected
-def resourceRoute():
-    return render_template("create/resource.html",
-                           user=users.getUserInfo(session['userid']),
-                           res=resources.getAllResources())
+def createResourceRoute():
+    if (request.method == 'GET'):
+        return render_template("create/resource.html",
+                               user=users.getUserInfo(session['userid']),
+                               )
+    elif (request.method == 'POST'):
+        return render_template("create/resource.html",
+                               user=users.getUserInfo(session['userid']),
+                               )
 
 
 @app.route("/favorites")
