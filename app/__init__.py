@@ -247,7 +247,7 @@ def createOpportunityRoute():
             'grades': grades,
             'links': links
         })
-        flash("Successfully created an opportunity", 'success')
+        flash("Successfully posted an opportunity", 'success')
         return render_template('create/opportunity.html',
                                user=users.getUserInfo(session['userid']))
 
@@ -289,7 +289,7 @@ def createScholarshipRoute():
             'links': links
         })
         if len(request.form['title']) > 0:
-            flash("Successfully created a scholarship", 'success')
+            flash("Successfully posted a scholarship", 'success')
         return render_template('create/scholarship.html',
                                user=users.getUserInfo(session['userid']))
 
@@ -310,6 +310,13 @@ def createResourceRoute():
                                user=users.getUserInfo(session['userid']),
                                )
     elif (request.method == 'POST'):
+        resources.createResource({
+            'title': request.form['title'],
+            'description': request.form['description'],
+            'link': request.form['link']
+        })
+        if len(request.form['title']) > 0:
+            flash("Successfully posted a resource", 'success')
         return render_template("create/resource.html",
                                user=users.getUserInfo(session['userid']),
                                )
