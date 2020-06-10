@@ -90,8 +90,8 @@ body {
 }
 
 .sidenav {
-  width: 20vw;
-  height: 50vh;
+  width: 25vw;
+  height: auto;
   padding: 2vw;
   position: fixed;
   z-index: 1;
@@ -105,6 +105,11 @@ body {
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
+}
+
+div.overflow-auto {
+  height: 19vh;
+  width: auto;
 }
 
 /* landing page CSS */
