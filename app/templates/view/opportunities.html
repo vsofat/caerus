@@ -4,29 +4,26 @@
 
 {% block title %}Opportunities{% endblock %}
 
-{% block heading %}
-{{super()}}
+{% block body %}
+
+<!-- SIDENAV -->
 <div class="sidenav">
-  <form class="form-inline">
-  <div class="col">
-    <form class="form-inline">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-  </div>
-  <div class="col">
-    <div class="form-group">
-      <select class="form-control" method="post" id="sort">
-        <option type="hidden"> Select a Sort </option>
-        <option value="dateposted-asc" id="dateposted-asc"> Date Created (↑)</option>
-        <option value="dateposted-desc" id="dateposted-desc">Date Created (↓)</option>
+  <form class="w-100">
+    <input style="margin-bottom: 2vh;" class="form-control" type="search" placeholder="Search" aria-label="Search">
+    <select style="margin-bottom: 2vh;" class="form-control" method="post" id="sort">
+        <option type="hidden">Select a sort</option>
+        <option value="dateposted-asc" id="dateposted-asc"> Date created (↑)</option>
+        <option value="dateposted-desc" id="dateposted-desc">Date created (↓)</option>
         <option value="deadline-asc" id="deadline-asc"> Deadline (↑)</option>
         <option value="deadline-desc" id="deadline-desc"> Deadline (↓)</option>
         <option value="cost-asc" id="cost-asc"> Price (↑)</option>
         <option value="cost-desc" id="cost-desc"> Price (↓)</option>
-      </select>
-    </div>
-  </div>
+    </select>
+    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+  </form>
 </div>
 
+<!--
 <span class="bar">
   <div class="row">
     <div class="col-sm">
@@ -91,7 +88,7 @@
 
         <div class="col-sm">
 
-          <!-- <label for="minPrice"><b> MINIMUM PRICE </b> </label> <br>
+          <label for="minPrice"><b> MINIMUM PRICE </b> </label> <br>
           <div class="input-group">
             <div class="input-group-prepend">
               <div class="input-group-text" id="btnGroupAddon">$</div>
@@ -99,7 +96,7 @@
             <input type="text" class="form-control" id="minPrice" aria-describedby="" placeholder="Enter price">
           </div>
 
-          <br> -->
+          <br>
 
           <label for="maxPrice"><b> MAXIMUM PRICE </b> </label> <br>
           <div class="input-group">
@@ -137,5 +134,7 @@
   </div>
 
 </div>
+
+-->
 
 {% endblock %}
