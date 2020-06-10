@@ -1,11 +1,10 @@
-from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+
+from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
 # Users
-
-
 class User(db.Model):
     userID = db.Column(db.String, primary_key=True)
     email = db.Column(db.String, nullable=False)

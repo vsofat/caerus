@@ -55,7 +55,8 @@ def getAllFieldPreferences(userID):
     fieldPreferences = FieldPreference.query.filter_by(userID=userID).all()
     fieldPreferencesArr = []
     for fieldPreference in fieldPreferences:
-        fieldPreferenceDict = {"type": FIELD_PREFERENCE, "value": fieldPreference.field}
+        fieldPreferenceDict = {"type": FIELD_PREFERENCE,
+                               "value": fieldPreference.field}
         fieldPreferencesArr.append(fieldPreferenceDict)
     return fieldPreferencesArr
 
@@ -96,7 +97,8 @@ def getAllGradePreferences(userID):
     GradePreferences = FieldPreference.query.filter_by(userID=userID).all()
     GradePreferencesArr = []
     for gradePreference in GradePreferences:
-        gradePreferenceDict = {"type": GRADE_PREFERENCE, "value": gradePreference.grade}
+        gradePreferenceDict = {"type": GRADE_PREFERENCE,
+                               "value": gradePreference.grade}
         GradePreferencesArr.append(gradePreferenceDict)
     return GradePreferencesArr
 
@@ -129,12 +131,12 @@ def createAllPreferences(body):
     Input
     -----
     An array of preference dictionaries, each with its own type and value.
-    For example, the dictionary representation of a cost preference with a 
+    For example, the dictionary representation of a cost preference with a
     value of 500 is {type: "COST_PREFERENCE", value: 500}. Another example
-    would be a gender preference with a value of female, whose dictionary 
+    would be a gender preference with a value of female, whose dictionary
     representation would be {type: "GENDER_PREFERENCE", value: "FEMALE"}.
     If a user wants both of these preferences, this function will receive
-    [{type: "COST_PREFERENCE", value: 500}, {type: "GENDER_PREFERENCE", 
+    [{type: "COST_PREFERENCE", value: 500}, {type: "GENDER_PREFERENCE",
     value: "FEMALE"}].
     """
     userID = body.userID
