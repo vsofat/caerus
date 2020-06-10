@@ -8,19 +8,22 @@
 
 <!-- SIDENAV -->
 <div class="sidenav">
-  <form class="w-100">
+  <form class="w-100" method="post">
+    <h5> <b> Refine Results </b> </h5> <hr>
     <input style="margin-bottom: 2vh;" class="form-control" type="search" placeholder="Search" aria-label="Search">
     <select style="margin-bottom: 2vh;" class="form-control" method="post" id="sort">
-        <option type="hidden">Select a sort</option>
-        <option value="dateposted-asc" id="dateposted-asc"> Date created (↑)</option>
+        <option type="hidden" value="default">Select a sort</option>
         <option value="dateposted-desc" id="dateposted-desc">Date created (↓)</option>
-        <option value="deadline-asc" id="deadline-asc"> Deadline (↑)</option>
+        <option value="dateposted-asc" id="dateposted-asc"> Date created (↑)</option>
         <option value="deadline-desc" id="deadline-desc"> Deadline (↓)</option>
-        <option value="cost-asc" id="cost-asc"> Price (↑)</option>
+        <option value="deadline-asc" id="deadline-asc"> Deadline (↑)</option>
         <option value="cost-desc" id="cost-desc"> Price (↓)</option>
+        <option value="cost-asc" id="cost-asc"> Price (↑)</option>
     </select>
+    
     <div class="overflow-auto">
-      <b> FIELD </b> <br>
+      <b> Field </b>
+      <br>
       <input type="checkbox" name="ACADEMIC" value="ACADEMIC">
       <label for="field1"> Academic Programs </label><br>
       <input type="checkbox" name="BUSINESS" value="BUSINESS">
@@ -45,9 +48,8 @@
       <label for="field11"> Performing Arts</label><br>
       <input type="checkbox" name="VISUAL" value="VISUAL">
       <label for="field12"> Visual Arts</label><br>
-
       <br>
-      <label for="minPrice"><b> MINIMUM PRICE </b> </label> <br>
+      <label for="minPrice"><b> Minimum Price </b> </label> <br>
       <div class="input-group">
         <div class="input-group-prepend">
           <div class="input-group-text" id="btnGroupAddon">$</div>
@@ -56,23 +58,25 @@
       </div>
       <br>
 
-      <b> GRADE </b> <br>
+      <b> Grade </b> <br>
       <input type="checkbox" name="FROSH" value="FROSH">
-      <label for="grade1"> FRESHMAN </label><br>
+      <label for="grade1"> Freshman </label><br>
       <input type="checkbox" name="SOPH" value="SOPH">
-      <label for="grade2"> SOPHOMORE </label><br>
+      <label for="grade2"> Sophomore </label><br>
       <input type="checkbox" name="JUNIOR" value="JUNIOR">
-      <label for="grade3"> JUNIOR </label><br>
+      <label for="grade3"> Junior </label><br>
       <input type="checkbox" name="SENIOR" value="SENIOR">
-      <label for="grade4"> SENIOR </label><br>
+      <label for="grade4"> Senior </label><br>
 
       <br>
 
-      <b> GENDER </b> <br>
+      <b> Gender </b> <br>
       <input type="checkbox" name="CO-ED" value="CO-ED">
-      <label for="grade1"> CO-ED </label><br>
+      <label for="gender1"> Co-Ed </label><br>
+      <input type="checkbox" name="MALE" value="MALE">
+      <label for="gender2"> Male only </label><br>
       <input type="checkbox" name="FEMALE" value="FEMALE">
-      <label for="grade2"> FEMALE </label><br>
+      <label for="gender3"> Female only </label><br>
       </div>
       <br>
       <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Show Results</button>

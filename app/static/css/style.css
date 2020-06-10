@@ -107,6 +107,10 @@ body {
   .sidenav a {font-size: 18px;}
 }
 
+div.overflow-auto {
+  height: 50px;
+}
+
 /* landing page CSS */
 
 .landing-body {
@@ -130,5 +134,3 @@ body {
      margin: 0;
      font-style: italic;
 }
-
-.div
