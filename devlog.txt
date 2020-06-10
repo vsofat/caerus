@@ -226,5 +226,31 @@ Added profile info, search form and sort dropdown on scholarships.html
 ericL -- 2020-06-08 18:16
 Add Google OAuth2 API 411 sheet link to README
 
+ericL -- 2020-06-08 20:05
+Add Jinja templating
+
+ericL -- 2020-06-08 20:55
+Fix database retrieval functions
+
+vishwaaS -- 2020-06-08 21:55
+Set up route for resource creation: resources/create
+Set up form on resources/create for creating route as admin
+
+ahmedS -- 2020-06-08 21:56
+Made few changes to website display, profile picture display on style.css and template.html
+Edited devlog.txt
+
+ahmedS -- 2020-06-08 22:24
+Added logout button, tested successfully
+Edited devlog.txt
+
 kaziJ -- 2020-06-09 00:02
 Create delete opportunities, scholarships, and resources functions
+
+ahmedS -- 2020-06-09 00:20
+Worked on individual opportunity templating in individual.html
+Added testing route in __init__.py
+Edited devlog.txt
+
+rayL -- 2020-06-09 02:35
+Create filtering functions for opportunities
