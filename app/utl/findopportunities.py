@@ -6,7 +6,7 @@ def findOpportunities(body):
     """
     input:
     {
-        filters: {field: ["ACADEMIC PROGRAMS", "ENGINEERING, MATH, & CS", "MEDICAL & LIFE SCIENCES"], maximum-cost: 500, grade: ["JUNIOR", "SENIOR"], gender: ["CO-ED", "FEMALE"]},
+        filters: {field: ["ACADEMIC PROtGRAMS", "ENGINEERING, MATH, & CS", "MEDICAL & LIFE SCIENCES"], maximum-cost: 500, grade: ["JUNIOR", "SENIOR"], gender: ["CO-ED", "FEMALE"]},
         search: "query",
         sort: "sort-order"
     }
@@ -148,12 +148,13 @@ def searchFilterSortOpportunities(search, filters, sort):
     return filterSortOpportunities(searchQuery, filters, sort)
 
 
-def hasFilters(filters):
-    """
+def hasFilters(filters): f
+
+"""
     input:
     {field: ["ACADEMIC PROGRAMS", "ENGINEERING, MATH, & CS", "MEDICAL & LIFE SCIENCES"],
         maximum-cost: 500, grade: ["JUNIOR", "SENIOR"], gender: ["CO-ED", "FEMALE"]}
     output:
     True or False
     """
-    return not (len(filters['field']) == 0 and filters['maximum-cost'] == None and len(filters['grade']) == 0 and len(filters['gender']) == 0)
+return not (len(filters['field']) == 0 and filters['maximum-cost'] == None and len(filters['grade']) == 0 and len(filters['gender']) == 0)
