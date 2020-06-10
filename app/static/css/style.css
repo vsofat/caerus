@@ -90,8 +90,8 @@ body {
 }
 
 .sidenav {
-  width: 20vw;
-  height: 50vh;
+  width: 25vw;
+  height: 62vh;
   padding: 2vw;
   position: fixed;
   z-index: 1;
@@ -108,7 +108,8 @@ body {
 }
 
 div.overflow-auto {
-  height: 125px;
+  height: 25vh;
+  width: auto;
 }
 
 /* landing page CSS */
