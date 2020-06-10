@@ -10,6 +10,7 @@
 {% block title %}{{ opp.title }}{% endblock %}
 
 {% block heading %}
+<a class="text-muted" href="/opportunities"><small>&#8592; back to opportunities</small></a>
 <h1 class="title">{{ opp.title }}</h1>
 
 <br> 
@@ -66,11 +67,16 @@
 
 <br>
 
+<!-- location -->
+<p><b>{{ opp.location }}</b></p>
+
 <!-- description -->
 <p>{{ opp.description }}</p>
 
 <!-- links -->
-
+{% for link in opp.links %}
+<a href="{{ link }}">{{ link }}</a> <br>
+{% endfor %}
 
 <!--
      opportunityID = db.Column(db.Integer, primary_key=True)
@@ -86,3 +92,5 @@
      datePosted = db.Column(db.DateTime, nullable=False,
      default=datetime.utcnow)
 -->
+
+{% endblock %}

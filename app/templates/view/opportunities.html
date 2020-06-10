@@ -91,4 +91,13 @@
   </form>
 </div>
 
+<!-- OPPORTUNTIIES (right) -->
+<div class="opportunities">
+  {% for opp in opportunityList %}
+  <div class="opp-block">
+    <a href="/opportunities/{{ opp.opportunityID }}"><h3>{{ opp.title }}</h3></a>
+  </div>
+  {% endfor %}
+</div>
+
 {% endblock %}

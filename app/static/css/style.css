@@ -102,6 +102,20 @@ body {
   padding-top: 20px;
 }
 
+.opportunities {
+width: 61vw;
+     float: right;
+}
+
+.opp-block {
+     width: 100%;
+     padding: 1vh 2vw;
+     background-color: white;
+     border: 1px solid gray;
+     border-radius: 10px;
+     margin-bottom: 2vh;
+}
+
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
