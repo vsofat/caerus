@@ -50,30 +50,6 @@ body {
      color: white !important;
 }
 
-/* landing page CSS */
-
-.landing-body {
-     background: rgb(0,123,255);
-     background-image: linear-gradient(135deg, rgba(0,123,255,1) 0%, rgba(255,143,240,1) 75%);
-     color: white;
-     height: 100%;
-     background-repeat: no-repeat;
-     background-attachment: fixed;
-}
-
-.landing-title {
-     font-size: 18vw;
-     font-weight: bold;
-     margin: 0;
-     line-height: 110%;
-}
-
-.landing-subtitle {
-     font-size: 24px;
-     margin: 0;
-     font-style: italic;
-}
-
 .text-center .button:active {
      outline: 1px;
 }
@@ -127,41 +103,46 @@ a:active {
   cursor: pointer;
 }
 
-body {
-  font-family: "Lato", sans-serif;
-}
-
 .sidenav {
-  height: 100%;
-  width: 160px;
+  height: 50vh;
+  width: 20vw;
+  padding: 2.5vw;
   position: fixed;
   z-index: 1;
-  top: 0;
+  bottom: 10vh;
   left: 0;
-  background-color: #111;
+  background-color: whitesmoke;
+  border: 1px solid gray;
+  border-radius: 0px 25px 25px 0px;
   overflow-x: hidden;
   padding-top: 20px;
-}
-
-.sidenav a {
-  padding: 6px 8px 6px 16px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
-  display: block;
-}
-
-.sidenav a:hover {
-  color: #f1f1f1;
-}
-
-.main {
-  margin-left: 160px; /* Same as the width of the sidenav */
-  font-size: 28px; /* Increased text to enable scrolling */
-  padding: 0px 10px;
 }
 
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
+}
+
+/* landing page CSS */
+
+.landing-body {
+     background: rgb(0,123,255);
+     background-image: linear-gradient(135deg, rgba(0,123,255,1) 0%, rgba(255,143,240,1) 75%);
+     color: white;
+     height: 100%;
+     background-repeat: no-repeat;
+     background-attachment: fixed;
+}
+
+.landing-title {
+     font-size: 18vw;
+     font-weight: bold;
+     margin: 0;
+     line-height: 110%;
+}
+
+.landing-subtitle {
+     font-size: 24px;
+     margin: 0;
+     font-style: italic;
 }
