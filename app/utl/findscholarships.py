@@ -1,5 +1,5 @@
 from .models import db, Scholarship, ScholarshipLink
-from sqlalchemy import and_, or_, in_
+from sqlalchemy import or_
 
 
 def findScholarships(body):
@@ -10,7 +10,7 @@ def findScholarships(body):
         sort: "sort-order"
     }
     output:
-    body (provided input), array of opportunity objects
+    body (provided input), array of scholarship objects
     """
     search = body["search"]
     sort = body["sort"]
