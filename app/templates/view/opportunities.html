@@ -6,6 +6,26 @@
 
 {% block heading %}
 {{super()}}
+<div class="sidenav">
+  <form class="form-inline">
+  <div class="col">
+    <form class="form-inline">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+  </div>
+  <div class="col">
+    <div class="form-group">
+      <select class="form-control" method="post" id="sort">
+        <option type="hidden"> Select a Sort </option>
+        <option value="dateposted-asc" id="dateposted-asc"> Date Created (↑)</option>
+        <option value="dateposted-desc" id="dateposted-desc">Date Created (↓)</option>
+        <option value="deadline-asc" id="deadline-asc"> Deadline (↑)</option>
+        <option value="deadline-desc" id="deadline-desc"> Deadline (↓)</option>
+        <option value="cost-asc" id="cost-asc"> Price (↑)</option>
+        <option value="cost-desc" id="cost-desc"> Price (↓)</option>
+      </select>
+    </div>
+  </div>
+</div>
 
 <span class="bar">
   <div class="row">
