@@ -1,7 +1,7 @@
 from .models import db, Opportunity, OpportunityGrade, OpportunityLink, Scholarship, ScholarshipLink, Resource
 
 
-def searchOpportunities(sort):
+def sortOpportunities(sort):
     opportunities = []
     if sort == 'dateposted-asc':
         opportunities = Opportunity.query.order_by(Opportunity.datePosted.asc()).all()
@@ -27,7 +27,7 @@ def searchOpportunities(sort):
     return sort, opportunities
 
 
-def searchScholarships(sort):
+def sortScholarships(sort):
     scholarships = []
     if sort == 'dateposted-asc':
         scholarships = Scholarship.query.order_by(Scholarship.datePosted.asc()).all()
@@ -49,7 +49,7 @@ def searchScholarships(sort):
     return sort, scholarships
 
 
-def searchResources(sort):
+def sortResources(sort):
     resources = []
     if sort == 'dateposted-asc':
         resources = Resource.query.order_by(Resource.datePosted.asc()).all()

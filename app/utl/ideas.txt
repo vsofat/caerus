@@ -15,3 +15,12 @@ if search == '':
 filtersortsearch()
 
 search -> filter -> sort
+
+.where(and_[(or_(*fieldFilters)),(Opportunity.cost <= maximumCostFilter),(or_(*genderFilters)),(or_(*gradeFilters)])
+
+https://docs.sqlalchemy.org/en/13/core/sqlelement.html
+
+or_(one, two)
+(one) | (two)
+
+or_(*fieldFilters)
