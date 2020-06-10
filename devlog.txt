@@ -298,3 +298,4 @@ Added a scrollable thingy with overflow for a div within the sidebar to show use
 vishwaaS -- 2020-06-10--9:30
 Cleaned up HTML files to make things consistent
 Touched up sidebar styling
+Fixed overflow div to become a scrollable section within sidebar
