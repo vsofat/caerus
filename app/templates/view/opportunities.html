@@ -96,6 +96,22 @@
   {% for opp in opportunityList %}
   <div class="opp-block">
     <a href="/opportunities/{{ opp.opportunityID }}"><h3>{{ opp.title }}</h3></a>
+    <!-- date -->
+    {% if date[opp.opportunityID][0] or date[opp.opportunityID][1] %}
+    <span> 
+      {% if date[opp.opportunityID][0] %}
+      {{ date[opp.opportunityID][0] }}
+      {% endif %}
+      {% if date[opp.opportunityID][1] %}
+      - {{ date[opp.opportunityID][1] }}
+      {% endif %}
+    {% endif %}
+
+    {% if date[opp.opportunityID][2] %}
+    <br>
+    <b>DEADLINE: {{ date[opp.opportunityID][2] }} </b>
+    {% endif %}
+    </span>
   </div>
   {% endfor %}
 </div>

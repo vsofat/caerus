@@ -200,7 +200,8 @@ def logout():
 def opportunitiesRoute():
     return render_template("view/opportunities.html",
                            user=users.getUserInfo(session['userid']),
-                           opportunityList=opportunities.getAllOpportunities()
+                           opportunityList=opportunities.getAllOpportunities(),
+                           date=dateconv.allDateDisplay()
                            )
 
 
