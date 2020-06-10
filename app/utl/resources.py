@@ -16,3 +16,8 @@ def createResource(body):
         title=body['title'], description=body['description'], link=body['link'])
     db.session.add(resource)
     db.session.commit()
+
+
+def deleteResource(resourceID):
+    Resource.query.filter_by(resourceID=resourceID).delete()
+    db.session.commit()

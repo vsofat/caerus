@@ -36,3 +36,7 @@ def createScholarship(body):
             scholarshipID=scholarship.scholarshipID, link=link)
         db.session.add(newLink)
     db.session.commit()
+
+def deleteScholarship(scholarshipID):
+    Scholarship.query.filter_by(scholarshipID=scholarshipID).delete()
+    db.session.commit()

@@ -247,6 +247,9 @@ Edited devlog.txt
 ericL -- 2020-06-08 22:52
 Add staff only wrapper
 
+kaziJ -- 2020-06-09 00:02
+Create delete opportunities, scholarships, and resources functions
+
 ahmedS -- 2020-06-09 00:20
 Worked on individual opportunity templating in individual.html
 Added testing route in __init__.py
