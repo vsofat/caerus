@@ -294,3 +294,7 @@ Worked with Ahmed remotely to change frontend layout for opportunities.html to h
 
 vishwaaS -- 2020-06-10--12:30
 Added a scrollable thingy with overflow for a div within the sidebar to show user all of filtering options
+
+vishwaaS -- 2020-06-10--9:30
+Cleaned up HTML files to make things consistent
+Touched up sidebar styling
