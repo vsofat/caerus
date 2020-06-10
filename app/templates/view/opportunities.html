@@ -12,7 +12,7 @@
     <h5> <b> Refine Results </b> </h5> <hr>
     <input style="margin-bottom: 2vh;" class="form-control" type="search" placeholder="Search" aria-label="Search">
     <select style="margin-bottom: 2vh;" class="form-control" method="post" id="sort">
-        <option type="hidden" value="default">Select a sort</option>
+        <!-- <option type="hidden" value="default">Select a sort</option> -->
         <option value="dateposted-desc" id="dateposted-desc">Date created (↓)</option>
         <option value="dateposted-asc" id="dateposted-asc"> Date created (↑)</option>
         <option value="deadline-desc" id="deadline-desc"> Deadline (↓)</option>
@@ -61,7 +61,7 @@
         <div class="input-group-prepend">
           <div class="input-group-text" id="btnGroupAddon">$</div>
         </div>
-        <input type="number" class="form-control" id="maxPrice" aria-describedby="" placeholder="Enter price">
+        <input type="number" class="form-control" id="maxPrice" aria-describedby="" value="None" placeholder="Enter price">
       </div>
       <br>
 
@@ -89,6 +89,34 @@
       </div>
       <button class="btn btn-outline-primary w-100" type="submit">Show Results</button>
   </form>
+</div>
+
+<!-- OPPORTUNTIIES (right) -->
+<div class="opportunities">
+  {% for opp in opportunityList %}
+  <div class="opp-block">
+    <br>
+    <a href="/opportunities/{{ opp.opportunityID }}"><h3>{{ opp.title }}</h3></a>
+    <!-- date -->
+    {% if date[opp.opportunityID][0] or date[opp.opportunityID][1] %}
+    <span> 
+      {% if date[opp.opportunityID][0] %}
+      {{ date[opp.opportunityID][0] }}
+      {% endif %}
+      {% if date[opp.opportunityID][1] %}
+      - {{ date[opp.opportunityID][1] }}
+      {% endif %}
+    {% endif %}
+
+    {% if date[opp.opportunityID][2] %}
+    <br>
+    <b>DEADLINE: {{ date[opp.opportunityID][2] }} </b>
+    {% endif %}
+
+    <br> <br>
+    </span>
+  </div>
+  {% endfor %}
 </div>
 
 {% endblock %}

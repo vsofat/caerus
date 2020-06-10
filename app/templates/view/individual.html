@@ -10,6 +10,7 @@
 {% block title %}{{ opp.title }}{% endblock %}
 
 {% block heading %}
+<a class="text-muted" href="/opportunities"><small>&#8592; back to opportunities</small></a>
 <h1 class="title">{{ opp.title }}</h1>
 
 <br> 
@@ -48,29 +49,34 @@
 <br>
 
 <!-- date -->
-{% if opp.startDate or opp.endDate %}
+{% if date[0] or date[1] %}
 <h3 class="subtitle">
-     {% if opp.startDate %}
-          {{ opp.startDate }}
+     {% if date[0] %}
+          {{ date[0] }}
      {% endif %}
-     {% if opp.endDate %}
-           - {{ opp.endDate }}
+     {% if date[1] %}
+           - {{ date[1] }}
      {% endif %} 
 </h3>
 {% endif %}
 
 <!-- deadline -->
-{% if opp.deadline %}
-<h3 class="subtitle"><b>DEADLINE: {{ opp.deadline }} </b></h3>
+{% if date[2] %}
+<h3 class="subtitle"><b>DEADLINE: {{ date[2] }} </b></h3>
 {% endif %}
 
 <br>
+
+<!-- location -->
+<p><b>{{ opp.location }}</b></p>
 
 <!-- description -->
 <p>{{ opp.description }}</p>
 
 <!-- links -->
-
+{% for link in opp.links %}
+<a href="{{ link }}">{{ link }}</a> <br>
+{% endfor %}
 
 <!--
      opportunityID = db.Column(db.Integer, primary_key=True)
@@ -86,3 +92,5 @@
      datePosted = db.Column(db.DateTime, nullable=False,
      default=datetime.utcnow)
 -->
+
+{% endblock %}

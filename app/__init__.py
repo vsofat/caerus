@@ -10,7 +10,7 @@ import google.oauth2.credentials
 import google_auth_oauthlib.flow
 from googleapiclient.discovery import build
 
-from utl import models, opportunities, preferences, resources, saved, scholarships, users
+from utl import models, opportunities, preferences, resources, saved, scholarships, users, dateconv
 from config import Config
 
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
@@ -200,14 +200,17 @@ def logout():
 def opportunitiesRoute():
     return render_template("view/opportunities.html",
                            user=users.getUserInfo(session['userid']),
-                           opportunityList=opportunities.getAllOpportunities()
+                           opportunityList=opportunities.getAllOpportunities(),
+                           date=dateconv.allDateDisplay()
                            )
 
 
 @app.route("/opportunities/<opportunityID>")
 @protected
 def opportunityRoute(opportunityID):
-    return render_template("view/individual.html", opp=opportunities.getOpportunity(opportunityID)
+    return render_template("view/individual.html", 
+                            opp=opportunities.getOpportunity(opportunityID),
+                            date=dateconv.dateDisplay(opportunityID)
                            )
 
 
