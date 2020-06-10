@@ -91,7 +91,7 @@ body {
 
 .sidenav {
   width: 25vw;
-  height: 62vh;
+  height: auto;
   padding: 2vw;
   position: fixed;
   z-index: 1;
@@ -108,7 +108,7 @@ body {
 }
 
 div.overflow-auto {
-  height: 25vh;
+  height: 19vh;
   width: auto;
 }
 
