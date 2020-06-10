@@ -122,8 +122,18 @@ width: 61vw;
 }
 
 div.overflow-auto {
-  height: 19vh;
+  height: 20vh;
   width: auto;
+}
+
+.tag-block .star {
+     color: #ff8ff0 !important;
+     transition: 250ms;
+}
+
+.tag-block .star:hover {
+     color: rgb(0,123,255) !important;
+     transition: 250ms;
 }
 
 /* landing page CSS */

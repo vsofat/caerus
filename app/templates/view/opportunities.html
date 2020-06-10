@@ -21,9 +21,9 @@
         <option value="cost-asc" id="cost-asc"> Price (↑)</option>
     </select>
 
-    <button style="margin-bottom: 2vh;" class="btn btn-primary form-control" type="button" data-toggle="collapse" data-target="#collapseExample"
+    <button style="margin-bottom: 2vh;" class="btn btn-primary btn-sm form-control" type="button" data-toggle="collapse" data-target="#collapseExample"
       aria-expanded="false" aria-controls="collapseExample">
-      Filter
+      Filter &#9662;
     </button>
     <br>
     <div class="collapse" id="collapseExample" style="margin-bottom: 2vh;">
@@ -57,7 +57,7 @@
       <label for="field12"> Visual Arts</label><br>
       <br>
       <label for="minPrice"><b> Maximum Price </b> </label> <br>
-      <div style="width: 19vw;" class="input-group">
+      <div style="width: 16vw;" class="input-group">
         <div class="input-group-prepend">
           <div class="input-group-text" id="btnGroupAddon">$</div>
         </div>
@@ -79,7 +79,7 @@
 
       <b> Gender </b> <br>
       <input type="checkbox" name="CO-ED" value="CO-ED">
-      <label for="gender1"> Co-Ed </label><br>
+      <label for="gender1"> Co-ed </label><br>
       <input type="checkbox" name="MALE" value="MALE">
       <label for="gender2"> Male only </label><br>
       <input type="checkbox" name="FEMALE" value="FEMALE">
@@ -87,7 +87,7 @@
       </div>
       </div>
       </div>
-      <button class="btn btn-outline-primary w-100" type="submit">Show Results</button>
+      <button class="btn btn-outline-primary btn-sm w-100" type="submit">Show Results</button>
   </form>
 </div>
 
@@ -96,7 +96,12 @@
   {% for opp in opportunityList %}
   <div class="opp-block">
     <br>
-    <a href="/opportunities/{{ opp.opportunityID }}"><h3>{{ opp.title }}</h3></a>
+    <a href="/opportunities/{{ opp.opportunityID }}"><h3>{{ opp.title }}</a> &nbsp;
+    <!-- field -->
+      {% if opp.field %}
+      <a class="btn btn-primary btn-sm" href="/opportunities">&nbsp;  {{ opp.field }} &nbsp; </a> &nbsp;
+      {% endif %}
+    </h3></a>
     <!-- date -->
     {% if date[opp.opportunityID][0] or date[opp.opportunityID][1] %}
     <span> 
@@ -113,8 +118,51 @@
     <b>DEADLINE: {{ date[opp.opportunityID][2] }} </b>
     {% endif %}
 
-    <br> <br>
+    <br>
+    <hr>
     </span>
+    <!-- location -->
+    <p><b>{{ opp.location }}</b></p>
+    
+    <!-- description -->
+    <p>{{ opp.description }}</p>
+    <!-- links -->
+    {% for link in opp.links %}
+    <a href="{{ link }}">{{ link }}</a> <br>
+    {% endfor %}
+
+    <hr>
+
+    <!-- tags -->
+    <div class="tag-block">
+      <!-- gender -->
+      {% if opp.gender %}
+      <a class="btn btn-primary btn-sm" href="/opportunities">&nbsp; {{ opp.gender }} &nbsp; </a> &nbsp;
+      {% endif %}
+    
+      <!-- cost (if free) -->
+      {% if opp.cost == 0 %}
+      <a class="btn btn-primary btn-sm" href="/opportunities">&nbsp; free &nbsp;</a> &nbsp;
+      {% endif %}
+    
+      <!-- grades -->
+      {% for grade in opp.grades %}
+      {% if grade == 9 %}
+      <a class="btn btn-primary btn-sm" href="/opportunities">&nbsp; freshmen &nbsp; </a> &nbsp;
+      {% elif grade == 10 %}
+      <a class="btn btn-primary btn-sm" href="/opportunities">&nbsp; sophomores &nbsp; </a> &nbsp;
+      {% elif grade == 11 %}
+      <a class="btn btn-primary btn-sm" href="/opportunities">&nbsp; juniors &nbsp; </a> &nbsp;
+      {% elif grade == 12 %}
+      <a class="btn btn-primary btn-sm" href="/opportunities">&nbsp; seniors &nbsp; </a> &nbsp;
+      {% endif %}
+      {% endfor %}
+
+      <a style="float: right; font-size: 20px" class="text-secondary star" href="/opportunities"><i class="fa fa-star" aria-hidden="true"></i></a>
+    </div>
+
+
+    <br>
   </div>
   {% endfor %}
 </div>

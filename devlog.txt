@@ -300,13 +300,60 @@ Cleaned up HTML files to make things consistent
 Touched up sidebar styling
 Fixed overflow div to become a scrollable section within sidebar
 
-vishwaaS -- 2020-06-10 10:30
+ahmedS -- 2020-06-10 10:02
+Fixed sidebar HTML/CSS to be cleaner & more organized
+
+ahmedS -- 2020-06-10 10:32
+Removed cost field requirement in opportunity create form
+Added floats to cost field in opportunity create form
+
+vishwaaS -- 2020-06-10 10:32
 Added a collapsable section for filtering
 Implemented scrollable overflow div within collapsable
 Fixed styling for the side bar to adjust to new changes 
 
+ahmedS -- 2020-06-10 10:41
+Re-added cost field requirement in opportunity create form
+
+ahmedS -- 2020-06-10 10:44
+Cleaned up opportunities.html, by removing old HTML code
+
 rayL -- 2020-06-10 11:20
 Create search/sort fxns for scholarships
 
+ahmedS -- 2020-06-10 11:31
+opportunities.html (opportunities bulletin) now begins to display actual opportunities
+Worked on formatting for individual.html 
+
+ahmedS -- 2020-06-10 11:57
+Formatted dates displayed on individual.html, through creation of dateconv.py
+
+ahmedS -- 2020-06-10 14:03
+Formatted dates displaying on opportunities.html, after creating function in dateconv.py
+
+ahmedS -- 2020-06-10 14:06
+Added default value of 0 to cost field in opportunity create form
+
+ahmedS -- 2020-06-10 14:11
+Made card spacing in opportunities.html a little nicer
+
+ahmedS -- 2020-06-10 14:28
+Made filter/show results button in sidebar on opportunities.html a little smaller
+
+ahmedS -- 2020-06-10 14:31
+Changed height of sidebar for cleaner layout on opportunities.html
+Fixed height of price filter in sidebar on opportunities.html
+
 rayL -- 2020-06-10 15:57
 Create search/sort fxns for resources
+
+ahmedS -- 2020-06-10 16:01
+Added favorite button (currently non-functional) to opportunity cards in opportunities.html
+Cleaned up logout button in navbar on top in template.html
+
+ahmedS -- 2020-06-10 16:17
+Retroactively edited devlog.txt with today's commits :/
+
+ahmedS -- 2020-06-10 17:12
+Added downward facing triangle to filter button to make purpose easier to understand in opportunities.html
+Edited devlog.txt
