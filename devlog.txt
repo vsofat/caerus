@@ -347,3 +347,7 @@ Cleaned up logout button in navbar on top in template.html
 
 ahmedS -- 2020-06-10 16:17
 Retroactively edited devlog.txt with today's commits :/
+
+ahmedS -- 2020-06-10 17:12
+Added downward facing triangle to filter button to make purpose easier to understand in opportunities.html
+Edited devlog.txt
