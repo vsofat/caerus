@@ -276,3 +276,6 @@ Style opportunity creation form
 
 ericL -- 2020-06-09 19:56
 Create scholarship creation form
+
+ericL -- 2020-06-09 20:01
+Conform resource creation routing to others

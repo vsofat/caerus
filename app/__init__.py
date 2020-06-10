@@ -221,7 +221,7 @@ def strtodate(string):
 @staffonly
 def createOpportunityRoute():
     if (request.method == 'GET'):
-        return render_template('create/createopportunity.html',
+        return render_template('create/opportunity.html',
                                user=users.getUserInfo(session['userid']))
     elif (request.method == 'POST'):
         links = list()
@@ -248,7 +248,7 @@ def createOpportunityRoute():
             'links': links
         })
         flash("Successfully created an opportunity", 'success')
-        return render_template('create/createopportunity.html',
+        return render_template('create/opportunity.html',
                                user=users.getUserInfo(session['userid']))
 
 
@@ -272,7 +272,7 @@ def scholarshipRoute():
 @staffonly
 def createScholarshipRoute():
     if (request.method == 'GET'):
-        return render_template('create/createscholarship.html',
+        return render_template('create/scholarship.html',
                                user=users.getUserInfo(session['userid']))
     elif (request.method == 'POST'):
         # links = list()
@@ -300,7 +300,7 @@ def createScholarshipRoute():
         # })
         if len(request.form['title']) > 0:
             flash("Successfully created a scholarship", 'success')
-        return render_template('create/createscholarship.html',
+        return render_template('create/scholarship.html',
                                user=users.getUserInfo(session['userid']))
 
 
@@ -315,7 +315,7 @@ def resourcesRoute():
 @app.route("/resources/create")
 @protected
 def resourceRoute():
-    return render_template("create/createResources.html",
+    return render_template("create/resource.html",
                            user=users.getUserInfo(session['userid']),
                            res=resources.getAllResources())
 
