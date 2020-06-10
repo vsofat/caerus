@@ -307,3 +307,6 @@ Fixed styling for the side bar to adjust to new changes
 
 rayL -- 2020-06-10 11:20
 Create search/sort fxns for scholarships
+
+rayL -- 2020-06-10 15:57
+Create search/sort fxns for resources
