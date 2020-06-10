@@ -282,3 +282,6 @@ Create scholarship creation form
 
 ericL -- 2020-06-09 20:01
 Conform resource creation routing to others
+
+ericL -- 2020-06-09 20:13
+Fix autopep styling issue

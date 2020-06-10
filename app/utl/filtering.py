@@ -5,7 +5,7 @@ def filterOpportunities(selectedFilters):
     """
     Parameters
     ----------
-    query: 
+    query:
     filters: a dictionary of filter type to filter values, where the filter types are: field, maximum price, grade, and gender
     ex: {field: ["ACADEMIC PROGRAMS", "ENGINEERING, MATH, & CS", "MEDICAL & LIFE SCIENCES"], maximumPrice: 500, grade: [
     "JUNIOR", "SENIOR"], gender: ["CO-ED", "FEMALE"]}
@@ -42,6 +42,7 @@ def filterOpportunities(selectedFilters):
     filteredOpportunities = opportunities.filter(*filters).all()
 
     return filteredOpportunities
+
 
 sort():
     model.query.sort_by().all()

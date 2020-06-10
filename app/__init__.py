@@ -1,15 +1,17 @@
-from flask import Flask, request, redirect, session, render_template, url_for, flash
-from flask_sqlalchemy import SQLAlchemy
-from config import Config
 import os
 import json
+import datetime
+
+from flask import Flask, request, redirect, session, render_template, url_for, flash
+from flask_sqlalchemy import SQLAlchemy
 import requests
 import functools
 import google.oauth2.credentials
 import google_auth_oauthlib.flow
 from googleapiclient.discovery import build
+
 from utl import models, opportunities, preferences, resources, saved, scholarships, users
-import datetime
+from config import Config
 
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 

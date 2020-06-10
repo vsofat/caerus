@@ -2,7 +2,8 @@ from .models import db, Scholarship, ScholarshipLink
 
 
 def getAllScholarships():
-    scholarships = Scholarship.query.order_by(Scholarship.datePosted.desc()).all()
+    scholarships = Scholarship.query.order_by(
+        Scholarship.datePosted.desc()).all()
     for scholarship in scholarships:
         links = ScholarshipLink.query.filter_by(
             scholarshipID=scholarship.scholarshipID
@@ -36,6 +37,7 @@ def createScholarship(body):
             scholarshipID=scholarship.scholarshipID, link=link)
         db.session.add(newLink)
     db.session.commit()
+
 
 def deleteScholarship(scholarshipID):
     Scholarship.query.filter_by(scholarshipID=scholarshipID).delete()
