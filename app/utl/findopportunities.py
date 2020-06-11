@@ -72,20 +72,36 @@ def filterSortOpportunities(baseQuery, filters, sort):
     opportunities = baseQuery.all()
     filteredOpportunities = []
 
+    if len(fieldFilters) == 0:
+        fieldFilters = ["Academic Programs", "Business & Jobs", "Community Service", "Govt & Law", "Leadership & Advocacy", "Museums & Art",
+                        "Parks, Zoos, & Nature", "Engineering, Math, & CS", "Medical & Life Sciences", "Literature", "Performing Arts", "Visual Arts"]
+
+    if maximumCostFilter == None:
+        maximumCostFilter = 100000
+
+    if len(gradeFilters == 0):
+        gradeFilters = ["9", "10", "11", "12"]
+
+    if len(genderFilters) == 0:
+        genderFilters = ["CO-ED", "MALE", "FEMALE"]
+
     for opportunity in opportunities:
         if (
             opportunity.field in fieldFilters
             and opportunity.cost < maximumCostFilter
             and opportunity.gender in genderFilters
         ):
-            OpportunityGrades = OpportunityGrade.query.filter_by(
-                opportunityID=opportunity.opportunityID
-            ).all()
-            grades = [grade.grade for grade in OpportunityGrades]
-            for gradeFilter in gradeFilters:
-                if gradeFilter in grades:
-                    filteredOpportunities.append(opportunity)
-                    break
+            if len(gradeFilters) == 0:
+                filteredOpportunities.append(opportunity)
+            else:
+                OpportunityGrades = OpportunityGrade.query.filter_by(
+                    opportunityID=opportunity.opportunityID
+                ).all()
+                grades = [grade.grade for grade in OpportunityGrades]
+                for gradeFilter in gradeFilters:
+                    if gradeFilter in grades:
+                        filteredOpportunities.append(opportunity)
+                        break
 
     ids = [
         filteredOpportunity.opportunityID
@@ -103,6 +119,19 @@ def filterSortOpportunities2(baseQuery, filters, sort):
     maximumCostFilter = filters["maximum-cost"]
     gradeFilters = filters["grade"]
     genderFilters = filters["gender"]
+
+    if len(fieldFilters) == 0:
+        fieldFilters = ["Academic Programs", "Business & Jobs", "Community Service", "Govt & Law", "Leadership & Advocacy", "Museums & Art",
+                        "Parks, Zoos, & Nature", "Engineering, Math, & CS", "Medical & Life Sciences", "Literature", "Performing Arts", "Visual Arts"]
+
+    if maximumCostFilter == None:
+        maximumCostFilter = 100000
+
+    if len(gradeFilters == 0):
+        gradeFilters = ["9", "10", "11", "12"]
+
+    if len(genderFilters) == 0:
+        genderFilters = ["CO-ED", "MALE", "FEMALE"]
 
     IDQuery = baseQuery.with_entities(Opportunity.opportunityID).filter(
         and_(
@@ -140,6 +169,19 @@ def filterSortOpportunities3(baseQuery, filters, sort):
     maximumCostFilter = filters["maximum-cost"]
     gradeFilters = filters["grade"]
     genderFilters = filters["gender"]
+
+    if len(fieldFilters) == 0:
+        fieldFilters = ["Academic Programs", "Business & Jobs", "Community Service", "Govt & Law", "Leadership & Advocacy", "Museums & Art",
+                        "Parks, Zoos, & Nature", "Engineering, Math, & CS", "Medical & Life Sciences", "Literature", "Performing Arts", "Visual Arts"]
+
+    if maximumCostFilter == None:
+        maximumCostFilter = 100000
+
+    if len(gradeFilters == 0):
+        gradeFilters = ["9", "10", "11", "12"]
+
+    if len(genderFilters) == 0:
+        genderFilters = ["CO-ED", "MALE", "FEMALE"]
 
     FirstQuery = baseQuery.filter(
         and_(
