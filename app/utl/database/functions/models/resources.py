@@ -1,4 +1,4 @@
-from .models import db, Resource
+from ....database.models.models import db, Resource
 
 
 def getAllResources():

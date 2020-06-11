@@ -1,4 +1,4 @@
-from .models import db, User
+from ....database.models.models import db, User
 
 
 def createUser(userID, email, name, imglink, userType, accessToken, refreshToken):

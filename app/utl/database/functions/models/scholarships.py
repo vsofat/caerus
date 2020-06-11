@@ -1,4 +1,4 @@
-from .models import db, Scholarship, ScholarshipLink
+from ....database.models.models import db, Scholarship, ScholarshipLink
 
 
 def getAllScholarships():

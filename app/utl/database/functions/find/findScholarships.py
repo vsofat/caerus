@@ -1,4 +1,4 @@
-from .models import db, Scholarship, ScholarshipLink
+from ..models import db, Scholarship, ScholarshipLink
 from sqlalchemy import or_
 
 

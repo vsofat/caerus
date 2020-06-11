@@ -1,4 +1,4 @@
-from .models import db, Opportunity, OpportunityGrade, OpportunityLink
+from ....database.models.models import db, Opportunity, OpportunityGrade, OpportunityLink
 
 
 def getAllOpportunities():
