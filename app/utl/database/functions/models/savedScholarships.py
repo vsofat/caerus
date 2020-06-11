@@ -1,4 +1,4 @@
-from ....database.models.models import db, SavedScholarship
+from utl.database.models.models import db, SavedScholarship
 from .scholarships import getScholarship
 
 

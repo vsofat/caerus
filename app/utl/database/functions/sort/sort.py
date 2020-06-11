@@ -1,4 +1,4 @@
-from .models import db, Opportunity, OpportunityGrade, OpportunityLink, Scholarship, ScholarshipLink, Resource
+from utl.database.models.models import db, Opportunity, OpportunityGrade, OpportunityLink, Scholarship, ScholarshipLink, Resource
 
 
 def sortOpportunities(sort):

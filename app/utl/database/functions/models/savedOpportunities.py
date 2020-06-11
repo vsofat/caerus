@@ -1,4 +1,4 @@
-from ....database.models.models import db, SavedOpportunity
+from utl.database.models.models import db, SavedOpportunity
 from .opportunities import getOpportunity
 
 
