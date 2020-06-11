@@ -23,12 +23,13 @@ def findResources(body):
 
 
 def sortResources(baseQuery, sort):
-    stringSortOptionToOrderByQuery = {
+    sortOptionQueries = {
         "dateposted-asc": Resource.datePosted.asc(),
         "dateposted-desc": Resource.datePosted.desc(),
     }
-    sortedResources = baseQuery.order_by(stringSortOptionToOrderByQuery[sort])
-    return sortResources
+    sortedResources = baseQuery.order_by(sortOptionQueries[sort])
+
+    return sortedResources
 
 
 def searchSortResources(search, sort):

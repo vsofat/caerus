@@ -30,20 +30,18 @@ def findOpportunities(body):
 
 
 def sortOpportunities(baseQuery, sort):
-    opportunities = []
-    if sort == "dateposted-asc":
-        opportunities = baseQuery.order_by(Opportunity.datePosted.asc()).all()
-    elif sort == "dateposted-desc":
-        opportunities = baseQuery.order_by(Opportunity.datePosted.desc()).all()
-    elif sort == "deadline-asc":
-        opportunities = baseQuery.order_by(Opportunity.deadline.asc()).all()
-    elif sort == "deadline-desc":
-        opportunities = baseQuery.order_by(Opportunity.deadline.desc()).all()
-    elif sort == "cost-asc":
-        opportunities = baseQuery.order_by(Opportunity.cost.asc()).all()
-    elif sort == "cost-desc":
-        opportunities = baseQuery.order_by(Opportunity.cost.desc()).all()
-    for opportunity in opportunities:
+    sortOptionQueries = {
+        "cost-asc": Opportunity.cost.asc(),
+        "cost-desc": Opportunity.cost.desc(),
+        "deadline-asc": Opportunity.deadline.asc(),
+        "deadline-desc": Opportunity.deadline.desc(),
+        "dateposted-asc": Opportunity.datePosted.asc(),
+        "dateposted-desc": Opportunity.datePosted.desc(),
+    }
+
+    sortedOpportunities = baseQuery.order_by(sortOptionQueries[sort]).all()
+
+    for opportunity in sortedOpportunities:
         grades = OpportunityGrade.query.filter_by(
             opportunityID=opportunity.opportunityID
         ).all()
@@ -52,7 +50,8 @@ def sortOpportunities(baseQuery, sort):
             opportunityID=opportunity.opportunityID
         ).all()
         opportunity.links = [link.link for link in links]
-    return opportunities
+
+    return sortedOpportunities
 
 
 def searchSortOpportunities(search, sort):
@@ -123,7 +122,8 @@ def filterSortOpportunities2(baseQuery, filters, sort):
             OpportunityGrade.grade.in_(gradeFilters),
         )
     )
-    filteredOpportunityIDs = [opportunity[0] for opportunity in filteredIDQuery]
+    filteredOpportunityIDs = [opportunity[0]
+                              for opportunity in filteredIDQuery]
 
     finalQuery = Opportunity.query.filter(
         Opportunity.opportunityID.in_(filteredOpportunityIDs)
@@ -152,7 +152,8 @@ def filterSortOpportunities3(baseQuery, filters, sort):
     filteredIDQuery = OpportunityGrade.query.with_entities(
         OpportunityGrade.opportunityID
     ).filter(OpportunityGrade.grade.in_(gradeFilters))
-    filteredOpportunityIDs = [opportunity[0] for opportunity in filteredIDQuery]
+    filteredOpportunityIDs = [opportunity[0]
+                              for opportunity in filteredIDQuery]
 
     SecondQuery = Opportunity.query.filter(
         Opportunity.opportunityID.in_(filteredOpportunityIDs)

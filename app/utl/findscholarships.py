@@ -23,7 +23,7 @@ def findScholarships(body):
 
 
 def sortScholarships(baseQuery, sort):
-    stringSortOptionToOrderByQuery = {
+    sortOptionQueries = {
         "amount-asc": Scholarship.amount.asc(),
         "amount-desc": Scholarship.amount.desc(),
         "deadline-asc": Scholarship.deadline.asc(),
@@ -32,7 +32,13 @@ def sortScholarships(baseQuery, sort):
         "dateposted-desc": Scholarship.datePosted.desc(),
     }
 
-    sortedScholarships = baseQuery.order_by(stringSortOptionToOrderByQuery[sort]).all()
+    sortedScholarships = baseQuery.order_by(sortOptionQueries[sort]).all()
+
+    for scholarship in sortedScholarships:
+        links = ScholarshipLink.query.filter_by(
+            scholarshipID=scholarship.scholarshipID
+        ).all()
+        scholarship.links = [link.link for link in links]
 
     return sortedScholarships
 
