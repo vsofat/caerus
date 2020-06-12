@@ -42,22 +42,3 @@ def filterOpportunities(selectedFilters):
     filteredOpportunities = opportunities.filter(*filters).all()
 
     return filteredOpportunities
-
-
-sort():
-    model.query.sort_by().all()
-sortsearch():
-    model.query.filter(model.title.like(search)).sort_by().all()
-filtersort():
-
-filtersortsearch():
-
-if filters.len == 0:
-    if search == '':
-        sort()
-    sortsearch()
-if search == '':
-    filtersort()
-filtersortsearch()
-
-search -> filter -> sort

@@ -1,4 +1,4 @@
-{% extends "template.html" %}
+ {% extends "template.html" %}
 
 {% set active_page = active_page|default('resources') -%}
 
@@ -12,9 +12,9 @@
     <div class="col-sm">
       <div class="form-group">
         <select class="form-control" method="post" id="sort">
-          <option type="hidden"> Select a Sort </option>
-          <option value="dateposted-asc" id="dateposted-asc"> Date Created (↑)</option>
+          <!-- <option type="hidden"> Select a Sort </option> -->
           <option value="dateposted-desc" id="dateposted-desc">Date Created (↓)</option>
+          <option value="dateposted-asc" id="dateposted-asc"> Date Created (↑)</option>
         </select>
       </div>
     </div>
