@@ -10,7 +10,7 @@ import google.oauth2.credentials
 import google_auth_oauthlib.flow
 from googleapiclient.discovery import build
 
-from utl import models, opportunities, preferences, resources, saved, scholarships, users
+from utl import models, opportunities, preferences, resources, saved, scholarships, users, dateconv
 from config import Config
 
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
@@ -56,6 +56,10 @@ def staffonly(f):
             flash("You are not authorized!", 'error')
             return redirect(url_for('root'))
     return wrapper
+
+
+def strtodate(string):
+    return datetime.datetime.strptime(string, '%Y-%m-%d') if len(string) > 0 else None
 
 
 def credentials_to_dict(credentials):
@@ -200,22 +204,18 @@ def logout():
 def opportunitiesRoute():
     return render_template("view/opportunities.html",
                            user=users.getUserInfo(session['userid']),
-                           opportunityList=opportunities.getAllOpportunities()
+                           opportunityList=opportunities.getAllOpportunities(),
+                           date=dateconv.allDateDisplay()
                            )
 
 
 @app.route("/opportunities/<opportunityID>")
 @protected
 def opportunityRoute(opportunityID):
-    return render_template("view/individual.html", opp=opportunities.getOpportunity(opportunityID)
+    return render_template("view/individual.html",
+                            opp=opportunities.getOpportunity(opportunityID),
+                            date=dateconv.dateDisplay(opportunityID)
                            )
-
-
-def strtodate(string):
-    if len(string) > 0:
-        return datetime.datetime.strptime(string, '%Y-%m-%d')
-    else:
-        return None
 
 
 @app.route("/opportunities/create", methods=['GET', 'POST'])
@@ -249,7 +249,7 @@ def createOpportunityRoute():
             'grades': grades,
             'links': links
         })
-        flash("Successfully created an opportunity", 'success')
+        flash("Successfully posted an opportunity", 'success')
         return render_template('create/opportunity.html',
                                user=users.getUserInfo(session['userid']))
 
@@ -277,31 +277,21 @@ def createScholarshipRoute():
         return render_template('create/scholarship.html',
                                user=users.getUserInfo(session['userid']))
     elif (request.method == 'POST'):
-        # links = list()
-        # grades = list()
-        # f = request.form
-        # for key in f.keys():
-        #     if 'link' in key:
-        #         links.append(request.form[key])
-        #     if 'grades' == key:
-        #         grades = request.form[key].split(',')
-        # location = request.form['location']
-        # location = location if len(location) > 0 else None
-        # opportunities.createOpportunity({
-        #     'title': request.form['title'],
-        #     'description': request.form['description'],
-        #     'field': request.form['field'],
-        #     'gender': request.form['gender'],
-        #     'location': location,
-        #     'startDate': strtodate(request.form['start']),
-        #     'endDate': strtodate(request.form['end']),
-        #     'deadline': strtodate(request.form['deadline']),
-        #     'cost': request.form['cost'],
-        #     'grades': grades,
-        #     'links': links
-        # })
+        links = list()
+        f = request.form
+        for key in f.keys():
+            if 'link' in key:
+                links.append(request.form[key])
+        scholarships.createScholarship({
+            'title': request.form['title'],
+            'description': request.form['description'],
+            'amount': request.form['amount'],
+            'deadline': strtodate(request.form['deadline']),
+            'eligibility': request.form['eligibility'],
+            'links': links
+        })
         if len(request.form['title']) > 0:
-            flash("Successfully created a scholarship", 'success')
+            flash("Successfully posted a scholarship", 'success')
         return render_template('create/scholarship.html',
                                user=users.getUserInfo(session['userid']))
 
@@ -314,12 +304,24 @@ def resourcesRoute():
                            res=resources.getAllResources())
 
 
-@app.route("/resources/create")
+@app.route("/resources/create", methods=['GET', 'POST'])
 @protected
-def resourceRoute():
-    return render_template("create/resource.html",
-                           user=users.getUserInfo(session['userid']),
-                           res=resources.getAllResources())
+def createResourceRoute():
+    if (request.method == 'GET'):
+        return render_template("create/resource.html",
+                               user=users.getUserInfo(session['userid']),
+                               )
+    elif (request.method == 'POST'):
+        resources.createResource({
+            'title': request.form['title'],
+            'description': request.form['description'],
+            'link': request.form['link']
+        })
+        if len(request.form['title']) > 0:
+            flash("Successfully posted a resource", 'success')
+        return render_template("create/resource.html",
+                               user=users.getUserInfo(session['userid']),
+                               )
 
 
 @app.route("/favorites")

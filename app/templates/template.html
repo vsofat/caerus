@@ -61,7 +61,7 @@
                <div class="col-4 mt-auto" style="padding-right: 0;">
                     <span class="float-right" style="padding: 0; margin: 0;">
                          <b>{{ user.name }}</b> &emsp;
-                         <img style="border-radius: 50%; height: 5vw; width: auto;" src="{{ user.imglink }}">
+                         <img style="border-radius: 50%; height: 50px; width: auto;" src="{{ user.imglink }}">
                     </span>
                </div>
           </div>
@@ -79,12 +79,14 @@
                {% endfor %}
                <a
                     style="float: right"
+                    class="text-danger"
                     href="/logout"
                     {% if "create" in request.url %}
                     tabindex="-1"
+                    
                     {% endif %}
                     >Log out</a></span>
-          </span>
+
           <br>
           <br>
           {% endblock %}
