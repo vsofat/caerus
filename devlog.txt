@@ -369,3 +369,6 @@ Retroactively edited devlog.txt with today's commits :/
 ahmedS -- 2020-06-10 17:12
 Added downward facing triangle to filter button to make purpose easier to understand in opportunities.html
 Edited devlog.txt
+
+rayL -- 2020-06-13 14:44
+Create search resources tests

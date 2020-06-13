@@ -1,6 +1,7 @@
 import unittest
 
 from app.__init__ import app, db as _db, create_app
+# Resources must be imported without prefix "app.", or else value comparisons with "==" with FAIL ("<class 'utl....ls.Resource'>" == "<class 'app....ls.Resource'>")
 from utl.database.models.models import Resource
 from app.utl.database.functions.search.searchResources import searchResources
 
