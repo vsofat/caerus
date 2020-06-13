@@ -369,3 +369,7 @@ Retroactively edited devlog.txt with today's commits :/
 ahmedS -- 2020-06-10 17:12
 Added downward facing triangle to filter button to make purpose easier to understand in opportunities.html
 Edited devlog.txt
+
+vishwaaS -- 2020-06-13 15:00
+Added sidebars/sidenavs to scholarships and resources pages
+Adjusted sort names to makes them easier to understand for users
