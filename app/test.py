@@ -10,6 +10,7 @@ class Test(unittest.TestCase):
         self.app = app.test_client()
 
     def test_home(self):
+        print("GET request to /route")
         return self.app.get('/', follow_redirects=True)
 
     def test_logout(self):

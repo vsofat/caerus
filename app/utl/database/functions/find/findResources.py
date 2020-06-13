@@ -1,4 +1,4 @@
-from .models import db, Resource
+from utl.database.models.models import db, Resource
 from sqlalchemy import or_
 
 

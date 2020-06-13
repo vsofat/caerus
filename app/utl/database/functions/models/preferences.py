@@ -1,6 +1,6 @@
 from copy import deepcopy
 
-from .models import (
+from utl.database.models.models import (
     db,
     CostPreference,
     FieldPreference,

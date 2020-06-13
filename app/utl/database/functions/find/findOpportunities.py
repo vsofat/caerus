@@ -1,4 +1,4 @@
-from .models import db, Opportunity, OpportunityGrade, OpportunityLink
+from utl.database.models.models import db, Opportunity, OpportunityGrade, OpportunityLink
 from sqlalchemy import and_, or_, in_
 
 
