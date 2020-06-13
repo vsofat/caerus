@@ -371,4 +371,5 @@ Added downward facing triangle to filter button to make purpose easier to unders
 Edited devlog.txt
 
 rayL -- 2020-06-13 14:44
-Create search resources tests
+Setup unit testing db connection
+Create search resources tests (test_searching_existing_resources, test_searching_nonexistent_resources, test_ordering_of_search_resources_results)
