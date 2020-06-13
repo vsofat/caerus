@@ -3,7 +3,7 @@ import pytest
 from sqlalchemy import event
 from sqlalchemy.orm import sessionmaker
 
-from app.__init__ import app, db as _db, create_app
+from __init__ import app, db as _db, create_app
 
 
 class TestConfig:
@@ -13,7 +13,7 @@ class TestConfig:
     WTF_CSRF_ENABLED = False
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="function")
 def app(request):
     """
     Returns session-wide application.
@@ -21,7 +21,7 @@ def app(request):
     return create_app(TestConfig)
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="function")
 def db(app, request):
     """
     Returns session-wide initialised database.
