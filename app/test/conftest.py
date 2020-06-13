@@ -13,7 +13,7 @@ class TestConfig:
     WTF_CSRF_ENABLED = False
 
 
-@pytest.fixture(scope="function")
+@pytest.fixture(scope="session")
 def app(request):
     """
     Returns session-wide application.
@@ -21,7 +21,7 @@ def app(request):
     return create_app(TestConfig)
 
 
-@pytest.fixture(scope="function")
+@pytest.fixture(scope="session")
 def db(app, request):
     """
     Returns session-wide initialised database.

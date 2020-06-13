@@ -373,3 +373,6 @@ Edited devlog.txt
 rayL -- 2020-06-13 14:44
 Setup unit testing db connection
 Create search resources tests (test_searching_existing_resources, test_searching_nonexistent_resources, test_ordering_of_search_resources_results)
+
+rayL -- 2020-06-13 17:08
+Create search scholarships tests
