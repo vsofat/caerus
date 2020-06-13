@@ -292,6 +292,18 @@ Changed frontend layout for opportunities.html to have a side bar instead of but
 vishwaaS -- 2020-06-09 20:30
 Worked with Ahmed remotely to change frontend layout for opportunities.html to have a side bar instead of buttons in a span on autopep
 
+ericL -- 2020-06-09 20:36
+Conform resource creation form with other forms
+
+ericL -- 2020-06-09 21:02
+Create opportunity post test
+
+ericL -- 2020-06-09 21:13
+Link scholarship form creation to database
+
+ericL -- 2020-06-09 21:23
+Link resource form creation to database
+
 vishwaaS -- 2020-06-10 00:30
 Added a scrollable thingy with overflow for a div within the sidebar to show user all of filtering options
 
@@ -310,7 +322,7 @@ Added floats to cost field in opportunity create form
 vishwaaS -- 2020-06-10 10:32
 Added a collapsable section for filtering
 Implemented scrollable overflow div within collapsable
-Fixed styling for the side bar to adjust to new changes 
+Fixed styling for the side bar to adjust to new changes
 
 ahmedS -- 2020-06-10 10:41
 Re-added cost field requirement in opportunity create form
@@ -323,7 +335,7 @@ Create search/sort fxns for scholarships
 
 ahmedS -- 2020-06-10 11:31
 opportunities.html (opportunities bulletin) now begins to display actual opportunities
-Worked on formatting for individual.html 
+Worked on formatting for individual.html
 
 ahmedS -- 2020-06-10 11:57
 Formatted dates displayed on individual.html, through creation of dateconv.py
