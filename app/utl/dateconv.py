@@ -1,6 +1,7 @@
 from datetime import datetime
 
-from .models import db, Opportunity
+from .database.models.models import Opportunity
+# from models import db, Opportunity
 
 def allDateDisplay():
      opportunities = Opportunity.query.order_by(Opportunity.datePosted.desc()).all()
