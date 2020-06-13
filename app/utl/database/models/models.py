@@ -27,8 +27,7 @@ class Opportunity(db.Model):
     endDate = db.Column(db.DateTime)
     deadline = db.Column(db.DateTime)
     cost = db.Column(db.Float, nullable=False)
-    datePosted = db.Column(db.DateTime, nullable=False,
-                           default=datetime.utcnow)
+    datePosted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
 
 class OpportunityGrade(db.Model):
@@ -51,8 +50,7 @@ class Scholarship(db.Model):
     amount = db.Column(db.Float, nullable=False)
     deadline = db.Column(db.DateTime, nullable=False)
     eligibility = db.Column(db.String, nullable=False)
-    datePosted = db.Column(db.DateTime, nullable=False,
-                           default=datetime.utcnow)
+    datePosted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
 
 class ScholarshipLink(db.Model):
@@ -82,8 +80,10 @@ class Resource(db.Model):
     title = db.Column(db.String, nullable=False)
     description = db.Column(db.Text, nullable=False)
     link = db.Column(db.String, nullable=False)
-    datePosted = db.Column(db.DateTime, nullable=False,
-                           default=datetime.utcnow)
+    datePosted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
+    def __str__(self):
+        return f"resourceID: {self.resourceID}, title: {self.title}, description: {self.description}, link: {self.link}, datePosted:{self.datePosted}"
 
 
 class FieldPreference(db.Model):
