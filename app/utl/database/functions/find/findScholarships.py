@@ -12,15 +12,16 @@ def sortScholarships(baseQuery, sort):
         "dateposted-desc": Scholarship.datePosted.desc(),
     }
 
-    sortedScholarships = baseQuery.order_by(sortOptionQueries[sort]).all()
+    # default sort option
+    sortOptionQuery = "dateposted-asc"
 
-    for scholarship in sortedScholarships:
-        links = ScholarshipLink.query.filter_by(
-            scholarshipID=scholarship.scholarshipID
-        ).all()
-        scholarship.links = [link.link for link in links]
+    # Check if sort is a truey value (i.e. not None or "") and is a key in sortOptionQueries
+    if sort and sort in sortOptionQueries.keys():
+        sortOptionQuery = sort
 
-    return sortedScholarships
+    sortedScholarshipsQuery = baseQuery.order_by(sortOptionQueries[sortOptionQuery])
+
+    return sortedScholarshipsQuery
 
 
 def searchScholarships(baseQuery, search):
@@ -54,6 +55,12 @@ def findScholarships(body):
     if search == "":
         locatedScholarships = sortScholarships(baseQuery, sort).all()
     else:
-        locatedScholarships = sortScholarships(searchScholarships(baseQuery), sort).all()
+        locatedScholarships = sortScholarships(searchScholarships(baseQuery, search), sort).all()
+
+    for scholarship in locatedScholarships:
+        links = ScholarshipLink.query.filter_by(
+            scholarshipID=scholarship.scholarshipID
+        ).all()
+        scholarship.links = [link.link for link in links]
 
     return body, locatedScholarships

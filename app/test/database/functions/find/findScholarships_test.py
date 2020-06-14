@@ -112,7 +112,7 @@ def test_searchScholarships(session):
 
     # arrange
     tScholarship1 = Scholarship(title="ff", description="faf", amount=4.20, deadline=datetime.today(), eligibility="male, female")
-    tScholarship2 = Scholarship(title="gg", description="gag", amount=4.20, deadline=datetime.today(), eligibility="male, female")
+    tScholarship2 = Scholarship(title="ff", description="gag", amount=4.20, deadline=datetime.today(), eligibility="male, female")
     tScholarship3 = Scholarship(title="hh", description="hah", amount=4.20, deadline=datetime.today(), eligibility="male, female")
     tScholarshipsList = [tScholarship1, tScholarship2, tScholarship3]
     session.add(tScholarship1)
@@ -164,7 +164,7 @@ def test_findScholarships(session):
 
     # arrange
     tScholarship1 = Scholarship(title="ff", description="faf", amount=4.20, deadline=datetime.today(), eligibility="male, female")
-    tScholarship2 = Scholarship(title="gg", description="gag", amount=4.20, deadline=datetime.today(), eligibility="male, female")
+    tScholarship2 = Scholarship(title="ff", description="gag", amount=4.20, deadline=datetime.today(), eligibility="male, female")
     tScholarship3 = Scholarship(title="hh", description="hah", amount=4.20, deadline=datetime.today(), eligibility="male, female")
     tScholarshipsList = [tScholarship1, tScholarship2, tScholarship3]
     session.add(tScholarship1)
