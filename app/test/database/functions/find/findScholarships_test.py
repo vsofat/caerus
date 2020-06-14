@@ -51,23 +51,6 @@ def test_sortScholarships(session):
         reverse=True,
     )
 
-    tScholarshipLink1 = ScholarshipLink(scholarshipID=1, link="https:f.f")
-    tScholarshipLink2 = ScholarshipLink(scholarshipID=1, link="https:f.f")
-    tScholarshipLink3 = ScholarshipLink(scholarshipID=2, link="https:g.g")
-    tScholarshipLink4 = ScholarshipLink(scholarshipID=2, link="https:g.g")
-    tScholarshipLink5 = ScholarshipLink(scholarshipID=3, link="https:h.h")
-    tScholarshipLink6 = ScholarshipLink(scholarshipID=3, link="https:h.h")
-
-    session.add(tScholarshipLink1)
-    session.add(tScholarshipLink2)
-    session.add(tScholarshipLink3)
-    session.add(tScholarshipLink4)
-    session.add(tScholarshipLink5)
-    session.add(tScholarshipLink6)
-    session.commit()
-
-    print(sortScholarships(session.query(Scholarship, ScholarshipLink).filter(Scholarship.scholarshipID == ScholarshipLink.scholarshipID), "dateposted-asc").all())
-
     # act
     # dateposted-asc
     sortedScholarshipsQueryByDatePostedAsc = sortScholarships(
@@ -174,6 +157,22 @@ def test_findScholarships(session):
     search1 = body1["search"]
     sort1 = body1["sort"]
 
+    # Scholarship links
+    tScholarshipLink1 = ScholarshipLink(scholarshipID=1, link="https:f.f")
+    tScholarshipLink2 = ScholarshipLink(scholarshipID=1, link="https:g.g")
+    tScholarshipLink3 = ScholarshipLink(scholarshipID=2, link="https:h.h")
+    tScholarshipLink4 = ScholarshipLink(scholarshipID=2, link="https:i.i")
+    tScholarshipLink5 = ScholarshipLink(scholarshipID=3, link="https:j.j")
+    tScholarshipLink6 = ScholarshipLink(scholarshipID=3, link="https:k.k")
+
+    session.add(tScholarshipLink1)
+    session.add(tScholarshipLink2)
+    session.add(tScholarshipLink3)
+    session.add(tScholarshipLink4)
+    session.add(tScholarshipLink5)
+    session.add(tScholarshipLink6)
+    session.commit()
+
     # act
     locatedScholarships1 = findScholarships(body1)
     tLocatedScholarships1 = sortScholarships(searchScholarships(baseQuery, search1), sort1).all()
@@ -181,3 +180,6 @@ def test_findScholarships(session):
     # assert
     assert locatedScholarships1 == (body1, tLocatedScholarships1)
     assert tLocatedScholarships1 == [tScholarship1, tScholarship2]
+    # test links
+    assert locatedScholarships1[1][0].links == ["https:f.f", "https:g.g"]
+    assert locatedScholarships1[1][1].links == ["https:h.h", "https:i.i"]

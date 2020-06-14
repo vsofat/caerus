@@ -28,7 +28,7 @@ def searchResources(baseQuery, search):
     search = search.strip()
     searchQueryString = "%" + search + "%"
     
-    searchQuery = Resource.query.filter(
+    searchQuery = baseQuery.filter(
         or_(Resource.title.ilike(searchQueryString), Resource.description.ilike(searchQueryString))
     )
 
