@@ -433,3 +433,6 @@ Fix preferred opportunities retrieval
 
 ericL -- 2020-06-14 17:16
 Move email information to json file
+
+ericL -- 2020-06-14 17:57
+Add links to website in email

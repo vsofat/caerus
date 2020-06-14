@@ -3,6 +3,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import json
 import os
+import datetime
 
 from utl.database.functions.models.preferences import getPreferredOpportunitiesForAllUsers
 from utl.database.models import models
@@ -11,11 +12,14 @@ from __init__ import app
 db = models.db
 
 path = os.path.dirname(__file__) + "/../gmail.json"
-f = json.load(path)
+f = open(path)
+f = json.load(f)
 
 user = f['gmail']
 pwd = f['password']
 
+intro = "Here are all the new opportunities posted on Caerus within the past week that you might be interested in:"
+baseurl = "http://127.0.0.1:5000"
 
 class Notifier:
     def __init__(self, username, password, host='smtp.gmail.com', port=587):
@@ -27,18 +31,18 @@ class Notifier:
         self.server.starttls()
         self.server.login(username, password)
 
-    def sendmail(self, recipients, subject, body):
+    def sendmail(self, recipients, subject, html):
         for recipient in recipients:
             msg = MIMEMultipart()
             msg['From'] = 'caerus.stuy@gmail.com'
             msg['To'] = recipient
-
             msg['Subject'] = subject
-            msg.attach(MIMEText(body, 'plain'))
+
+            msg.attach(MIMEText(html, "html"))
+
             self.server.sendmail(self.username, recipient, msg.as_string())
 
 
-# notifier.sendmail(['elau00@stuy.edu'], 'Special Delivery', "My name is my name.")
 # https://support.google.com/mail/answer/7126229?p=BadCredentials&visit_id=637267656946578056-6078978&rd=2#cantsignin
 # https://www.digitalocean.com/community/tutorials/how-to-use-cron-to-automate-tasks-ubuntu-1804
 # https://realpython.com/python-send-email/
@@ -49,4 +53,20 @@ if __name__ == "__main__":
         db.create_all()
         info = getPreferredOpportunitiesForAllUsers()
         notifier = Notifier(user, pwd)
-        print(info)
+        for user in info.keys():
+            opps = info[user]
+            if len(opps) > 0:
+                html = f"""
+                <html>
+                    <body>
+                        <p>{intro}</p><br>
+                """
+                for opp in opps:
+                    html += f"""
+                        <b><a href="{baseurl}/opportunities/{opp.opportunityID}">{opp.title}</a></b>
+                    """
+                html += """
+                    </body>
+                </html>
+                """
+                notifier.sendmail([user], f"Caerus Weekly Update -- {datetime.datetime.now().date().isoformat()}", html)
