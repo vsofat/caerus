@@ -56,8 +56,7 @@ def test_filterOpportunities(session):
     session.add(tOpportunityLink6)
     session.commit()
 
-    orFilters = [or_(Opportunity.field == "Academic Programs", Opportunity.field == "Business & Jobs"), Opportunity.cost <= 500, Opportunity.opportunityID == OpportunityGrade.opportunityID, OpportunityGrade.grade == 12, or_(Opportunity.gender == "CO-ED")]
+    orFilters = [or_(Opportunity.field == "Academic Programs", Opportunity.field == "Business & Jobs"), Opportunity.cost <= 500, Opportunity.opportunityID == OpportunityGrade.opportunityID, or_(OpportunityGrade.grade == 12, OpportunityGrade.grade == 10), or_(Opportunity.gender == "CO-ED")]
     print(Opportunity.query.filter(and_(*orFilters)))
     print(Opportunity.query.filter(and_(*orFilters)).all())
-    print(Opportunity.query.filter().all())
     assert False

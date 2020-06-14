@@ -390,3 +390,40 @@ Created getPreferredOpportunities and replaced call to getAllPreferences in getA
 
 rayL -- 2020-06-14 01:04
 Test find scholarships
+
+ericL -- 2020-06-14 05:24
+Fix refinement forms for middleware operations
+
+ericL -- 2020-06-14 05:48
+Implement finding functions in middleware
+
+ericL -- 2020-06-14 06:18
+Make minor adjustments to opportunity finding functions
+
+ericL -- 2020-06-14 06:44
+Fix inconsistencies in form queries
+
+ericL -- 2020-06-14 07:17
+Fix form requirements and queries
+
+ericL -- 2020-06-14 07:26
+Create static fields list
+
+ericL -- 2020-06-14 07:48
+Add more Jinja templating and form persistence
+
+ericL -- 2020-06-14 08:08
+Create more Jinja templates for opportunity form
+
+ericL -- 2020-06-14 08:13
+Complete opportunity form persistence
+Add form persistence to scholarships and resources
+
+ericL -- 2020-06-14 08:55
+Create basic preferences page
+
+ericL -- 2020-06-14 09:16
+Link preferences form to database
+
+ericL -- 2020-06-14 09:40
+Add form persistence to preferences page

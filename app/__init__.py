@@ -21,6 +21,11 @@ from utl.database.functions.models import (
     scholarships,
     users,
 )
+from utl.database.functions.find import (
+    findOpportunities,
+    findScholarships,
+    findResources
+)
 from config import Config
 
 os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
@@ -117,7 +122,8 @@ def root():
                 "scopes": SCOPES,
             }
         )
-        users.updateTokens(userid, credentials.token, credentials.refresh_token)
+        users.updateTokens(userid, credentials.token,
+                           credentials.refresh_token)
         return redirect(url_for("opportunitiesRoute"))
     else:
         return render_template("landing.html")
@@ -182,7 +188,8 @@ def oauthcallback():
         return redirect(url_for("root"))
 
     if users.userExists(userid):
-        users.updateTokens(userid, credentials.token, credentials.refresh_token)
+        users.updateTokens(userid, credentials.token,
+                           credentials.refresh_token)
     else:
         users.createUser(
             userid,
@@ -221,15 +228,44 @@ def logout():
     return redirect(url_for("root"))
 
 
-@app.route("/opportunities")
+@app.route("/opportunities", methods=['GET', 'POST'])
 @protected
 def opportunitiesRoute():
-    return render_template(
-        "view/opportunities.html",
-        user=users.getUserInfo(session["userid"]),
-        opportunityList=opportunities.getAllOpportunities(),
-        date=dateconv.allDateDisplay(),
-    )
+    if (request.method == 'GET'):
+        return render_template(
+            "view/opportunities.html",
+            user=users.getUserInfo(session["userid"]),
+            opportunityList=opportunities.getAllOpportunities(),
+            date=dateconv.allDateDisplay(),
+        )
+    elif (request.method == 'POST'):
+        f = request.form
+        maxCost = f['maximum-cost']
+        body = {
+            'search': f['search'],
+            'sort': f['sort'],
+            'filters': {
+                'field': list(),
+                'maximum-cost': maxCost if maxCost != '' else None,
+                'grade': list(),
+                'gender': list()
+            }
+        }
+        for k in f.keys():
+            if 'field' in k:
+                body['filters']['field'].append(f[k])
+            if 'grade' in k:
+                body['filters']['grade'].append(f[k])
+            if 'gender' in k:
+                body['filters']['gender'].append(f[k])
+        body, opps = findOpportunities.findOpportunities(body)
+        return render_template(
+            "view/opportunities.html",
+            user=users.getUserInfo(session["userid"]),
+            opportunityList=opps,
+            body=body,
+            date=dateconv.allDateDisplay(),
+        )
 
 
 @app.route("/opportunities/<opportunityID>")
@@ -240,13 +276,6 @@ def opportunityRoute(opportunityID):
         opp=opportunities.getOpportunity(opportunityID),
         date=dateconv.dateDisplay(opportunityID),
     )
-
-
-def strtodate(string):
-    if len(string) > 0:
-        return datetime.datetime.strptime(string, "%Y-%m-%d")
-    else:
-        return None
 
 
 @app.route("/opportunities/create", methods=["GET", "POST"])
@@ -289,14 +318,25 @@ def createOpportunityRoute():
         )
 
 
-@app.route("/scholarships")
+@app.route("/scholarships", methods=['GET', 'POST'])
 @protected
 def scholarshipsRoute():
-    return render_template(
-        "view/scholarships.html",
-        user=users.getUserInfo(session["userid"]),
-        scholars=scholarships.getAllScholarships(),
-    )
+    if (request.method == 'GET'):
+        return render_template(
+            "view/scholarships.html",
+            user=users.getUserInfo(session["userid"]),
+            scholars=scholarships.getAllScholarships(),
+        )
+    elif (request.method == 'POST'):
+        f = request.form
+        body = {'search': f['search'], 'sort': f['sort']}
+        body, scholars = findScholarships.findScholarships(body)
+        return render_template(
+            "view/scholarships.html",
+            user=users.getUserInfo(session["userid"]),
+            body=body,
+            scholars=scholars,
+        )
 
 
 @app.route("/scholarships/<scholarshipID>")
@@ -332,14 +372,25 @@ def createScholarshipRoute():
                                user=users.getUserInfo(session['userid']))
 
 
-@app.route("/resources")
+@app.route("/resources", methods=['GET', 'POST'])
 @protected
 def resourcesRoute():
-    return render_template(
-        "view/resources.html",
-        user=users.getUserInfo(session["userid"]),
-        res=resources.getAllResources(),
-    )
+    if (request.method == 'GET'):
+        return render_template(
+            "view/resources.html",
+            user=users.getUserInfo(session["userid"]),
+            res=resources.getAllResources(),
+        )
+    elif (request.method == 'POST'):
+        f = request.form
+        body = {'search': f['search'], 'sort': f['sort']}
+        body, res = findResources.findResources(body)
+        return render_template(
+            "view/resources.html",
+            body=body,
+            user=users.getUserInfo(session["userid"]),
+            res=res,
+        )
 
 
 @app.route("/resources/create", methods=['GET', 'POST'])
@@ -370,12 +421,37 @@ def favoritesRoute():
     )
 
 
-@app.route("/preferences")
+@app.route("/preferences", methods=['GET', 'POST'])
 @protected
 def preferencesRoute():
-    return render_template(
-        "view/preferences.html", user=users.getUserInfo(session["userid"])
-    )
+    if (request.method == 'GET'):
+        prefs = preferences.getAllPreferences(session['userid'])
+        keys = prefs.keys()
+        for key in keys:
+            for i in range(len(prefs[key])):
+                prefs[key][i] = prefs[key][i]['value']
+        return render_template(
+            "view/preferences.html", user=users.getUserInfo(session["userid"]), prefs=prefs
+        )
+    elif (request.method == 'POST'):
+        body = {
+            'userID': session['userid'],
+            'preferences': list()
+        }
+        f = request.form
+        maxCost = f['maximum-cost']
+        if maxCost != '':
+            body['preferences'].append({'type': 'COST_PREFERENCE', 'value': float(maxCost)})
+        for key in f.keys():
+            if 'field' in key:
+                body['preferences'].append({'type': 'FIELD_PREFERENCE', 'value': f[key]})
+            if 'grade' in key:
+                body['preferences'].append({'type': 'GRADE_PREFERENCE', 'value': f[key]})
+            if 'gender' in key:
+                body['preferences'].append({'type': 'GENDER_PREFERENCE', 'value': f[key]})
+        preferences.createAllPreferences(body)
+        flash('Preferences have been set', 'success')
+        return redirect(url_for('preferencesRoute'))
 
 
 @app.route("/dumb")

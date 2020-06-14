@@ -10,7 +10,6 @@ class Test(unittest.TestCase):
         self.app = app.test_client()
 
     def test_home(self):
-        print("GET request to /route")
         return self.app.get('/', follow_redirects=True)
 
     def test_logout(self):
@@ -34,7 +33,7 @@ class Test(unittest.TestCase):
             'link0': 'google.com',
             'link1': 'bing.com'
         })
-        self.assertEquals(req.status_code, 302)
+        self.assertEqual(req.status_code, 302)
 
 
 if __name__ == "__main__":

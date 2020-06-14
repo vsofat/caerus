@@ -100,7 +100,7 @@ def createGradePreference(userID, grade):
 
 # Get All
 def getAllGradePreferences(userID):
-    GradePreferences = FieldPreference.query.filter_by(userID=userID).all()
+    GradePreferences = GradePreference.query.filter_by(userID=userID).all()
     GradePreferencesArr = []
     for gradePreference in GradePreferences:
         gradePreferenceDict = {"type": GRADE_PREFERENCE,
@@ -145,7 +145,7 @@ def createAllPreferences(body):
     [{type: "COST_PREFERENCE", value: 500}, {type: "GENDER_PREFERENCE",
     value: "FEMALE"}].
     """
-    userID = body.userID
+    userID = body['userID']
 
     # Delete one to many rows in field, gender, and grade tables with a given userID, so that updated rows can be created
     # Since we have a different updating mechanism for CostPreference, it is taken care of in the createPreference function.
@@ -154,8 +154,8 @@ def createAllPreferences(body):
     GradePreference.query.filter_by(userID=userID).delete()
 
     # Create a preference for each of the given preferences
-    for preference in body.preferences:
-        createPreference(userID, preference.type, preference.value)
+    for preference in body['preferences']:
+        createPreference(userID, preference['type'], preference['value'])
 
 
 def getAllPreferences(userID):

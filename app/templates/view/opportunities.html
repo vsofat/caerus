@@ -4,86 +4,116 @@
 
 {% block title %}Opportunities{% endblock %}
 
+{% set sort_options = [
+  ('dateposted-desc', 'Date Created (Newest - Oldest)'),
+  ('dateposted-asc', 'Date Created (Oldest - Newest)'),
+  ('deadline-desc', 'Deadline (Least Recent - Most Recent)'),
+  ('deadline-asc', 'Deadline (Most Recent - Least Recent)'),
+  ('cost-asc', 'Price ($ - $$$$)'),
+  ('cost-desc', 'Price ($$$$ - $)')
+  ] %}
+
 {% block body %}
 
 <!-- SIDENAV -->
 <div class="sidenav">
-  <form class="w-100" method="post">
+  <form class="w-100" action="/opportunities" method="POST">
     <h5> <b> Refine Results </b> </h5> <hr>
-    <input style="margin-bottom: 2vh;" class="form-control" type="search" placeholder="Search" aria-label="Search">
-    <select style="margin-bottom: 2vh;" class="form-control" method="post" id="sort">
-        <!-- <option type="hidden" value="default">Select a sort</option> -->
-        <option value="dateposted-desc" id="dateposted-desc">Date Created (Newest - Oldest)</option>
-        <option value="dateposted-asc" id="dateposted-asc"> Date Created (Oldest - Newest)</option>
-        <option value="deadline-desc" id="deadline-desc"> Deadline (Most Recent - Least Recent)</option>
-        <option value="deadline-asc" id="deadline-asc"> Deadline (Most Recent - Least Recent))</option>
-        <option value="cost-desc" id="cost-desc"> Price ($ - $$$$)</option>
-        <option value="cost-asc" id="cost-asc"> Price ($$$$ - $)</option>
+    <input style="margin-bottom: 2vh;" class="form-control" type="search" name="search" placeholder="Search" aria-label="Search"
+      {% if body %}
+      value="{{ body['search'] }}"
+      {% endif %}
+    >
+    <select style="margin-bottom: 2vh;" class="form-control" id="sort" name="sort">
+      {% if body %}
+        {% for value, display in sort_options %}
+          <option value="{{ value }}"
+            {% if body['sort'] == value %}
+            selected
+            {% endif %}
+          >{{ display }}</option>
+        {% endfor %}
+      {% else %}
+        {% for value, display in sort_options %}
+          <option value="{{ value }}">{{ display }}</option>
+        {% endfor %}
+      {% endif %}
     </select>
 
-    <button style="margin-bottom: 2vh;" class="btn btn-primary btn-sm form-control" type="button" data-toggle="collapse" data-target="#collapseExample"
-      aria-expanded="false" aria-controls="collapseExample">
+    <button style="margin-bottom: 2vh;" class="btn btn-primary btn-sm form-control" type="button" data-toggle="collapse" data-target="#collapse-filters"
+      aria-expanded="false" aria-controls="collapse-filters">
       Filter &#9662;
     </button>
     <br>
-    <div class="collapse" id="collapseExample" style="margin-bottom: 2vh;">
+    <div class="collapse" id="collapse-filters" style="margin-bottom: 2vh;">
     <div class="card card-body">
     <div class="overflow-auto">
       <b> Field </b>
       <br>
-      <input type="checkbox" name="Academic Programs" value="Academic Programs">
-      <label for="field1"> Academic Programs </label><br>
-      <input type="checkbox" name="Business & Jobs" value="Business & Jobs">
-      <label for="field2"> Business & Jobs </label><br>
-      <input type="checkbox" name="Community Service" value="Community Service">
-      <label for="field3"> Community Service</label><br>
-      <input type="checkbox" name="Govt & Law" value="Govt & Law">
-      <label for="field4"> Govt & Law </label><br>
-      <input type="checkbox" name="Leadership & Advocacy" value="Leadership & Advocacy">
-      <label for="field5"> Leadership & Advocacy </label><br>
-      <input type="checkbox" name="Museums & Art" value="Museums & Art">
-      <label for="field6"> Museums & Art </label><br>
-      <input type="checkbox" name="Parks, Zoos, & Nature" value="Parks, Zoos, & Nature">
-      <label for="field7"> Parks, Zoos, & Nature </label><br>
-      <input type="checkbox" name="Engineering, Math, & CS" value="Engineering, Math, & CS">
-      <label for="field8"> Engineering, Math, & CS </label><br>
-      <input type="checkbox" name="Medical & Life Sciences" value="Medical & Life Sciences">
-      <label for="field9"> Medical & Life Sciences</label><br>
-      <input type="checkbox" name="Literature" value="Literature">
-      <label for="field10"> Literature</label><br>
-      <input type="checkbox" name="Performing Arts" value="Performing Arts">
-      <label for="field11"> Performing Arts</label><br>
-      <input type="checkbox" name="Visual Arts" value="Visual Arts">
-      <label for="field12"> Visual Arts</label><br>
+      {% if body %}
+        {% for field in fields %}
+          <input type="checkbox" name="field-{{ field }}" value="{{ field }}"
+            {% if field in body['filters']['field'] %}
+              checked
+            {% endif %}
+          >
+          <label>{{field}}</label><br>
+        {% endfor %}
+      {% else %}
+        {% for field in fields %}
+          <input type="checkbox" name="field-{{ field }}" value="{{ field }}">
+          <label>{{field}}</label><br>
+        {% endfor %}
+      {% endif %}
       <br>
       <label for="minPrice"><b> Maximum Price </b> </label> <br>
       <div style="width: 16vw;" class="input-group">
         <div class="input-group-prepend">
           <div class="input-group-text" id="btnGroupAddon">$</div>
         </div>
-        <input type="number" class="form-control" id="maxPrice" aria-describedby="" value="None" min="0" placeholder="Enter price">
+        <input type="number" class="form-control" name="maximum-cost" min=0 step=0.01 placeholder="Enter price"
+          {% if body %}
+            {% if body['filters']['maximum-cost'] != None %}
+              value="{{ body['filters']['maximum-cost'] }}"
+            {% endif %}
+          {% endif %}
+        >
       </div>
       <br>
 
       <b> Grade </b> <br>
-      <input type="checkbox" name="FROSH" value="FROSH">
-      <label for="grade1"> Freshman </label><br>
-      <input type="checkbox" name="SOPH" value="SOPH">
-      <label for="grade2"> Sophomore </label><br>
-      <input type="checkbox" name="JUNIOR" value="JUNIOR">
-      <label for="grade3"> Junior </label><br>
-      <input type="checkbox" name="SENIOR" value="SENIOR">
-      <label for="grade4"> Senior </label><br>
-
+      {% if body %}
+        {% for value, display in grades %}
+        <input type="checkbox" name="grade-{{ value }}" value="{{ value }}"
+          {% if value in body['filters']['grade'] %}
+          checked
+          {% endif %}
+        >
+        <label>{{ display }}</label><br>
+        {% endfor %}
+      {% else %}
+        {% for value, display in grades %}
+        <input type="checkbox" name="grade-{{ value }}" value="{{ value }}">
+        <label>{{ display }}</label><br>
+        {% endfor %}
+      {% endif %}
       <br>
-
       <b> Gender </b> <br>
-      <input type="checkbox" name="CO-ED" value="CO-ED">
-      <label for="gender1"> Co-ed </label><br>
-      <input type="checkbox" name="MALE" value="MALE">
-      <label for="gender2"> Male only </label><br>
-      <input type="checkbox" name="FEMALE" value="FEMALE">
-      <label for="gender3"> Female only </label><br>
+      {% if body %}
+        {% for value, display in genders %}
+          <input type="checkbox" name="gender-{{ value }}" value="{{ value }}"
+            {% if value in body['filters']['gender'] %}
+              checked
+            {% endif %}
+          >
+          <label> {{ display }}</label><br>
+        {% endfor %}
+      {% else %}
+        {% for value, display in genders %}
+          <input type="checkbox" name="gender-{{ value }}" value="{{ value }}">
+          <label> {{ display }}</label><br>
+        {% endfor %}
+      {% endif %}
       </div>
       </div>
       </div>
@@ -160,8 +190,6 @@
 
       <a style="float: right; font-size: 20px" class="text-secondary star" href="/opportunities"><i class="fa fa-star" aria-hidden="true"></i></a>
     </div>
-
-
     <br>
   </div>
   {% endfor %}

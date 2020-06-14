@@ -27,20 +27,18 @@ def hasFilters(filters):
 
 
 def searchOpportunities(baseQuery, search):
-    if search and search.strip():
-        searchQueryString = "%" + search + "%"
+    if not search and not search.strip():
+        return baseQuery
 
-        searchQuery = baseQuery.filter(
-            or_(
-                Opportunity.title.ilike(searchQueryString),
-                Opportunity.description.ilike(searchQueryString),
-            )
+    searchQueryString = "%" + search + "%"
+    searchQuery = baseQuery.filter(
+        or_(
+            Opportunity.title.ilike(searchQueryString),
+            Opportunity.description.ilike(searchQueryString),
         )
+    )
 
-        return searchQuery
-    # At this point search is something like None or ""
-    # Only baseQuery is returned because the original search space is not minimized in any way
-    return baseQuery
+    return searchQuery
 
 
 def filterOpportunities(baseQuery, filtersDict):
@@ -58,19 +56,18 @@ def filterOpportunities(baseQuery, filtersDict):
         if key == "field":
             for fieldFilter in val:
                 orFilters.append(Opportunity.field == fieldFilter)
-                filters.append(or_(*orFilters))
+            filters.append(or_(*orFilters))
         elif key == "maximum-cost":
-            for maximumCostFilter in val:
-                orFilters.append(Opportunity.cost == maximumCostFilter)
-                filters.append(or_(*orFilters))
+            filters.append(Opportunity.cost == maximumCostFilter)
         elif key == "grade":
+            filters.append(Opportunity.opportunityID == OpportunityGrade.opportunityID)
             for gradeFilter in val:
-                orFilters.append(Opportunity.grade == gradeFilter)
-                filters.append(or_(*orFilters))
+                orFilters.append(OpportunityGrade.grade == gradeFilter)
+            filters.append(or_(*orFilters))
         elif key == "gender":
             for genderFilter in val:
                 orFilters.append(Opportunity.gender == genderFilter)
-                filters.append(or_(*orFilters))
+            filters.append(or_(*orFilters))
 
     return baseQuery.filter(and_(*filters))
 
