@@ -433,3 +433,6 @@ Fix cost preference in middleware
 
 rayL -- 2020-06-14 18:14
 Test filtering opportunities
+
+rayL -- 2020-06-14 19:36
+Test finding opportunities
