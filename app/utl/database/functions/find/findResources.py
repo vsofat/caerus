@@ -19,7 +19,7 @@ def findResources(body):
         baseQuery = Resource.query
         return body, sortResources(baseQuery, sort)
     else:
-        return body, searchSortResources(search, sort)
+        return body, searchResources(sortResources(baseQuery, sort), search)
 
 
 def sortResources(baseQuery, sort):
@@ -32,9 +32,9 @@ def sortResources(baseQuery, sort):
     return sortedResources
 
 
-def searchSortResources(search, sort):
+def searchResources(baseQuery, search):
     like = "%" + search + "%"
     searchQuery = Resource.query.filter(
         or_(Resource.title.like(like), Resource.description.like(like))
     )
-    return sortResources(searchQuery, sort)
+    return searchQuery

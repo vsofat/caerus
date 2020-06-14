@@ -21,7 +21,7 @@ def app(request):
     return create_app(TestConfig)
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="function")
 def db(app, request):
     """
     Returns session-wide initialised database.
