@@ -405,3 +405,6 @@ Create more Jinja templates for opportunity form
 ericL -- 2020-06-14 08:13
 Complete opportunity form persistance
 Add form persistance to scholarships and resources
+
+ericL -- 2020-06-14 08:55
+Create basic preferences page

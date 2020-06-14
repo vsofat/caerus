@@ -417,12 +417,20 @@ def favoritesRoute():
     )
 
 
-@app.route("/preferences")
+@app.route("/preferences", methods=['GET', 'POST'])
 @protected
 def preferencesRoute():
-    return render_template(
-        "view/preferences.html", user=users.getUserInfo(session["userid"])
-    )
+    if (request.method == 'GET'):
+        return render_template(
+            "view/preferences.html", user=users.getUserInfo(session["userid"])
+        )
+    elif (request.method == 'POST'):
+        print(request.form)
+        # pref = list()
+        # preferences.createAllPreferences(pref)
+        return render_template(
+            "view/preferences.html", user=users.getUserInfo(session["userid"])
+        )
 
 
 @app.route("/dumb")

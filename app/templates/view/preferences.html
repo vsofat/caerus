@@ -4,7 +4,57 @@
 
 {% block title %}Preferences{% endblock %}
 
-{% block heading %}
-{{super()}}
-
+{% block body %}
+<form action="/preferences" method="POST">
+    <b>Fields</b><br>
+    {% if body %}
+    {% for field in fields %}
+    <input type="checkbox" name="field-{{ field }}" value="{{ field }}" {% if field in body['filters']['field'] %}
+        checked {% endif %}>
+    <label>{{field}}</label><br>
+    {% endfor %}
+    {% else %}
+    {% for field in fields %}
+    <input type="checkbox" name="field-{{ field }}" value="{{ field }}">
+    <label>{{field}}</label><br>
+    {% endfor %}
+    {% endif %}
+    <b> Gender </b> <br>
+    {% if body %}
+    {% for value, display in genders %}
+    <input type="checkbox" name="gender-{{ value }}" value="{{ value }}" {% if value in body['filters']['gender'] %}
+        checked {% endif %}>
+    <label> {{ display }}</label><br>
+    {% endfor %}
+    {% else %}
+    {% for value, display in genders %}
+    <input type="checkbox" name="gender-{{ value }}" value="{{ value }}">
+    <label> {{ display }}</label><br>
+    {% endfor %}
+    {% endif %}
+    <b>Maximum Cost</b><br>
+    <div style="width: 16vw;" class="input-group">
+        <div class="input-group-prepend">
+            <div class="input-group-text">$</div>
+        </div>
+        <input type="number" class="form-control" name="maximum-cost" min=0 step=0.01 placeholder="Enter price"
+            {% if body %} {% if body['filters']['maximum-cost'] != None %} value="{{ body['filters']['maximum-cost'] }}"
+            {% endif %} {% endif %}>
+    </div>
+    <br>
+    <b> Grade </b> <br>
+    {% if body %}
+    {% for value, display in grades %}
+    <input type="checkbox" name="grade-{{ value }}" value="{{ value }}" {% if value in body['filters']['grade'] %}
+        checked {% endif %}>
+    <label>{{ display }}</label><br>
+    {% endfor %}
+    {% else %}
+    {% for value, display in grades %}
+    <input type="checkbox" name="grade-{{ value }}" value="{{ value }}">
+    <label>{{ display }}</label><br>
+    {% endfor %}
+    {% endif %}
+    <button class="btn btn-outline-primary btn-sm" type="submit">Set Preferences</button>
+</form>
 {% endblock %}
