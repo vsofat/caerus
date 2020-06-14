@@ -44,5 +44,5 @@ def getUserInfo(userID):
 
 
 def getAllUsersInfo():
-    usersArray = User.query.all()
-    return usersArray
+    return User.query.all()
+

@@ -232,7 +232,6 @@ def logout():
 @protected
 def opportunitiesRoute():
     if (request.method == 'GET'):
-        preferences.getPreferredOpportunitiesForAllUsers()
         return render_template(
             "view/opportunities.html",
             user=users.getUserInfo(session["userid"]),
