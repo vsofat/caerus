@@ -314,14 +314,25 @@ def createOpportunityRoute():
         )
 
 
-@app.route("/scholarships")
+@app.route("/scholarships", methods=['GET', 'POST'])
 @protected
 def scholarshipsRoute():
-    return render_template(
-        "view/scholarships.html",
-        user=users.getUserInfo(session["userid"]),
-        scholars=scholarships.getAllScholarships(),
-    )
+    if (request.method == 'GET'):
+        return render_template(
+            "view/scholarships.html",
+            user=users.getUserInfo(session["userid"]),
+            scholars=scholarships.getAllScholarships(),
+        )
+    elif (request.method == 'POST'):
+        f = request.form
+        body = {'search': f['search'], 'sort': f['sort']}
+        body, scholars = findScholarships.findScholarships(body)
+        return render_template(
+            "view/scholarships.html",
+            user=users.getUserInfo(session["userid"]),
+            body=body,
+            scholars=scholars,
+        )
 
 
 @app.route("/scholarships/<scholarshipID>")
@@ -357,14 +368,25 @@ def createScholarshipRoute():
                                user=users.getUserInfo(session['userid']))
 
 
-@app.route("/resources")
+@app.route("/resources", methods=['GET', 'POST'])
 @protected
 def resourcesRoute():
-    return render_template(
-        "view/resources.html",
-        user=users.getUserInfo(session["userid"]),
-        res=resources.getAllResources(),
-    )
+    if (request.method == 'GET'):
+        return render_template(
+            "view/resources.html",
+            user=users.getUserInfo(session["userid"]),
+            res=resources.getAllResources(),
+        )
+    elif (request.method == 'POST'):
+        f = request.form
+        body = {'search': f['search'], 'sort': f['sort']}
+        body, res = findResources.findResources(body)
+        return render_template(
+            "view/resources.html",
+            body=body,
+            user=users.getUserInfo(session["userid"]),
+            res=res,
+        )
 
 
 @app.route("/resources/create", methods=['GET', 'POST'])

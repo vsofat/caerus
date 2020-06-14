@@ -4,21 +4,38 @@
 
 {% block title %}Resources{% endblock %}
 
-{% block heading %}
-{{super()}}
+{% set sort_options = [
+  ('dateposted-desc', 'Date Created (Newest - Oldest)'),
+  ('dateposted-asc', 'Date Created (Oldest - Newest)'),
+  ] %}
+
+{% block body %}
 
 <!-- SIDENAV -->
 <div class="sidenav">
-  <form class="w-100" method="post">
+  <form class="w-100" action="/resources" method="POST">
     <h5> <b> Refine Results </b> </h5> <hr>
-    <input style="margin-bottom: 2vh;" class="form-control" type="search" placeholder="Search" aria-label="Search">
-    <select style="margin-bottom: 2vh;" class="form-control" method="post" id="sort">
-        <!-- <option type="hidden" value="default">Select a sort</option> -->
-        <option value="dateposted-desc" id="dateposted-desc">Date Created (Newest - Oldest)</option>
-        <option value="dateposted-asc" id="dateposted-asc"> Date Created (Oldest - Newest)</option>
+    <input style="margin-bottom: 2vh;" class="form-control" type="search" name="search" placeholder="Search" aria-label="Search"
+    {% if body %}
+      value="{{ body['search'] }}"
+    {% endif %}
+    >
+    <select style="margin-bottom: 2vh;" class="form-control" method="post" id="sort" name="sort">
+      {% if body %}
+        {% for value, display in sort_options %}
+          <option value="{{ value }}"
+            {% if body['sort'] == value %}
+            selected
+            {% endif %}
+          >{{ display }}</option>
+        {% endfor %}
+      {% else %}
+        {% for value, display in sort_options %}
+          <option value="{{ value }}">{{ display }}</option>
+        {% endfor %}
+      {% endif %}
     </select>
-
-      <button class="btn btn-outline-primary btn-sm w-100" type="submit">Show Results</button>
+    <button class="btn btn-outline-primary btn-sm w-100" type="submit">Show Results</button>
   </form>
 </div>
 

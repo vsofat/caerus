@@ -22,10 +22,6 @@
 
 {% block body %}
 
-{% if body %}
-{{ body }}
-{% endif %}
-
 <!-- SIDENAV -->
 <div class="sidenav">
   <form class="w-100" action="/opportunities" method="POST">
@@ -93,16 +89,38 @@
       <br>
 
       <b> Grade </b> <br>
-      {% for value, display in grades %}
+      {% if body %}
+        {% for value, display in grades %}
+        <input type="checkbox" name="grade-{{ value }}" value="{{ value }}"
+          {% if value in body['filters']['grade'] %}
+          checked
+          {% endif %}
+        >
+        <label>{{ display }}</label><br>
+        {% endfor %}
+      {% else %}
+        {% for value, display in grades %}
         <input type="checkbox" name="grade-{{ value }}" value="{{ value }}">
         <label>{{ display }}</label><br>
-      {% endfor %}
+        {% endfor %}
+      {% endif %}
       <br>
       <b> Gender </b> <br>
-      {% for value, display in genders %}
-        <input type="checkbox" name="gender-{{ value }}" value="{{ value }}">
-        <label> {{ display }}</label><br>
-      {% endfor %}
+      {% if body %}
+        {% for value, display in genders %}
+          <input type="checkbox" name="gender-{{ value }}" value="{{ value }}"
+            {% if value in body['filters']['gender'] %}
+              checked
+            {% endif %}
+          >
+          <label> {{ display }}</label><br>
+        {% endfor %}
+      {% else %}
+        {% for value, display in genders %}
+          <input type="checkbox" name="gender-{{ value }}" value="{{ value }}">
+          <label> {{ display }}</label><br>
+        {% endfor %}
+      {% endif %}
       </div>
       </div>
       </div>
@@ -179,8 +197,6 @@
 
       <a style="float: right; font-size: 20px" class="text-secondary star" href="/opportunities"><i class="fa fa-star" aria-hidden="true"></i></a>
     </div>
-
-
     <br>
   </div>
   {% endfor %}
