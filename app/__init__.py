@@ -36,7 +36,7 @@ def create_app(config):
     app = Flask(__name__)
     app.config.from_object(config)
     app.secret_key = os.urandom(32)
-    return app 
+    return app
 
 app = create_app(Config)
 DIR = os.path.dirname(__file__) or "."
@@ -232,6 +232,7 @@ def logout():
 @protected
 def opportunitiesRoute():
     if (request.method == 'GET'):
+        preferences.getPreferredOpportunitiesForAllUsers()
         return render_template(
             "view/opportunities.html",
             user=users.getUserInfo(session["userid"]),

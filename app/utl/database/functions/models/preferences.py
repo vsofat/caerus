@@ -201,7 +201,7 @@ def getPreferredOpportunities(userID):
                'grade': gradeFilters, 'gender': genderFilters}
     sortedOpportunities = sortOpportunities(
         filterOpportunities(baseQuery, filters), "dateposted-desc").all()
-    
+
     for opportunity in sortedOpportunities:
         grades = OpportunityGrade.query.filter_by(
             opportunityID=opportunity.opportunityID

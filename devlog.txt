@@ -427,3 +427,6 @@ Link preferences form to database
 
 ericL -- 2020-06-14 09:40
 Add form persistence to preferences page
+
+ericL -- 2020-06-14 17:10
+Fix preferred opportunities retrieval
