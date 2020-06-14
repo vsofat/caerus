@@ -392,3 +392,6 @@ Fix inconsistencies in form queries
 
 ericL -- 2020-06-14 07:17
 Fix form requirements and queries
+
+ericL -- 2020-06-14 07:26
+Create static fields list

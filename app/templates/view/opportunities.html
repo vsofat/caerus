@@ -31,30 +31,10 @@
     <div class="overflow-auto">
       <b> Field </b>
       <br>
-      <input type="checkbox" name="field-Academic Programs" value="Academic Programs">
-      <label for="field1"> Academic Programs </label><br>
-      <input type="checkbox" name="field-Business & Jobs" value="Business & Jobs">
-      <label for="field2"> Business & Jobs </label><br>
-      <input type="checkbox" name="field-Community Service" value="Community Service">
-      <label for="field3"> Community Service</label><br>
-      <input type="checkbox" name="field-Govt & Law" value="Govt & Law">
-      <label for="field4"> Govt & Law </label><br>
-      <input type="checkbox" name="field-Leadership & Advocacy" value="Leadership & Advocacy">
-      <label for="field5"> Leadership & Advocacy </label><br>
-      <input type="checkbox" name="field-Museums & Art" value="Museums & Art">
-      <label for="field6"> Museums & Art </label><br>
-      <input type="checkbox" name="field-Parks, Zoos, & Nature" value="Parks, Zoos, & Nature">
-      <label for="field7"> Parks, Zoos, & Nature </label><br>
-      <input type="checkbox" name="field-Engineering, Math, & CS" value="Engineering, Math, & CS">
-      <label for="field8"> Engineering, Math, & CS </label><br>
-      <input type="checkbox" name="field-Medical & Life Sciences" value="Medical & Life Sciences">
-      <label for="field9"> Medical & Life Sciences</label><br>
-      <input type="checkbox" name="field-Literature" value="Literature">
-      <label for="field10"> Literature</label><br>
-      <input type="checkbox" name="field-Performing Arts" value="Performing Arts">
-      <label for="field11"> Performing Arts</label><br>
-      <input type="checkbox" name="field-Visual Arts" value="Visual Arts">
-      <label for="field12"> Visual Arts</label><br>
+      {% for field in fields %}
+        <input type="checkbox" name="field-{{ field }}" value="{{ field }}">
+        <label>{{field}}</label><br>
+      {% endfor %}
       <br>
       <label for="minPrice"><b> Maximum Price </b> </label> <br>
       <div style="width: 16vw;" class="input-group">

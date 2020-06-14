@@ -24,18 +24,9 @@
         <div class="form-group col-md-4">
             <label for="field"><b>Field</b></label>
             <select class="form-control" name="field" id="field">
-                <option value="Academic Programs">Academic Programs</option>
-                <option value="Business & Jobs">Business & Jobs</option>
-                <option value="Community Service">Community Service</option>
-                <option value="Govt & Law">Govt & Law</option>
-                <option value="Leadership & Advocacy">Leadership & Advocacy</option>
-                <option value="Museums & Art"> Museums & Art</option>
-                <option value="Parks, Zoos, & Nature">Parks, Zoos, & Nature</option>
-                <option value="Engineering, Math, & CS">Engineering, Math, & CS</option>
-                <option value="Medical & Life Sciences">Medical & Life Sciences</option>
-                <option value="Literature">Literature</option>
-                <option value="Performing Arts">Performing Arts</option>
-                <option value="Visual Arts">Visual Arts</option>
+                {% for field in fields %}
+                <option value="{{ field }}">{{ field }}</option>
+                {% endfor %}
             </select>
         </div>
         <div class="form-group col-md-4">
