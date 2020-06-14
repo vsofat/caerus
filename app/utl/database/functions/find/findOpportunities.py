@@ -29,7 +29,7 @@ def findOpportunities(body):
             return body, searchSortOpportunities(search, sort)
     elif search == "":
         baseQuery = Opportunity.query
-        return body, filterSortOpportunities(baseQuery, filters, sort)
+        return body, filterSortOpportunities2(baseQuery, filters, sort)
     else:
         return body, searchFilterSortOpportunities(search, filters, sort)
 

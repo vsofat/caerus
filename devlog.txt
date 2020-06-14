@@ -389,3 +389,6 @@ Make minor adjustments to opportunity finding functions
 
 ericL -- 2020-06-14 06:44
 Fix inconsistencies in form queries
+
+ericL -- 2020-06-14 07:17
+Fix form requirements and queries

@@ -236,12 +236,13 @@ def opportunitiesRoute():
         )
     elif (request.method == 'POST'):
         f = request.form
+        maxCost = f['maximum-cost']
         body = {
             'search': f['search'],
             'sort': f['sort'],
             'filters': {
                 'field': list(),
-                'maximum-cost': None,
+                'maximum-cost': maxCost if maxCost != '' else None,
                 'grade': list(),
                 'gender': list()
             }
