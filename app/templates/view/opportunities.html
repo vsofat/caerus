@@ -4,21 +4,43 @@
 
 {% block title %}Opportunities{% endblock %}
 
+{% set sort_options = [
+  ('dateposted-desc', 'Date Created (Newest - Oldest)'),
+  ('dateposted-asc', 'Date Created (Oldest - Newest)'),
+  ('deadline-desc', 'Deadline (Least Recent - Most Recent)'),
+  ('deadline-asc', 'Deadline (Most Recent - Least Recent)'),
+  ('cost-asc', 'Price ($ - $$$$)'),
+  ('cost-desc', 'Price ($$$$ - $)')
+  ] %}
 {% block body %}
+
+{% if body %}
+{{ body }}
+{% endif %}
 
 <!-- SIDENAV -->
 <div class="sidenav">
   <form class="w-100" action="/opportunities" method="POST">
     <h5> <b> Refine Results </b> </h5> <hr>
-    <input style="margin-bottom: 2vh;" class="form-control" type="search" name="search" placeholder="Search" aria-label="Search">
+    <input style="margin-bottom: 2vh;" class="form-control" type="search" name="search" placeholder="Search" aria-label="Search"
+      {% if body %}
+      value="{{ body['search'] }}"
+      {% endif %}
+    >
     <select style="margin-bottom: 2vh;" class="form-control" id="sort" name="sort">
-        <!-- <option type="hidden" value="default">Select a sort</option> -->
-        <option value="dateposted-desc" id="dateposted-desc">Date Created (Newest - Oldest)</option>
-        <option value="dateposted-asc" id="dateposted-asc"> Date Created (Oldest - Newest)</option>
-        <option value="deadline-desc" id="deadline-desc"> Deadline (Least Recent - Most Recent)</option>
-        <option value="deadline-asc" id="deadline-asc"> Deadline (Most Recent - Least Recent))</option>
-        <option value="cost-asc" id="cost-asc"> Price ($ - $$$$)</option>
-        <option value="cost-desc" id="cost-desc"> Price ($$$$ - $)</option>
+      {% if body %}
+        {% for value, display in sort_options %}
+          <option value="{{ value }}"
+            {% if body['sort'] == value %}
+            selected
+            {% endif %}
+          >{{ display }}</option>
+        {% endfor %}
+      {% else %}
+        {% for value, display in sort_options %}
+          <option value="{{ value }}">{{ display }}</option>
+        {% endfor %}
+      {% endif %}
     </select>
 
     <button style="margin-bottom: 2vh;" class="btn btn-primary btn-sm form-control" type="button" data-toggle="collapse" data-target="#collapseExample"
@@ -31,10 +53,21 @@
     <div class="overflow-auto">
       <b> Field </b>
       <br>
-      {% for field in fields %}
-        <input type="checkbox" name="field-{{ field }}" value="{{ field }}">
-        <label>{{field}}</label><br>
-      {% endfor %}
+      {% if body %}
+        {% for field in fields %}
+          <input type="checkbox" name="field-{{ field }}" value="{{ field }}"
+            {% if field in body['filters']['field'] %}
+              checked
+            {% endif %}
+          >
+          <label>{{field}}</label><br>
+        {% endfor %}
+      {% else %}
+        {% for field in fields %}
+          <input type="checkbox" name="field-{{ field }}" value="{{ field }}">
+          <label>{{field}}</label><br>
+        {% endfor %}
+      {% endif %}
       <br>
       <label for="minPrice"><b> Maximum Price </b> </label> <br>
       <div style="width: 16vw;" class="input-group">
