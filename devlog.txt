@@ -376,3 +376,6 @@ Create search resources tests (test_searching_existing_resources, test_searching
 
 rayL -- 2020-06-13 17:08
 Create search scholarships tests
+
+rayL -- 2020-06-13 21:54
+Test sort/search resources
