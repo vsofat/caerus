@@ -247,7 +247,7 @@ def getPreferredOpportunities(userID):
     return sortedOpportunities
 
 
-def getAllPreferencesForAllUsers():
+def getPreferredOpportunitiesForAllUsers():
     users = getAllUsersInfo()
     emailsToPreferencesDict = {}
     for user in users:
