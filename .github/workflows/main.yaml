@@ -1,11 +1,11 @@
 on:
   push
 
-name: Test App
+name: Caerus Unit Testing
 
 jobs:
   test:
-    name: run test.py
+    name: Test app routing and database
     runs-on: ubuntu-latest
 
     steps:
