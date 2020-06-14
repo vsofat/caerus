@@ -28,7 +28,8 @@ def findOpportunities(body):
         else:
             return body, searchSortOpportunities(search, sort)
     elif search == "":
-        return body, filterSortOpportunities(baseQuery, filters, sort)
+        baseQuery = Opportunity.query
+        return body, filterSortOpportunities3(baseQuery, filters, sort)
     else:
         return body, searchFilterSortOpportunities(search, filters, sort)
 
@@ -83,7 +84,7 @@ def filterSortOpportunities(baseQuery, filters, sort):
     if maximumCostFilter == None:
         maximumCostFilter = 100000
 
-    if len(gradeFilters == 0):
+    if len(gradeFilters) == 0:
         gradeFilters = ["9", "10", "11", "12"]
 
     if len(genderFilters) == 0:
@@ -111,7 +112,7 @@ def filterSortOpportunities(baseQuery, filters, sort):
         filteredOpportunity.opportunityID
         for filteredOpportunity in filteredOpportunities
     ]
-    filterQuery = Opportunity.filter(Opportunity.opportunityID.in_(ids))
+    filterQuery = Opportunity.query.filter(Opportunity.opportunityID.in_(ids))
     return sortOpportunities(filterQuery, sort)
 
 
@@ -129,7 +130,7 @@ def filterSortOpportunities2(baseQuery, filters, sort):
     if maximumCostFilter == None:
         maximumCostFilter = 100000
 
-    if len(gradeFilters == 0):
+    if len(gradeFilters) == 0:
         gradeFilters = ["9", "10", "11", "12"]
 
     if len(genderFilters) == 0:
@@ -177,7 +178,7 @@ def filterSortOpportunities3(baseQuery, filters, sort):
     if maximumCostFilter == None:
         maximumCostFilter = 100000
 
-    if len(gradeFilters == 0):
+    if len(gradeFilters) == 0:
         gradeFilters = ["9", "10", "11", "12"]
 
     if len(genderFilters) == 0:

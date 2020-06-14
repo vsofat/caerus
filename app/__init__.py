@@ -253,6 +253,7 @@ def opportunitiesRoute():
                 body['filters']['grade'].append(f[k])
             if 'gender' in k:
                 body['filters']['gender'].append(f[k])
+        print(body)
         body, opps = findOpportunities.findOpportunities(body)
         return render_template(
             "view/opportunities.html",

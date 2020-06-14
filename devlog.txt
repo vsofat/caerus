@@ -383,3 +383,6 @@ Fix refinement forms for middleware operations
 
 ericL -- 2020-06-14 05:48
 Implement finding functions in middleware
+
+ericL -- 2020-06-14 06:18
+Make minor adjustments to opportunity finding functions
