@@ -428,5 +428,8 @@ Link preferences form to database
 ericL -- 2020-06-14 09:40
 Add form persistence to preferences page
 
+ericL -- 2020-06-14 18:04
+Fix cost preference in middleware
+
 rayL -- 2020-06-14 18:14
 Test filtering opportunities

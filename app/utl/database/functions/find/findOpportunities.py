@@ -85,7 +85,7 @@ def sortOpportunities(baseQuery, sort):
     }
 
     # default sort option
-    sortOptionQuery = "dateposted-asc"
+    sortOptionQuery = "dateposted-desc"
 
     # Check if sort is a truey value (i.e. not None or "") and is a key in sortOptionQueries
     if sort and sort in sortOptionQueries.keys():

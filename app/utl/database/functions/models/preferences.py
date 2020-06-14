@@ -1,7 +1,8 @@
 from copy import deepcopy
 from datetime import datetime, timedelta
-from utl.database.models.models import db, Opportunity, OpportunityGrade, OpportunityLink
 from sqlalchemy import and_, or_
+from utl.database.models.models import db, Opportunity, OpportunityGrade, OpportunityLink
+from utl.database.functions.find.findOpportunities import filterOpportunities, sortOpportunities
 
 from utl.database.models.models import (
     db,
@@ -43,8 +44,13 @@ def getCostPreferences(userID):
     if costPreferences == None:
         return []
     else:
-        costPreference = [{"type": COST_PREFERENCE, "value": costPreferences.cost}]
+        costPreference = [
+            {"type": COST_PREFERENCE, "value": costPreferences.cost}]
         return costPreference
+
+# Delete
+def deleteCostPreference(userID):
+    CostPreference.query.filter_by(userID=userID).delete()
 
 
 # Field Preference
@@ -119,11 +125,7 @@ def createPreference(userID, preferenceType, preferenceValue):
     values.
     """
     if preferenceType == COST_PREFERENCE:
-        # TODO: Is this the most optimal way to check for existence?
-        if CostPreference.query.filter_by(userID=userID).first():
-            updateCostPreference(userID, preferenceValue)
-        else:
-            createCostPreference(userID, preferenceValue)
+        createCostPreference(userID, preferenceValue)
     elif preferenceType == FIELD_PREFERENCE:
         createFieldPreference(userID, preferenceValue)
     elif preferenceType == GENDER_PREFERENCE:
@@ -149,6 +151,7 @@ def createAllPreferences(body):
 
     # Delete one to many rows in field, gender, and grade tables with a given userID, so that updated rows can be created
     # Since we have a different updating mechanism for CostPreference, it is taken care of in the createPreference function.
+    CostPreference.query.filter_by(userID=userID).delete()
     FieldPreference.query.filter_by(userID=userID).delete()
     GenderPreference.query.filter_by(userID=userID).delete()
     GradePreference.query.filter_by(userID=userID).delete()
@@ -186,53 +189,20 @@ def getPreferredOpportunities(userID):
     gradeFilters = [gradePreference["value"]
                     for gradePreference in preferences["grade"]]
     costFilter = preferences["cost"]
-
-    startDate = datetime.now() - timedelta(days=7)
-
-    opportunities = Opportunity.query.filter(
-        Opportunity.datePosted > startDate).all()
-    filteredOpportunities = []
-
-    if len(fieldFilters) == 0:
-        fieldFilters = ["Academic Programs", "Business & Jobs", "Community Service", "Govt & Law", "Leadership & Advocacy", "Museums & Art",
-                        "Parks, Zoos, & Nature", "Engineering, Math, & CS", "Medical & Life Sciences", "Literature", "Performing Arts", "Visual Arts"]
-
     if len(costFilter) == 0:
-        maximumCostFilter = 100000
+        maximumCostFilter = None
     else:
         maximumCostFilter = costFilter[0]["value"]
 
-    if len(gradeFilters == 0):
-        gradeFilters = ["9", "10", "11", "12"]
+    startDate = datetime.now() - timedelta(days=7)
 
-    if len(genderFilters) == 0:
-        genderFilters = ["CO-ED", "MALE", "FEMALE"]
+    baseQuery = Opportunity.query.filter(Opportunity.datePosted > startDate)
 
-    for opportunity in opportunities:
-        if (
-            opportunity.field in fieldFilters
-            and opportunity.cost < maximumCostFilter
-            and opportunity.gender in genderFilters
-        ):
-            if len(gradeFilters) == 0:
-                filteredOpportunities.append(opportunity)
-            else:
-                OpportunityGrades = OpportunityGrade.query.filter_by(
-                    opportunityID=opportunity.opportunityID
-                ).all()
-                grades = [grade.grade for grade in OpportunityGrades]
-                for gradeFilter in gradeFilters:
-                    if gradeFilter in grades:
-                        filteredOpportunities.append(opportunity)
-                        break
+    filters = {'field': fieldFilters, 'maximum-cost': maximumCostFilter,
+               'grade': gradeFilters, 'gender': genderFilters}
 
-    ids = [
-        filteredOpportunity.opportunityID
-        for filteredOpportunity in filteredOpportunities
-    ]
-
-    sortedOpportunities = Opportunity.filter(Opportunity.opportunityID.in_(
-        ids)).order_by(Opportunity.datePosted.desc()).all()
+    sortedOpportunities = sortOpportunities(
+        filterOpportunities(baseQuery, filters), "dateposted-desc").all()
 
     for opportunity in sortedOpportunities:
         grades = OpportunityGrade.query.filter_by(
@@ -247,7 +217,7 @@ def getPreferredOpportunities(userID):
     return sortedOpportunities
 
 
-def getAllPreferencesForAllUsers():
+def getPreferredOpportunitiesForAllUsers():
     users = getAllUsersInfo()
     emailsToPreferencesDict = {}
     for user in users:
