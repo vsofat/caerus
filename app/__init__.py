@@ -442,6 +442,8 @@ def preferencesRoute():
         maxCost = f['maximum-cost']
         if maxCost != '':
             body['preferences'].append({'type': 'COST_PREFERENCE', 'value': float(maxCost)})
+        else:
+            preferences.deleteCostPreference(session['userid'])
         for key in f.keys():
             if 'field' in key:
                 body['preferences'].append({'type': 'FIELD_PREFERENCE', 'value': f[key]})
