@@ -133,4 +133,5 @@ ehthumbs.db
 # Project Files
 !__init__.py
 oauth-client.json
+gmail.json
 site.db

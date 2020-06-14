@@ -428,6 +428,15 @@ Link preferences form to database
 ericL -- 2020-06-14 09:40
 Add form persistence to preferences page
 
+ericL -- 2020-06-14 17:10
+Fix preferred opportunities retrieval
+
+ericL -- 2020-06-14 17:16
+Move email information to json file
+
+ericL -- 2020-06-14 17:57
+Add links to website in email
+
 ericL -- 2020-06-14 18:04
 Fix cost preference in middleware
 
