@@ -49,7 +49,7 @@ def getCostPreferences(userID):
         return costPreference
 
 # Delete
-def deleteCostPreferences(userID):
+def deleteCostPreference(userID):
     CostPreference.query.filter_by(userID=userID).delete()
 
 
@@ -200,10 +200,10 @@ def getPreferredOpportunities(userID):
 
     filters = {'field': fieldFilters, 'maximum-cost': maximumCostFilter,
                'grade': gradeFilters, 'gender': genderFilters}
-               
+
     sortedOpportunities = sortOpportunities(
         filterOpportunities(baseQuery, filters), "dateposted-desc").all()
-    
+
     for opportunity in sortedOpportunities:
         grades = OpportunityGrade.query.filter_by(
             opportunityID=opportunity.opportunityID
