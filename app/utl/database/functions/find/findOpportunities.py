@@ -54,6 +54,10 @@ def filterOpportunities(baseQuery, filtersDict):
                 subFilters.append(Opportunity.field == fieldFilter)
             filters.append(or_(*subFilters))
         elif key == "maximum-cost":
+            if type(val) == str:
+                val = val.strip()
+            if not val:
+                continue
             # val is max cost filter here
             filters.append(Opportunity.cost <= val)
         elif key == "grade":
