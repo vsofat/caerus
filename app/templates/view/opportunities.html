@@ -12,6 +12,14 @@
   ('cost-asc', 'Price ($ - $$$$)'),
   ('cost-desc', 'Price ($$$$ - $)')
   ] %}
+
+{% set grades = [
+  ('9', 'Freshman'),
+  ('10', 'Sophomore'),
+  ('11', 'Junior'),
+  ('12', 'Senior')
+  ] %}
+
 {% block body %}
 
 {% if body %}
@@ -43,12 +51,12 @@
       {% endif %}
     </select>
 
-    <button style="margin-bottom: 2vh;" class="btn btn-primary btn-sm form-control" type="button" data-toggle="collapse" data-target="#collapseExample"
-      aria-expanded="false" aria-controls="collapseExample">
+    <button style="margin-bottom: 2vh;" class="btn btn-primary btn-sm form-control" type="button" data-toggle="collapse" data-target="#collapse-filters"
+      aria-expanded="false" aria-controls="collapse-filters">
       Filter &#9662;
     </button>
     <br>
-    <div class="collapse" id="collapseExample" style="margin-bottom: 2vh;">
+    <div class="collapse" id="collapse-filters" style="margin-bottom: 2vh;">
     <div class="card card-body">
     <div class="overflow-auto">
       <b> Field </b>
@@ -74,29 +82,27 @@
         <div class="input-group-prepend">
           <div class="input-group-text" id="btnGroupAddon">$</div>
         </div>
-        <input type="number" class="form-control" name="maximum-cost" aria-describedby="" value="None" min=0 step=0.01 placeholder="Enter price">
+        <input type="number" class="form-control" name="maximum-cost" min=0 step=0.01 placeholder="Enter price"
+          {% if body %}
+            {% if body['filters']['maximum-cost'] != None %}
+              value="{{ body['filters']['maximum-cost'] }}"
+            {% endif %}
+          {% endif %}
+        >
       </div>
       <br>
 
       <b> Grade </b> <br>
-      <input type="checkbox" name="grade-9" value="9">
-      <label for="grade1"> Freshman </label><br>
-      <input type="checkbox" name="grade-10" value="10">
-      <label for="grade2"> Sophomore </label><br>
-      <input type="checkbox" name="grade-11" value="11">
-      <label for="grade3"> Junior </label><br>
-      <input type="checkbox" name="grade-12" value="12">
-      <label for="grade4"> Senior </label><br>
-
+      {% for value, display in grades %}
+        <input type="checkbox" name="grade-{{ value }}" value="{{ value }}">
+        <label>{{ display }}</label><br>
+      {% endfor %}
       <br>
-
       <b> Gender </b> <br>
-      <input type="checkbox" name="gender-co-ed" value="co-ed">
-      <label for="gender1"> Co-ed </label><br>
-      <input type="checkbox" name="gender-male-only" value="male-only">
-      <label for="gender2"> Male only </label><br>
-      <input type="checkbox" name="gender-female-only" value="female-only">
-      <label for="gender3"> Female only </label><br>
+      {% for value, display in genders %}
+        <input type="checkbox" name="gender-{{ value }}" value="{{ value }}">
+        <label> {{ display }}</label><br>
+      {% endfor %}
       </div>
       </div>
       </div>

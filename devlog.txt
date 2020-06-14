@@ -398,3 +398,6 @@ Create static fields list
 
 ericL -- 2020-06-14 07:48
 Add more Jinja templating and form persistance
+
+ericL -- 2020-06-14 08:08
+Create more Jinja templates for opportunity form

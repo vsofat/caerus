@@ -51,21 +51,6 @@ TOKEN_URI = f["token_uri"]
 CLIENT_ID = f["client_id"]
 CLIENT_SECRET = f["client_secret"]
 
-fields = [
-    'Academic Programs',
-    'Business & Jobs',
-    'Community Service',
-    'Govt & Law',
-    'Leadership & Advocacy',
-    'Museums & Art',
-    'Parks, Zoos, & Nature',
-    'Engineering, Math, & CS',
-    'Medical & Life Sciences',
-    'Literature',
-    'Performing Arts',
-    'Visual Arts'
-]
-
 
 def protected(f):
     @functools.wraps(f)
@@ -246,7 +231,6 @@ def opportunitiesRoute():
         return render_template(
             "view/opportunities.html",
             user=users.getUserInfo(session["userid"]),
-            fields=fields,
             opportunityList=opportunities.getAllOpportunities(),
             date=dateconv.allDateDisplay(),
         )
@@ -276,7 +260,6 @@ def opportunitiesRoute():
             user=users.getUserInfo(session["userid"]),
             opportunityList=opps,
             body=body,
-            fields=fields,
             date=dateconv.allDateDisplay(),
         )
 
@@ -297,7 +280,7 @@ def opportunityRoute(opportunityID):
 def createOpportunityRoute():
     if request.method == "GET":
         return render_template(
-            "create/opportunity.html", user=users.getUserInfo(session["userid"], fields=fields)
+            "create/opportunity.html", user=users.getUserInfo(session["userid"])
         )
     elif request.method == "POST":
         links = list()
@@ -327,7 +310,7 @@ def createOpportunityRoute():
         )
         flash("Successfully created an opportunity", "success")
         return render_template(
-            "create/opportunity.html", user=users.getUserInfo(session["userid"], fields=fields)
+            "create/opportunity.html", user=users.getUserInfo(session["userid"])
         )
 
 

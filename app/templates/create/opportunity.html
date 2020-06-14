@@ -32,9 +32,9 @@
         <div class="form-group col-md-4">
             <label for="gender"><b>Gender</b></label>
             <select class="form-control" name="gender" id="gender">
-                <option value="co-ed">Co-Ed</option>
-                <option value="female-only">Female only</option>
-                <option value="male-only">Male only</option>
+                {% for value, display in genders %}
+                    <option value="{{ value }}">{{ display }}</option>
+                {% endfor %}
             </select>
         </div>
         <div class="form-group col-md-4">
