@@ -44,9 +44,5 @@ def getUserInfo(userID):
 
 
 def getAllUsersInfo():
-    # {0: User, 1: User, 2: User, ...}
-    userIDs = User.query.with_entities(User.userID).all()
-    userIDToUserInfoDict = {}
-    for userID in userIDs:
-        userIDToUserInfoDict[userID] = getUserInfo(userID)
-    return userIDToUserInfoDict
+    return User.query.all()
+
