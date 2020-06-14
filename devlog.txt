@@ -330,6 +330,9 @@ Re-added cost field requirement in opportunity create form
 ahmedS -- 2020-06-10 10:44
 Cleaned up opportunities.html, by removing old HTML code
 
+rayL -- 2020-06-10 11:20
+Create search/sort fxns for scholarships
+
 ahmedS -- 2020-06-10 11:31
 opportunities.html (opportunities bulletin) now begins to display actual opportunities
 Worked on formatting for individual.html
@@ -353,6 +356,9 @@ ahmedS -- 2020-06-10 14:31
 Changed height of sidebar for cleaner layout on opportunities.html
 Fixed height of price filter in sidebar on opportunities.html
 
+rayL -- 2020-06-10 15:57
+Create search/sort fxns for resources
+
 ahmedS -- 2020-06-10 16:01
 Added favorite button (currently non-functional) to opportunity cards in opportunities.html
 Cleaned up logout button in navbar on top in template.html
@@ -363,3 +369,48 @@ Retroactively edited devlog.txt with today's commits :/
 ahmedS -- 2020-06-10 17:12
 Added downward facing triangle to filter button to make purpose easier to understand in opportunities.html
 Edited devlog.txt
+
+vishwaaS -- 2020-06-13 15:00
+Added sidebars/sidenavs to scholarships and resources pages
+Adjusted sort names to makes them easier to understand for users
+
+kaziJ -- 2020-06-13 23:42
+Modify getAllPreferences to return a dictionary
+Created getPreferredOpportunities and replaced call to getAllPreferences in getAllPreferencesForAllUsers to getPreferredOpportunities
+
+ericL -- 2020-06-14 05:24
+Fix refinement forms for middleware operations
+
+ericL -- 2020-06-14 05:48
+Implement finding functions in middleware
+
+ericL -- 2020-06-14 06:18
+Make minor adjustments to opportunity finding functions
+
+ericL -- 2020-06-14 06:44
+Fix inconsistencies in form queries
+
+ericL -- 2020-06-14 07:17
+Fix form requirements and queries
+
+ericL -- 2020-06-14 07:26
+Create static fields list
+
+ericL -- 2020-06-14 07:48
+Add more Jinja templating and form persistence
+
+ericL -- 2020-06-14 08:08
+Create more Jinja templates for opportunity form
+
+ericL -- 2020-06-14 08:13
+Complete opportunity form persistence
+Add form persistence to scholarships and resources
+
+ericL -- 2020-06-14 08:55
+Create basic preferences page
+
+ericL -- 2020-06-14 09:16
+Link preferences form to database
+
+ericL -- 2020-06-14 09:40
+Add form persistence to preferences page

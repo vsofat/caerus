@@ -6,6 +6,34 @@
      ('/preferences', 'preferences', 'Preferences'),
  ] %}
 
+{% set fields = [
+     'Academic Programs',
+     'Business & Jobs',
+     'Community Service',
+     'Govt & Law',
+     'Leadership & Advocacy',
+     'Museums & Art',
+     'Parks, Zoos, & Nature',
+     'Engineering, Math, & CS',
+     'Medical & Life Sciences',
+     'Literature',
+     'Performing Arts',
+     'Visual Arts'
+ ] %}
+
+{% set genders = [
+     ('co-ed', 'Co-Ed'),
+     ('female-only', 'Female only'),
+     ('male-only', 'Male only')
+] %}
+
+{% set grades = [
+     ('9', 'Freshman'),
+     ('10', 'Sophomore'),
+     ('11', 'Junior'),
+     ('12', 'Senior')
+] %}
+
 {% set active_page = active_page|default('opportunities') -%}
 
 <!DOCTYPE html>
@@ -83,7 +111,7 @@
                     href="/logout"
                     {% if "create" in request.url %}
                     tabindex="-1"
-                    
+
                     {% endif %}
                     >Log out</a></span>
 

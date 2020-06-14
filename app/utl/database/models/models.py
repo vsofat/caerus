@@ -64,14 +64,14 @@ class ScholarshipLink(db.Model):
 # Saved
 class SavedOpportunity(db.Model):
     savedOpportunityID = db.Column(db.Integer, primary_key=True)
-    userID = db.Column(db.Integer, nullable=False)
+    userID = db.Column(db.String, nullable=False)
     opportunityID = db.Column(db.Integer, nullable=False)
     reminderDate = db.Column(db.DateTime)
 
 
 class SavedScholarship(db.Model):
     savedScholarshipID = db.Column(db.Integer, primary_key=True)
-    userID = db.Column(db.Integer, nullable=False)
+    userID = db.Column(db.String, nullable=False)
     scholarshipID = db.Column(db.Integer, nullable=False)
     reminderDate = db.Column(db.DateTime)
 
@@ -88,23 +88,23 @@ class Resource(db.Model):
 
 class FieldPreference(db.Model):
     fieldPreferenceID = db.Column(db.Integer, primary_key=True)
-    userID = db.Column(db.Integer, nullable=False)
+    userID = db.Column(db.String, nullable=False)
     field = db.Column(db.String, nullable=False)
 
 
 class GradePreference(db.Model):
     gradePreferenceID = db.Column(db.Integer, primary_key=True)
-    userID = db.Column(db.Integer, nullable=False)
+    userID = db.Column(db.String, nullable=False)
     grade = db.Column(db.Integer, nullable=False)
 
 
 class GenderPreference(db.Model):
     genderPreferenceID = db.Column(db.Integer, primary_key=True)
-    userID = db.Column(db.Integer, nullable=False)
+    userID = db.Column(db.String, nullable=False)
     gender = db.Column(db.String, nullable=False)
 
 
 class CostPreference(db.Model):
     costPreferenceID = db.Column(db.Integer, primary_key=True)
-    userID = db.Column(db.Integer, nullable=False)
+    userID = db.Column(db.String, nullable=False)
     cost = db.Column(db.Float, nullable=False)

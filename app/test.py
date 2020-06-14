@@ -33,7 +33,7 @@ class Test(unittest.TestCase):
             'link0': 'google.com',
             'link1': 'bing.com'
         })
-        self.assertEquals(req.status_code, 302)
+        self.assertEqual(req.status_code, 302)
 
 
 if __name__ == "__main__":
