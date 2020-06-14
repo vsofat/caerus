@@ -1,4 +1,7 @@
 from copy import deepcopy
+from datetime import datetime, timedelta
+from utl.database.models.models import db, Opportunity, OpportunityGrade, OpportunityLink
+from sqlalchemy import and_, or_, in_
 
 from utl.database.models.models import (
     db,
@@ -37,8 +40,11 @@ def updateCostPreference(userID, cost):
 # Get
 def getCostPreferences(userID):
     costPreferences = CostPreference.query.filter_by(userID=userID).first()
-    costPreference = [{"type": COST_PREFERENCE, "value": costPreferences.cost}]
-    return costPreference
+    if costPreferences == None:
+        return []
+    else:
+        costPreference = [{"type": COST_PREFERENCE, "value": costPreferences.cost}]
+        return costPreference
 
 
 # Field Preference
@@ -164,15 +170,87 @@ def getAllPreferences(userID):
     genderPreferences = deepcopy(getAllGenderPreferences(userID))
     gradePreferences = deepcopy(getAllGradePreferences(userID))
 
-    allPreferences = (
-        costPreferences + fieldPreferences + genderPreferences + gradePreferences
-    )
+    allPreferences = {
+        'field': fieldPreferences, 'cost': costPreferences,
+        'grade': gradePreferences, 'gender': genderPreferences
+    }
     return allPreferences
+
+
+def getPreferredOpportunities(userID):
+    preferences = getAllPreferences(userID)
+    fieldFilters = [fieldPreference["value"]
+                    for fieldPreference in preferences["field"]]
+    genderFilters = [genderPreference["value"]
+                     for genderPreference in preferences["gender"]]
+    gradeFilters = [gradePreference["value"]
+                    for gradePreference in preferences["grade"]]
+    costFilter = preferences["cost"]
+
+    startDate = datetime.now() - timedelta(days=7)
+
+    opportunities = Opportunity.query.filter(
+        Opportunity.datePosted > startDate).all()
+    filteredOpportunities = []
+
+    if len(fieldFilters) == 0:
+        fieldFilters = ["Academic Programs", "Business & Jobs", "Community Service", "Govt & Law", "Leadership & Advocacy", "Museums & Art",
+                        "Parks, Zoos, & Nature", "Engineering, Math, & CS", "Medical & Life Sciences", "Literature", "Performing Arts", "Visual Arts"]
+
+    if len(costFilter) == 0:
+        maximumCostFilter = 100000
+    else:
+        maximumCostFilter = costFilter[0]["value"]
+
+    if len(gradeFilters == 0):
+        gradeFilters = ["9", "10", "11", "12"]
+
+    if len(genderFilters) == 0:
+        genderFilters = ["CO-ED", "MALE", "FEMALE"]
+
+    for opportunity in opportunities:
+        if (
+            opportunity.field in fieldFilters
+            and opportunity.cost < maximumCostFilter
+            and opportunity.gender in genderFilters
+        ):
+            if len(gradeFilters) == 0:
+                filteredOpportunities.append(opportunity)
+            else:
+                OpportunityGrades = OpportunityGrade.query.filter_by(
+                    opportunityID=opportunity.opportunityID
+                ).all()
+                grades = [grade.grade for grade in OpportunityGrades]
+                for gradeFilter in gradeFilters:
+                    if gradeFilter in grades:
+                        filteredOpportunities.append(opportunity)
+                        break
+
+    ids = [
+        filteredOpportunity.opportunityID
+        for filteredOpportunity in filteredOpportunities
+    ]
+
+    sortedOpportunities = Opportunity.filter(Opportunity.opportunityID.in_(
+        ids)).order_by(Opportunity.datePosted.desc()).all()
+
+    for opportunity in sortedOpportunities:
+        grades = OpportunityGrade.query.filter_by(
+            opportunityID=opportunity.opportunityID
+        ).all()
+        opportunity.grades = [grade.grade for grade in grades]
+        links = OpportunityLink.query.filter_by(
+            opportunityID=opportunity.opportunityID
+        ).all()
+        opportunity.links = [link.link for link in links]
+
+    return sortedOpportunities
 
 
 def getAllPreferencesForAllUsers():
     users = getAllUsersInfo()
     emailsToPreferencesDict = {}
     for user in users:
-        emailsToPreferencesDict[user.email] = getAllPreferences(user.userID)
+        emailsToPreferencesDict[user.email] = getPreferredOpportunities(
+            user.userID)
     return emailsToPreferencesDict

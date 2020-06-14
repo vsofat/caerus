@@ -13,12 +13,12 @@
     <input style="margin-bottom: 2vh;" class="form-control" type="search" placeholder="Search" aria-label="Search">
     <select style="margin-bottom: 2vh;" class="form-control" method="post" id="sort">
         <!-- <option type="hidden" value="default">Select a sort</option> -->
-        <option value="dateposted-desc" id="dateposted-desc">Date created (↓)</option>
-        <option value="dateposted-asc" id="dateposted-asc"> Date created (↑)</option>
-        <option value="deadline-desc" id="deadline-desc"> Deadline (↓)</option>
-        <option value="deadline-asc" id="deadline-asc"> Deadline (↑)</option>
-        <option value="cost-desc" id="cost-desc"> Price (↓)</option>
-        <option value="cost-asc" id="cost-asc"> Price (↑)</option>
+        <option value="dateposted-desc" id="dateposted-desc">Date Created (Newest - Oldest)</option>
+        <option value="dateposted-asc" id="dateposted-asc"> Date Created (Oldest - Newest)</option>
+        <option value="deadline-desc" id="deadline-desc"> Deadline (Most Recent - Least Recent)</option>
+        <option value="deadline-asc" id="deadline-asc"> Deadline (Most Recent - Least Recent))</option>
+        <option value="cost-desc" id="cost-desc"> Price ($ - $$$$)</option>
+        <option value="cost-asc" id="cost-asc"> Price ($$$$ - $)</option>
     </select>
 
     <button style="margin-bottom: 2vh;" class="btn btn-primary btn-sm form-control" type="button" data-toggle="collapse" data-target="#collapseExample"
@@ -104,7 +104,7 @@
     </h3></a>
     <!-- date -->
     {% if date[opp.opportunityID][0] or date[opp.opportunityID][1] %}
-    <span> 
+    <span>
       {% if date[opp.opportunityID][0] %}
       {{ date[opp.opportunityID][0] }}
       {% endif %}
@@ -123,7 +123,7 @@
     </span>
     <!-- location -->
     <p><b>{{ opp.location }}</b></p>
-    
+
     <!-- description -->
     <p>{{ opp.description }}</p>
     <!-- links -->
@@ -139,12 +139,12 @@
       {% if opp.gender %}
       <a class="btn btn-primary btn-sm" href="/opportunities">&nbsp; {{ opp.gender }} &nbsp; </a> &nbsp;
       {% endif %}
-    
+
       <!-- cost (if free) -->
       {% if opp.cost == 0 %}
       <a class="btn btn-primary btn-sm" href="/opportunities">&nbsp; free &nbsp;</a> &nbsp;
       {% endif %}
-    
+
       <!-- grades -->
       {% for grade in opp.grades %}
       {% if grade == 9 %}

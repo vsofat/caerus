@@ -374,8 +374,16 @@ rayL -- 2020-06-13 14:44
 Setup unit testing db connection
 Create search resources tests (test_searching_existing_resources, test_searching_nonexistent_resources, test_ordering_of_search_resources_results)
 
+vishwaaS -- 2020-06-13 15:00
+Added sidebars/sidenavs to scholarships and resources pages
+Adjusted sort names to makes them easier to understand for users
+
 rayL -- 2020-06-13 17:08
 Create search scholarships tests
 
 rayL -- 2020-06-13 21:54
 Test sort/search resources
+
+kaziJ -- 2020-06-13 23:42
+Modify getAllPreferences to return a dictionary
+Created getPreferredOpportunities and replaced call to getAllPreferences in getAllPreferencesForAllUsers to getPreferredOpportunities
