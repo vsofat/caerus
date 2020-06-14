@@ -31,10 +31,14 @@ from config import Config
 os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
 
 db = models.db
-app = Flask(__name__)
-app.config.from_object(Config)
-app.secret_key = os.urandom(32)
 
+def create_app(config):
+    app = Flask(__name__)
+    app.config.from_object(config)
+    app.secret_key = os.urandom(32)
+    return app 
+
+app = create_app(Config)
 DIR = os.path.dirname(__file__) or "."
 DIR += "/"
 
