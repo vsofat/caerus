@@ -40,8 +40,11 @@ def updateCostPreference(userID, cost):
 # Get
 def getCostPreferences(userID):
     costPreferences = CostPreference.query.filter_by(userID=userID).first()
-    costPreference = [{"type": COST_PREFERENCE, "value": costPreferences.cost}]
-    return costPreference
+    if costPreferences == None:
+        return []
+    else:
+        costPreference = [{"type": COST_PREFERENCE, "value": costPreferences.cost}]
+        return costPreference
 
 
 # Field Preference
@@ -182,7 +185,7 @@ def getPreferredOpportunities(userID):
                      for genderPreference in preferences["gender"]]
     gradeFilters = [gradePreference["value"]
                     for gradePreference in preferences["grade"]]
-    maximumCostFilter = preferences["cost"][0]["value"]
+    costFilter = preferences["cost"]
 
     startDate = datetime.now() - timedelta(days=7)
 
@@ -194,8 +197,10 @@ def getPreferredOpportunities(userID):
         fieldFilters = ["Academic Programs", "Business & Jobs", "Community Service", "Govt & Law", "Leadership & Advocacy", "Museums & Art",
                         "Parks, Zoos, & Nature", "Engineering, Math, & CS", "Medical & Life Sciences", "Literature", "Performing Arts", "Visual Arts"]
 
-    if maximumCostFilter == None:
+    if len(costFilter) == None:
         maximumCostFilter = 100000
+    else:
+        maximumCostFilter = costFilter[0]["value"]
 
     if len(gradeFilters == 0):
         gradeFilters = ["9", "10", "11", "12"]
