@@ -377,3 +377,6 @@ Adjusted sort names to makes them easier to understand for users
 kaziJ -- 2020-06-13 23:42
 Modify getAllPreferences to return a dictionary
 Created getPreferredOpportunities and replaced call to getAllPreferences in getAllPreferencesForAllUsers to getPreferredOpportunities
+
+ericL -- 2020-06-14 05:24
+Fix refinement forms for middleware operations

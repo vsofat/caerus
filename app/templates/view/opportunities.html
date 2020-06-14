@@ -8,10 +8,10 @@
 
 <!-- SIDENAV -->
 <div class="sidenav">
-  <form class="w-100" method="post">
+  <form class="w-100" action="/opportunities" method="POST">
     <h5> <b> Refine Results </b> </h5> <hr>
-    <input style="margin-bottom: 2vh;" class="form-control" type="search" placeholder="Search" aria-label="Search">
-    <select style="margin-bottom: 2vh;" class="form-control" method="post" id="sort">
+    <input style="margin-bottom: 2vh;" class="form-control" type="search" name="search" placeholder="Search" aria-label="Search">
+    <select style="margin-bottom: 2vh;" class="form-control" id="sort" name="sort">
         <!-- <option type="hidden" value="default">Select a sort</option> -->
         <option value="dateposted-desc" id="dateposted-desc">Date Created (Newest - Oldest)</option>
         <option value="dateposted-asc" id="dateposted-asc"> Date Created (Oldest - Newest)</option>
@@ -31,29 +31,29 @@
     <div class="overflow-auto">
       <b> Field </b>
       <br>
-      <input type="checkbox" name="Academic Programs" value="Academic Programs">
+      <input type="checkbox" name="field-Academic Programs" value="Academic Programs">
       <label for="field1"> Academic Programs </label><br>
-      <input type="checkbox" name="Business & Jobs" value="Business & Jobs">
+      <input type="checkbox" name="field-Business & Jobs" value="Business & Jobs">
       <label for="field2"> Business & Jobs </label><br>
-      <input type="checkbox" name="Community Service" value="Community Service">
+      <input type="checkbox" name="field-Community Service" value="Community Service">
       <label for="field3"> Community Service</label><br>
-      <input type="checkbox" name="Govt & Law" value="Govt & Law">
+      <input type="checkbox" name="field-Govt & Law" value="Govt & Law">
       <label for="field4"> Govt & Law </label><br>
-      <input type="checkbox" name="Leadership & Advocacy" value="Leadership & Advocacy">
+      <input type="checkbox" name="field-Leadership & Advocacy" value="Leadership & Advocacy">
       <label for="field5"> Leadership & Advocacy </label><br>
-      <input type="checkbox" name="Museums & Art" value="Museums & Art">
+      <input type="checkbox" name="field-Museums & Art" value="Museums & Art">
       <label for="field6"> Museums & Art </label><br>
-      <input type="checkbox" name="Parks, Zoos, & Nature" value="Parks, Zoos, & Nature">
+      <input type="checkbox" name="field-Parks, Zoos, & Nature" value="Parks, Zoos, & Nature">
       <label for="field7"> Parks, Zoos, & Nature </label><br>
-      <input type="checkbox" name="Engineering, Math, & CS" value="Engineering, Math, & CS">
+      <input type="checkbox" name="field-Engineering, Math, & CS" value="Engineering, Math, & CS">
       <label for="field8"> Engineering, Math, & CS </label><br>
-      <input type="checkbox" name="Medical & Life Sciences" value="Medical & Life Sciences">
+      <input type="checkbox" name="field-Medical & Life Sciences" value="Medical & Life Sciences">
       <label for="field9"> Medical & Life Sciences</label><br>
-      <input type="checkbox" name="Literature" value="Literature">
+      <input type="checkbox" name="field-Literature" value="Literature">
       <label for="field10"> Literature</label><br>
-      <input type="checkbox" name="Performing Arts" value="Performing Arts">
+      <input type="checkbox" name="field-Performing Arts" value="Performing Arts">
       <label for="field11"> Performing Arts</label><br>
-      <input type="checkbox" name="Visual Arts" value="Visual Arts">
+      <input type="checkbox" name="field-Visual Arts" value="Visual Arts">
       <label for="field12"> Visual Arts</label><br>
       <br>
       <label for="minPrice"><b> Maximum Price </b> </label> <br>

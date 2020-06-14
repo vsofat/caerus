@@ -219,15 +219,27 @@ def logout():
     return redirect(url_for("root"))
 
 
-@app.route("/opportunities")
+@app.route("/opportunities", methods=['GET', 'POST'])
 @protected
 def opportunitiesRoute():
-    return render_template(
-        "view/opportunities.html",
-        user=users.getUserInfo(session["userid"]),
-        opportunityList=opportunities.getAllOpportunities(),
-        date=dateconv.allDateDisplay(),
-    )
+    if (request.method == 'GET'):
+        return render_template(
+            "view/opportunities.html",
+            user=users.getUserInfo(session["userid"]),
+            opportunityList=opportunities.getAllOpportunities(),
+            date=dateconv.allDateDisplay(),
+        )
+    elif (request.method == 'POST'):
+        print(request.form)
+        print(request.form['field'])
+        ## empty form case
+        # return redirect(url_for('opportunitiesRoute'))
+        return render_template(
+            "view/opportunities.html",
+            user=users.getUserInfo(session["userid"]),
+            opportunityList=opportunities.getAllOpportunities(),
+            date=dateconv.allDateDisplay(),
+        )
 
 
 @app.route("/opportunities/<opportunityID>")
