@@ -48,6 +48,10 @@ def getCostPreferences(userID):
             {"type": COST_PREFERENCE, "value": costPreferences.cost}]
         return costPreference
 
+# Delete
+def deleteCostPreferences(userID):
+    CostPreference.query.filter_by(userID=userID).delete()
+
 
 # Field Preference
 
@@ -121,11 +125,7 @@ def createPreference(userID, preferenceType, preferenceValue):
     values.
     """
     if preferenceType == COST_PREFERENCE:
-        # TODO: Is this the most optimal way to check for existence?
-        if CostPreference.query.filter_by(userID=userID).first():
-            updateCostPreference(userID, preferenceValue)
-        else:
-            createCostPreference(userID, preferenceValue)
+        createCostPreference(userID, preferenceValue)
     elif preferenceType == FIELD_PREFERENCE:
         createFieldPreference(userID, preferenceValue)
     elif preferenceType == GENDER_PREFERENCE:
@@ -151,6 +151,7 @@ def createAllPreferences(body):
 
     # Delete one to many rows in field, gender, and grade tables with a given userID, so that updated rows can be created
     # Since we have a different updating mechanism for CostPreference, it is taken care of in the createPreference function.
+    CostPreference.query.filter_by(userID=userID).delete()
     FieldPreference.query.filter_by(userID=userID).delete()
     GenderPreference.query.filter_by(userID=userID).delete()
     GradePreference.query.filter_by(userID=userID).delete()
@@ -199,6 +200,7 @@ def getPreferredOpportunities(userID):
 
     filters = {'field': fieldFilters, 'maximum-cost': maximumCostFilter,
                'grade': gradeFilters, 'gender': genderFilters}
+               
     sortedOpportunities = sortOpportunities(
         filterOpportunities(baseQuery, filters), "dateposted-desc").all()
     
