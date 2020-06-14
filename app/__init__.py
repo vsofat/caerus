@@ -421,16 +421,31 @@ def favoritesRoute():
 @protected
 def preferencesRoute():
     if (request.method == 'GET'):
+        prefs = preferences.getAllPreferences(session['userid'])
+        print(prefs)
         return render_template(
             "view/preferences.html", user=users.getUserInfo(session["userid"])
         )
     elif (request.method == 'POST'):
-        print(request.form)
-        # pref = list()
-        # preferences.createAllPreferences(pref)
-        return render_template(
-            "view/preferences.html", user=users.getUserInfo(session["userid"])
-        )
+        body = {
+            'userID': session['userid'],
+            'preferences': list()
+        }
+        f = request.form
+        maxCost = f['maximum-cost']
+        if maxCost != '':
+            body['preferences'].append({'type': 'COST_PREFERENCE', 'value': float(maxCost)})
+        for key in f.keys():
+            if 'field' in key:
+                body['preferences'].append({'type': 'FIELD_PREFERENCE', 'value': f[key]})
+            if 'grade' in key:
+                body['preferences'].append({'type': 'GRADE_PREFERENCE', 'value': f[key]})
+            if 'gender' in key:
+                body['preferences'].append({'type': 'GENDER_PREFERENCE', 'value': f[key]})
+        print(body)
+        preferences.createAllPreferences(body)
+        flash('Preferences have been set', 'success')
+        return redirect(url_for('preferencesRoute'))
 
 
 @app.route("/dumb")

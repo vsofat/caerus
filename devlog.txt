@@ -397,14 +397,17 @@ ericL -- 2020-06-14 07:26
 Create static fields list
 
 ericL -- 2020-06-14 07:48
-Add more Jinja templating and form persistance
+Add more Jinja templating and form persistence
 
 ericL -- 2020-06-14 08:08
 Create more Jinja templates for opportunity form
 
 ericL -- 2020-06-14 08:13
-Complete opportunity form persistance
-Add form persistance to scholarships and resources
+Complete opportunity form persistence
+Add form persistence to scholarships and resources
 
 ericL -- 2020-06-14 08:55
 Create basic preferences page
+
+ericL -- 2020-06-14 09:16
+Link preferences form to database

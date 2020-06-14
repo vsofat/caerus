@@ -100,7 +100,7 @@ def createGradePreference(userID, grade):
 
 # Get All
 def getAllGradePreferences(userID):
-    GradePreferences = FieldPreference.query.filter_by(userID=userID).all()
+    GradePreferences = GradePreference.query.filter_by(userID=userID).all()
     GradePreferencesArr = []
     for gradePreference in GradePreferences:
         gradePreferenceDict = {"type": GRADE_PREFERENCE,
