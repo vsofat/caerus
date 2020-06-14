@@ -113,7 +113,8 @@ def root():
                 "scopes": SCOPES,
             }
         )
-        users.updateTokens(userid, credentials.token, credentials.refresh_token)
+        users.updateTokens(userid, credentials.token,
+                           credentials.refresh_token)
         return redirect(url_for("opportunitiesRoute"))
     else:
         return render_template("landing.html")
@@ -178,7 +179,8 @@ def oauthcallback():
         return redirect(url_for("root"))
 
     if users.userExists(userid):
-        users.updateTokens(userid, credentials.token, credentials.refresh_token)
+        users.updateTokens(userid, credentials.token,
+                           credentials.refresh_token)
     else:
         users.createUser(
             userid,
@@ -236,13 +238,6 @@ def opportunityRoute(opportunityID):
         opp=opportunities.getOpportunity(opportunityID),
         date=dateconv.dateDisplay(opportunityID),
     )
-
-
-def strtodate(string):
-    if len(string) > 0:
-        return datetime.datetime.strptime(string, "%Y-%m-%d")
-    else:
-        return None
 
 
 @app.route("/opportunities/create", methods=["GET", "POST"])
