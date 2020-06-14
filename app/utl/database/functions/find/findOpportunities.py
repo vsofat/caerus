@@ -1,5 +1,5 @@
 from utl.database.models.models import db, Opportunity, OpportunityGrade, OpportunityLink
-from sqlalchemy import and_, or_, in_
+from sqlalchemy import and_, or_
 
 
 def findOpportunities(body):

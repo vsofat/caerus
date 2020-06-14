@@ -2,26 +2,6 @@ from utl.database.models.models import db, Scholarship, ScholarshipLink
 from sqlalchemy import or_
 
 
-def findScholarships(body):
-    """
-    input:
-    {
-        search: "query",
-        sort: "sort-order"
-    }
-    output:
-    body (provided input), array of scholarship objects
-    """
-    search = body["search"]
-    sort = body["sort"]
-
-    if search == "":
-        baseQuery = Scholarship.query
-        return body, sortScholarships(baseQuery, sort)
-    else:
-        return body, searchSortScholarships(search, sort)
-
-
 def sortScholarships(baseQuery, sort):
     sortOptionQueries = {
         "amount-asc": Scholarship.amount.asc(),
@@ -43,9 +23,37 @@ def sortScholarships(baseQuery, sort):
     return sortedScholarships
 
 
-def searchSortScholarships(search, sort):
-    like = "%" + search + "%"
+def searchScholarships(baseQuery, search):
+    # If search is None or ""
+    if not search:
+        return Scholarship.query
+
+    search = search.strip()
+    searchQueryString = "%" + search + "%"
     searchQuery = Scholarship.query.filter(
-        or_(Scholarship.title.like(like), Scholarship.description.like(like))
+        or_(Scholarship.title.ilike(searchQueryString), Scholarship.description.ilike(searchQueryString))
     )
-    return sortScholarships(searchQuery, sort)
+    return searchQuery
+
+
+def findScholarships(body):
+    """
+    input:
+    {
+        search: "query",
+        sort: "sort-order"
+    }
+    output:
+    body (provided input), array of scholarship objects
+    """
+    search = body["search"]
+    sort = body["sort"]
+    locatedScholarships = None
+    baseQuery = Scholarship.query
+
+    if search == "":
+        locatedScholarships = sortScholarships(baseQuery, sort).all()
+    else:
+        locatedScholarships = sortScholarships(searchScholarships(baseQuery), sort).all()
+
+    return body, locatedScholarships
