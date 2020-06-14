@@ -422,9 +422,12 @@ def favoritesRoute():
 def preferencesRoute():
     if (request.method == 'GET'):
         prefs = preferences.getAllPreferences(session['userid'])
-        print(prefs)
+        keys = prefs.keys()
+        for key in keys:
+            for i in range(len(prefs[key])):
+                prefs[key][i] = prefs[key][i]['value']
         return render_template(
-            "view/preferences.html", user=users.getUserInfo(session["userid"])
+            "view/preferences.html", user=users.getUserInfo(session["userid"]), prefs=prefs
         )
     elif (request.method == 'POST'):
         body = {
@@ -442,7 +445,6 @@ def preferencesRoute():
                 body['preferences'].append({'type': 'GRADE_PREFERENCE', 'value': f[key]})
             if 'gender' in key:
                 body['preferences'].append({'type': 'GENDER_PREFERENCE', 'value': f[key]})
-        print(body)
         preferences.createAllPreferences(body)
         flash('Preferences have been set', 'success')
         return redirect(url_for('preferencesRoute'))
