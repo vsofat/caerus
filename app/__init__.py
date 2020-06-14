@@ -21,6 +21,11 @@ from utl.database.functions.models import (
     scholarships,
     users,
 )
+from utl.database.functions.find import (
+    findOpportunities,
+    findScholarships,
+    findResources
+)
 from config import Config
 
 os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
@@ -230,14 +235,29 @@ def opportunitiesRoute():
             date=dateconv.allDateDisplay(),
         )
     elif (request.method == 'POST'):
-        print(request.form)
-        print(request.form['field'])
-        ## empty form case
-        # return redirect(url_for('opportunitiesRoute'))
+        f = request.form
+        body = {
+            'search': f['search'],
+            'sort': f['sort'],
+            'filters': {
+                'field': list(),
+                'maximum-cost': None,
+                'grade': list(),
+                'gender': list()
+            }
+        }
+        for k in f.keys():
+            if 'field' in k:
+                body['filters']['field'].append(f[k])
+            if 'grade' in k:
+                body['filters']['grade'].append(f[k])
+            if 'gender' in k:
+                body['filters']['gender'].append(f[k])
+        body, opps = findOpportunities.findOpportunities(body)
         return render_template(
             "view/opportunities.html",
             user=users.getUserInfo(session["userid"]),
-            opportunityList=opportunities.getAllOpportunities(),
+            opportunityList=opps,
             date=dateconv.allDateDisplay(),
         )
 

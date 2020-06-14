@@ -6,7 +6,11 @@ def findOpportunities(body):
     """
     input:
     {
-        filters: {field: ["ACADEMIC PROtGRAMS", "ENGINEERING, MATH, & CS", "MEDICAL & LIFE SCIENCES"], maximum-cost: 500, grade: ["JUNIOR", "SENIOR"], gender: ["CO-ED", "FEMALE"]},
+        filters: {
+            field: ["ACADEMIC PROGRAMS", "ENGINEERING, MATH, & CS", "MEDICAL & LIFE SCIENCES"],
+            maximum-cost: 500,
+            grade: ["JUNIOR", "SENIOR"],
+            gender: ["CO-ED", "FEMALE"]},
         search: "query",
         sort: "sort-order"
     }
@@ -112,8 +116,6 @@ def filterSortOpportunities(baseQuery, filters, sort):
 
 
 # sql way 1
-
-
 def filterSortOpportunities2(baseQuery, filters, sort):
     fieldFilters = filters["field"]
     maximumCostFilter = filters["maximum-cost"]
@@ -162,8 +164,6 @@ def filterSortOpportunities2(baseQuery, filters, sort):
 
 
 # sql way 2
-
-
 def filterSortOpportunities3(baseQuery, filters, sort):
     fieldFilters = filters["field"]
     maximumCostFilter = filters["maximum-cost"]

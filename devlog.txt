@@ -380,3 +380,6 @@ Created getPreferredOpportunities and replaced call to getAllPreferences in getA
 
 ericL -- 2020-06-14 05:24
 Fix refinement forms for middleware operations
+
+ericL -- 2020-06-14 05:48
+Implement finding functions in middleware
