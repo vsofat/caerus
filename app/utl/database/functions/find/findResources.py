@@ -47,12 +47,12 @@ def findResources(body):
     """
     search = body["search"]
     sort = body["sort"]
-    resources = None
+    locatedResources = None
+    baseQuery = Resource.query
 
     if search == "":
-        baseQuery = Resource.query
-        resources = sortResources(baseQuery, sort).all()
+        locatedResources = sortResources(baseQuery, sort).all()
     else:
-        resources = searchResources(sortResources(baseQuery, sort), search).all()
+        locatedResources = sortResources(searchResources(baseQuery, search), sort).all()
 
-    return body, resources
+    return body, locatedResources

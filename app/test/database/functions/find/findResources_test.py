@@ -128,7 +128,6 @@ def test_searchResources(session):
     assert len(searchResourcesResultsNone) == 3
     assert tResource1 in searchResourcesResultsNone
     assert tResource2 in searchResourcesResultsNone
-    # TODO: Sometimes, if the datePosted value is identical, the order of resource retrieval could be [<Resource 1>, <Resource 2>] or [<Resource 2>, <Resource 1>], so the check below may be faulty.
     assert searchResourcesResultsNone == [tResource1, tResource2, tResource3]
 
     # Empty search query
@@ -136,5 +135,32 @@ def test_searchResources(session):
     assert len(searchResourcesResultsEmpty) == 3
     assert tResource1 in searchResourcesResultsEmpty
     assert tResource2 in searchResourcesResultsEmpty
-    # TODO: Sometimes, if the datePosted value is identical, the order of resource retrieval could be [<Resource 1>, <Resource 2>] or [<Resource 2>, <Resource 1>], so the check below may be faulty.
     assert searchResourcesResultsEmpty == [tResource1, tResource2,tResource3]
+
+# TODO: Test sortResources(searchResources(..., ...), ...)
+
+def test_findResources(session):
+    baseQuery = Resource.query
+    search1 = "ff"
+    datePostedAscSortString = "dateposted-asc"
+    datePostedDescSortString = "dateposted-desc"
+
+    # arrange
+    tResource1 = Resource(title="ff", description="faf", link="fif")
+    tResource2 = Resource(title="ff", description="gag", link="gig")
+    tResource3 = Resource(title="hh", description="hah", link="hih")
+    tResourcesList = [tResource1, tResource2, tResource3]
+    session.add(tResource1)
+    session.add(tResource2)
+    session.add(tResource3)
+    body1 = {"search": search1, "sort": datePostedAscSortString}
+    search1 = body1["search"]
+    sort1 = body1["sort"]
+
+    # act
+    locatedResources1 = findResources(body1)
+    tLocatedResources1 = sortResources(searchResources(baseQuery, search1), sort1).all()
+
+    # assert
+    assert locatedResources1 == (body1, tLocatedResources1)
+    assert tLocatedResources1 == [tResource1, tResource2]
