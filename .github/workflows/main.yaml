@@ -1,11 +1,11 @@
 on:
   push
 
-name: Test App
+name: Caerus Unit Testing
 
 jobs:
   test:
-    name: run test.py
+    name: Test app routing and database
     runs-on: ubuntu-latest
 
     steps:
@@ -20,5 +20,9 @@ jobs:
         python-version: '3.x'
     - name: Install dependencies
       run: pip install -r requirements.txt
-    - name: Execute test.py
+    - name: Test app routing
       run: python app/test.py
+    - name: Test database functions
+      run: |
+        cd app
+        python -m pytest
