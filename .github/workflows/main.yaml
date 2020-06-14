@@ -20,5 +20,9 @@ jobs:
         python-version: '3.x'
     - name: Install dependencies
       run: pip install -r requirements.txt
-    - name: Execute test.py
+    - name: Test app routing
       run: python app/test.py
+    - name: Test database functions
+      run: |
+        cd app
+        python -m pytest
