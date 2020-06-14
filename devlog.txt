@@ -386,3 +386,6 @@ Implement finding functions in middleware
 
 ericL -- 2020-06-14 06:18
 Make minor adjustments to opportunity finding functions
+
+ericL -- 2020-06-14 06:44
+Fix inconsistencies in form queries

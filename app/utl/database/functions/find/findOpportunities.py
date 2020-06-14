@@ -29,7 +29,7 @@ def findOpportunities(body):
             return body, searchSortOpportunities(search, sort)
     elif search == "":
         baseQuery = Opportunity.query
-        return body, filterSortOpportunities3(baseQuery, filters, sort)
+        return body, filterSortOpportunities(baseQuery, filters, sort)
     else:
         return body, searchFilterSortOpportunities(search, filters, sort)
 
@@ -88,7 +88,7 @@ def filterSortOpportunities(baseQuery, filters, sort):
         gradeFilters = ["9", "10", "11", "12"]
 
     if len(genderFilters) == 0:
-        genderFilters = ["CO-ED", "MALE", "FEMALE"]
+        genderFilters = ["co-ed", "male-only", "female-only"]
 
     for opportunity in opportunities:
         if (
@@ -134,7 +134,7 @@ def filterSortOpportunities2(baseQuery, filters, sort):
         gradeFilters = ["9", "10", "11", "12"]
 
     if len(genderFilters) == 0:
-        genderFilters = ["CO-ED", "MALE", "FEMALE"]
+        genderFilters = ["co-ed", "male-only", "female-only"]
 
     IDQuery = baseQuery.with_entities(Opportunity.opportunityID).filter(
         and_(
@@ -182,7 +182,7 @@ def filterSortOpportunities3(baseQuery, filters, sort):
         gradeFilters = ["9", "10", "11", "12"]
 
     if len(genderFilters) == 0:
-        genderFilters = ["CO-ED", "MALE", "FEMALE"]
+        genderFilters = ["co-ed", "male-only", "female-only"]
 
     FirstQuery = baseQuery.filter(
         and_(
