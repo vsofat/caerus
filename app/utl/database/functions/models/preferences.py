@@ -197,7 +197,7 @@ def getPreferredOpportunities(userID):
         fieldFilters = ["Academic Programs", "Business & Jobs", "Community Service", "Govt & Law", "Leadership & Advocacy", "Museums & Art",
                         "Parks, Zoos, & Nature", "Engineering, Math, & CS", "Medical & Life Sciences", "Literature", "Performing Arts", "Visual Arts"]
 
-    if len(costFilter) == None:
+    if len(costFilter) == 0:
         maximumCostFilter = 100000
     else:
         maximumCostFilter = costFilter[0]["value"]
