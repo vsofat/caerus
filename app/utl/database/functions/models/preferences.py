@@ -164,8 +164,10 @@ def getAllPreferences(userID):
     genderPreferences = deepcopy(getAllGenderPreferences(userID))
     gradePreferences = deepcopy(getAllGradePreferences(userID))
 
-    allPreferences = {'field': fieldPreferences, 'cost': costPreferences,
-                      'grade': gradePreferences, 'gender': genderPreferences}
+    allPreferences = {
+        'field': fieldPreferences, 'cost': costPreferences,
+        'grade': gradePreferences, 'gender': genderPreferences
+    }
     return allPreferences
 
 
@@ -173,5 +175,5 @@ def getAllPreferencesForAllUsers():
     users = getAllUsersInfo()
     emailsToPreferencesDict = {}
     for user in users:
-        emailsToPreferencesDict[user.email] = getAllPreerences(user.userID)
+        emailsToPreferencesDict[user.email] = getAllPreferences(user.userID)
     return emailsToPreferencesDict
