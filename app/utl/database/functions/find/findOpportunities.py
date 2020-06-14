@@ -1,9 +1,6 @@
-from copy import deepcopy
-
 from sqlalchemy import and_, or_
 
 from utl.database.models.models import (
-    db,
     Opportunity,
     OpportunityGrade,
     OpportunityLink,
@@ -27,7 +24,10 @@ def hasFilters(filters):
 
 
 def searchOpportunities(baseQuery, search):
-    if not search and not search.strip():
+    if type(search) == str:
+        search = search.strip()
+
+    if not search:
         return baseQuery
 
     searchQueryString = "%" + search + "%"
@@ -45,29 +45,27 @@ def filterOpportunities(baseQuery, filtersDict):
     if not hasFilters(filtersDict):
         return baseQuery
 
-    fieldFilters = filtersDict["field"]
-    maximumCostFilter = filtersDict["maximum-cost"]
-    gradeFilters = filtersDict["grade"]
-    genderFilters = filtersDict["gender"]
     filters = []
 
     for key, val in filtersDict.items():
-        orFilters = []
+        subFilters = []
         if key == "field":
             for fieldFilter in val:
-                orFilters.append(Opportunity.field == fieldFilter)
-            filters.append(or_(*orFilters))
+                subFilters.append(Opportunity.field == fieldFilter)
+            filters.append(or_(*subFilters))
         elif key == "maximum-cost":
-            filters.append(Opportunity.cost == maximumCostFilter)
+            # val is max cost filter here
+            filters.append(Opportunity.cost <= val)
         elif key == "grade":
+            # Restrict search space to Opportunity objects that share their ID with OpportunityGrade objects
             filters.append(Opportunity.opportunityID == OpportunityGrade.opportunityID)
             for gradeFilter in val:
-                orFilters.append(OpportunityGrade.grade == gradeFilter)
-            filters.append(or_(*orFilters))
+                subFilters.append(OpportunityGrade.grade == gradeFilter)
+            filters.append(or_(*subFilters))
         elif key == "gender":
             for genderFilter in val:
-                orFilters.append(Opportunity.gender == genderFilter)
-            filters.append(or_(*orFilters))
+                subFilters.append(Opportunity.gender == genderFilter)
+            filters.append(or_(*subFilters))
 
     return baseQuery.filter(and_(*filters))
 

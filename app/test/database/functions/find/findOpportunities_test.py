@@ -11,11 +11,173 @@ from utl.database.functions.find.findOpportunities import (
     findOpportunities,
 )
 
+
+def test_hasFilters():
+    assert hasFilters(
+        {
+            "field": [
+                "ACADEMIC PROGRAMS",
+                "ENGINEERING, MATH, & CS",
+                "MEDICAL & LIFE SCIENCES",
+            ],
+            "maximum-cost": 500,
+            "grade": ["JUNIOR", "SENIOR"],
+            "gender": ["CO-ED", "FEMALE"],
+        }
+    )
+
+    assert hasFilters(
+        {
+            "field": [],
+            "maximum-cost": 500,
+            "grade": ["JUNIOR", "SENIOR"],
+            "gender": ["CO-ED", "FEMALE"],
+        }
+    )
+
+    assert hasFilters(
+        {
+            "field": [],
+            "maximum-cost": None,
+            "grade": [],
+            "gender": [],
+        }
+    ) == False
+
+    assert hasFilters(
+        {
+            "field": [],
+            "maximum-cost": "",
+            "grade": [],
+            "gender": [],
+        }
+    ) == False
+
+
+def test_searchOpportunities(session):
+    # arrange
+    baseQuery = Opportunity.query
+    tOpportunity1 = Opportunity(
+        title="ff",
+        description="faf",
+        field="Academic Programs",
+        gender="CO-ED",
+        location="NYC",
+        startDate=datetime.today(),
+        endDate=datetime.today(),
+        deadline=datetime.today(),
+        cost=500,
+    )
+    tOpportunity2 = Opportunity(
+        title="gg",
+        description="gag",
+        field="Business & Jobs",
+        gender="CO-ED",
+        location="NYC",
+        startDate=datetime.today(),
+        endDate=datetime.today(),
+        deadline=datetime.today(),
+        cost=500,
+    )
+    tOpportunity3 = Opportunity(
+        title="hh",
+        description="hah",
+        field="Parks, Zoos, & Nature",
+        gender="CO-ED",
+        location="NYC",
+        startDate=datetime.today(),
+        endDate=datetime.today(),
+        deadline=datetime.today(),
+        cost=500,
+    )
+    tOpportunity4 = Opportunity(
+        title="hh",
+        description="hah",
+        field="Parks, Zoos, & Nature",
+        gender="CO-ED",
+        location="NYC",
+        startDate=datetime.today(),
+        endDate=datetime.today(),
+        deadline=datetime.today(),
+        cost=500,
+    )
+    session.add(tOpportunity1)
+    session.add(tOpportunity2)
+    session.add(tOpportunity3)
+    session.add(tOpportunity4)
+    session.commit()
+
+    # act
+    # Non-empty
+    searchOpportunitiesResultsNonEmpty = searchOpportunities(baseQuery, "hh").all()
+    # None
+    searchOpportunitiesResultsNone = searchOpportunities(baseQuery, None).all()
+    # Empty
+    searchOpportunitiesResultsEmpty = searchOpportunities(baseQuery, "").all()
+    searchOpportunitiesResultsEmpty1 = searchOpportunities(baseQuery, "   ").all()
+
+    # assert
+    # Non-empty
+    assert isinstance(searchOpportunitiesResultsNonEmpty, list)
+    assert len(searchOpportunitiesResultsNonEmpty) == 2
+    assert tOpportunity3 in searchOpportunitiesResultsNonEmpty
+    assert tOpportunity4 in searchOpportunitiesResultsNonEmpty
+    assert searchOpportunitiesResultsNonEmpty == [tOpportunity3, tOpportunity4]
+    
+    # None
+    assert searchOpportunitiesResultsNone == [tOpportunity1, tOpportunity2, tOpportunity3, tOpportunity4]
+
+    # Empty
+    print(searchOpportunitiesResultsEmpty1)
+    assert searchOpportunitiesResultsEmpty == [tOpportunity1, tOpportunity2, tOpportunity3, tOpportunity4]
+    assert searchOpportunitiesResultsEmpty1 == [tOpportunity1, tOpportunity2, tOpportunity3, tOpportunity4]
+
+
 def test_filterOpportunities(session):
-    tOpportunity1 = Opportunity(title="ff", description="faf", field="Academic Programs", gender="CO-ED", location="NYC", startDate=datetime.today(), endDate=datetime.today(), deadline=datetime.today(), cost=500)
-    tOpportunity2 = Opportunity(title="gg", description="gag", field="Business & Jobs", gender="CO-ED", location="NYC", startDate=datetime.today(), endDate=datetime.today(), deadline=datetime.today(), cost=500)
-    tOpportunity3 = Opportunity(title="hh", description="hah", field="Parks, Zoos, & Nature", gender="CO-ED", location="NYC", startDate=datetime.today(), endDate=datetime.today(), deadline=datetime.today(), cost=500)
-    tOpportunity4 = Opportunity(title="hh", description="hah", field="Parks, Zoos, & Nature", gender="CO-ED", location="NYC", startDate=datetime.today(), endDate=datetime.today(), deadline=datetime.today(), cost=500)
+    tOpportunity1 = Opportunity(
+        title="ff",
+        description="faf",
+        field="Academic Programs",
+        gender="CO-ED",
+        location="NYC",
+        startDate=datetime.today(),
+        endDate=datetime.today(),
+        deadline=datetime.today(),
+        cost=500,
+    )
+    tOpportunity2 = Opportunity(
+        title="gg",
+        description="gag",
+        field="Business & Jobs",
+        gender="CO-ED",
+        location="NYC",
+        startDate=datetime.today(),
+        endDate=datetime.today(),
+        deadline=datetime.today(),
+        cost=500,
+    )
+    tOpportunity3 = Opportunity(
+        title="hh",
+        description="hah",
+        field="Parks, Zoos, & Nature",
+        gender="CO-ED",
+        location="NYC",
+        startDate=datetime.today(),
+        endDate=datetime.today(),
+        deadline=datetime.today(),
+        cost=500,
+    )
+    tOpportunity4 = Opportunity(
+        title="hh",
+        description="hah",
+        field="Parks, Zoos, & Nature",
+        gender="CO-ED",
+        location="NYC",
+        startDate=datetime.today(),
+        endDate=datetime.today(),
+        deadline=datetime.today(),
+        cost=500,
+    )
     session.add(tOpportunity1)
     session.add(tOpportunity2)
     session.add(tOpportunity3)
@@ -40,7 +202,7 @@ def test_filterOpportunities(session):
     session.add(tOpportunityGrade7)
     session.add(tOpportunityGrade8)
     session.commit()
-    
+
     # Opportunity links
     tOpportunityLink1 = OpportunityLink(opportunityID=1, link="https:f.f")
     tOpportunityLink2 = OpportunityLink(opportunityID=1, link="https:g.g")
@@ -56,7 +218,16 @@ def test_filterOpportunities(session):
     session.add(tOpportunityLink6)
     session.commit()
 
-    orFilters = [or_(Opportunity.field == "Academic Programs", Opportunity.field == "Business & Jobs"), Opportunity.cost <= 500, Opportunity.opportunityID == OpportunityGrade.opportunityID, or_(OpportunityGrade.grade == 12, OpportunityGrade.grade == 10), or_(Opportunity.gender == "CO-ED")]
+    orFilters = [
+        or_(
+            Opportunity.field == "Academic Programs",
+            Opportunity.field == "Business & Jobs",
+        ),
+        Opportunity.cost <= 500,
+        Opportunity.opportunityID == OpportunityGrade.opportunityID,
+        or_(OpportunityGrade.grade == 12, OpportunityGrade.grade == 10),
+        or_(Opportunity.gender == "CO-ED"),
+    ]
     print(Opportunity.query.filter(and_(*orFilters)))
     print(Opportunity.query.filter(and_(*orFilters)).all())
-    assert False
+    # assert False
