@@ -451,3 +451,15 @@ Test get preferred opportunities
 
 ericL -- 2020-06-14 22:37
 Fix routing of gmail.json
+
+ericL -- 2020-06-14 23:24
+Fix deletion of preferences in database
+
+ericL -- 2020-06-15 00:10
+Make email body construction cleaner
+
+ericL -- 2020-06-15 01:01
+Create AJAX request to favorite opportunity
+
+ericL -- 2020-06-15 01:25
+Parameterize AJAX request for favorites
