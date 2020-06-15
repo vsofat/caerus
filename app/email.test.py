@@ -11,7 +11,7 @@ from __init__ import app
 
 db = models.db
 
-path = os.path.dirname(__file__) + "/../gmail.json"
+path = os.path.dirname(__file__) + "./../gmail.json"
 f = open(path)
 f = json.load(f)
 
