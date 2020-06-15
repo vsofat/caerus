@@ -274,7 +274,7 @@ def opportunitiesRoute():
 @protected
 def opportunityRoute(opportunityID):
     return render_template(
-        "view/individual.html",
+        "view/opportunity.html",
         opp=opportunities.getOpportunity(opportunityID),
         date=dateconv.dateDisplay(opportunityID),
     )
@@ -346,7 +346,7 @@ def scholarshipsRoute():
 @app.route("/scholarships/<scholarshipID>")
 @protected
 def scholarshipRoute(scholarshipID):
-    return render_template("view/individual.html",
+    return render_template("view/scholarship.html",
                            scholar=scholarships.getScholarship(scholarshipID),
                            date=dateconv.dateDisplayS(scholarshipID),)
 
