@@ -460,3 +460,6 @@ Make email body construction cleaner
 
 ericL -- 2020-06-15 01:01
 Create AJAX request to favorite opportunity
+
+ericL -- 2020-06-15 01:25
+Parameterize AJAX request for favorites
