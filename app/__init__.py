@@ -328,6 +328,7 @@ def scholarshipsRoute():
             "view/scholarships.html",
             user=users.getUserInfo(session["userid"]),
             scholars=scholarships.getAllScholarships(),
+            date=dateconv.allDateDisplayS()
         )
     elif (request.method == 'POST'):
         f = request.form
@@ -338,13 +339,16 @@ def scholarshipsRoute():
             user=users.getUserInfo(session["userid"]),
             body=body,
             scholars=scholars,
+            date=dateconv.allDateDisplayS(),
         )
 
 
 @app.route("/scholarships/<scholarshipID>")
 @protected
-def scholarshipRoute():
-    return render_template("view/individual.html")
+def scholarshipRoute(scholarshipID):
+    return render_template("view/individual.html",
+                           scholar=scholarships.getScholarship(scholarshipID),
+                           date=dateconv.dateDisplayS(scholarshipID),)
 
 
 @app.route("/scholarships/create", methods=["GET", "POST"])

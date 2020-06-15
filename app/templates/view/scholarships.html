@@ -18,6 +18,8 @@
   ] %}
 
 {% block body %}
+
+<!-- SIDENAV -->
 <div class="sidenav">
   <form class="w-100" action="/scholarships" method="POST">
     <div class="d-flex flex-row justify-content-between">
@@ -50,5 +52,42 @@
       <button class="btn btn-outline-primary btn-sm w-100" type="submit">Show Results</button>
   </form>
 </div>
+
+<!-- SCHOLARSHIPS (right) -->
+<div class="scholarships">
+  {% for scholar in scholars %}
+  <div class="scholar-block">
+    <br>
+    
+    <a href="/scholarships/{{ scholar.scholarshipID }}"><h3>{{ scholar.title }} (${{ scholar.amount }})</h3></a> 
+    {% if date[scholar.scholarshipID] %}
+      <span><b>DEADLINE: {{ date[scholar.scholarshipID] }} </b></span>
+    {% endif %}
+
+    <div class="tag-block">
+      <!-- eligibility -->
+      {% if scholar.eligibility %}
+        <span><i>ELIGIBLE: {{ scholar.eligibility }}</i></span>
+      {% endif %}
+    </div>
+
+    <hr>
+  
+    <!-- description -->
+    <p>{{ scholar.description }}</p>
+    <!-- links -->
+    {% for link in scholar.links %}
+      <a href="{{ link }}">{{ link }}</a> <br>
+    {% endfor %}
+    
+    <button style="float: right; font-size: 20px; border: 0; padding: 0; background-color: transparent; outline: none;"
+      class="text-secondary star" onclick="favorite('scholarship',{{scholar.scholarshipID}});">
+      <i class="fa fa-star" aria-hidden="true"></i>
+    </button>
+    <br> <br>
+  </div>
+  {% endfor %}
+</div>
+
 <br>
 {% endblock %}
