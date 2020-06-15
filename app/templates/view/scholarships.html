@@ -53,7 +53,7 @@
 <!-- SCHOLARSHIPS (right) -->
 <div class="scholarships">
   {% for scholar in scholars %}
-  <div class="scholar-block">
+  <div id="{{ scholar.scholarshipID }}" class="scholar-block">
     <br>
 
     <a href="/scholarships/{{ scholar.scholarshipID }}">
