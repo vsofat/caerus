@@ -294,7 +294,10 @@ def createOpportunityRoute():
         f = request.form
         for key in f.keys():
             if "link" in key:
-                links.append(request.form[key])
+                link = request.form[key]
+                if link[:7] != 'http://' or link[:8] != 'https://':
+                    link = 'http://' + link
+                links.append(link)
             if "grades" == key:
                 grades = request.form[key].split(",")
         location = request.form["location"]
