@@ -28,7 +28,7 @@ from utl.database.functions.find import (
 )
 from config import Config
 
-os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
+#os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
 
 db = models.db
 
