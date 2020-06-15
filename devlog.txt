@@ -478,3 +478,6 @@ Add default 7 day reminder prior to deadline
 
 kaziJ -- 2020-06-15 12:52
 Update favorites backend to prevent double favoriting
+
+ericL -- 2020-06-15 13:19
+Update favorite function for double favoriting

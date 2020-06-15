@@ -14,13 +14,13 @@ def saveOpportunity(userID, opportunityID):
     exists = db.session.query(SavedOpportunity.query.filter(
         SavedOpportunity.userID == userID, SavedOpportunity.opportunityID == opportunityID).exists()).scalar()
     if exists:
-        return "Could not favorite opportunity because user has already favorited this opportunity"
+        return False
     else:
         opportunity = SavedOpportunity(
             userID=userID, opportunityID=opportunityID)
         db.session.add(opportunity)
         db.session.commit()
-        return "Successfully favorited opportunity"
+        return True
 
 
 def unsaveOpportunity(userID, opportunityID):

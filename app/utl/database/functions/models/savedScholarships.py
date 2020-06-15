@@ -14,13 +14,13 @@ def saveScholarship(userID, scholarshipID):
     exists = db.session.query(SavedScholarship.query.filter(
         SavedScholarship.userID == userID, SavedScholarship.scholarshipID == scholarshipID).exists()).scalar()
     if exists:
-        return "Could not favorite scholarship because user has already favorited this scholarship"
+        return False
     else:
         scholarship = SavedScholarship(
             userID=userID, scholarshipID=scholarshipID)
         db.session.add(scholarship)
         db.session.commit()
-        return "Successfully favorited scholarship"
+        return True
 
 
 def unsaveScholarship(userID, scholarshipID):
