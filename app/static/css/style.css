@@ -89,21 +89,31 @@ body {
   cursor: pointer;
 }
 
+.side-container {
+     width: 25vw;
+     height: auto;;
+     position: fixed;
+     z-index: 1;
+}
+
 .sidenav {
-  width: 25vw;
-  height: auto;
-  padding: 2vw;
-  position: fixed;
-  z-index: 1;
-  background-color: white;
-  border: 1px solid gray;
-  border-radius: 10px;
-  overflow-x: hidden;
-  padding-top: 20px;
+     padding-top: 20px;
+     padding: 2vw;
+     background-color: white;
+     border: 1px solid gray;
+     border-radius: 10px;
+     overflow-x: hidden;
+}
+
+#favorite-side {
+     height: auto;
+     padding: 2vw;
+     z-index: 1;
+     margin-top: 20px;
 }
 
 .opportunities, .scholarships {
-width: 61vw;
+     width: 61vw;
      float: right;
 }
 
