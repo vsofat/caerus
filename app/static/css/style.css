@@ -116,6 +116,11 @@ width: 61vw;
      margin-bottom: 2vh;
 }
 
+.tag-block a {
+     color: white !important;
+}
+
+
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
