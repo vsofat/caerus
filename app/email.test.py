@@ -11,7 +11,10 @@ from __init__ import app
 
 db = models.db
 
-path = os.path.dirname(__file__) + "/../gmail.json"
+DIR = os.path.dirname(__file__) or "."
+DIR += "/"
+path = DIR + "../gmail.json"
+
 f = open(path)
 f = json.load(f)
 
@@ -20,6 +23,7 @@ pwd = f['password']
 
 intro = "Here are all the new opportunities posted on Caerus within the past week that you might be interested in:"
 baseurl = "http://127.0.0.1:5000"
+
 
 class Notifier:
     def __init__(self, username, password, host='smtp.gmail.com', port=587):
@@ -70,5 +74,6 @@ if __name__ == "__main__":
                 </html>
                 """
                 time = datetime.datetime.now()
-                notifier.sendmail([user], f"Caerus Weekly Update -- {time.date().isoformat()}", html)
+                notifier.sendmail(
+                    [user], f"Caerus Weekly Update -- {time.date().isoformat()}", html)
                 print(f"Sent email to {user} -- {time.isoformat()}")
