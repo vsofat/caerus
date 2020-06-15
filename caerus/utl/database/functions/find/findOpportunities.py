@@ -15,9 +15,18 @@ def hasFilters(filters):
     output:
     True or False
     """
+    maximumCostFilter = filters["maximum-cost"]
+    maximumCostHasFilter = False
+    if type(maximumCostFilter) == int or type(maximumCostFilter) == float:
+        return True
+    elif type(maximumCostFilter) == str:
+        maximumCostFilter = maximumCostFilter.strip()
+        if maximumCostFilter == "":
+            maximumCostHasFilter = False
+
     return (
-        len(filters["field"])
-        or filters["maximum-cost"]
+        maximumCostHasFilter
+        or len(filters["field"])
         or len(filters["grade"])
         or len(filters["gender"])
     )
@@ -56,13 +65,14 @@ def filterOpportunities(baseQuery, filtersDict):
         elif key == "maximum-cost":
             if type(val) == str:
                 val = val.strip()
-            if not val:
+            if not val and val != 0 and val != 0.0:
                 continue
             # val is max cost filter here
             filters.append(Opportunity.cost <= val)
         elif key == "grade":
             # Restrict search space to Opportunity objects that share their ID with OpportunityGrade objects
-            filters.append(Opportunity.opportunityID == OpportunityGrade.opportunityID)
+            if len(val) != 0:
+                filters.append(Opportunity.opportunityID == OpportunityGrade.opportunityID)
             for gradeFilter in val:
                 subFilters.append(OpportunityGrade.grade == gradeFilter)
             filters.append(or_(*subFilters))

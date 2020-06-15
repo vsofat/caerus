@@ -256,6 +256,13 @@ def test_filterOpportunities(session):
         "gender": [],
     }
 
+    emptyBody4 = {
+        "field": [],
+        "maximum-cost": 300,
+        "grade": [],
+        "gender": [],
+    }
+
     # Semi-empty
     semiEmptyBody1 = body = {
         "field": ["ACADEMIC PROGRAMS", "PARKS, ZOOS, & NATURE",],
@@ -300,6 +307,8 @@ def test_filterOpportunities(session):
     # "   "
     filteredOpportunitiesQuery4 = filterOpportunities(baseQuery, emptyBody3)
     filteredOpportunities4 = filteredOpportunitiesQuery4.all()
+    filteredOpportunitiesQuery40 = filterOpportunities(baseQuery, emptyBody4)
+    filteredOpportunities40 = filteredOpportunitiesQuery40.all()
 
     # Semi-empty filters
     filteredOpportunitiesQuery5 = filterOpportunities(baseQuery, semiEmptyBody1)
@@ -316,10 +325,117 @@ def test_filterOpportunities(session):
     assert filteredOpportunities2 == [tOpportunity1, tOpportunity2, tOpportunity3, tOpportunity4]
     assert filteredOpportunities3 == [tOpportunity1, tOpportunity2, tOpportunity3, tOpportunity4]
     assert filteredOpportunities4 == [tOpportunity1, tOpportunity2, tOpportunity3, tOpportunity4]
+    assert filteredOpportunities40 == []
     assert filteredOpportunities5 == [tOpportunity3, tOpportunity4]
     assert filteredOpportunities6 == [tOpportunity2, tOpportunity4]
     assert filteredOpportunities7 == [tOpportunity1, tOpportunity4]
     assert filteredOpportunities8 == [tOpportunity4]
+
+
+def test_filterOpportunities1(session):
+    # arrange
+    baseQuery = Opportunity.query
+    tOpportunity1 = Opportunity(
+        title="ff",
+        description="faf",
+        field="ACADEMIC PROGRAMS",
+        gender="CO-ED",
+        location="NYC",
+        startDate=datetime.today(),
+        endDate=datetime.today(),
+        deadline=datetime.today(),
+        cost=0,
+    )
+    tOpportunity2 = Opportunity(
+        title="gg",
+        description="gag",
+        field="BUSINESS & JOBS",
+        gender="CO-ED",
+        location="NYC",
+        startDate=datetime.today(),
+        endDate=datetime.today(),
+        deadline=datetime.today(),
+        cost=50,
+    )
+    tOpportunity3 = Opportunity(
+        title="hh",
+        description="hah",
+        field="PARKS, ZOOS, & NATURE",
+        gender="CO-ED",
+        location="NYC",
+        startDate=datetime.today(),
+        endDate=datetime.today(),
+        deadline=datetime.today(),
+        cost=100,
+    )
+    tOpportunity4 = Opportunity(
+        title="hh",
+        description="hah",
+        field="PARKS, ZOOS, & NATURE",
+        gender="CO-ED",
+        location="NYC",
+        startDate=datetime.today(),
+        endDate=datetime.today(),
+        deadline=datetime.today(),
+        cost=200,
+    )
+    session.add(tOpportunity1)
+    session.add(tOpportunity2)
+    session.add(tOpportunity3)
+    session.add(tOpportunity4)
+    session.commit()
+
+    semiEmptyBody1 = {
+        "field": [],
+        "maximum-cost": 0,
+        "grade": [],
+        "gender": [],
+    }
+
+    semiEmptyBody2 = {
+        "field": [],
+        "maximum-cost": 30,
+        "grade": [],
+        "gender": [],
+    }
+
+    semiEmptyBody3 = {
+        "field": [],
+        "maximum-cost": 50,
+        "grade": [],
+        "gender": [],
+    }
+
+    semiEmptyBody4 = {
+        "field": [],
+        "maximum-cost": 300,
+        "grade": [],
+        "gender": [],
+    }
+    
+    # act
+    filteredOpportunitiesQuery1 = filterOpportunities(baseQuery, semiEmptyBody1)
+    filteredOpportunities1 = filteredOpportunitiesQuery1.all()
+    filteredOpportunitiesQuery2 = filterOpportunities(baseQuery, semiEmptyBody2)
+    filteredOpportunities2 = filteredOpportunitiesQuery2.all()
+    filteredOpportunitiesQuery3 = filterOpportunities(baseQuery, semiEmptyBody3)
+    filteredOpportunities3 = filteredOpportunitiesQuery3.all()
+    filteredOpportunitiesQuery4 = filterOpportunities(baseQuery, semiEmptyBody4)
+    filteredOpportunities4 = filteredOpportunitiesQuery4.all()
+    print(hasFilters(semiEmptyBody1))
+    print(filteredOpportunitiesQuery1)
+    print(filteredOpportunities1)
+    print(hasFilters(semiEmptyBody2))
+    print(filteredOpportunities2)
+    print(hasFilters(semiEmptyBody3))
+    print(filteredOpportunities3)
+    print(hasFilters(semiEmptyBody4))
+    print(filteredOpportunities4)
+    # assert
+    assert filteredOpportunities1 == [tOpportunity1]
+    assert filteredOpportunities2 == [tOpportunity1]
+    assert filteredOpportunities3 == [tOpportunity1, tOpportunity2]
+    assert filteredOpportunities4 == [tOpportunity1, tOpportunity2, tOpportunity3, tOpportunity4]
 
 
 def test_sortOpportunities(session):

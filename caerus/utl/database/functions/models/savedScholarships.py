@@ -11,9 +11,16 @@ def getSavedScholarships(userID):
 
 
 def saveScholarship(userID, scholarshipID):
-    scholarship = SavedScholarship(userID=userID, scholarshipID=scholarshipID)
-    db.session.add(scholarship)
-    db.session.commit()
+    exists = db.session.query(SavedScholarship.query.filter(
+        SavedScholarship.userID == userID, SavedScholarship.scholarshipID == scholarshipID).exists()).scalar()
+    if exists:
+        return False
+    else:
+        scholarship = SavedScholarship(
+            userID=userID, scholarshipID=scholarshipID)
+        db.session.add(scholarship)
+        db.session.commit()
+        return True
 
 
 def unsaveScholarship(userID, scholarshipID):

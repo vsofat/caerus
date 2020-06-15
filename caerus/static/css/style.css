@@ -89,25 +89,35 @@ body {
   cursor: pointer;
 }
 
-.sidenav {
-  width: 25vw;
-  height: auto;
-  padding: 2vw;
-  position: fixed;
-  z-index: 1;
-  background-color: white;
-  border: 1px solid gray;
-  border-radius: 10px;
-  overflow-x: hidden;
-  padding-top: 20px;
+.side-container {
+     width: 25vw;
+     height: auto;;
+     position: fixed;
+     z-index: 1;
 }
 
-.opportunities {
-width: 61vw;
+.sidenav {
+     padding-top: 20px;
+     padding: 2vw;
+     background-color: white;
+     border: 1px solid gray;
+     border-radius: 10px;
+     overflow-x: hidden;
+}
+
+#favorite-side {
+     height: auto;
+     padding: 2vw;
+     z-index: 1;
+     margin-top: 20px;
+}
+
+.opportunities, .scholarships {
+     width: 61vw;
      float: right;
 }
 
-.opp-block {
+.opp-block, .scholar-block {
      width: 100%;
      padding: 1vh 2vw;
      background-color: white;
@@ -126,12 +136,12 @@ div.overflow-auto {
   width: auto;
 }
 
-.tag-block .star {
+.star {
      color: #ff8ff0 !important;
      transition: 250ms;
 }
 
-.tag-block .star:hover {
+.star:hover {
      color: rgb(0,123,255) !important;
      transition: 250ms;
 }

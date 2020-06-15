@@ -21,8 +21,8 @@ jobs:
     - name: Install dependencies
       run: pip install -r requirements.txt
     - name: Test app routing
-      run: python app/test.py
+      run: python caerus/test.py
     - name: Test database functions
       run: |
-        cd app
+        cd caerus
         python -m pytest

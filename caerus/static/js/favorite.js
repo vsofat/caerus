@@ -1,15 +1,18 @@
 let favorite = (type, id) => {
     let xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
+    xhttp.onreadystatechange = async function() {
         if (this.readyState == 4 && this.status == 200) {
-            // let flash = `
-            // <div class="sidenav alert alert-success text-align-center alert-dismissible fade show" role="alert">
-            //     ${this.responseText}
-            //     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            //         <span aria-hidden="true">&times;</span>
-            //    </button>
-            // </div>`;
-            // document.body.innerHTML += flash;
+            let flash = `
+            <div class="alert alert-warning text-align-center alert-dismissible fade show w-100" role="alert"
+                id="favorite-${type}-${id}">
+                ${this.responseText}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+               </button>
+            </div>`;
+            document.getElementById('favorite-side').innerHTML += flash;
+            await sleep(1500);
+            $(`#favorite-${type}-${id}`).alert('close');
         }
     };
     xhttp.open('GET', `/favorite/${type}/${id}`, true);
@@ -24,4 +27,12 @@ let unfavorite = (type, id) => {
     };
     xhttp.open('GET', `/unfavorite/${type}/${id}`, true);
     xhttp.send();
+};
+
+const sleep = (time) => {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve();
+        }, time);
+    });
 };

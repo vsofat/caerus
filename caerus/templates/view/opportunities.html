@@ -20,43 +20,36 @@
 {% block body %}
 
 <!-- SIDENAV -->
-<div class="sidenav">
-  <form class="w-100" action="/opportunities" method="POST">
-    <div class="d-flex flex-row justify-content-between">
-      <span class="h5"><b>Refine Results</b></span>
-      {% if body %}
-      <a class="btn btn-outline-danger btn-sm w-25" href="/opportunities">Clear</a>
-      {% endif %}
-    </div>
-    <hr>
-    <input style="margin-bottom: 2vh;" class="form-control" type="search" name="search" placeholder="Search" aria-label="Search"
-      {% if body %}
-      value="{{ body['search'] }}"
-      {% endif %}
-    >
-    <select style="margin-bottom: 2vh;" class="form-control" id="sort" name="sort">
-      {% if body %}
+<div class="side-container">
+  <div class="sidenav">
+    <form class="w-100" action="/opportunities" method="POST">
+      <div class="d-flex flex-row justify-content-between">
+        <span class="h5"><b>Refine Results</b></span>
+        {% if body %}
+        <a class="btn btn-outline-danger btn-sm w-25" href="/opportunities">Clear</a>
+        {% endif %}
+      </div>
+      <hr>
+      <input style="margin-bottom: 2vh;" class="form-control" type="search" name="search" placeholder="Search"
+        aria-label="Search" {% if body %} value="{{ body['search'] }}" {% endif %}>
+      <select style="margin-bottom: 2vh;" class="form-control" id="sort" name="sort">
+        {% if body %}
         {% for value, display in sort_options %}
-          <option value="{{ value }}"
-            {% if body['sort'] == value %}
-            selected
-            {% endif %}
-          >{{ display }}</option>
+        <option value="{{ value }}" {% if body['sort'] == value %} selected {% endif %}>{{ display }}</option>
         {% endfor %}
-      {% else %}
+        {% else %}
         {% for value, display in sort_options %}
-          <option value="{{ value }}">{{ display }}</option>
+        <option value="{{ value }}">{{ display }}</option>
         {% endfor %}
-      {% endif %}
-    </select>
+        {% endif %}
+      </select>
 
-    <button style="margin-bottom: 2vh;" class="btn btn-primary btn-sm form-control" type="button" data-toggle="collapse" data-target="#collapse-filters"
-      aria-expanded="false" aria-controls="collapse-filters">
-      Filter &#9662;
-    </button>
-    <br>
-    <div id="collapse-filters" style="margin-bottom: 2vh;"
-      class="collapse
+      <button style="margin-bottom: 2vh;" class="btn btn-primary btn-sm form-control" type="button"
+        data-toggle="collapse" data-target="#collapse-filters" aria-expanded="false" aria-controls="collapse-filters">
+        Filter &#9662;
+      </button>
+      <br>
+      <div id="collapse-filters" style="margin-bottom: 2vh;" class="collapse
 
       {% if body and (
               body['filters']['field']|length > 0 or body['filters']['maximum-cost'] != None or
@@ -64,81 +57,70 @@
             ) %}
       show
       {% endif %}
-      "
-    >
-    <div class="card card-body">
-    <div class="overflow-auto">
-      <b> Field </b>
-      <br>
-      {% if body %}
-        {% for field in fields %}
-          <input type="checkbox" name="field-{{ field }}" value="{{ field }}"
-            {% if field in body['filters']['field'] %}
-              checked
+      ">
+        <div class="card card-body">
+          <div class="overflow-auto">
+            <b> Field </b>
+            <br>
+            {% if body %}
+            {% for field in fields %}
+            <input type="checkbox" name="field-{{ field }}" value="{{ field }}"
+              {% if field in body['filters']['field'] %} checked {% endif %}>
+            <label>{{field}}</label><br>
+            {% endfor %}
+            {% else %}
+            {% for field in fields %}
+            <input type="checkbox" name="field-{{ field }}" value="{{ field }}">
+            <label>{{field}}</label><br>
+            {% endfor %}
             {% endif %}
-          >
-          <label>{{field}}</label><br>
-        {% endfor %}
-      {% else %}
-        {% for field in fields %}
-          <input type="checkbox" name="field-{{ field }}" value="{{ field }}">
-          <label>{{field}}</label><br>
-        {% endfor %}
-      {% endif %}
-      <br>
-      <label for="minPrice"><b> Maximum Price </b> </label> <br>
-      <div style="width: 16vw;" class="input-group">
-        <div class="input-group-prepend">
-          <div class="input-group-text" id="btnGroupAddon">$</div>
-        </div>
-        <input type="number" class="form-control" name="maximum-cost" min=0 step=0.01 placeholder="Enter price"
-          {% if body %}
-            {% if body['filters']['maximum-cost'] != None %}
-              value="{{ body['filters']['maximum-cost'] }}"
-            {% endif %}
-          {% endif %}
-        >
-      </div>
-      <br>
+            <br>
+            <label for="minPrice"><b> Maximum Price </b> </label> <br>
+            <div style="width: 16vw;" class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text" id="dollar-sign"><b>$</b></div>
+              </div>
+              <input type="number" class="form-control" name="maximum-cost" min=0 step=0.01 placeholder="Enter price"
+                {% if body %} {% if body['filters']['maximum-cost'] != None %}
+                value="{{ body['filters']['maximum-cost'] }}" {% endif %} {% endif %}>
+            </div>
+            <br>
 
-      <b> Grade </b> <br>
-      {% if body %}
-        {% for value, display in grades %}
-        <input type="checkbox" name="grade-{{ value }}" value="{{ value }}"
-          {% if value in body['filters']['grade'] %}
-          checked
-          {% endif %}
-        >
-        <label>{{ display }}</label><br>
-        {% endfor %}
-      {% else %}
-        {% for value, display in grades %}
-        <input type="checkbox" name="grade-{{ value }}" value="{{ value }}">
-        <label>{{ display }}</label><br>
-        {% endfor %}
-      {% endif %}
-      <br>
-      <b> Gender </b> <br>
-      {% if body %}
-        {% for value, display in genders %}
-          <input type="checkbox" name="gender-{{ value }}" value="{{ value }}"
-            {% if value in body['filters']['gender'] %}
-              checked
+            <b> Grade </b> <br>
+            {% if body %}
+            {% for value, display in grades %}
+            <input type="checkbox" name="grade-{{ value }}" value="{{ value }}"
+              {% if value in body['filters']['grade'] %} checked {% endif %}>
+            <label>{{ display }}</label><br>
+            {% endfor %}
+            {% else %}
+            {% for value, display in grades %}
+            <input type="checkbox" name="grade-{{ value }}" value="{{ value }}">
+            <label>{{ display }}</label><br>
+            {% endfor %}
             {% endif %}
-          >
-          <label> {{ display }}</label><br>
-        {% endfor %}
-      {% else %}
-        {% for value, display in genders %}
-          <input type="checkbox" name="gender-{{ value }}" value="{{ value }}">
-          <label> {{ display }}</label><br>
-        {% endfor %}
-      {% endif %}
-      </div>
-      </div>
+            <br>
+            <b> Gender </b> <br>
+            {% if body %}
+            {% for value, display in genders %}
+            <input type="checkbox" name="gender-{{ value }}" value="{{ value }}"
+              {% if value in body['filters']['gender'] %} checked {% endif %}>
+            <label> {{ display }}</label><br>
+            {% endfor %}
+            {% else %}
+            {% for value, display in genders %}
+            <input type="checkbox" name="gender-{{ value }}" value="{{ value }}">
+            <label> {{ display }}</label><br>
+            {% endfor %}
+            {% endif %}
+          </div>
+        </div>
       </div>
       <button class="btn btn-outline-primary btn-sm w-100" type="submit">Show Results</button>
-  </form>
+    </form>
+  </div>
+  <div id="favorite-side">
+  </div>
 </div>
 
 <!-- OPPORTUNTIIES (right) -->
@@ -146,11 +128,13 @@
   {% for opp in opportunityList %}
   <div class="opp-block">
     <br>
-    <a href="/opportunities/{{ opp.opportunityID }}"><h3>{{ opp.title }}</a> &nbsp;
+    <a href="/opportunities/{{ opp.opportunityID }}">
+      <h3>{{ opp.title }}
+    </a> &nbsp;
     <!-- field -->
-      {% if opp.field %}
-      <a class="btn btn-primary btn-sm" href="/opportunities">&nbsp;  {{ opp.field }} &nbsp; </a> &nbsp;
-      {% endif %}
+    {% if opp.field %}
+    <a class="btn btn-primary btn-sm" href="/opportunities">&nbsp; {{ opp.field }} &nbsp; </a> &nbsp;
+    {% endif %}
     </h3></a>
     <!-- date -->
     {% if date[opp.opportunityID][0] or date[opp.opportunityID][1] %}
@@ -161,15 +145,15 @@
       {% if date[opp.opportunityID][1] %}
       - {{ date[opp.opportunityID][1] }}
       {% endif %}
-    {% endif %}
+      {% endif %}
 
-    {% if date[opp.opportunityID][2] %}
-    <br>
-    <b>DEADLINE: {{ date[opp.opportunityID][2] }} </b>
-    {% endif %}
+      {% if date[opp.opportunityID][2] %}
+      <br>
+      <b>DEADLINE: {{ date[opp.opportunityID][2] }} </b>
+      {% endif %}
 
-    <br>
-    <hr>
+      <br>
+      <hr>
     </span>
     <!-- location -->
     <p><b>{{ opp.location }}</b></p>
@@ -208,8 +192,9 @@
       {% endif %}
       {% endfor %}
 
-      <button style="float: right; font-size: 20px; border: 0; padding: 0; background-color: transparent; outline: none;"
-              class="text-secondary star" onclick="favorite('opportunity',{{opp.opportunityID}});">
+      <button
+        style="float: right; font-size: 20px; border: 0; padding: 0; background-color: transparent; outline: none;"
+        class="text-secondary star" onclick="favorite('opportunity',{{opp.opportunityID}});">
         <i class="fa fa-star" aria-hidden="true"></i>
       </button>
     </div>

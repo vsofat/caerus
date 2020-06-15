@@ -475,3 +475,27 @@ Add unfavorite route
 
 ericL -- 2020-06-15 03:22
 Add default 7 day reminder prior to deadline
+
+kaziJ -- 2020-06-15 12:52
+Update favorites backend to prevent double favoriting
+
+ericL -- 2020-06-15 13:19
+Update favorite function for double favoriting
+
+ericL -- 2020-06-15 14:15
+Fix notification utility
+
+ericL -- 2020-06-15 14:50
+Add fading flash for favorites
+
+ericL -- 2020-06-15 16:10
+Complete reminder email script
+
+ericL -- 2020-06-15 16:26
+Add dollar sign preprend
+
+ericL -- 2020-06-15 16:35
+Add generic deletion route
+
+ericL -- 202-06-15 16:51
+Add deletion AJAX function

@@ -1,0 +1,28 @@
+{% extends "template.html" %}
+
+{% block title %}{{ scholar.title }} (${{ scholar.amount }}){% endblock %}
+
+{% block heading %}
+<a class="text-muted" href="/scholarships"><small>&#8592; back to scholarships</small></a>
+<h1 class="title">{{ scholar.title }} (${{ scholar.amount }})</h1>
+
+<br>
+
+{% if date %}
+<h3 class="subtitle">DEADLINE: {{ date[0] }}</h3>
+{% endif %}
+{% if scholar.eligibility %}
+<h3 class="subtitle"><i>ELIGIBLE: {{ scholar.eligibility }}</i></h3>
+{% endif %}
+
+<hr>
+
+<!-- description -->
+<p>{{ scholar.description }}</p>
+
+<!-- links -->
+{% for link in scholar.links %}
+<a href="{{ link }}">{{ link }}</a> <br>
+{% endfor %}
+
+{% endblock %}
