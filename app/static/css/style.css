@@ -102,12 +102,12 @@ body {
   padding-top: 20px;
 }
 
-.opportunities {
+.opportunities, .scholarships {
 width: 61vw;
      float: right;
 }
 
-.opp-block {
+.opp-block, .scholar-block {
      width: 100%;
      padding: 1vh 2vw;
      background-color: white;
@@ -126,12 +126,12 @@ div.overflow-auto {
   width: auto;
 }
 
-.tag-block .star {
+.star {
      color: #ff8ff0 !important;
      transition: 250ms;
 }
 
-.tag-block .star:hover {
+.star:hover {
      color: rgb(0,123,255) !important;
      transition: 250ms;
 }

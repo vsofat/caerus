@@ -463,3 +463,21 @@ Create AJAX request to favorite opportunity
 
 ericL -- 2020-06-15 01:25
 Parameterize AJAX request for favorites
+
+ericL -- 2020-06-15 01:40
+Add persistence to filter collapse div in sidenav form
+
+ericL -- 2020-06-15 02:00
+Add clear button to sidenav form
+
+ericL -- 2020-06-15 02:16
+Add unfavorite route
+
+ericL -- 2020-06-15 03:22
+Add default 7 day reminder prior to deadline
+
+kaziJ -- 2020-06-15 12:52
+Update favorites backend to prevent double favoriting
+
+ericL -- 2020-06-15 13:19
+Update favorite function for double favoriting

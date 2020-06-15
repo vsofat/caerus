@@ -11,9 +11,16 @@ def getSavedOpportunities(userID):
 
 
 def saveOpportunity(userID, opportunityID):
-    opportunity = SavedOpportunity(userID=userID, opportunityID=opportunityID)
-    db.session.add(opportunity)
-    db.session.commit()
+    exists = db.session.query(SavedOpportunity.query.filter(
+        SavedOpportunity.userID == userID, SavedOpportunity.opportunityID == opportunityID).exists()).scalar()
+    if exists:
+        return False
+    else:
+        opportunity = SavedOpportunity(
+            userID=userID, opportunityID=opportunityID)
+        db.session.add(opportunity)
+        db.session.commit()
+        return True
 
 
 def unsaveOpportunity(userID, opportunityID):

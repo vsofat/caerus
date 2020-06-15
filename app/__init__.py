@@ -274,7 +274,7 @@ def opportunitiesRoute():
 @protected
 def opportunityRoute(opportunityID):
     return render_template(
-        "view/individual.html",
+        "view/opportunity.html",
         opp=opportunities.getOpportunity(opportunityID),
         date=dateconv.dateDisplay(opportunityID),
     )
@@ -328,6 +328,7 @@ def scholarshipsRoute():
             "view/scholarships.html",
             user=users.getUserInfo(session["userid"]),
             scholars=scholarships.getAllScholarships(),
+            date=dateconv.allDateDisplayS()
         )
     elif (request.method == 'POST'):
         f = request.form
@@ -338,13 +339,16 @@ def scholarshipsRoute():
             user=users.getUserInfo(session["userid"]),
             body=body,
             scholars=scholars,
+            date=dateconv.allDateDisplayS(),
         )
 
 
 @app.route("/scholarships/<scholarshipID>")
 @protected
-def scholarshipRoute():
-    return render_template("view/individual.html")
+def scholarshipRoute(scholarshipID):
+    return render_template("view/scholarship.html",
+                           scholar=scholarships.getScholarship(scholarshipID),
+                           date=dateconv.dateDisplayS(scholarshipID),)
 
 
 @app.route("/scholarships/create", methods=["GET", "POST"])
@@ -425,12 +429,39 @@ def favoritesRoute():
 
 @app.route("/favorite/<t>/<saveid>")
 @protected
-def favoriteOpportunity(t, saveid):
+def favorite(t, saveid):
     if t == 'opportunity':
-        savedOpportunities.saveOpportunity(session['userid'], saveid)
+        saved = savedOpportunities.saveOpportunity(session['userid'], saveid)
+        if saved:
+            opp = opportunities.getOpportunity(saveid)
+            if (opp.deadline != None):
+                reminder = opp.deadline - datetime.timedelta(days=7)
+                savedOpportunities.addOpportunityReminder(
+                    session['userid'], saveid, reminder)
+            return "Successfully favorited opportunity"
+        else:
+            return "Could not favorite opportunity because user has already favorited this opportunity"
     elif t == 'scholarship':
-        savedScholarships.saveScholarship(session['userid'], saveid)
-    return f"Favorited the {t}"
+        saved = savedScholarships.saveScholarship(session['userid'], saveid)
+        if saved:
+            scholar = scholarships.getScholarship(saveid)
+            if (scholar.deadline != None):
+                reminder = scholar.deadline - datetime.timedelta(days=7)
+                savedScholarships.addScholarshipReminder(
+                    session['userid'], saveid, reminder)
+            return "Successfully favorited scholarship"
+        else:
+            return "Could not favorite scholarship because user has already favorited this scholarship"
+
+
+@app.route("/unfavorite/<t>/<saveid>")
+@protected
+def unfavorite(t, saveid):
+    if t == 'opportunity':
+        savedOpportunities.unsaveOpportunity(session['userid'], saveid)
+    elif t == 'scholarship':
+        savedScholarships.unsaveScholarship(session['userid'], saveid)
+    return f"Unfavorited the {t}"
 
 
 @app.route("/preferences", methods=['GET', 'POST'])

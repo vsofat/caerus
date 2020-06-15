@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from .database.models.models import Opportunity
+from .database.models.models import Opportunity, Scholarship
 # from models import db, Opportunity
 
 def allDateDisplay():
@@ -27,4 +27,19 @@ def dateDisplay(opportunityID):
           dateList.append(opportunity.endDate.strftime("%B %d, %Y"))
      if (opportunity.deadline):
           dateList.append(opportunity.deadline.strftime("%A, %B %d, %Y"))
+     return dateList
+
+def allDateDisplayS():
+     scholarships = Scholarship.query.order_by(Scholarship.datePosted.desc()).all()
+     dateDict = {}
+     for scholarship in scholarships:
+          if (scholarship.deadline):
+               dateDict[scholarship.scholarshipID] = scholarship.deadline.strftime("%A, %B %d, %Y")
+     return dateDict
+
+def dateDisplayS(scholarshipID):
+     scholarship = Scholarship.query.filter_by(scholarshipID=scholarshipID).first()     
+     dateList = []
+     if (scholarship.deadline):
+          dateList.append(scholarship.deadline.strftime("%A, %B %d, %Y"))
      return dateList

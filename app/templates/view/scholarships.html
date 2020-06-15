@@ -4,6 +4,10 @@
 
 {% block title %}Scholarships{% endblock %}
 
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/favorite.js') }}"></script>
+{% endblock %}
+
 {% set sort_options = [
   ('dateposted-desc', 'Date Created (Newest - Oldest)'),
   ('dateposted-asc', 'Date Created (Oldest - Newest)'),
@@ -14,9 +18,17 @@
   ] %}
 
 {% block body %}
+
+<!-- SIDENAV -->
 <div class="sidenav">
   <form class="w-100" action="/scholarships" method="POST">
-    <h5> <b> Refine Results </b> </h5> <hr>
+    <div class="d-flex flex-row justify-content-between">
+      <span class="h5"><b>Refine Results</b></span>
+      {% if body %}
+      <a class="btn btn-outline-danger btn-sm w-25" href="/opportunities">Clear</a>
+      {% endif %}
+    </div>
+    <hr>
     <input style="margin-bottom: 2vh;" class="form-control" type="search" name="search" placeholder="Search" aria-label="Search"
     {% if body %}
       value="{{ body['search'] }}"
@@ -40,5 +52,37 @@
       <button class="btn btn-outline-primary btn-sm w-100" type="submit">Show Results</button>
   </form>
 </div>
+
+<!-- SCHOLARSHIPS (right) -->
+<div class="scholarships">
+  {% for scholar in scholars %}
+  <div class="scholar-block">
+    <br>
+    
+    <a href="/scholarships/{{ scholar.scholarshipID }}"><h3>{{ scholar.title }} (${{ scholar.amount }})</h3></a> 
+    {% if date[scholar.scholarshipID] %}
+      <span><b>DEADLINE: {{ date[scholar.scholarshipID] }} </b></span> <br>
+    {% endif %}
+    {% if scholar.eligibility %}
+      <span><i>ELIGIBLE: {{ scholar.eligibility }}</i></span>
+    {% endif %}
+    <hr>
+  
+    <!-- description -->
+    <p>{{ scholar.description }}</p>
+    <!-- links -->
+    {% for link in scholar.links %}
+      <a href="{{ link }}">{{ link }}</a> <br>
+    {% endfor %}
+    
+    <button style="float: right; font-size: 20px; border: 0; padding: 0; background-color: transparent; outline: none;"
+      class="text-secondary star" onclick="favorite('scholarship',{{scholar.scholarshipID}});">
+      <i class="fa fa-star" aria-hidden="true"></i>
+    </button>
+    <br> <br>
+  </div>
+  {% endfor %}
+</div>
+
 <br>
 {% endblock %}
