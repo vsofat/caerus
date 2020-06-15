@@ -15,9 +15,20 @@ def hasFilters(filters):
     output:
     True or False
     """
+    maximumCostFilter = filters["maximum-cost"]
+    maximumCostHasFilter = False
+    if type(maximumCostFilter) == int and maximumCostFilter == 0:
+        return True
+    elif type(maximumCostFilter) == float and maximumCostFilter == 0.0:
+        return True
+    elif type(maximumCostFilter) == str:
+        maximumCostFilter = maximumCostFilter.strip()
+        if maximumCostFilter == "":
+            maximumCostHasFilter = False
+
     return (
-        len(filters["field"])
-        or filters["maximum-cost"]
+        maximumCostHasFilter
+        or len(filters["field"])
         or len(filters["grade"])
         or len(filters["gender"])
     )
@@ -56,7 +67,7 @@ def filterOpportunities(baseQuery, filtersDict):
         elif key == "maximum-cost":
             if type(val) == str:
                 val = val.strip()
-            if not val:
+            if not val and val != 0:
                 continue
             # val is max cost filter here
             filters.append(Opportunity.cost <= val)

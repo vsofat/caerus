@@ -444,6 +444,7 @@ def preferencesRoute():
             body['preferences'].append({'type': 'COST_PREFERENCE', 'value': float(maxCost)})
         else:
             preferences.deleteCostPreference(session['userid'])
+        print(type(maxCost))
         for key in f.keys():
             if 'field' in key:
                 body['preferences'].append({'type': 'FIELD_PREFERENCE', 'value': f[key]})

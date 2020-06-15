@@ -256,6 +256,13 @@ def test_filterOpportunities(session):
         "gender": [],
     }
 
+    emptyBody4 = {
+        "field": [],
+        "maximum-cost": 0,
+        "grade": [],
+        "gender": [],
+    }
+
     # Semi-empty
     semiEmptyBody1 = body = {
         "field": ["ACADEMIC PROGRAMS", "PARKS, ZOOS, & NATURE",],
@@ -300,6 +307,8 @@ def test_filterOpportunities(session):
     # "   "
     filteredOpportunitiesQuery4 = filterOpportunities(baseQuery, emptyBody3)
     filteredOpportunities4 = filteredOpportunitiesQuery4.all()
+    filteredOpportunitiesQuery40 = filterOpportunities(baseQuery, emptyBody4)
+    filteredOpportunities40 = filteredOpportunitiesQuery40.all()
 
     # Semi-empty filters
     filteredOpportunitiesQuery5 = filterOpportunities(baseQuery, semiEmptyBody1)
@@ -316,6 +325,7 @@ def test_filterOpportunities(session):
     assert filteredOpportunities2 == [tOpportunity1, tOpportunity2, tOpportunity3, tOpportunity4]
     assert filteredOpportunities3 == [tOpportunity1, tOpportunity2, tOpportunity3, tOpportunity4]
     assert filteredOpportunities4 == [tOpportunity1, tOpportunity2, tOpportunity3, tOpportunity4]
+    assert filteredOpportunities40 == []
     assert filteredOpportunities5 == [tOpportunity3, tOpportunity4]
     assert filteredOpportunities6 == [tOpportunity2, tOpportunity4]
     assert filteredOpportunities7 == [tOpportunity1, tOpportunity4]
