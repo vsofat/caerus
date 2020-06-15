@@ -456,6 +456,19 @@ def unfavorite(t, saveid):
     return f"Unfavorited the {t}"
 
 
+@app.route("/delete/<type>/<deleteid>")
+@protected
+@staffonly
+def deleteObject(t, deleteid):
+    if t == 'opportunity':
+        opportunities.deleteOpportunity(deleteid)
+    elif t == 'scholarship':
+        scholarships.deleteScholarship(deleteid)
+    elif t == 'resource':
+        resources.deleteResource(deleteid)
+    return f"Deleted the {t}"
+
+
 @app.route("/preferences", methods=['GET', 'POST'])
 @protected
 def preferencesRoute():

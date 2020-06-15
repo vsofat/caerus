@@ -493,3 +493,6 @@ Complete reminder email script
 
 ericL -- 2020-06-15 16:26
 Add dollar sign preprend
+
+ericL -- 2020-06-15 16:35
+Add generic deletion route
