@@ -4,6 +4,10 @@
 
 {% block title %}Opportunities{% endblock %}
 
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/favorite.js') }}"></script>
+{% endblock %}
+
 {% set sort_options = [
   ('dateposted-desc', 'Date Created (Newest - Oldest)'),
   ('dateposted-asc', 'Date Created (Oldest - Newest)'),
@@ -188,7 +192,10 @@
       {% endif %}
       {% endfor %}
 
-      <a style="float: right; font-size: 20px" class="text-secondary star" href="/opportunities"><i class="fa fa-star" aria-hidden="true"></i></a>
+      <button style="float: right; font-size: 20px; border: 0; padding: 0; background-color: transparent; outline: none;"
+              class="text-secondary star" onclick="favorite({{opp.opportunityID}});">
+        <i class="fa fa-star" aria-hidden="true"></i>
+      </button>
     </div>
     <br>
   </div>

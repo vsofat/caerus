@@ -32,11 +32,13 @@ os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
 
 db = models.db
 
+
 def create_app(config):
     app = Flask(__name__)
     app.config.from_object(config)
     app.secret_key = os.urandom(32)
     return app
+
 
 app = create_app(Config)
 DIR = os.path.dirname(__file__) or "."
@@ -421,6 +423,16 @@ def favoritesRoute():
     )
 
 
+@app.route("/favorite/<t>/<saveid>")
+@protected
+def favoriteOpportunity(t, saveid):
+    if t == 'opportunity':
+        savedOpportunities.saveOpportunity(session['userid'], saveid)
+    elif t == 'scholarship':
+        savedScholarships.saveScholarship(session['userid'], saveid)
+    return f"Favorited the {t}"
+
+
 @app.route("/preferences", methods=['GET', 'POST'])
 @protected
 def preferencesRoute():
@@ -442,38 +454,23 @@ def preferencesRoute():
         print(f)
         maxCost = f['maximum-cost']
         if maxCost != '':
-            body['preferences'].append({'type': 'COST_PREFERENCE', 'value': float(maxCost)})
+            body['preferences'].append(
+                {'type': 'COST_PREFERENCE', 'value': float(maxCost)})
         else:
             preferences.deleteCostPreference(session['userid'])
         for key in f.keys():
             if 'field' in key:
-                body['preferences'].append({'type': 'FIELD_PREFERENCE', 'value': f[key]})
+                body['preferences'].append(
+                    {'type': 'FIELD_PREFERENCE', 'value': f[key]})
             if 'grade' in key:
-                body['preferences'].append({'type': 'GRADE_PREFERENCE', 'value': f[key]})
+                body['preferences'].append(
+                    {'type': 'GRADE_PREFERENCE', 'value': f[key]})
             if 'gender' in key:
-                body['preferences'].append({'type': 'GENDER_PREFERENCE', 'value': f[key]})
+                body['preferences'].append(
+                    {'type': 'GENDER_PREFERENCE', 'value': f[key]})
         preferences.createAllPreferences(body)
         flash('Preferences have been set', 'success')
         return redirect(url_for('preferencesRoute'))
-
-
-@app.route("/dumb")
-def dumb():
-    newOpp = {
-        "title": "yo momma",
-        "description": "at my house last nite!!! #yolo",
-        "field": "STEM",
-        "gender": None,
-        "location": "106 W 117th Street, New York, NY, 10026",
-        "startDate": datetime.datetime.today(),
-        "endDate": None,
-        "deadline": None,
-        "cost": 0,
-        "grades": [9, 10, 11, 12],
-        "links": ["hello"],
-    }
-    opportunities.createOpportunity(newOpp)
-    return "submitted"
 
 
 if __name__ == "__main__":

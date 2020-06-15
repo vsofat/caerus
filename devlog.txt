@@ -457,3 +457,6 @@ Fix deletion of preferences in database
 
 ericL -- 2020-06-15 00:10
 Make email body construction cleaner
+
+ericL -- 2020-06-15 01:01
+Create AJAX request to favorite opportunity
