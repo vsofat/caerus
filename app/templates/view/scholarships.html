@@ -25,7 +25,7 @@
     <div class="d-flex flex-row justify-content-between">
       <span class="h5"><b>Refine Results</b></span>
       {% if body %}
-      <a class="btn btn-outline-danger btn-sm w-25" href="/opportunities">Clear</a>
+      <a class="btn btn-outline-danger btn-sm w-25" href="/scholarships">Clear</a>
       {% endif %}
     </div>
     <hr>
@@ -56,7 +56,7 @@
 <!-- SCHOLARSHIPS (right) -->
 <div class="scholarships">
   {% for scholar in scholars %}
-  <div class="scholar-block">
+  <div id="{{ scholar.scholarshipID }}" class="scholar-block">
     <br>
     
     <a href="/scholarships/{{ scholar.scholarshipID }}"><h3>{{ scholar.title }} (${{ scholar.amount }})</h3></a> 
