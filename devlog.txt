@@ -476,6 +476,20 @@ Add unfavorite route
 ericL -- 2020-06-15 03:22
 Add default 7 day reminder prior to deadline
 
+ahmedS -- 2020-06-15 11:53
+Added scholarships cards
+Added dateconv functions for individual scholarships, all scholarships
+
+ahmedS -- 2020-06-15 11:54
+Changed .star styling in CSS to be independent of tag-block
+
+ahmedS -- 2020-06-15 11:56
+Renamed individual.html to opportunity.html
+Created scholarship.html, and created individual scholarship template
+
+ahmedS -- 2020-06-15 12:11
+Finished individual scholarship templating
+
 kaziJ -- 2020-06-15 12:52
 Update favorites backend to prevent double favoriting
 
@@ -484,3 +498,6 @@ Update favorite function for double favoriting
 
 ericL -- 2020-06-15 14:15
 Fix notification utility
+
+ahmedS -- 2020-06-15 18:17
+Devlog updates from today
