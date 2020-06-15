@@ -61,16 +61,11 @@
     
     <a href="/scholarships/{{ scholar.scholarshipID }}"><h3>{{ scholar.title }} (${{ scholar.amount }})</h3></a> 
     {% if date[scholar.scholarshipID] %}
-      <span><b>DEADLINE: {{ date[scholar.scholarshipID] }} </b></span>
+      <span><b>DEADLINE: {{ date[scholar.scholarshipID] }} </b></span> <br>
     {% endif %}
-
-    <div class="tag-block">
-      <!-- eligibility -->
-      {% if scholar.eligibility %}
-        <span><i>ELIGIBLE: {{ scholar.eligibility }}</i></span>
-      {% endif %}
-    </div>
-
+    {% if scholar.eligibility %}
+      <span><i>ELIGIBLE: {{ scholar.eligibility }}</i></span>
+    {% endif %}
     <hr>
   
     <!-- description -->
