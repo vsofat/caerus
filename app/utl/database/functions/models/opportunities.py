@@ -53,4 +53,6 @@ def createOpportunity(body):
 
 def deleteOpportunity(opportunityID):
     Opportunity.query.filter_by(opportunityID=opportunityID).delete()
+    OpportunityGrade.query.filter_by(opportunityID=opportunityID).delete()
+    OpportunityLink.query.filter_by(opportunityID=opportunityID).delete()
     db.session.commit()
