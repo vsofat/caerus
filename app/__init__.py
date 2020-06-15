@@ -434,10 +434,6 @@ def favorite(t, saveid):
         saved = savedOpportunities.saveOpportunity(session['userid'], saveid)
         if saved:
             opp = opportunities.getOpportunity(saveid)
-            if (opp.deadline != None):
-                reminder = opp.deadline - datetime.timedelta(days=7)
-                savedOpportunities.addOpportunityReminder(
-                    session['userid'], saveid, reminder)
             return "Successfully favorited opportunity"
         else:
             return "Could not favorite opportunity because user has already favorited this opportunity"
@@ -445,10 +441,6 @@ def favorite(t, saveid):
         saved = savedScholarships.saveScholarship(session['userid'], saveid)
         if saved:
             scholar = scholarships.getScholarship(saveid)
-            if (scholar.deadline != None):
-                reminder = scholar.deadline - datetime.timedelta(days=7)
-                savedScholarships.addScholarshipReminder(
-                    session['userid'], saveid, reminder)
             return "Successfully favorited scholarship"
         else:
             return "Could not favorite scholarship because user has already favorited this scholarship"

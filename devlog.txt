@@ -487,3 +487,6 @@ Fix notification utility
 
 ericL -- 2020-06-15 14:50
 Add fading flash for favorites
+
+ericL -- 2020-06-15 16:10
+Complete reminder email script

@@ -17,7 +17,7 @@ def saveOpportunity(userID, opportunityID):
         return False
     else:
         opportunity = SavedOpportunity(
-            userID=userID, opportunityID=opportunityID)
+            userID=userID, opportunityID=opportunityID, reminderDate=None)
         db.session.add(opportunity)
         db.session.commit()
         return True

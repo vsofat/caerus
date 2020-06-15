@@ -63,4 +63,4 @@ if __name__ == "__main__":
             notifier.sendmail(
                 [email], f"Caerus Weekly Update -- {time.date().isoformat()}", html
             )
-            print(f"Sent email to {email} -- {time.isoformat()}")
+            print(f"Notification email sent to {email} -- {time.isoformat()}")
