@@ -11,9 +11,16 @@ def getSavedOpportunities(userID):
 
 
 def saveOpportunity(userID, opportunityID):
-    opportunity = SavedOpportunity(userID=userID, opportunityID=opportunityID)
-    db.session.add(opportunity)
-    db.session.commit()
+    exists = db.session.query(SavedOpportunity.query.filter(
+        SavedOpportunity.userID == userID, SavedOpportunity.opportunityID == opportunityID).exists()).scalar()
+    if exists:
+        return "Could not favorite opportunity because user has already favorited this opportunity"
+    else:
+        opportunity = SavedOpportunity(
+            userID=userID, opportunityID=opportunityID)
+        db.session.add(opportunity)
+        db.session.commit()
+        return "Successfully favorited opportunity"
 
 
 def unsaveOpportunity(userID, opportunityID):
