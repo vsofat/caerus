@@ -472,3 +472,6 @@ Add clear button to sidenav form
 
 ericL -- 2020-06-15 02:16
 Add unfavorite route
+
+ericL -- 2020-06-15 03:22
+Add default 7 day reminder prior to deadline

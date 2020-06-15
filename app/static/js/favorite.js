@@ -15,3 +15,13 @@ let favorite = (type, id) => {
     xhttp.open('GET', `/favorite/${type}/${id}`, true);
     xhttp.send();
 };
+
+let unfavorite = (type, id) => {
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+        }
+    };
+    xhttp.open('GET', `/unfavorite/${type}/${id}`, true);
+    xhttp.send();
+};

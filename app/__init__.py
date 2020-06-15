@@ -428,8 +428,18 @@ def favoritesRoute():
 def favorite(t, saveid):
     if t == 'opportunity':
         savedOpportunities.saveOpportunity(session['userid'], saveid)
+        opp = opportunities.getOpportunity(saveid)
+        if (opp.deadline != None):
+            reminder = opp.deadline - datetime.timedelta(days=7)
+            savedOpportunities.addOpportunityReminder(
+                session['userid'], saveid, reminder)
     elif t == 'scholarship':
         savedScholarships.saveScholarship(session['userid'], saveid)
+        scholar = scholarships.getScholarship(saveid)
+        if (scholar.deadline != None):
+            reminder = scholar.deadline - datetime.timedelta(days=7)
+            savedScholarships.addScholarshipReminder(
+                session['userid'], saveid, reminder)
     return f"Favorited the {t}"
 
 
