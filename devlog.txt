@@ -445,3 +445,6 @@ Test filtering opportunities
 
 rayL -- 2020-06-14 19:36
 Test finding opportunities
+
+rayL -- 2020-06-14 21:35
+Test get preferred opportunities
