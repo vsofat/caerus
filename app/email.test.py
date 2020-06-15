@@ -5,7 +5,7 @@ import json
 import os
 import datetime
 
-from utl.database.functions.models.preferences import getPreferredOpportunitiesForAllUsers
+from utl.database.functions.models.preferences import getPreferredOpportunitiesForAllUsers, getAllPreferences
 from utl.database.models import models
 from __init__ import app
 
@@ -57,8 +57,9 @@ if __name__ == "__main__":
         db.create_all()
         info = getPreferredOpportunitiesForAllUsers()
         notifier = Notifier(user, pwd)
-        for user in info.keys():
-            opps = info[user]
+        for email in info.keys():
+            print(getAllPreferences(info[email]['id']))
+            opps = info[email]['opportunities']
             if len(opps) > 0:
                 html = f"""
                 <html>
@@ -67,13 +68,13 @@ if __name__ == "__main__":
                 """
                 for opp in opps:
                     html += f"""
-                        <b><a href="{baseurl}/opportunities/{opp.opportunityID}">{opp.title}</a></b>
+                        <b><a href="{baseurl}/opportunities/{opp.opportunityID}">{opp.title}</a></b><br>
                     """
                 html += """
                     </body>
                 </html>
                 """
                 time = datetime.datetime.now()
-                notifier.sendmail(
-                    [user], f"Caerus Weekly Update -- {time.date().isoformat()}", html)
+                # notifier.sendmail(
+                #     [user], f"Caerus Weekly Update -- {time.date().isoformat()}", html)
                 print(f"Sent email to {user} -- {time.isoformat()}")

@@ -439,6 +439,7 @@ def preferencesRoute():
             'preferences': list()
         }
         f = request.form
+        print(f)
         maxCost = f['maximum-cost']
         if maxCost != '':
             body['preferences'].append({'type': 'COST_PREFERENCE', 'value': float(maxCost)})

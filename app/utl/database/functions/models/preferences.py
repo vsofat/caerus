@@ -59,7 +59,7 @@ def getCostPreferences(userID):
 # Delete
 def deleteCostPreference(userID):
     CostPreference.query.filter_by(userID=userID).delete()
-
+    db.session.commit()
 
 # Field Preference
 
@@ -162,6 +162,8 @@ def createAllPreferences(body):
     GenderPreference.query.filter_by(userID=userID).delete()
     GradePreference.query.filter_by(userID=userID).delete()
 
+    db.session.commit()
+
     # Create a preference for each of the given preferences
     for preference in body["preferences"]:
         createPreference(userID, preference["type"], preference["value"])
@@ -237,5 +239,8 @@ def getPreferredOpportunitiesForAllUsers():
     users = getAllUsersInfo()
     emailsToPreferencesDict = {}
     for user in users:
-        emailsToPreferencesDict[user.email] = getPreferredOpportunities(user.userID)
+        emailsToPreferencesDict[user.email] = {
+            'id': user.userID,
+            'opportunities': getPreferredOpportunities(user.userID)
+        }
     return emailsToPreferencesDict
