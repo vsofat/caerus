@@ -496,3 +496,6 @@ Add dollar sign preprend
 
 ericL -- 2020-06-15 16:35
 Add generic deletion route
+
+ericL -- 202-06-15 16:51
+Add deletion AJAX function
