@@ -425,12 +425,22 @@ def favoritesRoute():
 
 @app.route("/favorite/<t>/<saveid>")
 @protected
-def favoriteOpportunity(t, saveid):
+def favorite(t, saveid):
     if t == 'opportunity':
         savedOpportunities.saveOpportunity(session['userid'], saveid)
     elif t == 'scholarship':
         savedScholarships.saveScholarship(session['userid'], saveid)
     return f"Favorited the {t}"
+
+
+@app.route("/unfavorite/<t>/<saveid>")
+@protected
+def unfavorite(t, saveid):
+    if t == 'opportunity':
+        savedOpportunities.unsaveOpportunity(session['userid'], saveid)
+    elif t == 'scholarship':
+        savedScholarships.unsaveScholarship(session['userid'], saveid)
+    return f"Unfavorited the {t}"
 
 
 @app.route("/preferences", methods=['GET', 'POST'])

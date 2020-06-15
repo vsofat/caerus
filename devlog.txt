@@ -469,3 +469,6 @@ Add persistence to filter collapse div in sidenav form
 
 ericL -- 2020-06-15 02:00
 Add clear button to sidenav form
+
+ericL -- 2020-06-15 02:16
+Add unfavorite route
