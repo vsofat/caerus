@@ -126,12 +126,12 @@ div.overflow-auto {
   width: auto;
 }
 
-.tag-block .star {
+.star {
      color: #ff8ff0 !important;
      transition: 250ms;
 }
 
-.tag-block .star:hover {
+.star:hover {
      color: rgb(0,123,255) !important;
      transition: 250ms;
 }
