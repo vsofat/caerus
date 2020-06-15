@@ -490,3 +490,6 @@ Add fading flash for favorites
 
 ericL -- 2020-06-15 16:10
 Complete reminder email script
+
+ericL -- 2020-06-15 16:26
+Add dollar sign preprend
