@@ -137,7 +137,7 @@ def auth():
         CLIENT_SECRETS_FILE, SCOPES
     )
 
-    flow.redirect_uri = "http://127.0.0.1:5000/redirect"
+    flow.redirect_uri = "http://caerus.solonedu.com/redirect"
 
     authorization_url, state = flow.authorization_url(
         # Enable offline access so that you can refresh an access token without
