@@ -19,6 +19,7 @@
 
 {% block body %}
 
+{{ body }}
 <!-- SIDENAV -->
 <div class="sidenav">
   <form class="w-100" action="/opportunities" method="POST">
@@ -49,7 +50,16 @@
       Filter &#9662;
     </button>
     <br>
-    <div class="collapse" id="collapse-filters" style="margin-bottom: 2vh;">
+    <div id="collapse-filters" style="margin-bottom: 2vh;"
+      class="collapse
+      {% if (
+              body['filters']['field']|length > 0 or body['filters']['maximum-cost'] != None or
+              body['filters']['grade']|length > 0 or body['filters']['gender']|length > 0
+            ) %}
+      show
+      {% endif %}
+      "
+    >
     <div class="card card-body">
     <div class="overflow-auto">
       <b> Field </b>

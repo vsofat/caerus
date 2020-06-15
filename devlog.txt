@@ -463,3 +463,6 @@ Create AJAX request to favorite opportunity
 
 ericL -- 2020-06-15 01:25
 Parameterize AJAX request for favorites
+
+ericL -- 2020-06-15 01:40
+Add persistence to filter collapse div in sidenav form
