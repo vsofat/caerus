@@ -2,7 +2,7 @@ import json
 import os
 import datetime
 
-from notifier import Notifier
+from utl.notifier import Notifier
 from utl.database.functions.models.preferences import getPreferredOpportunitiesForAllUsers, getAllPreferences
 from utl.database.models import models
 from __init__ import app
@@ -11,7 +11,7 @@ db = models.db
 
 DIR = os.path.dirname(__file__) or "."
 DIR += "/"
-path = DIR + "../../../gmail.json"
+path = DIR + "../gmail.json"
 
 f = open(path)
 f = json.load(f)
