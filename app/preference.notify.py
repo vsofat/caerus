@@ -57,10 +57,11 @@ if __name__ == "__main__":
         for email in info.keys():
             prefs = getAllPreferences(info[email]['id'])
             opps = info[email]['opportunities']
-            html = constructBody(opps, prefs)
+            if len(opps) > 0:
+                html = constructBody(opps, prefs)
 
-            time = datetime.datetime.now()
-            notifier.sendmail(
-                [email], f"Caerus Weekly Update -- {time.date().isoformat()}", html
-            )
-            print(f"Notification email sent to {email} -- {time.isoformat()}")
+                time = datetime.datetime.now()
+                notifier.sendmail(
+                    [email], f"Caerus Weekly Update -- {time.date().isoformat()}", html
+                )
+                print(f"Notification email sent to {email} -- {time.isoformat()}")
