@@ -52,7 +52,9 @@
   {% for reso in res %}
   <div id="{{ reso.resourceID }}" class="resource-block">
     <br>
-    <h3>{{ reso.title }}</h3>
+    <a href="/resources/{{ reso.resourceID }}">
+      <h3>{{ reso.title }}</h3>
+    </a>
 
     <hr>
     <!-- description -->
