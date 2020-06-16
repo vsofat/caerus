@@ -157,7 +157,9 @@
       <hr>
     </span>
     <!-- location -->
+    {% if opp.location %}
     <p><b>{{ opp.location }}</b></p>
+    {% endif %}
 
     <!-- description -->
     <p>{{ opp.description }}</p>
