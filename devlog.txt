@@ -527,3 +527,6 @@ ahmedS -- 2020-06-15 19:20
 Removed links from tags (now non-clickable)
 Added IDs to opportunity and scholarship block divs
 Added 'create' to dropdown
+
+ericL -- 2020-06-15 20:12
+Add routing for editing objects

@@ -323,6 +323,20 @@ def createOpportunityRoute():
         )
 
 
+@app.route("opportunities/edit/<opportunityID>", methods=['GET', 'POST'])
+@protected
+@staffonly
+def editOpportunityRoute(opportunityID):
+    if (request.method == 'GET'):
+        return render_template(
+            'edit/opportunity.html'
+        )
+    elif (request.method == 'POST'):
+        return render_template(
+            'edit/opportunity.html'
+        )
+
+
 @app.route("/scholarships", methods=['GET', 'POST'])
 @protected
 def scholarshipsRoute():
@@ -381,6 +395,20 @@ def createScholarshipRoute():
                                user=users.getUserInfo(session['userid']))
 
 
+@app.route("scholarships/edit/<scholarshipID>", methods=['GET', 'POST'])
+@protected
+@staffonly
+def editScholarshipRoute(scholarshipID):
+    if (request.method == 'GET'):
+        return render_template(
+            'edit/scholarship.html'
+        )
+    elif (request.method == 'POST'):
+        return render_template(
+            'edit/scholarship.html'
+        )
+
+
 @app.route("/resources", methods=['GET', 'POST'])
 @protected
 def resourcesRoute():
@@ -404,6 +432,7 @@ def resourcesRoute():
 
 @app.route("/resources/create", methods=['GET', 'POST'])
 @protected
+@staffonly
 def createResourceRoute():
     if (request.method == 'GET'):
         return render_template("create/resource.html",
@@ -420,6 +449,20 @@ def createResourceRoute():
         return render_template("create/resource.html",
                                user=users.getUserInfo(session['userid']),
                                )
+
+
+@app.route("resources/edit/<resourceID>", methods=['GET', 'POST'])
+@protected
+@staffonly
+def editResourceRoute(resourceID):
+    if (request.method == 'GET'):
+        return render_template(
+            'edit/resource.html'
+        )
+    elif (request.method == 'POST'):
+        return render_template(
+            'edit/resource.html'
+        )
 
 
 @app.route("/favorites")
