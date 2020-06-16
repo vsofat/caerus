@@ -4,6 +4,12 @@
 
 {% block title %}Resources{% endblock %}
 
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/favorite.js') }}"></script>
+<script src="{{ url_for('static', filename='js/delete.js') }}"></script>
+{% endblock %}
+
+
 {% set sort_options = [
   ('dateposted-desc', 'Date Created (Newest - Oldest)'),
   ('dateposted-asc', 'Date Created (Oldest - Newest)'),
@@ -61,7 +67,19 @@
     <p>{{ reso.description }}</p>
     <!-- links -->
     <a href="{{ reso.link }}">{{ reso.link }}</a> <br>
-
+    
+    {% if user.userType == "admin" %}
+    <a style="float: right; font-size: 20px; border: 0; padding-left: 1.5vw; background-color: transparent; outline: none;"
+      class="text-secondary star" href="/resources/edit/{{ reso.resourceID }}">
+      <i class="fa fa-edit" aria-hidden="true"></i>
+    </a>
+    <button
+      style="float: right; font-size: 20px; border: 0; padding-left: 1vw; background-color: transparent; outline: none;"
+      class="text-secondary star" onclick="deleteObject('resource',{{reso.resourceID}});">
+      <i class="fas fa-trash-alt" aria-hidden="true"></i>
+    </button>
+    {% endif %}
+    <br>
     <br>
   </div>
   {% endfor %}
