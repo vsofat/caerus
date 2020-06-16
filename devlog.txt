@@ -528,5 +528,6 @@ Removed links from tags (now non-clickable)
 Added IDs to opportunity and scholarship block divs
 Added 'create' to dropdown
 
-vishwaaS -- 2020-06-15
-Updates designDoc as per changes made over the span of the project
+vishwaaS -- 2020-06-15 22:30
+Updated designDoc as per changes made over the span of the project
+
