@@ -112,12 +112,12 @@ body {
      margin-top: 20px;
 }
 
-.opportunities, .scholarships {
+.opportunities, .scholarships, .resources {
      width: 61vw;
      float: right;
 }
 
-.opp-block, .scholar-block {
+.opp-block, .scholar-block, .resource-block {
      width: 100%;
      padding: 1vh 2vw;
      background-color: white;
