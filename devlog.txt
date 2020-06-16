@@ -574,3 +574,8 @@ Uploaded design doc v1
 
 ahmedS -- 2020-06-16 00:31
 Committed various acts of miscellany
+     Added unfavorite, edit, delete buttons to everything for admins
+     Some styling and fun stuff
+
+ahmedS -- 2020-06-16 00:32
+Yo momma!!!!
