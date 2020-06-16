@@ -106,7 +106,7 @@
                     {% endif %}
                     >{{ caption|e }}</a> &emsp;
                {% endfor %}
-               {% if user.userType == "admin" %}
+               {% if user.userType == "admin" or user.userType == "teacher" %}
                <div class="dropdown show d-inline">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                          Create

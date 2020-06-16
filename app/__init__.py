@@ -568,7 +568,7 @@ def unfavorite(t, saveid):
     return f"Unfavorited the {t}"
 
 
-@app.route("/delete/<type>/<deleteid>")
+@app.route("/delete/<t>/<deleteid>")
 @protected
 @adminonly
 def deleteObject(t, deleteid):

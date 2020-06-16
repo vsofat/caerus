@@ -126,10 +126,13 @@ body {
      margin-bottom: 2vh;
 }
 
-.tag-block a {
-     color: white !important;
+.tag-block .tag {
+     color: #ffffff !important;
 }
 
+.tag-block .tag:hover {
+     color: #ffffff !important;
+}
 
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
@@ -139,6 +142,10 @@ body {
 div.overflow-auto {
   height: 20vh;
   width: auto;
+}
+
+.tag-block a:hover {
+     color: rgb(0,123,255) !important;
 }
 
 .star {
