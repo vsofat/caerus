@@ -402,6 +402,15 @@ def resourcesRoute():
         )
 
 
+@app.route("/resources/<resourceID>")
+@protected
+def resourceRoute(resourceID):
+    return render_template(
+        "view/resource.html",
+        resource=resources.getResource(resourceID),
+    )
+
+
 @app.route("/resources/create", methods=['GET', 'POST'])
 @protected
 def createResourceRoute():
