@@ -531,8 +531,17 @@ Added 'create' to dropdown
 ericL -- 2020-06-15 20:12
 Add routing for editing objects
 
+ahmedS -- 2020-06-15 20:31
+Added resource cards
+
+ahmedS -- 2020-06-15 20:34
+Fixed line spacing on scholarships (minor change)
+
 kaziJ -- 2020-06-15 20:35
 Create backend functions for editing opportunities, scholarships, and resources
+
+ahmedS -- 2020-06-15 20:49
+Added individual resources page, modified resources all page
 
 ericL -- 2020-06-15 20:53
 Fill out edit form with opportunity info
@@ -551,3 +560,12 @@ Complete scholarship editing form
 
 ericL -- 2020-06-15 22:18
 Complete resource editing form
+
+ahmedS -- 2020-06-15 22:29
+Created favorites page, added opportunities and scholarships
+
+vishwaaS -- 2020-06-15 22:30
+Updated designDoc as per changes made over the span of the project
+
+ahmedS -- 2020-06-15 22:38
+Updated devlog with recent commits (maybe even done?!?!?)
