@@ -19,29 +19,29 @@
 <div class="tag-block">
      <!-- field -->
      {% if opp.field %}
-     <a class="btn btn-primary btn-sm">&nbsp; {{ opp.field }} &nbsp; </a> &nbsp;
+     <a class="btn btn-primary btn-sm tag">&nbsp; {{ opp.field }} &nbsp; </a> &nbsp;
      {% endif %}
 
      <!-- gender -->
      {% if opp.gender %}
-     <a class="btn btn-primary btn-sm">&nbsp; {{ opp.gender }} &nbsp; </a> &nbsp;
+     <a class="btn btn-primary btn-sm tag">&nbsp; {{ opp.gender }} &nbsp; </a> &nbsp;
      {% endif %}
 
      <!-- cost (if free) -->
      {% if opp.cost == 0 %}
-     <a class="btn btn-primary btn-sm">&nbsp; free &nbsp;</a> &nbsp;
+     <a class="btn btn-primary btn-sm tag">&nbsp; free &nbsp;</a> &nbsp;
      {% endif %}
 
      <!-- grades -->
      {% for grade in opp.grades %}
           {% if grade == 9 %}
-          <a class="btn btn-primary btn-sm">&nbsp; freshmen &nbsp; </a> &nbsp;
+          <a class="btn btn-primary btn-sm tag">&nbsp; freshmen &nbsp; </a> &nbsp;
           {% elif grade == 10 %}
-          <a class="btn btn-primary btn-sm">&nbsp; sophomores &nbsp; </a> &nbsp;
+          <a class="btn btn-primary btn-sm tag">&nbsp; sophomores &nbsp; </a> &nbsp;
           {% elif grade == 11 %}
-          <a class="btn btn-primary btn-sm">&nbsp; juniors &nbsp; </a> &nbsp;
+          <a class="btn btn-primary btn-sm tag">&nbsp; juniors &nbsp; </a> &nbsp;
           {% elif grade == 12 %}
-          <a class="btn btn-primary btn-sm">&nbsp; seniors &nbsp; </a> &nbsp;
+          <a class="btn btn-primary btn-sm tag">&nbsp; seniors &nbsp; </a> &nbsp;
           {% endif %}
      {% endfor %}
 </div>
