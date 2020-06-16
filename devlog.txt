@@ -528,6 +528,18 @@ Removed links from tags (now non-clickable)
 Added IDs to opportunity and scholarship block divs
 Added 'create' to dropdown
 
+ahmedS -- 2020-06-15 20:31
+Added resource cards
+
+ahmedS -- 2020-06-15 20:34
+Fixed line spacing on scholarships (minor change)
+
+ahmedS -- 2020-06-15 20:49
+Added individual resources page, modified resources all page
+
+ahmedS -- 2020-06-15 22:29
+Created favorites page, added opportunities and scholarships
+
 vishwaaS -- 2020-06-15 22:30
 Updated designDoc as per changes made over the span of the project
 
