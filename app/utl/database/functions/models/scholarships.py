@@ -38,6 +38,21 @@ def createScholarship(body):
         db.session.add(newLink)
     db.session.commit()
 
+def editScholarship(body):
+    scholarshipID = body['scholarshipID']
+    scholarship = Scholarship.query.filter_by(scholarshipID=scholarshipID).first()
+    scholarship.title = body['title']
+    scholarship.description = body['description']
+    scholarship.amount = body['amount']
+    scholarship.deadline = body['deadline']
+    scholarship.eligibility = body['eligibility']
+    ScholarshipLink.filter_by(scholarshipID=scholarshipID).delete()
+    for link in body['links']:
+        newLink = ScholarshipLink(
+            scholarshipID=scholarship.scholarshipID, link=link)
+        db.session.add(newLink)
+    db.session.commit()
+
 
 def deleteScholarship(scholarshipID):
     Scholarship.query.filter_by(scholarshipID=scholarshipID).delete()
