@@ -543,3 +543,6 @@ Created favorites page, added opportunities and scholarships
 vishwaaS -- 2020-06-15 22:30
 Updated designDoc as per changes made over the span of the project
 
+ahmedS -- 2020-06-15 22:38
+Updated devlog with recent commits (maybe even done?!?!?)
+
