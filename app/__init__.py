@@ -435,7 +435,12 @@ def createResourceRoute():
 @protected
 def favoritesRoute():
     return render_template(
-        "view/favorites.html", user=users.getUserInfo(session["userid"])
+        "view/favorites.html", 
+        user=users.getUserInfo(session["userid"]),
+        opportunityList=savedOpportunities.getSavedOpportunities(session["userid"]),
+        scholarshipList=savedScholarships.getSavedScholarships(session["userid"]),
+        date=dateconv.allDateDisplay(),
+        oppscholar=dateconv.allDateDisplayS(),
     )
 
 
