@@ -533,3 +533,6 @@ Add routing for editing objects
 
 ericL -- 2020-06-15 20:53
 Fill out edit form with opportunity info
+
+ericL -- 2020-06-15 21:00
+Generalize link checking

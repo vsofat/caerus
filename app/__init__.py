@@ -87,6 +87,11 @@ def strtodate(string):
     return datetime.datetime.strptime(string, '%Y-%m-%d') if len(string) > 0 else None
 
 
+def link_check(link):
+    if len(link) > 0 and (link[:7] != 'http://' or link[:8] != 'https://'):
+        link = 'http://' + link
+    return link
+
 def credentials_to_dict(credentials):
     return {
         "token": credentials.token,
@@ -294,9 +299,8 @@ def createOpportunityRoute():
         f = request.form
         for key in f.keys():
             if "link" in key:
-                link = request.form[key]
-                if link[:7] != 'http://' or link[:8] != 'https://':
-                    link = 'http://' + link
+                link = request.form[key].strip()
+                link = link_check(link)
                 links.append(link)
             if "grades" == key:
                 grades = request.form[key].split(",")
@@ -382,8 +386,10 @@ def createScholarshipRoute():
         links = list()
         f = request.form
         for key in f.keys():
-            if 'link' in key:
-                links.append(request.form[key])
+            if "link" in key:
+                link = request.form[key].strip()
+                link = link_check(link)
+                links.append(link)
         scholarships.createScholarship({
             'title': request.form['title'],
             'description': request.form['description'],
@@ -442,10 +448,12 @@ def createResourceRoute():
                                user=users.getUserInfo(session['userid']),
                                )
     elif (request.method == 'POST'):
+        link = request.form['link'].strip()
+        link = link_check(link)
         resources.createResource({
             'title': request.form['title'],
             'description': request.form['description'],
-            'link': request.form['link']
+            'link': link
         })
         if len(request.form['title']) > 0:
             flash("Successfully posted a resource", 'success')
