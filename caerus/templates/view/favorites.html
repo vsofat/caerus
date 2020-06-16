@@ -2,9 +2,141 @@
 
 {% set active_page = active_page|default('favorites') -%}
 
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/favorite.js') }}"></script>
+{% endblock %}
+
 {% block title %}Favorites{% endblock %}
 
-{% block heading %}
-{{super()}}
+{% block body %}
+
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+     <li class="nav-item">
+          <a class="nav-link active" id="opportunities-tab" data-toggle="tab" href="#opportunities" role="tab" aria-controls="opportunities"
+               aria-selected="true">Opportunities</a>
+     </li>
+     <li class="nav-item">
+          <a class="nav-link" id="scholarships-tab" data-toggle="tab" href="#scholarships" role="tab" aria-controls="scholarships"
+               aria-selected="false">Scholarships</a>
+     </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+     <div class="tab-pane fade show active" id="opportunities" role="tabpanel" aria-labelledby="opportunities-tab">
+          <div class="opportunities-fav">
+               <br>
+               {% for opp in opportunityList %}
+               <div id="opportunity-{{ opp.opportunityID }}" class="opp-block">
+                    <br>
+                    <a href="/opportunities/{{ opp.opportunityID }}">
+                         <h3>{{ opp.title }}
+                    </a> &nbsp;
+                    <!-- field -->
+                    {% if opp.field %}
+                    <a class="btn btn-primary btn-sm" style="color: white !important;">&nbsp; {{ opp.field }} &nbsp; </a> &nbsp;
+                    {% endif %}
+                    </h3></a>
+                    <!-- date -->
+                    {% if date[opp.opportunityID][0] or date[opp.opportunityID][1] %}
+                    <span>
+                         {% if date[opp.opportunityID][0] %}
+                         {{ date[opp.opportunityID][0] }}
+                         {% endif %}
+                         {% if date[opp.opportunityID][1] %}
+                         - {{ date[opp.opportunityID][1] }}
+                         {% endif %}
+                         {% endif %}
+          
+                         {% if date[opp.opportunityID][2] %}
+                         <br>
+                         <b>DEADLINE: {{ date[opp.opportunityID][2] }} </b>
+                         {% endif %}
+          
+                         <br>
+                         <hr>
+                    </span>
+                    <!-- location -->
+                    <p><b>{{ opp.location }}</b></p>
+          
+                    <!-- description -->
+                    <p>{{ opp.description }}</p>
+                    <!-- links -->
+                    {% for link in opp.links %}
+                    <a href="{{ link }}">{{ link }}</a> <br>
+                    {% endfor %}
+          
+                    <hr>
+          
+                    <!-- tags -->
+                    <div class="tag-block">
+                         <!-- gender -->
+                         {% if opp.gender %}
+                         <a class="btn btn-primary btn-sm tag">&nbsp; {{ opp.gender }} &nbsp; </a> &nbsp;
+                         {% endif %}
+          
+                         <!-- cost (if free) -->
+                         {% if opp.cost == 0 %}
+                         <a class="btn btn-primary btn-sm tag">&nbsp; free &nbsp;</a> &nbsp;
+                         {% endif %}
+          
+                         <!-- grades -->
+                         {% for grade in opp.grades %}
+                         {% if grade == 9 %}
+                         <a class="btn btn-primary btn-sm tag">&nbsp; freshmen &nbsp; </a> &nbsp;
+                         {% elif grade == 10 %}
+                         <a class="btn btn-primary btn-sm tag">&nbsp; sophomores &nbsp; </a> &nbsp;
+                         {% elif grade == 11 %}
+                         <a class="btn btn-primary btn-sm tag">&nbsp; juniors &nbsp; </a> &nbsp;
+                         {% elif grade == 12 %}
+                         <a class="btn btn-primary btn-sm tag">&nbsp; seniors &nbsp; </a> &nbsp;
+                         {% endif %}
+                         {% endfor %}
+          
+                         <button
+                              style="float: right; font-size: 20px; border: 0; padding: 0; background-color: transparent; outline: none;"
+                              class="text-secondary star" onclick="unfavorite('opportunity',{{opp.opportunityID}});">
+                              <i class="far fa-star" aria-hidden="true"></i>
+                         </button>
+                    </div>
+                    <br>
+               </div>
+               {% endfor %}
+          </div>
+     </div>
+     <div class="tab-pane fade" id="scholarships" role="tabpanel" aria-labelledby="scholarships-tab">
+          <div class="scholarships-fav">
+               <br>
+               {% for scholar in scholarshipList %}
+               <div id="scholarship-{{ scholar.scholarshipID }}" class="scholar-block">
+                    <br>
+               
+                    <a href="/scholarships/{{ scholar.scholarshipID }}">
+                         <h3>{{ scholar.title }} (${{ scholar.amount }})</h3>
+                    </a>
+                    {% if date[scholar.scholarshipID] %}
+                    <span><b>DEADLINE: {{ oppscholar[scholar.scholarshipID] }} </b></span> <br>
+                    {% endif %}
+                    {% if scholar.eligibility %}
+                    <span><i>ELIGIBLE: {{ scholar.eligibility }}</i></span>
+                    {% endif %}
+                    <hr>
+               
+                    <!-- description -->
+                    <p>{{ scholar.description }}</p>
+                    <!-- links -->
+                    {% for link in scholar.links %}
+                    <a href="{{ link }}">{{ link }}</a>
+                    {% endfor %}
+               
+                    <button style="float: right; font-size: 20px; border: 0; padding: 0; background-color: transparent; outline: none;"
+                         class="text-secondary star" onclick="unfavorite('scholarship', {{scholar.scholarshipID}});">
+                         <i class="far fa-star" aria-hidden="true"></i>
+                    </button>
+                    <br> <br>
+               </div>
+               {% endfor %}
+               
+          </div>
+     </div>
+</div>
 
 {% endblock %}

@@ -1,0 +1,33 @@
+{% extends "template.html" %}
+
+{% set active_page = active_page|default('resources') -%}
+
+{% block title %}Edit Resource{% endblock %}
+
+{% block body %}
+<form ation="/resources/edit/{{obj.resourceID}}" method="POST">
+  <div class="form-group row">
+    <label for="title" class="col-sm-2 col-form-label font-weight-bold">Title</label>
+    <div class="col-sm-10">
+      <input name="title" type="text" class="form-control" id="title" placeholder="Enter title" required value="{{obj.title}}">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="link" class="col-sm-2 col-form-label font-weight-bold">Link</label>
+    <div class="col-sm-10">
+      <input name="link" type="text" class="form-control" type="required" id="Link"
+        placeholder="Provide a link for resource." value="{{obj.link}}">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="description" class="col-sm-2 col-form-label font-weight-bold">Description</label>
+    <div class="col-sm-10">
+      <input name="description" type="text" class="form-control" type="required" id="description"
+        placeholder="Please use this space to provide an explanation for the resource you are uploading."
+        value="{{obj.description}}">
+    </div>
+  </div>
+  <button type="submit" class="btn btn-success">Submit</button>
+</form>
+
+{% endblock %}

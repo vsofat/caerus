@@ -1,0 +1,120 @@
+{% extends "template.html" %}
+
+{% block scripts %}
+<script defer src="{{ url_for('static', filename='js/create.js') }}"></script>
+{% endblock %}
+
+{% block title %}Edit Opportunity{% endblock %}
+
+{% block body %}
+<form action="/opportunities/edit/{{obj.opportunityID}}" method="POST">
+    <div class="form-group row">
+        <label for="title" class="col-sm-2 col-form-label font-weight-bold">Title</label>
+        <div class="col-sm-10">
+            <input name="title" type="text" class="form-control" id="title" placeholder="Enter title" value="{{obj.title}}"required>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="description" class="col-sm-2 col-form-label font-weight-bold">Description</label>
+        <div class="col-sm-10">
+            <textarea name="description" class="form-control" id="description" rows="3">{{ obj.description }}</textarea>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="field"><b>Field</b></label>
+            <select class="form-control" name="field" id="field">
+                {% for field in fields %}
+                <option value="{{ field }}"
+                    {% if obj.field == field %}
+                    selected
+                    {% endif %}
+                >{{ field }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="gender"><b>Gender</b></label>
+            <select class="form-control" name="gender" id="gender">
+                {% for value, display in genders %}
+                    <option value="{{ value }}"
+                        {% if obj.gender == value %}
+                        selected
+                        {% endif %}
+                    >{{ display }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="cost"><b>Cost</b></label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text" id="dollar-sign"><b>$</b></div>
+                    </div>
+                    <input name="cost" type="number" min=0 step=0.01 value="{{obj.cost}}"" class="form-control" id="cost" placeholder="Enter cost" required>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="start"><b>Start Date</b><br>
+                <input type="date" name="start"
+                {% if obj.startDate != None %}
+                    value="{{obj.startDate.date()}}"
+                {% endif %}>
+            </label>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="end"><b>End Date</b><br>
+                <input type="date" name="end"
+                {% if obj.endDate != None %}
+                    value="{{obj.endDate.date()}}"
+                {% endif %}>
+            </label>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="deadline"><b>Application Deadline</b><br>
+                <input type="date" name="deadline"
+                {% if obj.deadline != None %}
+                    value="{{obj.deadline.date()}}"
+                {% endif %}>
+            </label>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="location"><b>Location</b></label>
+            <input name="location" type="text" class="form-control" id="location" placeholder="Enter Location"
+                {% if obj.location != None %}
+                    value={{obj.location}}
+                {% endif %}
+            >
+        </div>
+        <div class="form-group col-md-6">
+            <label for="grades"><b>Grades</b></label>
+            <input name="grades" type="text" class="form-control" id="grades"
+                placeholder="Enter grades separated by commas (e.g. 9,10,11)" required value={{obj.grades}}>
+        </div>
+    </div>
+    <div class="mb-2 font-weight-bold">
+        Link(s)
+    </div>
+    {% for i in range(obj.links|length) %}
+        <div id="links-container" class="form-group">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Add link" id="link{{i}}" name="link{{i}}" value="{{obj.links[i]}}">
+            </div>
+        </div>
+    {% endfor %}
+    {% if obj.links|length == 0 %}
+        <div id="links-container" class="form-group">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Add link" id="link0" name="link0">
+            </div>
+        </div>
+    {% endif %}
+    <button type="button" class="btn btn-primary" id="add-link">Add Another Link</button>
+    <button type="submit" class="btn btn-success">Submit</button>
+</form>
+{% endblock %}

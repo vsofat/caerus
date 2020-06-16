@@ -1,0 +1,17 @@
+{% extends "template.html" %}
+
+{% block title %}{{ resource.title }}{% endblock %}
+
+{% block heading %}
+<a class="text-muted" href="/resources"><small>&#8592; back to resources</small></a>
+<h1 class="title">{{ resource.title }}</h1>
+
+<hr>
+
+<!-- description -->
+<p>{{ resource.description }}</p>
+
+<!-- links -->
+<a href="{{ resource.link }}">{{ resource.link }}</a> <br>
+
+{% endblock %}

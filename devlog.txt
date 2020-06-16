@@ -1,4 +1,3 @@
-
 precedented -- Vishwaa Sofat, Kazi Jamal, Eric Lau, Raymond Lee, Ahmed Sultan
 SoftDev1 pd9
 P05 —- Fin
@@ -476,6 +475,20 @@ Add unfavorite route
 ericL -- 2020-06-15 03:22
 Add default 7 day reminder prior to deadline
 
+ahmedS -- 2020-06-15 11:53
+Added scholarships cards
+Added dateconv functions for individual scholarships, all scholarships
+
+ahmedS -- 2020-06-15 11:54
+Changed .star styling in CSS to be independent of tag-block
+
+ahmedS -- 2020-06-15 11:56
+Renamed individual.html to opportunity.html
+Created scholarship.html, and created individual scholarship template
+
+ahmedS -- 2020-06-15 12:11
+Finished individual scholarship templating
+
 kaziJ -- 2020-06-15 12:52
 Update favorites backend to prevent double favoriting
 
@@ -500,5 +513,69 @@ Add generic deletion route
 ericL -- 2020-06-15 16:51
 Add deletion AJAX function
 
+ahmedS -- 2020-06-15 18:17
+Devlog updates from today
+
 ericL -- 2020-06-15 18:52
 Prevent email send if there are no objects
+
+ericL -- 2020-6-15 19:07
+Add link correction for missing http(s)
+
+ahmedS -- 2020-06-15 19:20
+Removed links from tags (now non-clickable)
+Added IDs to opportunity and scholarship block divs
+Added 'create' to dropdown
+
+ericL -- 2020-06-15 20:12
+Add routing for editing objects
+
+ahmedS -- 2020-06-15 20:31
+Added resource cards
+
+ahmedS -- 2020-06-15 20:34
+Fixed line spacing on scholarships (minor change)
+
+kaziJ -- 2020-06-15 20:35
+Create backend functions for editing opportunities, scholarships, and resources
+
+ahmedS -- 2020-06-15 20:49
+Added individual resources page, modified resources all page
+
+ericL -- 2020-06-15 20:53
+Fill out edit form with opportunity info
+
+ericL -- 2020-06-15 21:00
+Generalize link checking
+
+ericL -- 2020-06-15 21:40
+Complete opportunity editing form
+
+ericL -- 2020-06-15 21:50
+Complete scholarship editing fill-in
+
+ericL -- 2020-06-15 22:05
+Complete scholarship editing form
+
+ericL -- 2020-06-15 22:18
+Complete resource editing form
+
+ahmedS -- 2020-06-15 22:29
+Created favorites page, added opportunities and scholarships
+
+vishwaaS -- 2020-06-15 22:30
+Updated designDoc as per changes made over the span of the project
+
+ahmedS -- 2020-06-15 22:38
+Updated devlog with recent commits (maybe even done?!?!?)
+
+kaziJ -- 2020-06-15 23:25
+Uploaded design doc v1
+
+ahmedS -- 2020-06-16 00:31
+Committed various acts of miscellany
+     Added unfavorite, edit, delete buttons to everything for admins
+     Some styling and fun stuff
+
+ahmedS -- 2020-06-16 00:32
+Yo momma!!!!

@@ -6,6 +6,7 @@
 
 {% block scripts %}
 <script src="{{ url_for('static', filename='js/favorite.js') }}"></script>
+<script src="{{ url_for('static', filename='js/delete.js') }}"></script>
 {% endblock %}
 
 {% set sort_options = [
@@ -126,15 +127,15 @@
 <!-- OPPORTUNTIIES (right) -->
 <div class="opportunities">
   {% for opp in opportunityList %}
-  <div class="opp-block">
+  <div id="{{ opp.opportunityID }}" class="opp-block">
     <br>
     <a href="/opportunities/{{ opp.opportunityID }}">
       <h3>{{ opp.title }}
     </a> &nbsp;
     <!-- field -->
-    {% if opp.field %}
-    <a class="btn btn-primary btn-sm" href="/opportunities">&nbsp; {{ opp.field }} &nbsp; </a> &nbsp;
-    {% endif %}
+      {% if opp.field %}
+      <a class="btn btn-primary btn-sm" style="color: white !important;">&nbsp;  {{ opp.field }} &nbsp; </a> &nbsp;
+      {% endif %}
     </h3></a>
     <!-- date -->
     {% if date[opp.opportunityID][0] or date[opp.opportunityID][1] %}
@@ -171,32 +172,45 @@
     <div class="tag-block">
       <!-- gender -->
       {% if opp.gender %}
-      <a class="btn btn-primary btn-sm" href="/opportunities">&nbsp; {{ opp.gender }} &nbsp; </a> &nbsp;
+      <a class="btn btn-primary btn-sm tag">&nbsp; {{ opp.gender }} &nbsp; </a> &nbsp;
       {% endif %}
 
       <!-- cost (if free) -->
       {% if opp.cost == 0 %}
-      <a class="btn btn-primary btn-sm" href="/opportunities">&nbsp; free &nbsp;</a> &nbsp;
+      <a class="btn btn-primary btn-sm tag">&nbsp; free &nbsp;</a> &nbsp;
       {% endif %}
 
       <!-- grades -->
       {% for grade in opp.grades %}
       {% if grade == 9 %}
-      <a class="btn btn-primary btn-sm" href="/opportunities">&nbsp; freshmen &nbsp; </a> &nbsp;
+      <a class="btn btn-primary btn-sm tag">&nbsp; freshmen &nbsp; </a> &nbsp;
       {% elif grade == 10 %}
-      <a class="btn btn-primary btn-sm" href="/opportunities">&nbsp; sophomores &nbsp; </a> &nbsp;
+      <a class="btn btn-primary btn-sm tag">&nbsp; sophomores &nbsp; </a> &nbsp;
       {% elif grade == 11 %}
-      <a class="btn btn-primary btn-sm" href="/opportunities">&nbsp; juniors &nbsp; </a> &nbsp;
+      <a class="btn btn-primary btn-sm tag">&nbsp; juniors &nbsp; </a> &nbsp;
       {% elif grade == 12 %}
-      <a class="btn btn-primary btn-sm" href="/opportunities">&nbsp; seniors &nbsp; </a> &nbsp;
+      <a class="btn btn-primary btn-sm tag">&nbsp; seniors &nbsp; </a> &nbsp;
       {% endif %}
       {% endfor %}
 
       <button
-        style="float: right; font-size: 20px; border: 0; padding: 0; background-color: transparent; outline: none;"
+        style="float: right; font-size: 20px; border: 0; padding-left: 1vw; background-color: transparent; outline: none;"
         class="text-secondary star" onclick="favorite('opportunity',{{opp.opportunityID}});">
         <i class="fa fa-star" aria-hidden="true"></i>
       </button>
+      {% if user.userType == "admin" %}
+      <a
+        style="float: right; font-size: 20px; border: 0; padding-left: 1.5vw; background-color: transparent; outline: none;"
+        class="text-secondary star" href="/opportunities/edit/{{ opp.opportunityID }}">
+        <i class="fa fa-edit" aria-hidden="true"></i>
+      </a>
+      <button
+        style="float: right; font-size: 20px; border: 0; padding-left: 1vw; background-color: transparent; outline: none;"
+        class="text-secondary star" onclick="deleteObject('opportunity',{{opp.opportunityID}});">
+        <i class="fas fa-trash-alt" aria-hidden="true"></i>
+      </button>
+      {% endif %}
+      
     </div>
     <br>
   </div>

@@ -20,13 +20,19 @@ let favorite = (type, id) => {
 };
 
 let unfavorite = (type, id) => {
-    let xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-        }
+    let confirmation = confirm(`Are you sure you want to unfavorite this ${type}?`);
+    console.log(confirmation)
+    if (confirmation) {
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                let obj = document.getElementById(`${type}-${id}`);
+                obj.parentNode.removeChild(obj);
+            }
+        };
+        xhttp.open('GET', `/unfavorite/${type}/${id}`, true);
+        xhttp.send();
     };
-    xhttp.open('GET', `/unfavorite/${type}/${id}`, true);
-    xhttp.send();
 };
 
 const sleep = (time) => {

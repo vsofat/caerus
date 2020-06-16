@@ -1,4 +1,4 @@
-from utl.database.models.models import db, Scholarship, ScholarshipLink
+from utl.database.models.models import db, Scholarship, ScholarshipLink, SavedScholarship
 
 
 def getAllScholarships():
@@ -38,8 +38,24 @@ def createScholarship(body):
         db.session.add(newLink)
     db.session.commit()
 
+def editScholarship(body):
+    scholarshipID = body['scholarshipID']
+    scholarship = Scholarship.query.filter_by(scholarshipID=scholarshipID).first()
+    scholarship.title = body['title']
+    scholarship.description = body['description']
+    scholarship.amount = body['amount']
+    scholarship.deadline = body['deadline']
+    scholarship.eligibility = body['eligibility']
+    ScholarshipLink.query.filter_by(scholarshipID=scholarshipID).delete()
+    for link in body['links']:
+        newLink = ScholarshipLink(
+            scholarshipID=scholarship.scholarshipID, link=link)
+        db.session.add(newLink)
+    db.session.commit()
+
 
 def deleteScholarship(scholarshipID):
     Scholarship.query.filter_by(scholarshipID=scholarshipID).delete()
     ScholarshipLink.query.filter_by(scholarshipID=scholarshipID).delete()
+    SavedScholarship.query.filter_by(scholarshipID=scholarshipID).delete()
     db.session.commit()

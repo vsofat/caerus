@@ -6,6 +6,7 @@
 
 {% block scripts %}
 <script src="{{ url_for('static', filename='js/favorite.js') }}"></script>
+<script src="{{ url_for('static', filename='js/delete.js') }}"></script>
 {% endblock %}
 
 {% set sort_options = [
@@ -53,7 +54,7 @@
 <!-- SCHOLARSHIPS (right) -->
 <div class="scholarships">
   {% for scholar in scholars %}
-  <div class="scholar-block">
+  <div id="{{ scholar.scholarshipID }}" class="scholar-block">
     <br>
 
     <a href="/scholarships/{{ scholar.scholarshipID }}">
@@ -74,10 +75,22 @@
     <a href="{{ link }}">{{ link }}</a> <br>
     {% endfor %}
 
-    <button style="float: right; font-size: 20px; border: 0; padding: 0; background-color: transparent; outline: none;"
+    <button
+      style="float: right; font-size: 20px; border: 0; padding-left: 1vw; background-color: transparent; outline: none;"
       class="text-secondary star" onclick="favorite('scholarship',{{scholar.scholarshipID}});">
       <i class="fa fa-star" aria-hidden="true"></i>
     </button>
+    {% if user.userType == "admin" %}
+    <a style="float: right; font-size: 20px; border: 0; padding-left: 1.5vw; background-color: transparent; outline: none;"
+      class="text-secondary star" href="/scholarships/edit/{{ scholar.scholarshipID }}">
+      <i class="fa fa-edit" aria-hidden="true"></i>
+    </a>
+    <button
+      style="float: right; font-size: 20px; border: 0; padding-left: 1vw; background-color: transparent; outline: none;"
+      class="text-secondary star" onclick="deleteObject('scholarship',{{scholar.scholarshipID}});">
+      <i class="fas fa-trash-alt" aria-hidden="true"></i>
+    </button>
+    {% endif %}
     <br> <br>
   </div>
   {% endfor %}
