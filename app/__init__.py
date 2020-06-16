@@ -139,6 +139,16 @@ def create_opportunity_body(f):
             }
 
 
+def create_resource_body(f):
+    link = f['link'].strip()
+    link = link_check(link)
+    return {
+            'title': request.form['title'],
+            'description': request.form['description'],
+            'link': link
+        }
+
+
 def credentials_to_dict(credentials):
     return {
         "token": credentials.token,
@@ -467,14 +477,10 @@ def createResourceRoute():
                                user=users.getUserInfo(session['userid']),
                                )
     elif (request.method == 'POST'):
-        link = request.form['link'].strip()
-        link = link_check(link)
-        resources.createResource({
-            'title': request.form['title'],
-            'description': request.form['description'],
-            'link': link
-        })
-        if len(request.form['title']) > 0:
+        f = request.form
+        body = create_resource_body(f)
+        resources.createResource(body)
+        if len(f['title']) > 0:
             flash("Successfully posted a resource", 'success')
         return render_template("create/resource.html",
                                user=users.getUserInfo(session['userid']),
@@ -492,6 +498,10 @@ def editResourceRoute(resourceID):
             user=users.getUserInfo(session["userid"])
         )
     elif (request.method == 'POST'):
+        f = request.form
+        body = create_resource_body(f)
+        body['resourceID'] = resourceID
+        resources.editResource(body)
         return redirect(url_for('resourceRoute', resourceID=resourceID))
 
 
