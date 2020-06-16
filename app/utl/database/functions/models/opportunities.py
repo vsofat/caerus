@@ -1,4 +1,4 @@
-from utl.database.models.models import db, Opportunity, OpportunityGrade, OpportunityLink
+from utl.database.models.models import db, Opportunity, OpportunityGrade, OpportunityLink, SavedOpportunity
 
 
 def getAllOpportunities():
@@ -82,4 +82,5 @@ def deleteOpportunity(opportunityID):
     Opportunity.query.filter_by(opportunityID=opportunityID).delete()
     OpportunityGrade.query.filter_by(opportunityID=opportunityID).delete()
     OpportunityLink.query.filter_by(opportunityID=opportunityID).delete()
+    SavedOpportunity.query.filter_by(opportunityID=opportunityID).delete()
     db.session.commit()

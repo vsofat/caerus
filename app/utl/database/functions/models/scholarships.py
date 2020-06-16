@@ -1,4 +1,4 @@
-from utl.database.models.models import db, Scholarship, ScholarshipLink
+from utl.database.models.models import db, Scholarship, ScholarshipLink, SavedScholarship
 
 
 def getAllScholarships():
@@ -57,4 +57,5 @@ def editScholarship(body):
 def deleteScholarship(scholarshipID):
     Scholarship.query.filter_by(scholarshipID=scholarshipID).delete()
     ScholarshipLink.query.filter_by(scholarshipID=scholarshipID).delete()
+    SavedScholarship.query.filter_by(scholarshipID=scholarshipID).delete()
     db.session.commit()
