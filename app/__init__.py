@@ -92,6 +92,36 @@ def link_check(link):
         link = 'http://' + link
     return link
 
+
+def parse_opportunity_form(form):
+    links = list()
+    grades = list()
+    for key in form.keys():
+        if "link" in key:
+            link = form[key].strip()
+            link = link_check(link)
+            links.append(link)
+    grades = form['grades'].split(",")
+    location = form["location"]
+    location = location if len(location) > 0 else None
+    return links, grades, location
+
+
+def create_opportunity_body(f, location, grades, links):
+    return {'title': f['title'],
+            'description': f['description'],
+            'field': f['field'],
+            'gender': f['gender'],
+            'location': location,
+            'startDate': strtodate(f['start']),
+            'endDate': strtodate(f['end']),
+            'deadline': strtodate(f['deadline']),
+            'cost': f['cost'],
+            'grades': grades,
+            'links': links
+            }
+
+
 def credentials_to_dict(credentials):
     return {
         "token": credentials.token,
@@ -294,33 +324,10 @@ def createOpportunityRoute():
             "create/opportunity.html", user=users.getUserInfo(session["userid"])
         )
     elif request.method == "POST":
-        links = list()
-        grades = list()
         f = request.form
-        for key in f.keys():
-            if "link" in key:
-                link = request.form[key].strip()
-                link = link_check(link)
-                links.append(link)
-            if "grades" == key:
-                grades = request.form[key].split(",")
-        location = request.form["location"]
-        location = location if len(location) > 0 else None
-        opportunities.createOpportunity(
-            {
-                "title": request.form["title"],
-                "description": request.form["description"],
-                "field": request.form["field"],
-                "gender": request.form["gender"],
-                "location": location,
-                "startDate": strtodate(request.form["start"]),
-                "endDate": strtodate(request.form["end"]),
-                "deadline": strtodate(request.form["deadline"]),
-                "cost": request.form["cost"],
-                "grades": grades,
-                "links": links,
-            }
-        )
+        links, grades, location = parse_opportunity_form(f)
+        body = create_opportunity_body(f, location, grades, links)
+        opportunities.createOpportunity(body)
         flash("Successfully created an opportunity", "success")
         return render_template(
             "create/opportunity.html", user=users.getUserInfo(session["userid"])
@@ -332,7 +339,7 @@ def createOpportunityRoute():
 @staffonly
 def editOpportunityRoute(opportunityID):
     if (request.method == 'GET'):
-        obj=opportunities.getOpportunity(opportunityID)
+        obj = opportunities.getOpportunity(opportunityID)
         obj.grades = [str(grade) for grade in obj.grades]
         obj.grades = ','.join(obj.grades)
         return render_template(
@@ -341,6 +348,11 @@ def editOpportunityRoute(opportunityID):
             user=users.getUserInfo(session["userid"])
         )
     elif (request.method == 'POST'):
+        f = request.form
+        links, grades, location = parse_opportunity_form(f)
+        body = create_opportunity_body(f, location, grades, links)
+        body['opportunityID'] = opportunityID
+        opportunities.editOpportunity(body)
         return redirect(url_for('opportunityRoute', opportunityID=opportunityID))
 
 

@@ -100,11 +100,21 @@
     <div class="mb-2 font-weight-bold">
         Link(s)
     </div>
-    <div id="links-container" class="form-group">
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Add link" id="link0" name="link0">
+    {{ obj.links|length }}
+    {% for i in range(obj.links|length) %}
+        <div id="links-container" class="form-group">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Add link" id="link{{i}}" name="link{{i}}" value="{{obj.links[i]}}">
+            </div>
         </div>
-    </div>
+    {% endfor %}
+    {% if obj.links|length == 0 %}
+        <div id="links-container" class="form-group">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Add link" id="link0" name="link0">
+            </div>
+        </div>
+    {% endif %}
     <button type="button" class="btn btn-primary" id="add-link">Add Another Link</button>
     <button type="submit" class="btn btn-success">Submit</button>
 </form>

@@ -539,3 +539,6 @@ Fill out edit form with opportunity info
 
 ericL -- 2020-06-15 21:00
 Generalize link checking
+
+ericL -- 2020-06-15 21:40
+Complete opportunity editing form
