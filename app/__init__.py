@@ -93,21 +93,38 @@ def link_check(link):
     return link
 
 
-def parse_opportunity_form(form):
+def link_parse(form):
     links = list()
-    grades = list()
     for key in form.keys():
         if "link" in key:
             link = form[key].strip()
             link = link_check(link)
             links.append(link)
+    return links
+
+
+def parse_opportunity_form(form):
+    links = link_parse(form)
     grades = form['grades'].split(",")
     location = form["location"]
     location = location if len(location) > 0 else None
     return links, grades, location
 
 
-def create_opportunity_body(f, location, grades, links):
+def create_scholarship_body(f):
+    links = link_parse(f)
+    return {
+        'title': f['title'],
+        'description': f['description'],
+        'amount': f['amount'],
+        'deadline': strtodate(f['deadline']),
+        'eligibility': f['eligibility'],
+        'links': links
+    }
+
+
+def create_opportunity_body(f):
+    links, grades, location = parse_opportunity_form(f)
     return {'title': f['title'],
             'description': f['description'],
             'field': f['field'],
@@ -325,8 +342,7 @@ def createOpportunityRoute():
         )
     elif request.method == "POST":
         f = request.form
-        links, grades, location = parse_opportunity_form(f)
-        body = create_opportunity_body(f, location, grades, links)
+        body = create_opportunity_body(f)
         opportunities.createOpportunity(body)
         flash("Successfully created an opportunity", "success")
         return render_template(
@@ -349,8 +365,7 @@ def editOpportunityRoute(opportunityID):
         )
     elif (request.method == 'POST'):
         f = request.form
-        links, grades, location = parse_opportunity_form(f)
-        body = create_opportunity_body(f, location, grades, links)
+        body = create_opportunity_body(f)
         body['opportunityID'] = opportunityID
         opportunities.editOpportunity(body)
         return redirect(url_for('opportunityRoute', opportunityID=opportunityID))
@@ -395,22 +410,10 @@ def createScholarshipRoute():
         return render_template('create/scholarship.html',
                                user=users.getUserInfo(session['userid']))
     elif (request.method == 'POST'):
-        links = list()
         f = request.form
-        for key in f.keys():
-            if "link" in key:
-                link = request.form[key].strip()
-                link = link_check(link)
-                links.append(link)
-        scholarships.createScholarship({
-            'title': request.form['title'],
-            'description': request.form['description'],
-            'amount': request.form['amount'],
-            'deadline': strtodate(request.form['deadline']),
-            'eligibility': request.form['eligibility'],
-            'links': links
-        })
-        if len(request.form['title']) > 0:
+        body = create_scholarship_body(f)
+        scholarships.createScholarship(body)
+        if len(f['title']) > 0:
             flash("Successfully posted a scholarship", 'success')
         return render_template('create/scholarship.html',
                                user=users.getUserInfo(session['userid']))
@@ -427,6 +430,10 @@ def editScholarshipRoute(scholarshipID):
             user=users.getUserInfo(session["userid"])
         )
     elif (request.method == 'POST'):
+        f = request.form
+        body = create_scholarship_body(f)
+        body['scholarshipID'] = scholarshipID
+        scholarships.editScholarship(body)
         return redirect(url_for('scholarshipRoute', scholarshipID=scholarshipID))
 
 

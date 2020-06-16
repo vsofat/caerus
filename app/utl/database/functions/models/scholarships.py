@@ -46,7 +46,7 @@ def editScholarship(body):
     scholarship.amount = body['amount']
     scholarship.deadline = body['deadline']
     scholarship.eligibility = body['eligibility']
-    ScholarshipLink.filter_by(scholarshipID=scholarshipID).delete()
+    ScholarshipLink.query.filter_by(scholarshipID=scholarshipID).delete()
     for link in body['links']:
         newLink = ScholarshipLink(
             scholarshipID=scholarship.scholarshipID, link=link)
