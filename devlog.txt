@@ -530,3 +530,6 @@ Added 'create' to dropdown
 
 ericL -- 2020-06-15 20:12
 Add routing for editing objects
+
+ericL -- 2020-06-15 20:53
+Fill out edit form with opportunity info

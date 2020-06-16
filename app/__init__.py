@@ -323,18 +323,21 @@ def createOpportunityRoute():
         )
 
 
-@app.route("opportunities/edit/<opportunityID>", methods=['GET', 'POST'])
+@app.route("/opportunities/edit/<opportunityID>", methods=['GET', 'POST'])
 @protected
 @staffonly
 def editOpportunityRoute(opportunityID):
     if (request.method == 'GET'):
+        obj=opportunities.getOpportunity(opportunityID)
+        obj.grades = [str(grade) for grade in obj.grades]
+        obj.grades = ','.join(obj.grades)
         return render_template(
-            'edit/opportunity.html'
+            'edit/opportunity.html',
+            obj=obj,
+            user=users.getUserInfo(session["userid"])
         )
     elif (request.method == 'POST'):
-        return render_template(
-            'edit/opportunity.html'
-        )
+        return redirect(url_for('opportunityRoute', opportunityID=opportunityID))
 
 
 @app.route("/scholarships", methods=['GET', 'POST'])
@@ -395,18 +398,18 @@ def createScholarshipRoute():
                                user=users.getUserInfo(session['userid']))
 
 
-@app.route("scholarships/edit/<scholarshipID>", methods=['GET', 'POST'])
+@app.route("/scholarships/edit/<scholarshipID>", methods=['GET', 'POST'])
 @protected
 @staffonly
 def editScholarshipRoute(scholarshipID):
     if (request.method == 'GET'):
         return render_template(
-            'edit/scholarship.html'
+            'edit/scholarship.html',
+            obj=scholarships.getScholarship(scholarshipID),
+            user=users.getUserInfo(session["userid"])
         )
     elif (request.method == 'POST'):
-        return render_template(
-            'edit/scholarship.html'
-        )
+        return redirect(url_for('scholarshipRoute', scholarshipID=scholarshipID))
 
 
 @app.route("/resources", methods=['GET', 'POST'])
@@ -451,18 +454,18 @@ def createResourceRoute():
                                )
 
 
-@app.route("resources/edit/<resourceID>", methods=['GET', 'POST'])
+@app.route("/resources/edit/<resourceID>", methods=['GET', 'POST'])
 @protected
 @staffonly
 def editResourceRoute(resourceID):
     if (request.method == 'GET'):
         return render_template(
-            'edit/resource.html'
+            'edit/resource.html',
+            obj=resources.getResource(resourceID),
+            user=users.getUserInfo(session["userid"])
         )
     elif (request.method == 'POST'):
-        return render_template(
-            'edit/resource.html'
-        )
+        return redirect(url_for('resourceRoute', resourceID=resourceID))
 
 
 @app.route("/favorites")
