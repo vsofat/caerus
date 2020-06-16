@@ -13,8 +13,20 @@ def getResource(resourceID):
 
 def createResource(body):
     resource = Resource(
-        title=body['title'], description=body['description'], link=body['link'])
+        title=body['title'],
+        description=body['description'],
+        link=body['link']
+    )
     db.session.add(resource)
+    db.session.commit()
+
+
+def editResource(body):
+    resourceID = body['resourceID']
+    resource = Resource.query.filter_by(resourceID=resourceID).first()
+    resource.title = body['title']
+    resource.description = body['description']
+    resource.link = body['link']
     db.session.commit()
 
 

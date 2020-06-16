@@ -530,3 +530,6 @@ Added 'create' to dropdown
 
 ericL -- 2020-06-15 20:12
 Add routing for editing objects
+
+kaziJ -- 2020-06-15 20:35
+Create backend functions for editing opportunities, scholarships, and resources
