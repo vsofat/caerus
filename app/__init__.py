@@ -83,6 +83,18 @@ def staffonly(f):
     return wrapper
 
 
+def adminonly(f):
+    @functools.wraps(f)
+    def wrapper(*args, **kwargs):
+        u = users.getUserInfo(session["userid"])
+        if u.userType == "admin":
+            return f(*args, **kwargs)
+        else:
+            flash("You are not authorized!", "error")
+            return redirect(url_for("root"))
+
+    return wrapper
+
 def strtodate(string):
     return datetime.datetime.strptime(string, '%Y-%m-%d') if len(string) > 0 else None
 
@@ -362,7 +374,7 @@ def createOpportunityRoute():
 
 @app.route("/opportunities/edit/<opportunityID>", methods=['GET', 'POST'])
 @protected
-@staffonly
+@adminonly
 def editOpportunityRoute(opportunityID):
     if (request.method == 'GET'):
         obj = opportunities.getOpportunity(opportunityID)
@@ -431,7 +443,7 @@ def createScholarshipRoute():
 
 @app.route("/scholarships/edit/<scholarshipID>", methods=['GET', 'POST'])
 @protected
-@staffonly
+@adminonly
 def editScholarshipRoute(scholarshipID):
     if (request.method == 'GET'):
         return render_template(
@@ -498,7 +510,7 @@ def createResourceRoute():
 
 @app.route("/resources/edit/<resourceID>", methods=['GET', 'POST'])
 @protected
-@staffonly
+@adminonly
 def editResourceRoute(resourceID):
     if (request.method == 'GET'):
         return render_template(
@@ -518,7 +530,7 @@ def editResourceRoute(resourceID):
 @protected
 def favoritesRoute():
     return render_template(
-        "view/favorites.html", 
+        "view/favorites.html",
         user=users.getUserInfo(session["userid"]),
         opportunityList=savedOpportunities.getSavedOpportunities(session["userid"]),
         scholarshipList=savedScholarships.getSavedScholarships(session["userid"]),
@@ -558,7 +570,7 @@ def unfavorite(t, saveid):
 
 @app.route("/delete/<type>/<deleteid>")
 @protected
-@staffonly
+@adminonly
 def deleteObject(t, deleteid):
     if t == 'opportunity':
         opportunities.deleteOpportunity(deleteid)
