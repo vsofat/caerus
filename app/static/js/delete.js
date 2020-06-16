@@ -7,7 +7,6 @@ let deleteObject = (t, id) => {
             if (this.readyState == 4 && this.status == 200) {
                 let obj = document.getElementById(`${id}`);
                 obj.parentNode.removeChild(obj);
-                console.log("aiahrtqjir3j");
             }
         };
         xhttp.open('GET', `/delete/${t}/${id}`, true);

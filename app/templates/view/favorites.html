@@ -2,6 +2,10 @@
 
 {% set active_page = active_page|default('favorites') -%}
 
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/favorite.js') }}"></script>
+{% endblock %}
+
 {% block title %}Favorites{% endblock %}
 
 {% block body %}
@@ -21,7 +25,7 @@
           <div class="opportunities-fav">
                <br>
                {% for opp in opportunityList %}
-               <div id="{{ opp.opportunityID }}" class="opp-block">
+               <div id="opportunity-{{ opp.opportunityID }}" class="opp-block">
                     <br>
                     <a href="/opportunities/{{ opp.opportunityID }}">
                          <h3>{{ opp.title }}
@@ -66,31 +70,31 @@
                     <div class="tag-block">
                          <!-- gender -->
                          {% if opp.gender %}
-                         <a class="btn btn-primary btn-sm">&nbsp; {{ opp.gender }} &nbsp; </a> &nbsp;
+                         <a class="btn btn-primary btn-sm tag">&nbsp; {{ opp.gender }} &nbsp; </a> &nbsp;
                          {% endif %}
           
                          <!-- cost (if free) -->
                          {% if opp.cost == 0 %}
-                         <a class="btn btn-primary btn-sm">&nbsp; free &nbsp;</a> &nbsp;
+                         <a class="btn btn-primary btn-sm tag">&nbsp; free &nbsp;</a> &nbsp;
                          {% endif %}
           
                          <!-- grades -->
                          {% for grade in opp.grades %}
                          {% if grade == 9 %}
-                         <a class="btn btn-primary btn-sm">&nbsp; freshmen &nbsp; </a> &nbsp;
+                         <a class="btn btn-primary btn-sm tag">&nbsp; freshmen &nbsp; </a> &nbsp;
                          {% elif grade == 10 %}
-                         <a class="btn btn-primary btn-sm">&nbsp; sophomores &nbsp; </a> &nbsp;
+                         <a class="btn btn-primary btn-sm tag">&nbsp; sophomores &nbsp; </a> &nbsp;
                          {% elif grade == 11 %}
-                         <a class="btn btn-primary btn-sm">&nbsp; juniors &nbsp; </a> &nbsp;
+                         <a class="btn btn-primary btn-sm tag">&nbsp; juniors &nbsp; </a> &nbsp;
                          {% elif grade == 12 %}
-                         <a class="btn btn-primary btn-sm">&nbsp; seniors &nbsp; </a> &nbsp;
+                         <a class="btn btn-primary btn-sm tag">&nbsp; seniors &nbsp; </a> &nbsp;
                          {% endif %}
                          {% endfor %}
           
                          <button
                               style="float: right; font-size: 20px; border: 0; padding: 0; background-color: transparent; outline: none;"
-                              class="text-secondary star" onclick="favorite('opportunity',{{opp.opportunityID}});">
-                              <i class="fa fa-star" aria-hidden="true"></i>
+                              class="text-secondary star" onclick="unfavorite('opportunity',{{opp.opportunityID}});">
+                              <i class="far fa-star" aria-hidden="true"></i>
                          </button>
                     </div>
                     <br>
@@ -102,7 +106,7 @@
           <div class="scholarships-fav">
                <br>
                {% for scholar in scholarshipList %}
-               <div id="{{ scholar.scholarshipID }}" class="scholar-block">
+               <div id="scholarship-{{ scholar.scholarshipID }}" class="scholar-block">
                     <br>
                
                     <a href="/scholarships/{{ scholar.scholarshipID }}">
@@ -124,8 +128,8 @@
                     {% endfor %}
                
                     <button style="float: right; font-size: 20px; border: 0; padding: 0; background-color: transparent; outline: none;"
-                         class="text-secondary star" onclick="favorite('scholarship', {{scholar.scholarshipID}});">
-                         <i class="fa fa-star" aria-hidden="true"></i>
+                         class="text-secondary star" onclick="unfavorite('scholarship', {{scholar.scholarshipID}});">
+                         <i class="far fa-star" aria-hidden="true"></i>
                     </button>
                     <br> <br>
                </div>
