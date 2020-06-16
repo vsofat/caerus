@@ -100,7 +100,7 @@ def strtodate(string):
 
 
 def link_check(link):
-    if len(link) > 0 and (link[:7] != 'http://' or link[:8] != 'https://'):
+    if len(link) > 0 and (link[:7] != 'http://' and link[:8] != 'https://'):
         link = 'http://' + link
     return link
 
