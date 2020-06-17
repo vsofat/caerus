@@ -12,6 +12,10 @@
 
 Caerus is a website based off of Mr. Blumm's weekly Opportunity Bulletin, where students at Stuyvesant can search through a database of opportunities, internships and scholarships curated by Mr. Blumm and Stuyvesant faculty.
 
+## Video Demo
+
+[video demo here](https://www.youtube.com/watch?v=cPlkgKidTiU&feature=youtu.be)
+
 ## APIs Used
 
 - [Google OAuth2 API](https://docs.google.com/document/u/3/d/1ByvzxoEhH1UuHJR2RW2w5-unr6sOeJBm9Hh-YFq3RSw): Retrieves basic information from a user's Google account. We use it for authentication and to get the email, name, and picture from a user's account.
