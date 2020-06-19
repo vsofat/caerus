@@ -135,3 +135,4 @@ ehthumbs.db
 oauth-client.json
 gmail.json
 site.db
+app/static/data/*.csv

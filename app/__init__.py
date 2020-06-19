@@ -11,6 +11,7 @@ import google_auth_oauthlib.flow
 from googleapiclient.discovery import build
 
 from utl import dateconv
+from utl import form_utl
 from utl.database.models import models
 from utl.database.functions.models import (
     opportunities,
@@ -94,71 +95,6 @@ def adminonly(f):
             return redirect(url_for("root"))
 
     return wrapper
-
-def strtodate(string):
-    return datetime.datetime.strptime(string, '%Y-%m-%d') if len(string) > 0 else None
-
-
-def link_check(link):
-    if len(link) > 0 and (link[:7] != 'http://' and link[:8] != 'https://'):
-        link = 'http://' + link
-    return link
-
-
-def link_parse(form):
-    links = list()
-    for key in form.keys():
-        if "link" in key:
-            link = form[key].strip()
-            link = link_check(link)
-            links.append(link)
-    return links
-
-
-def parse_opportunity_form(form):
-    links = link_parse(form)
-    grades = form['grades'].split(",")
-    location = form["location"]
-    location = location if len(location) > 0 else None
-    return links, grades, location
-
-
-def create_scholarship_body(f):
-    links = link_parse(f)
-    return {
-        'title': f['title'],
-        'description': f['description'],
-        'amount': f['amount'],
-        'deadline': strtodate(f['deadline']),
-        'eligibility': f['eligibility'],
-        'links': links
-    }
-
-
-def create_opportunity_body(f):
-    links, grades, location = parse_opportunity_form(f)
-    return {'title': f['title'],
-            'description': f['description'],
-            'field': f['field'],
-            'gender': f['gender'],
-            'location': location,
-            'startDate': strtodate(f['start']),
-            'endDate': strtodate(f['end']),
-            'deadline': strtodate(f['deadline']),
-            'cost': f['cost'],
-            'grades': grades,
-            'links': links
-            }
-
-
-def create_resource_body(f):
-    link = f['link'].strip()
-    link = link_check(link)
-    return {
-            'title': request.form['title'],
-            'description': request.form['description'],
-            'link': link
-        }
 
 
 def credentials_to_dict(credentials):
@@ -348,7 +284,7 @@ def opportunitiesRoute():
 @protected
 def opportunityRoute(opportunityID):
     return render_template(
-        "view/opportunity.html",
+        "view/individual/opportunity.html",
         opp=opportunities.getOpportunity(opportunityID),
         date=dateconv.dateDisplay(opportunityID),
     )
@@ -363,8 +299,7 @@ def createOpportunityRoute():
             "create/opportunity.html", user=users.getUserInfo(session["userid"])
         )
     elif request.method == "POST":
-        f = request.form
-        body = create_opportunity_body(f)
+        body = form_utl.create_opportunity_body(request.form)
         opportunities.createOpportunity(body)
         flash("Successfully created an opportunity", "success")
         return render_template(
@@ -386,8 +321,7 @@ def editOpportunityRoute(opportunityID):
             user=users.getUserInfo(session["userid"])
         )
     elif (request.method == 'POST'):
-        f = request.form
-        body = create_opportunity_body(f)
+        body = form_utl.create_opportunity_body(request.form)
         body['opportunityID'] = opportunityID
         opportunities.editOpportunity(body)
         return redirect(url_for('opportunityRoute', opportunityID=opportunityID))
@@ -419,7 +353,7 @@ def scholarshipsRoute():
 @app.route("/scholarships/<scholarshipID>")
 @protected
 def scholarshipRoute(scholarshipID):
-    return render_template("view/scholarship.html",
+    return render_template("view/individual/scholarship.html",
                            scholar=scholarships.getScholarship(scholarshipID),
                            date=dateconv.dateDisplayS(scholarshipID),)
 
@@ -432,11 +366,9 @@ def createScholarshipRoute():
         return render_template('create/scholarship.html',
                                user=users.getUserInfo(session['userid']))
     elif (request.method == 'POST'):
-        f = request.form
-        body = create_scholarship_body(f)
+        body = form_utl.create_scholarship_body(request.form)
         scholarships.createScholarship(body)
-        if len(f['title']) > 0:
-            flash("Successfully posted a scholarship", 'success')
+        flash("Successfully posted a scholarship", 'success')
         return render_template('create/scholarship.html',
                                user=users.getUserInfo(session['userid']))
 
@@ -452,8 +384,7 @@ def editScholarshipRoute(scholarshipID):
             user=users.getUserInfo(session["userid"])
         )
     elif (request.method == 'POST'):
-        f = request.form
-        body = create_scholarship_body(f)
+        body = form_utl.create_scholarship_body(request.form)
         body['scholarshipID'] = scholarshipID
         scholarships.editScholarship(body)
         return redirect(url_for('scholarshipRoute', scholarshipID=scholarshipID))
@@ -484,7 +415,7 @@ def resourcesRoute():
 @protected
 def resourceRoute(resourceID):
     return render_template(
-        "view/resource.html",
+        "view/individual/resource.html",
         resource=resources.getResource(resourceID),
     )
 
@@ -498,11 +429,9 @@ def createResourceRoute():
                                user=users.getUserInfo(session['userid']),
                                )
     elif (request.method == 'POST'):
-        f = request.form
-        body = create_resource_body(f)
+        body = form_utl.create_resource_body(request.form)
         resources.createResource(body)
-        if len(f['title']) > 0:
-            flash("Successfully posted a resource", 'success')
+        flash("Successfully posted a resource", 'success')
         return render_template("create/resource.html",
                                user=users.getUserInfo(session['userid']),
                                )
@@ -519,8 +448,7 @@ def editResourceRoute(resourceID):
             user=users.getUserInfo(session["userid"])
         )
     elif (request.method == 'POST'):
-        f = request.form
-        body = create_resource_body(f)
+        body = form_utl.create_resource_body(request.form)
         body['resourceID'] = resourceID
         resources.editResource(body)
         return redirect(url_for('resourceRoute', resourceID=resourceID))
@@ -532,8 +460,10 @@ def favoritesRoute():
     return render_template(
         "view/favorites.html",
         user=users.getUserInfo(session["userid"]),
-        opportunityList=savedOpportunities.getSavedOpportunities(session["userid"]),
-        scholarshipList=savedScholarships.getSavedScholarships(session["userid"]),
+        opportunityList=savedOpportunities.getSavedOpportunities(
+            session["userid"]),
+        scholarshipList=savedScholarships.getSavedScholarships(
+            session["userid"]),
         date=dateconv.allDateDisplay(),
         oppscholar=dateconv.allDateDisplayS(),
     )

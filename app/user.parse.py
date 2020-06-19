@@ -2,7 +2,7 @@ import csv
 import os
 import json
 
-DIR = os.path.dirname(__file__) + "/../static/data/"
+DIR = os.path.dirname(__file__) + "/static/data/"
 
 users = {
     'teacher': list(),
