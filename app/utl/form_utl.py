@@ -61,3 +61,25 @@ def create_resource_body(f):
         'description': f['description'],
         'link': link
     }
+
+
+def create_preference_body(f, userid):
+    body = {
+            'userID': userid,
+            'preferences': list()
+        }
+    maxCost = f['maximum-cost']
+    if maxCost != '':
+        body['preferences'].append(
+            {'type': 'COST_PREFERENCE', 'value': float(maxCost)})
+    for key in f.keys():
+        if 'field' in key:
+            body['preferences'].append(
+                {'type': 'FIELD_PREFERENCE', 'value': f[key]})
+        if 'grade' in key:
+            body['preferences'].append(
+                {'type': 'GRADE_PREFERENCE', 'value': f[key]})
+        if 'gender' in key:
+            body['preferences'].append(
+                {'type': 'GENDER_PREFERENCE', 'value': f[key]})
+    return body, maxCost == ''

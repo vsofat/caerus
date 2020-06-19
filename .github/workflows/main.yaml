@@ -21,7 +21,7 @@ jobs:
     - name: Install dependencies
       run: pip install -r requirements.txt
     - name: Test app routing
-      run: python app/test.py
+      run: python app/unittest.py
     - name: Test database functions
       run: |
         cd app

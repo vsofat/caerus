@@ -294,16 +294,18 @@ def opportunityRoute(opportunityID):
 @protected
 @staffonly
 def createOpportunityRoute():
+    user = users.getUserInfo(session["userid"])
     if request.method == "GET":
         return render_template(
-            "create/opportunity.html", user=users.getUserInfo(session["userid"])
+            "create/opportunity.html", user=user
         )
     elif request.method == "POST":
         body = form_utl.create_opportunity_body(request.form)
         opportunities.createOpportunity(body)
+
         flash("Successfully created an opportunity", "success")
         return render_template(
-            "create/opportunity.html", user=users.getUserInfo(session["userid"])
+            "create/opportunity.html", user=user
         )
 
 
@@ -330,10 +332,11 @@ def editOpportunityRoute(opportunityID):
 @app.route("/scholarships", methods=['GET', 'POST'])
 @protected
 def scholarshipsRoute():
+    user = users.getUserInfo(session["userid"])
     if (request.method == 'GET'):
         return render_template(
             "view/scholarships.html",
-            user=users.getUserInfo(session["userid"]),
+            user=user,
             scholars=scholarships.getAllScholarships(),
             date=dateconv.allDateDisplayS()
         )
@@ -343,10 +346,7 @@ def scholarshipsRoute():
         body, scholars = findScholarships.findScholarships(body)
         return render_template(
             "view/scholarships.html",
-            user=users.getUserInfo(session["userid"]),
-            body=body,
-            scholars=scholars,
-            date=dateconv.allDateDisplayS(),
+            user=user, body=body, scholars=scholars, date=dateconv.allDateDisplayS(),
         )
 
 
@@ -362,15 +362,15 @@ def scholarshipRoute(scholarshipID):
 @protected
 @staffonly
 def createScholarshipRoute():
+    user = users.getUserInfo(session['userid'])
     if (request.method == 'GET'):
-        return render_template('create/scholarship.html',
-                               user=users.getUserInfo(session['userid']))
+        return render_template('create/scholarship.html', user=user)
     elif (request.method == 'POST'):
         body = form_utl.create_scholarship_body(request.form)
         scholarships.createScholarship(body)
+
         flash("Successfully posted a scholarship", 'success')
-        return render_template('create/scholarship.html',
-                               user=users.getUserInfo(session['userid']))
+        return render_template('create/scholarship.html', user=user)
 
 
 @app.route("/scholarships/edit/<scholarshipID>", methods=['GET', 'POST'])
@@ -393,21 +393,17 @@ def editScholarshipRoute(scholarshipID):
 @app.route("/resources", methods=['GET', 'POST'])
 @protected
 def resourcesRoute():
+    user = users.getUserInfo(session["userid"])
     if (request.method == 'GET'):
         return render_template(
-            "view/resources.html",
-            user=users.getUserInfo(session["userid"]),
-            res=resources.getAllResources(),
+            "view/resources.html", user=user, res=resources.getAllResources(),
         )
     elif (request.method == 'POST'):
         f = request.form
         body = {'search': f['search'], 'sort': f['sort']}
         body, res = findResources.findResources(body)
         return render_template(
-            "view/resources.html",
-            body=body,
-            user=users.getUserInfo(session["userid"]),
-            res=res,
+            "view/resources.html", body=body, user=user, res=res,
         )
 
 
@@ -424,17 +420,15 @@ def resourceRoute(resourceID):
 @protected
 @staffonly
 def createResourceRoute():
+    user = users.getUserInfo(session['userid'])
     if (request.method == 'GET'):
-        return render_template("create/resource.html",
-                               user=users.getUserInfo(session['userid']),
-                               )
+        return render_template("create/resource.html", user=user)
     elif (request.method == 'POST'):
         body = form_utl.create_resource_body(request.form)
         resources.createResource(body)
+
         flash("Successfully posted a resource", 'success')
-        return render_template("create/resource.html",
-                               user=users.getUserInfo(session['userid']),
-                               )
+        return render_template("create/resource.html", user=user)
 
 
 @app.route("/resources/edit/<resourceID>", methods=['GET', 'POST'])
@@ -457,13 +451,12 @@ def editResourceRoute(resourceID):
 @app.route("/favorites")
 @protected
 def favoritesRoute():
+    uid = session['userid']
     return render_template(
         "view/favorites.html",
-        user=users.getUserInfo(session["userid"]),
-        opportunityList=savedOpportunities.getSavedOpportunities(
-            session["userid"]),
-        scholarshipList=savedScholarships.getSavedScholarships(
-            session["userid"]),
+        user=users.getUserInfo(uid),
+        opportunityList=savedOpportunities.getSavedOpportunities(uid),
+        scholarshipList=savedScholarships.getSavedScholarships(uid),
         date=dateconv.allDateDisplay(),
         oppscholar=dateconv.allDateDisplayS(),
     )
@@ -514,37 +507,21 @@ def deleteObject(t, deleteid):
 @app.route("/preferences", methods=['GET', 'POST'])
 @protected
 def preferencesRoute():
+    uid = session['userid']
     if (request.method == 'GET'):
-        prefs = preferences.getAllPreferences(session['userid'])
-        keys = prefs.keys()
-        for key in keys:
+        prefs = preferences.getAllPreferences(uid)
+        for key in prefs.keys():
             for i in range(len(prefs[key])):
                 prefs[key][i] = prefs[key][i]['value']
         return render_template(
-            "view/preferences.html", user=users.getUserInfo(session["userid"]), prefs=prefs
+            "view/preferences.html", user=users.getUserInfo(uid), prefs=prefs
         )
     elif (request.method == 'POST'):
-        body = {
-            'userID': session['userid'],
-            'preferences': list()
-        }
-        f = request.form
-        maxCost = f['maximum-cost']
-        if maxCost != '':
-            body['preferences'].append(
-                {'type': 'COST_PREFERENCE', 'value': float(maxCost)})
-        else:
-            preferences.deleteCostPreference(session['userid'])
-        for key in f.keys():
-            if 'field' in key:
-                body['preferences'].append(
-                    {'type': 'FIELD_PREFERENCE', 'value': f[key]})
-            if 'grade' in key:
-                body['preferences'].append(
-                    {'type': 'GRADE_PREFERENCE', 'value': f[key]})
-            if 'gender' in key:
-                body['preferences'].append(
-                    {'type': 'GENDER_PREFERENCE', 'value': f[key]})
+        body, emptyMaxCost = form_utl.create_preference_body(request.form, uid)
+
+        if emptyMaxCost:
+            preferences.deleteCostPreference(uid)
+
         preferences.createAllPreferences(body)
         flash('Preferences have been set', 'success')
         return redirect(url_for('preferencesRoute'))
