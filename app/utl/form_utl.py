@@ -83,3 +83,29 @@ def create_preference_body(f, userid):
             body['preferences'].append(
                 {'type': 'GENDER_PREFERENCE', 'value': f[key]})
     return body, maxCost == ''
+
+
+def create_opportunity_find(f):
+    maxCost = f['maximum-cost']
+    body = {
+            'search': f['search'],
+            'sort': f['sort'],
+            'filters': {
+                'field': list(),
+                'maximum-cost': maxCost if maxCost != '' else None,
+                'grade': list(),
+                'gender': list()
+            }
+        }
+    for k in f.keys():
+        if 'field' in k:
+            body['filters']['field'].append(f[k])
+        if 'grade' in k:
+            body['filters']['grade'].append(f[k])
+        if 'gender' in k:
+            body['filters']['gender'].append(f[k])
+    return body
+
+
+def create_basic_find(f):
+    return {'search': f['search'], 'sort': f['sort']}

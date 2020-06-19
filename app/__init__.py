@@ -243,37 +243,21 @@ def logout():
 @app.route("/opportunities", methods=['GET', 'POST'])
 @protected
 def opportunitiesRoute():
+    user = users.getUserInfo(session["userid"])
     if (request.method == 'GET'):
         return render_template(
             "view/opportunities.html",
-            user=users.getUserInfo(session["userid"]),
+            user=user,
             opportunityList=opportunities.getAllOpportunities(),
             date=dateconv.allDateDisplay(),
         )
     elif (request.method == 'POST'):
-        f = request.form
-        maxCost = f['maximum-cost']
-        body = {
-            'search': f['search'],
-            'sort': f['sort'],
-            'filters': {
-                'field': list(),
-                'maximum-cost': maxCost if maxCost != '' else None,
-                'grade': list(),
-                'gender': list()
-            }
-        }
-        for k in f.keys():
-            if 'field' in k:
-                body['filters']['field'].append(f[k])
-            if 'grade' in k:
-                body['filters']['grade'].append(f[k])
-            if 'gender' in k:
-                body['filters']['gender'].append(f[k])
+        body = form_utl.create_opportunity_find(request.form)
+
         body, opps = findOpportunities.findOpportunities(body)
         return render_template(
             "view/opportunities.html",
-            user=users.getUserInfo(session["userid"]),
+            user=user,
             opportunityList=opps,
             body=body,
             date=dateconv.allDateDisplay(),
@@ -297,7 +281,8 @@ def createOpportunityRoute():
     user = users.getUserInfo(session["userid"])
     if request.method == "GET":
         return render_template(
-            "create/opportunity.html", user=user
+            "create/opportunity.html",
+            user=user
         )
     elif request.method == "POST":
         body = form_utl.create_opportunity_body(request.form)
@@ -305,7 +290,8 @@ def createOpportunityRoute():
 
         flash("Successfully created an opportunity", "success")
         return render_template(
-            "create/opportunity.html", user=user
+            "create/opportunity.html",
+            user=user
         )
 
 
@@ -341,21 +327,25 @@ def scholarshipsRoute():
             date=dateconv.allDateDisplayS()
         )
     elif (request.method == 'POST'):
-        f = request.form
-        body = {'search': f['search'], 'sort': f['sort']}
+        body = form_utl.create_basic_find(request.form)
         body, scholars = findScholarships.findScholarships(body)
         return render_template(
             "view/scholarships.html",
-            user=user, body=body, scholars=scholars, date=dateconv.allDateDisplayS(),
+            user=user,
+            body=body,
+            scholars=scholars,
+            date=dateconv.allDateDisplayS(),
         )
 
 
 @app.route("/scholarships/<scholarshipID>")
 @protected
 def scholarshipRoute(scholarshipID):
-    return render_template("view/individual/scholarship.html",
-                           scholar=scholarships.getScholarship(scholarshipID),
-                           date=dateconv.dateDisplayS(scholarshipID),)
+    return render_template(
+        "view/individual/scholarship.html",
+        scholar=scholarships.getScholarship(scholarshipID),
+        date=dateconv.dateDisplayS(scholarshipID)
+    )
 
 
 @app.route("/scholarships/create", methods=["GET", "POST"])
@@ -396,14 +386,18 @@ def resourcesRoute():
     user = users.getUserInfo(session["userid"])
     if (request.method == 'GET'):
         return render_template(
-            "view/resources.html", user=user, res=resources.getAllResources(),
+            "view/resources.html",
+            user=user,
+            res=resources.getAllResources()
         )
     elif (request.method == 'POST'):
-        f = request.form
-        body = {'search': f['search'], 'sort': f['sort']}
+        body = form_utl.create_basic_find(request.form)
         body, res = findResources.findResources(body)
         return render_template(
-            "view/resources.html", body=body, user=user, res=res,
+            "view/resources.html",
+            body=body,
+            user=user,
+            res=res
         )
 
 
