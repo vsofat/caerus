@@ -181,3 +181,7 @@ div.overflow-auto {
      margin: 0;
      font-style: italic;
 }
+
+.wrap {
+     word-wrap: break-word;
+}

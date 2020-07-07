@@ -3,26 +3,30 @@
 {% block title %}{{ scholar.title }} (${{ scholar.amount }}){% endblock %}
 
 {% block heading %}
+{% endblock %}
+
+{% block body %}
 <a class="text-muted" href="/scholarships"><small>&#8592; back to scholarships</small></a>
-<h1 class="title">{{ scholar.title }} (${{ scholar.amount }})</h1>
+<div class="wrap">
 
-<br>
+    <h1 class="title">{{ scholar.title }} (${{ scholar.amount }})</h1>
 
-{% if date %}
-<h3 class="subtitle">DEADLINE: {{ date[0] }}</h3>
-{% endif %}
-{% if scholar.eligibility %}
-<h3 class="subtitle"><i>ELIGIBLE: {{ scholar.eligibility }}</i></h3>
-{% endif %}
+    <br>
+    {% if date %}
+    <h3 class="subtitle">DEADLINE: {{ date[0] }}</h3>
+    {% endif %}
+    {% if scholar.eligibility %}
+    <h3 class="subtitle"><i>ELIGIBLE: {{ scholar.eligibility }}</i></h3>
+    {% endif %}
 
-<hr>
+    <hr>
 
-<!-- description -->
-<p>{{ scholar.description }}</p>
+    <!-- description -->
+    <p>{{ scholar.description }}</p>
 
-<!-- links -->
-{% for link in scholar.links %}
-<a href="{{ link }}">{{ link }}</a> <br>
-{% endfor %}
-
+    <!-- links -->
+    {% for link in scholar.links %}
+    <a href="{{ link }}">{{ link }}</a> <br>
+    {% endfor %}
+</div>
 {% endblock %}

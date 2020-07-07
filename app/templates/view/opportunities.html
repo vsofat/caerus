@@ -127,7 +127,7 @@
 <!-- OPPORTUNTIIES (right) -->
 <div class="opportunities">
   {% for opp in opportunityList %}
-  <div id="{{ opp.opportunityID }}" class="opp-block">
+  <div id="{{ opp.opportunityID }}" class="opp-block wrap">
     <br>
     <a href="/opportunities/{{ opp.opportunityID }}">
       <h3>{{ opp.title }}
@@ -164,10 +164,11 @@
     <!-- description -->
     <p>{{ opp.description }}</p>
     <!-- links -->
-    {% for link in opp.links %}
-    <a href="{{ link }}">{{ link }}</a> <br>
-    {% endfor %}
-
+    <div>
+      {% for link in opp.links %}
+      <a href="{{ link }}">{{ link }}</a> <br>
+      {% endfor %}
+    </div>
     <hr>
 
     <!-- tags -->
@@ -212,7 +213,7 @@
         <i class="fas fa-trash-alt" aria-hidden="true"></i>
       </button>
       {% endif %}
-      
+
     </div>
     <br>
   </div>

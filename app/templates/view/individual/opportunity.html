@@ -10,30 +10,34 @@
 {% block title %}{{ opp.title }}{% endblock %}
 
 {% block heading %}
+{% endblock %}
+
+{% block body %}
 <a class="text-muted" href="/opportunities"><small>&#8592; back to opportunities</small></a>
-<h1 class="title">{{ opp.title }}</h1>
+<div class="wrap">
+     <h1 class="title">{{ opp.title }}</h1>
 
-<br> 
+     <br>
 
-<!-- tags -->
-<div class="tag-block">
-     <!-- field -->
-     {% if opp.field %}
-     <a class="btn btn-primary btn-sm tag">&nbsp; {{ opp.field }} &nbsp; </a> &nbsp;
-     {% endif %}
+     <!-- tags -->
+     <div class="tag-block">
+          <!-- field -->
+          {% if opp.field %}
+          <a class="btn btn-primary btn-sm tag">&nbsp; {{ opp.field }} &nbsp; </a> &nbsp;
+          {% endif %}
 
-     <!-- gender -->
-     {% if opp.gender %}
-     <a class="btn btn-primary btn-sm tag">&nbsp; {{ opp.gender }} &nbsp; </a> &nbsp;
-     {% endif %}
+          <!-- gender -->
+          {% if opp.gender %}
+          <a class="btn btn-primary btn-sm tag">&nbsp; {{ opp.gender }} &nbsp; </a> &nbsp;
+          {% endif %}
 
-     <!-- cost (if free) -->
-     {% if opp.cost == 0 %}
-     <a class="btn btn-primary btn-sm tag">&nbsp; free &nbsp;</a> &nbsp;
-     {% endif %}
+          <!-- cost (if free) -->
+          {% if opp.cost == 0 %}
+          <a class="btn btn-primary btn-sm tag">&nbsp; free &nbsp;</a> &nbsp;
+          {% endif %}
 
-     <!-- grades -->
-     {% for grade in opp.grades %}
+          <!-- grades -->
+          {% for grade in opp.grades %}
           {% if grade == 9 %}
           <a class="btn btn-primary btn-sm tag">&nbsp; freshmen &nbsp; </a> &nbsp;
           {% elif grade == 10 %}
@@ -43,54 +47,40 @@
           {% elif grade == 12 %}
           <a class="btn btn-primary btn-sm tag">&nbsp; seniors &nbsp; </a> &nbsp;
           {% endif %}
+          {% endfor %}
+     </div>
+
+     <br>
+
+     <!-- date -->
+     {% if date[0] or date[1] %}
+     <h3 class="subtitle">
+          {% if date[0] %}
+          {{ date[0] }}
+          {% endif %}
+          {% if date[1] %}
+          - {{ date[1] }}
+          {% endif %}
+     </h3>
+     {% endif %}
+
+     <!-- deadline -->
+     {% if date[2] %}
+     <h3 class="subtitle"><b>DEADLINE: {{ date[2] }} </b></h3>
+     {% endif %}
+
+     <hr>
+
+     <!-- location -->
+     <p><b>{{ opp.location }}</b></p>
+
+     <!-- description -->
+     <p>{{ opp.description }}</p>
+
+     <!-- links -->
+     {% for link in opp.links %}
+     <a href="{{ link }}">{{ link }}</a> <br>
      {% endfor %}
 </div>
-
-<br>
-
-<!-- date -->
-{% if date[0] or date[1] %}
-<h3 class="subtitle">
-     {% if date[0] %}
-          {{ date[0] }}
-     {% endif %}
-     {% if date[1] %}
-           - {{ date[1] }}
-     {% endif %} 
-</h3>
-{% endif %}
-
-<!-- deadline -->
-{% if date[2] %}
-<h3 class="subtitle"><b>DEADLINE: {{ date[2] }} </b></h3>
-{% endif %}
-
-<hr>
-
-<!-- location -->
-<p><b>{{ opp.location }}</b></p>
-
-<!-- description -->
-<p>{{ opp.description }}</p>
-
-<!-- links -->
-{% for link in opp.links %}
-<a href="{{ link }}">{{ link }}</a> <br>
-{% endfor %}
-
-<!--
-     opportunityID = db.Column(db.Integer, primary_key=True)
-     title = db.Column(db.String, nullable=False)
-     description = db.Column(db.Text, nullable=False)
-     field = db.Column(db.String, nullable=False)
-     gender = db.Column(db.String)
-     location = db.Column(db.String)
-     startDate = db.Column(db.DateTime)
-     endDate = db.Column(db.DateTime)
-     deadline = db.Column(db.DateTime)
-     cost = db.Column(db.Float, nullable=False)
-     datePosted = db.Column(db.DateTime, nullable=False,
-     default=datetime.utcnow)
--->
 
 {% endblock %}

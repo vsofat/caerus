@@ -2,16 +2,21 @@
 
 {% block title %}{{ resource.title }}{% endblock %}
 
+
 {% block heading %}
+{% endblock %}
+
+{% block body %}
 <a class="text-muted" href="/resources"><small>&#8592; back to resources</small></a>
-<h1 class="title">{{ resource.title }}</h1>
+<div class="wrap">
+    <h1 class="title">{{ resource.title }}</h1>
 
-<hr>
+    <hr>
 
-<!-- description -->
-<p>{{ resource.description }}</p>
+    <!-- description -->
+    <p>{{ resource.description }}</p>
 
-<!-- links -->
-<a href="{{ resource.link }}">{{ resource.link }}</a> <br>
-
+    <!-- links -->
+    <a href="{{ resource.link }}">{{ resource.link }}</a> <br>
+</div>
 {% endblock %}
