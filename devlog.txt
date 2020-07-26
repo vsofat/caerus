@@ -318,7 +318,7 @@ ahmedS -- 2020-06-10 10:32
 Removed cost field requirement in opportunity create form
 Added floats to cost field in opportunity create form
 
-vishwaaS -- 2020-06-10 10:32
+vishwaaS -- 2020-06-10 10:33
 Added a collapsable section for filtering
 Implemented scrollable overflow div within collapsable
 Fixed styling for the side bar to adjust to new changes
